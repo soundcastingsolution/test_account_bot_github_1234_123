@@ -1,0 +1,78 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +retrySettings->a hash
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def Putskillretrysetting(token,skillid,
+"retrySettings":{ 
+    "loadNonFresh"=> true,
+    "finalizeWhenExhausted"=> true,
+    "maximumAttempts"=> 0,
+    "minimumRetryMinutes"=> 0,
+    "maximumNumberOfHandledCalls"=> 0,
+    "restrictedCallingMinutes"=> 0,
+    "restrictedCallingMaxAttempts"=> 0,
+    "generalStaleMinutes"=> 0,
+    "callbackRestMinutes"=> 0,
+    "releaseAgentSpecificCalls"=> true,
+    "maximumNumberOfCallbacks"=> 0,
+    "callbackStaleMinutes"=> 0})
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/skills/#{skillid}/parameters/retry-settings"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::put.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+    "retrySettings[loadNonFresh]"=> true,
+    "retrySettings[finalizeWhenExhausted]"=> true,
+    "retrySettings[maximumAttempts]"=> 0,
+    "retrySettings[minimumRetryMinutes]"=> 0,
+    "retrySettings[maximumNumberOfHandledCalls]"=> 0,
+    "retrySettings[restrictedCallingMinutes]"=> 0,
+    "retrySettings[restrictedCallingMaxAttempts]"=> 0,
+    "retrySettings[generalStaleMinutes]"=> 0,
+    "retrySettings[callbackRestMinutes]"=> 0,
+    "retrySettings[releaseAgentSpecificCalls]"=> true,
+    "retrySettings[maximumNumberOfCallbacks]"=> 0,
+    "retrySettings[callbackStaleMinutes]"=> 0 })
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

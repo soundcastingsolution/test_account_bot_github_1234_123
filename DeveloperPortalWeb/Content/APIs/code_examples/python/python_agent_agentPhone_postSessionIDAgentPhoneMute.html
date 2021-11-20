@@ -1,0 +1,27 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def muteAgentLeg(sessionID):
+	#Check if accessToken is empty or null
+	if accessToken!="":
+        #baseURL was returned with your successful token request
+        baseURI = "{baseURI}"
+        accessToken = '{accessToken}'
+      
+        #Add all necessary headers
+        header_param = {'Authorization': 'bearer ' + '{accessToken}','content-Type': 'application/x-www-form-urlencoded'}
+      
+        # Make the http request 
+        response = requests.post(baseURI + 'services/{version}/agent-sessions/' + sessionID + '/agent-phone/mute' ,
+                  headerParams = header_param) 
+      
+        # TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON package to
+        # handle the response appropriately
+        print(response)
+    else:
+		#No token - get one or handle error
+      
+
+
+</pre>

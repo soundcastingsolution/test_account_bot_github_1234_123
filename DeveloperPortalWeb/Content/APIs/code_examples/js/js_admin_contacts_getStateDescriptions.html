@@ -1,0 +1,25 @@
+<pre class="prettyprint linenums">
+//DUPLICATE - NOT USED BY SITE
+function getContactStatesList(){ 
+&emsp;var url_base = 'https://api-b2.incontact.com/incontactapi/services/v2.0'; 
+&emsp;$.ajax({ 
+&emsp;&emsp;'url' : url_base + '/contact-state-descriptions', 
+&emsp;&emsp;'type' : 'GET', 
+&emsp;&emsp;'contentType' : 'application/json', 
+&emsp;&emsp;'dataType' : 'json', 
+&emsp;&emsp;'headers' : { 
+&emsp;&emsp;&emsp;//Use access_token previously retrieved from inContact token service 
+&emsp;&emsp;&emsp;'Authorization' : 'bearer ' + access_token 
+&emsp;&emsp;}, 
+&emsp;&emsp;'success' : function (result) { 
+&emsp;&emsp;&emsp;//Do something if success 
+&emsp;&emsp;&emsp;return result; 
+&emsp;&emsp;}, 
+&emsp;&emsp;'error' : function (XMLHttpRequest, textStatus, errorThrown) { 
+&emsp;&emsp;&emsp;//Process error actions 
+&emsp;&emsp;&emsp;console.log(XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText); 
+&emsp;&emsp;&emsp;return false; 
+&emsp;&emsp;} 
+&emsp;}); 
+}
+</pre>

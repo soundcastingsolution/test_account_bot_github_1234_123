@@ -1,0 +1,48 @@
+<pre class="prettyprint linenums">
+protected void PostAgentPhoneUnmute(string sessionID)
+{
+  //Test to see if you have obtained a token
+  if (!string.IsNullOrEmpty(accessToken))
+  {
+    string apiURL = "/services/{version}/agent-sessions/" + sessionID + 
+                    "/agent-phone/unmute";
+	
+    //baseURL was returned with your successful token request
+    string endpoint = baseURL + apiURL; 
+    string authorizationHeader = "Authorization:bearer " + accessToken;
+
+    //Create the request object
+    var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+    request.Method = "POST";
+    request.ContentType = "application/json";
+    request.ContentLength = 0;
+
+    //Add any and all necessary headers
+    request.Headers.Add("Authorization", "bearer " + accessToken);
+    //Accept is a reserved header, so you must modify it rather than add
+    request.Accept = "application/json, text/javascript, */*; q=0.01"; 
+
+    //Make the request
+    try
+    {
+        using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+        {
+            // Success do something with response here.
+        }
+    }
+    catch (System.Net.WebException webException)
+    {
+        //.NET will throw a System.Net.webException on StatusCodes other than 200.  
+        // You can catch that exception and retain the StatusCode for error handling.
+    }
+    catch (Exception ex)
+    {
+        //Non Web Exception error, handle error
+    }
+  }
+  else
+  {
+    //No token - get one or handle error
+  }
+}
+</pre>

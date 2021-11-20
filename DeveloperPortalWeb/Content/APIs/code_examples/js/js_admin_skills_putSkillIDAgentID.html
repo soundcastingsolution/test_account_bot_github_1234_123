@@ -1,0 +1,28 @@
+<pre class="prettyprint linenums">
+function assignAgentProficiency() {
+    var assignAgentProficiencyPayload = {
+        'proficiency': 'integer: 5 - Lowest, 4 - Low, 3 - Medium, 2 - High, 1 - Highest',
+        'active': 'boolean'
+    }
+    $.ajax({
+        //The baseURI variable is created by the result.base_server_base_uri
+        //which is returned when getting a token and should be used to create the URL base
+        'url': baseURI + 'services/{version}/skills/' + skillId + '/agents/' + agentId,
+        'type': 'PUT',
+        'headers': {
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/json'
+        },
+        'data': JSON.stringify(assignAgentProficiencyPayload),
+        'success': function (result) {
+            //Process success actions
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions
+            return false;
+        }
+    });
+}
+</pre>

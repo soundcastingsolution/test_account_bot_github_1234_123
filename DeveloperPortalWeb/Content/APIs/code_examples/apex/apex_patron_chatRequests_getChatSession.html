@@ -1,0 +1,59 @@
+<pre class="prettyprint linenums">
+/****************************************************************************************
+*
+* @description Gets any inbound chat text from an active chat session
+* @param chatSession (string): Session Id from previous GetText of StartChat methods
+* @param timeout (integer): value must be between 0-60 seconds
+* @return Returns the chat posts associated with an active chatSession and returns the
+* chatId needed to retrieve subsequent posts
+*
+*/
+public void getChatText(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        //timeout is an integer values on the page, but is converted to string
+        //via the getParameters() method
+        String chatSession=ApexPages.currentPage().getParameters().get('chatSession');
+        String timeout=ApexPages.currentPage().getParameters().get('timeout');
+
+        String apiURL = 'services/{version}/contacts/chats/' + chatSession + 
+                '?chatSession=' + chatSession + '&timeout=' + timeout;
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(this.BaseUri + apiURL);
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');    
+            request.setHeader('Content-Type','application/json');    
+            request.setHeader('Content-Length','1024');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+        }
+    }
+}
+</pre>

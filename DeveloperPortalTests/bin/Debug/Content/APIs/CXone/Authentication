@@ -1,0 +1,96 @@
+﻿{
+  "authentication_v1_token_access-key": {
+    "post": {
+      "tags": [ "Authentication" ],
+      "summary": "Request a Token",
+      "description": "This method will return a bearer token required for all application API requests.</br></br> Note: This request uses “https://na1.nice-incontact.com” as its base URI.",
+      "operationId": "Request a Token",
+      "requestBody": {
+        "description": "AccessKey ID and AccessKey Secret",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "dynamicData",
+              "$ref": "#/components/schemas/body"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postAccessKeyResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid Input"
+        },
+        "401": {
+          "description": "Unauthorized"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "postAccessKeyResponse": {
+        "title": "response",
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "token_type": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "id_token": {
+            "type": "string"
+          }
+        }
+      },
+      "postValidateResponse": {
+        "title": "ValidateAccessToken",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "user Id"
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "tenant Id"
+          },
+          "agentId": {
+            "type": "integer",
+            "description": "agent Id"
+          },
+          "billingId": {
+            "type": "integer",
+            "description": "billing Id"
+          }
+        },
+        "description": "Validate AccessToken "
+      },
+      "body": {
+          "additionalProperties": false,
+          "properties": {
+            "accessKeyId": {
+              "type": "string"
+            },
+            "accessKeySecret": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }

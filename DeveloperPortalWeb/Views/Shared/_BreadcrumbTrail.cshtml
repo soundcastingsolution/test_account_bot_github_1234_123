@@ -1,0 +1,22 @@
+﻿
+@model InContact.Common.Web.Mvc.BreadcrumbTrail
+
+@if (null != Model && Model.Nodes.Count > 1)
+{
+    foreach (var node in Model.Nodes)
+    {
+        if (node.IsClickable)
+        {
+            @Html.RouteLink(node.Title, node.RouteName, node.RouteData, node.HtmlAttributes)
+        }
+        else
+        {
+            @node.Title
+        }
+
+        if (node != Model.Nodes.Last())
+        {
+            <text> &raquo; </text>
+        }
+    }
+}

@@ -1,0 +1,57 @@
+<pre class="prettyprint linenums">
+# Calls the API to end an active chat session.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +chatSession+ -> a string
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if chatSession isn't a string
+#
+def endChatSession(token, chatSession)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that chatSession is a string.
+  unless chatSession.is_a? String
+    raise ArgumentError, "chatSession must be a string"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  apiURL = "service/{version}/contacts/chats/#{chatSession}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request.
+  http.delete(uri.path, headers)
+end
+</pre>

@@ -1,0 +1,35 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def getAgentLoginHistory():
+
+# api-endpoint 
+#Give the specified url ,accessToken
+	BASEURL = "{BASEURL}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+if accessToken!="":
+
+#Give necessary parameters for http request
+	payload={'startDate':'ISO 8601 formatted date/time', 
+	'endDate':'ISO 8601 formatted date/time',
+	'searchString':'string',
+	'fields':'string',
+	'skip':'string',
+	'top':'string',
+	'orderby':'string'}
+
+#add all necessary headers
+	header_param = {'Authorization': 'bearer ' + '{accessToken}','content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make get http request
+	response = requests.get(BASEURL + 'services/{version}/agents/' + {agentID} + '/login-history' , headers = header_param, params=payload) 
+
+#print response appropriately
+	print (response)
+
+else:
+	#no token get one or handle error
+</pre>

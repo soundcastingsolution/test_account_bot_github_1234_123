@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Supervisor Events";
+}
+
+<h3 class="primary-color margin-top-none">TakeOver</h3>
+<pre class="prettyprint linenums margin-bottom-none">
+{
+    "Type": "TakeOver",
+    "ContactID": "TargetContactID",
+    "TakeOverDate": "2013-09-11T07:23:26.632Z"
+}
+</pre>
+
+<h3 class="primary-color">Monitoring an Agent</h3>
+<pre class="prettyprint linenums margin-bottom-none">
+{
+    "Type": "SupervisorContact",
+    "ContactID": "6550071587",
+    "Status": "Active",
+    "OriginalState": "False",
+    "CallType": "Regular",
+    "DNIS": "9991638000",
+    "ANI": "+748596215382",
+    "Skill": "50883",
+    "IsInbound": "False",
+    "StartTimeUTC": "2013-09-11T07:32:03.000Z",
+    "LastStateChangeTimeUTC": "2013-09-11T07:32:04.000Z",
+    "ScreenPopUrl": "",
+    "DisconnectCode": "NA",
+    "IsLogging": "False",
+    "Timeout": "",
+    "AllowDispositions": "False",
+    "Label": "",
+    "IsLinked": "False",
+    "TimeZones": "",
+    "FinalState": "False",
+    "OtherInformation": ""
+}
+{
+    "Type": "SupervisorMonitor",
+    "MonitorStartTime": "2013-09-11T07:32:10.000Z",
+    "TargetAgentId": "9011",
+    "FinalState": "False"
+}
+</pre>
+
+<h3 class="primary-color">Take Over an Agent's Call</h3>
+<pre class="prettyprint linenums margin-bottom-none">
+{
+    "Type": "CallContactEvent",
+    "ContactID": "6550071591",
+    "Status": "Active",
+    "OriginalState": "False",
+    "CallType": "TakeOver",
+    "DNIS": "9991638000",
+    "ANI": "011748596215382",
+    "Skill": "50883",
+    "IsInbound": "True",
+    "StartTimeUTC": "2013-09-11T07:33:57.000Z",
+    "LastStateChangeTimeUTC": "2013-09-11T07:33:57.000Z",
+    "ScreenPopUrl": "",
+    "DisconnectCode": "NA",
+    "IsLogging": "False",
+    "Timeout": "",
+    "AllowDispositions": "True",
+    "Label": "",
+    "IsLinked": "False",
+    "TimeZones": "",
+    "FinalState": "False",
+    "OtherInformation": "",
+    "BlendingToSkillName": ""
+}
+</pre>

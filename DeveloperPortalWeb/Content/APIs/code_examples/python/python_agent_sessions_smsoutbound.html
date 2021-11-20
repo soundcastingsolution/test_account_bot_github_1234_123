@@ -1,0 +1,18 @@
+﻿<pre class="prettyprint linenums">
+def postsmsoutbound(sessionId):
+#Check if accessToken is empty or null
+if accessToken!="":
+#payload
+	postsmsoutboundPayload = {
+	"phoneNumber": "",
+	"skillId": 1000,
+	"parentContactId": null
+}
+	header_param = {'Authorization': 'bearer ' + accessToken,
+	'content-Type': 'application/x-www-form-urlencoded'}
+response=requests.post(CXone_baseURI + '/agent-sessions/'+ sessionId +'/interactions/sms-outbound', headers = header_param, data=postsmsoutboundPayload)
+#print response appropriately
+    else:
+#no token get one or handle error
+	construct('error')
+</pre>

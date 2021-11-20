@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Retrieve The Token";
+}
+
+<p>
+    The token service returns a JSON object in the response body that contains the access token, as well as
+    other information that you will need. For example, the following could be returned as part of the
+    password grant response:
+</p>
+<p>
+    <b>Response body for Password or Client Grant:</b>
+</p>
+
+<pre class="prettyprint linenums">
+{ 
+    access_token: "h9l2tWy5ZIApljMFpvJqitJyU2n8SNe1Q5hP85IeMZpwt+ULZt9plv5vKea4eRce57w++yOe2f/j
+    AHOMYs81a2RuJdFBRXV/eyUGcyWp79R+OX+MwN/SJYoQBV6ZrGshyyciZkk1/Q4wGEZLw0de9JxGPajm1O9V7
+    7GVjRBozESy11+v0Fgp918kxiC0/sCD4bjino6Lkvu2fnHf30sW1zF8LDI7OHqdKaVcMzguMcINtxu55FlKuC
+    +UQnesuE2d6LRg4ZxQp3q9jdxETHwvTYkskQLLT+/wmpEW36yryqIlpGzuBv5LmUr83nOb+1zZas34bhJqBxg
+    UKztT9GdV5alsT0MQmoNV6Hn5PviO7X47JTey2EvspVkrPnLABUANJ9GfMJKtyUiICXJwk47FmQ==" 
+    token_type: "bearer" 
+    expires_in: 3600 
+    refresh_token: "PX3SnlieM0a22Ij2hGfIxg==" 
+    refresh_token_server_uri: 
+        "https://api-{cluster}.incontact.com/InContactAuthorizationServer/Token" 
+    resource_server_base_uri: "https://api-{cluster}.incontact.com/inContactAPI/" 
+    scope: "RealTimeApi AdminApi AuthenticationApi PatronApi AgentApi CustomApi" 
+    agent_id: 645328 
+    team_id: 103748 
+}
+</pre>
+
+<p>
+    The response body contains a JSON object that provides the token, the expiration time limit for the
+    token, the refresh token, the scope for the token (i.e. which APIs the token can be used with), and a
+    "resource server base URI" and "refresh token server base URI." Each of these is explained below:
+</p>
+
+<pre class="no-padding">
+<b>access_token:</b> 
+        This is the token value you send with each API call
+<b>token_type:</b>
+        This is the value included before the token in the authorization header for
+        each API call
+<b>expires_in:</b> 
+        This is the number of seconds after which the token will expire (from the 
+        time of the token’s creation). NICE CXone uses a value of 3600 seconds for 
+        all Password and Client Grant tokens 
+<b>refresh_token:</b> 
+        This is set to NULL for Client Grant tokens as no credentials are needed 
+        for a Client token.  For Password Grants this is the encoded information 
+        used to retrieve a new API token when the API token expires. This token 
+        will be valid for 7200 seconds
+<b>refresh_token_server_uri:</b> 
+        This is the base URI for the token service used to retrieve a new token 
+        when the original token expires, using the refresh token for Password Grants. 
+<b>resource_server_base_uri:</b> 
+        This is the base URI for calling all APIs and contains the name of the 
+        cluster, represented by {cluster}, that your Buiness Unit is authorized 
+        to use, based on the application and user identifiers supplied in the 
+        authorization key. <b>You must use this new base URI to use any of the 
+        APIs with the access_token.</b> 
+<b>scope:</b> 
+        Specifies which of the available APIs your application is authorized to 
+        use. For Client Grants, only the PatronApi scope is allowed regardless of 
+        the values in this field
+<b>agent_id:</b> 
+        This is the ID of the agent whose credentials were used to retrieve the 
+        token for Password Grants and is NULL for Client Grants
+<b>team_id:</b> 
+        This is the ID of the team which agent belongs to Password Grants and is 
+        NULL for Client Grants 
+</pre>
+<p>
+    <b>Response QueryString values for Implicit Grant:</b>
+</p>
+<pre class="prettyprint linenums">
+    state: "myState" 
+    scope: "AdminApi AgentApi" 
+    access_token: "h9l2tWy5ZIApljMFpvJqitJyU2n8SNe1Q5hP85IeMZpwt+ULZt9plv5vKea4eRce57w++yOe2f/j
+    AHOMYs81a2RuJdFBRXV/eyUGcyWp79R+OX+MwN/SJYoQBV6ZrGshyyciZkk1/Q4wGEZLw0de9JxGPajm1O9V7
+    7GVjRBozESy11+v0Fgp918kxiC0/sCD4bjino6Lkvu2fnHf30sW1zF8LDI7OHqdKaVcMzguMcINtxu55FlKuC
+    +UQnesuE2d6LRg4ZxQp3q9jdxETHwvTYkskQLLT+/wmpEW36yryqIlpGzuBv5LmUr83nOb+1zZas34bhJqBxg
+    UKztT9GdV5alsT0MQmoNV6Hn5PviO7X47JTey2EvspVkrPnLABUANJ9GfMJKtyUiICXJwk47FmQ==" 
+    token_type: "bearer" 
+    expires_in: 5184000  
+    resource_server_base_uri: "https://api-{cluster}.incontact.com/inContactAPI/" 
+</pre>
+
+<p>
+    For Implicit Grants the user redirected to the URI passed in as "redirect_uri" with the above
+    values passed in as QueryString values that can be used by the application accessed through
+    that URI. Each of these is explained below:
+</p>
+<pre class="margin-bottom-none no-padding">
+<b>state:</b> 
+        This is a user defined value that can be passed in to represent an initial
+        state for the application identified by the redirect_uri parameter.  This
+        can also be used to pass any additional information in the form of a string
+        to be used in your application
+<b>scope:</b> 
+        Specifies which of the available APIs your application is authorized to 
+        use. These will only be populated if the user "Granted" permissions to 
+        those scopes from the Grant page
+<b>access_token:</b> 
+        This is the token value you send with each API call
+<b>token_type:</b>
+        This is the value included before the token in the authorization header for
+        each API call
+<b>expires_in:</b> 
+        This is the number of seconds after which the token will expire (from the 
+        time of the token’s creation). NICE CXone uses a value of 5184000 seconds 
+        (60 days) for all Implicit Grant tokens 
+<b>resource_server_base_uri:</b> 
+        This is the base URI for calling all APIs and contains the name of the 
+        cluster, represented by {cluster}, that your Buiness Unit is authorized 
+        to use, based on the application and user identifiers supplied in the 
+        authorization key. <b>You must use this new base URI to use any of the 
+        APIs with the access_token.</b> 
+</pre>

@@ -1,0 +1,23 @@
+﻿@using MVCForum.Utilities
+@model MVCForum.Website.ViewModels.HighEarnersPointViewModel
+
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>User ID/Email</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dict in Model.HighEarners.Where(x => x.Value > 0))
+        {
+            <tr>
+                <td>
+                    <a href="@Html.Raw(dict.Key.NiceUrl)">@Html.Raw(dict.Key.UserName)</a>
+                </td>
+                <td>@dict.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>

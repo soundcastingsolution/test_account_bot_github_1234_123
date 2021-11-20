@@ -1,0 +1,62 @@
+﻿<pre class="prettyprint linenums">
+ // importing the scalaj-http library
+package scalaj.http
+
+object createCallingListMapping {
+
+	def createCallingListMapping() {
+
+       //Give the specified url ,accessToken
+       
+         val accessToken = "";
+	    val baseURI = "";
+		 
+       //Check if accessToken is empty or null
+		 if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http(baseURI+ "services/{version}/lists/call-lists")
+					.postData("""{"listName"-> "string - required",
+					"listExpirationDate"-> "ISO 8601 formatted date/time",
+					"externalIdColumn"-> "string - required",
+					"scoreColumn"-> "string",
+					"customer1Column"-> "string",
+					"customer2Column"-> "string",
+					"callerIdColumn"-> "string",
+					"priorityColumn"-> "string",
+					"complianceReqColumn"-> "string",
+					"firstNameColumn"-> "string",
+					"lastNameColumn"-> "string",
+					"addressColumn"-> "string",
+					"cityColumn"-> "string",
+					"stateColumn"-> "string",
+					"zipColumn"-> "string",
+					"timeZoneColumn"-> "string",
+					"confirmReqColumn"-> "string",
+					"overrideFinalizationColumn"-> "string",
+					"agentIdColumn"-> "string",
+					"callRequestTimeColumn"-> "string",
+					"callRequestStaleColumn"-> "string",
+					"notesColumn"-> "string",
+					"expirationDateColumn"-> "string",
+					"destinationMappings"-> [
+				{
+					"fieldName"-> "string - required",
+					"fieldValue"-> "string - required"}]
+					"customFieldMappings"-> [
+				{
+					"fieldName"-> "string",
+					"fieldValue"-> "string"}],"json"->"data"}""")
+
+			.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json"))
+			.asString
+			//TODO-> the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+		
+			println(response);
+		}
+		else{
+			   //No token - get one or handle error
+		}
+	}
+}
+</pre>

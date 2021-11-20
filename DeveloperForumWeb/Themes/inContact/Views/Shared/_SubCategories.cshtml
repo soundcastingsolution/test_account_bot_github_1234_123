@@ -1,0 +1,27 @@
+﻿@using MVCForum.Domain.Constants
+@using MVCForum.Domain;
+@using MVCForum.Utilities
+@model MVCForum.Website.ViewModels.SubCategoryViewModel
+@{
+
+}
+    <div class="page-section" style="margin-bottom:1em;">
+        <a class="header" onclick="toggleSection(this);">
+            <span>@Html.Raw(string.Concat(Html.LanguageString("Category.SubCategoriesHeading"), " ", Model.ParentCategory.Name))</span>
+            <b class="float-right">-</b>
+            <div class="clear-both"></div>
+        </a>
+            @foreach (var category in Model.AllPermissionSets.Keys)
+            {
+                var permissions = Model.AllPermissionSets[category];
+                if (!permissions[AppConstants.PermissionDenyAccess].IsTicked)
+                {
+                    <div class="sub-category-link">
+                        &raquo;<a href="@Html.Raw(category.NiceUrl)">@Html.Raw(@category.Name)</a>
+                    </div>
+
+                }
+            }
+    </div>
+
+ 

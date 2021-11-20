@@ -1,0 +1,19 @@
+﻿@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@RenderBody()
+
+@section Styles {
+	@Styles.Render("~/bundles/swagger.css")
+	@Styles.Render("~/bundles/prettify.css")
+
+	@RenderSection("Styles", false)
+}
+@section Scripts {
+	@Scripts.Render("~/bundles/prettify.js")
+	@Scripts.Render("~/bundles/kendo.js")
+	@Scripts.Render("~/bundles/swagger.js")
+
+	@RenderSection("Scripts", true)
+}

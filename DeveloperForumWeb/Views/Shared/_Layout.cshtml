@@ -1,0 +1,232 @@
+﻿@using MVCForum.Domain.Constants
+@{
+    var theme = Html.Settings().Theme;
+    var themePath = string.Concat(AppConstants.ThemeRootFolder, theme);
+    var globalClass = Convert.ToBoolean(PageData[AppConstants.IsMobileDevice]) ? "mobile" : "desktop";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://lab-corporatestyles.blfdev.lab/Content/kendo/css" rel="stylesheet">
+    <link href="https://lab-corporatestyles.blfdev.lab/Content/css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.MetaDesc" />
+    @RenderSection("SocialMeta", false)
+    @ViewBag.Canonical
+    @(
+ Bundle.Css()
+                .Add("~/Content/Styles/bootstrap.css")
+                .Add("~/Content/Styles/bootstrap-responsive.css")
+                .Add("~/Content/Styles/bootstrap-prettify.css")
+                .Add(themePath + "/Content/Styles/theme.css")
+                .MvcRender("~/content/cache/combined_" + theme + "_#.css")
+    )
+    <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!--[if lt IE 8]>
+            <script src="@Url.Content("~/scripts/json3.js")"></script>
+        <![endif]-->
+
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content(themePath + "/content/images/apple-touch-icon-57-precomposed.png")">
+    <script type="text/javascript">
+        var app_base = '@Url.Content("~/")';
+    </script>
+    @(Bundle.JavaScript()
+                    .Add("~/Scripts/jquery-1.8.0.min.js")
+                    .Add("~/Scripts/jquery.unobtrusive-ajax.js")
+                    .Add("~/Scripts/bootstrap.min.js")
+                    .Add("~/Scripts/jquery.placeholder.min.js")
+                    .Add("~/Scripts/bootstrap-prettify.js")
+                    .Add("~/Scripts/general.js")
+                    .Add(themePath + "/Content/Scripts/general.js")
+                    .MvcRender("~/scripts/cache/combined_" + theme + "_#.js")
+    )
+    @RenderSection("Header", false)
+</head>
+
+<body class="@globalClass">
+
+    <header>
+        <div class="search-container">
+            <div class="centered-fixed-width-content">
+                @if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <div class="login-information  float-left">
+                        <div class="logged-in-username">Business Unit - </div>
+                    </div>
+                }
+                <div class="login-information float-right">
+                    @if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <a class="pop-over-menu-trigger">
+                            <img src="~/Content/images/settings-gear.png" />
+                            <div class="logged-in-username">
+                                @User.Identity.Name
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        @Html.RouteLink("Sign In", "Default", new { controller = "Account", action = "SignIn", returnUrl = Request.Url.PathAndQuery })
+                    }
+                    <div class="clear-both"></div>
+                    <div class="pop-over-menu">
+                        <span class="tail-top">
+                            <img src="~/Content/images/grfx_dropmenu_whitearrow.png" />
+                        </span>
+                        <nav>
+                            @if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                                @Html.RouteLink("Sign Out", "Default", new { controller = "Account", action = "SignOut", returnUrl = Request.Url.PathAndQuery })
+                            }
+                            else
+                            {
+                                @Html.RouteLink("Sign In", "Default", new { controller = "Account", action = "SignIn", returnUrl = Request.Url.PathAndQuery })
+                            }
+                        </nav>
+                    </div>
+                </div>
+                <div class="clear-both"></div>
+            </div>
+        </div>
+        <div class="menu-container">
+            <div class="centered-fixed-width-content">
+                <a href="/" class="float-left logo-link">
+                    <img src="~/Content/Images/in-contact-logo.png" />
+                </a>
+
+                <nav id="Menu" class="primary">
+                    <a id="API-link" onclick="ActivateSubMenu('API');">API</a>
+                    <a id="Documentation-link" onclick="ActivateSubMenu('Documentation');">Documentation</a>
+                    <a href="/Downloads" id="Downloads">Downloads</a>
+                    <a href="/FAQ" id="FAQ">FAQ</a>
+                </nav>
+                <script type="text/javascript">
+                    function ActivateSubMenu(subMenuId) {
+                        if ($('#' + subMenuId + '-link').hasClass('on')) {
+                            $('.sub-menu-container').slideUp('fast', function () { $('.primary > a.on').removeClass('on'); $('nav.sub-menu').hide(); });
+                        }
+                        else {
+                            $('.sub-menu-container').slideDown();
+
+                            var openNav = $('nav.sub-menu:not(:hidden)');
+                            var navToOpen = $('#' + subMenuId + '-sub-menu');
+
+                            if (openNav.length > 0) {
+                                openNav.slideUp("fast", function () {
+                                    $('.primary > a.on').removeClass('on');
+                                    navToOpen.slideToggle('fast');
+                                    $('#' + subMenuId + '-link').addClass('on');
+                                });
+                            }
+                            else {
+                                navToOpen.slideToggle('fast');
+                                $('#' + subMenuId + '-link').addClass('on');
+                            };
+                        }
+                    }
+                </script>
+
+
+            </div>
+        </div>
+        <div class="sub-menu-container">
+            <div class="centered-fixed-width-content">
+
+
+                <nav id="API-sub-menu" class="sub-menu">
+                    <div class="navigation-link">» <a href="/API">API Home</a></div>
+                    <div class="navigation-link">» <a href="/API/AgentAPI">Agent API</a></div>
+                    <div class="navigation-link">» <a href="/API/PatronAPI">Patron API</a></div>
+                    <div class="navigation-link">» <a href="/API/AdminAPI">Admin API</a></div>
+                    <div class="navigation-link">» <a href="/API/CompleteRequestExampleCode">Complete Request Example Code</a></div>
+                    <div class="navigation-link">» <a href="/API/RealTimeDataAPI">Real-Time Data API</a></div>
+                </nav>
+                <nav id="Documentation-sub-menu" class="sub-menu">
+                    <div class="navigation-link">» <a href="/Documentation">Documentation Home</a></div>
+                    <div class="navigation-link">» <a class="secure-content-link" href="/Documentation/APIAuthenticationToken" title="Sign in to view more.">API Authentication Token</a></div>
+                    <div class="navigation-link">» <a class="secure-content-link" href="/Documentation/MobileSDK" title="Sign in to view more.">Mobile SDK</a></div>
+                    <div class="navigation-link">» <a class="secure-content-link" href="/Documentation/AgentSessionEvents" title="Sign in to view more.">Agent Session Events</a></div>
+                    <div class="navigation-link">» <a class="secure-content-link" href="/Documentation/GettingStarted" title="Sign in to view more.">Getting Started</a></div>
+                    <div class="navigation-link">» <a class="secure-content-link" href="/Documentation/UsingEvents" title="Sign in to view more.">Using Events</a></div>
+                </nav>
+
+                <div class="clear-both"></div>
+                <a onclick="$('.sub-menu-container').slideUp('fast', function(){$('.primary > a.on').attr('class', ''); $('nav.sub-menu').hide();});" class="mega-menu-close">
+                    <img src="/Content/images/grfx_megamenu_arrow.png">
+                </a>
+            </div>
+        </div>
+        <div class="clear-both"></div>
+    </header>
+    <div class="container-fluid" style="text-align:left;">
+        @Html.Partial("_GenericMessage")
+        @Html.Partial("_EmailConfirmationNotice")
+        @Html.Partial("_NoScript")
+        <div id="main" class="row-fluid mainbody">
+
+            <div class="span9">
+
+                @RenderBody()
+            </div>
+            <div class="span3 sidelayoutsection">
+                <div class="main-side-box">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.Action("CreateTopicButton", "Topic")
+                        @Html.Action("SideAdminPanel", "Members")
+                    }
+                    @RenderSection("side", false)
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        @Html.Action("GetMainStats", "Stats")
+        @Html.Action("GetCurrentActiveMembers", "Members")
+        @RenderSection("Footer", false)
+        <hr>
+        <footer>
+            <div class="row-fluid">
+                <div class="span12">
+                    <!-- ########################## IMPORTANT - PLEASE DO NOT REMOVE WITHOUT LICENSE ###########################
+                            If you would like to remove the powered by notice, then please vist http://www.mvcforum.com/license -->
+
+                    <p>&copy; @DateTime.UtcNow.Year - @Html.LanguageString("Layout.PoweredBy") <a rel="nofollow" href="http://www.mvcforum.com">MVCForum.com</a></p>
+
+                    <!--########################## IMPORTANT - PLEASE DO NOT REMOVE WITHOUT LICENSE ########################### -->
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <footer>
+        <div class="centered-fixed-width-content">
+            <div class="float-left">
+                <div style="color: #FA8c00" class="float-left footer-line">
+                    <a href="http://www.incontact.com/call-center-software-company/legal">Legal</a>
+                    |
+                    <a href="http://www.incontact.com/call-center-software-company/legal/privacy-policy">Privacy</a>
+                </div>
+                <div class="float-left clear-both footer-line">
+                    <span>&copy; @DateTime.Now.Year inContact Inc.</span>
+                </div>
+            </div>
+            <div class="float-right">
+                <a class="twitter-link float-right" target="_blank" href="http://www.twitter.com/incontact"></a>
+                <a class="linkedin-link float-right" target="_blank" href="http://www.linkedin.com/company/niceincontact"></a>
+                <a class="facebook-link float-right" target="_blank" href="http://www.facebook.com/niceincontact"></a>
+                <a class="blog-link float-right" target="_blank" href="http://www.niceincontact.com/blog"></a>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,1871 @@
+﻿{
+  "agent_states": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": " Returns the current state for all Agents",
+      "operationId": "getAgentStates",
+      "description": "This method returns information on the current state of all Agents in the business unit, however if \"updatedSince\" is included in the query string, then only agents whose status has changed since the \"updatedSince\" time will be returned.<div class='tabs_wrapper' data-path='RealTimeData_rtdSummaries_getAgentsStates.html'></div>",
+      "responseClass": "AgentStateObjects",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "reqBUIds",
+          "description": "required BU IDs",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "$ref": "#/definitions/parameters/updatedSince"
+        },
+        {
+          "$ref": "#/definitions/parameters/fields"
+        },
+        {
+          "$ref": "#/definitions/parameters/top"
+        },
+        {
+          "$ref": "#/definitions/parameters/skip"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "agentStates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "title": "agentState",
+                  "description": "",
+                  "properties": {
+                    "agentId": {
+                      "type": "integer",
+                      "description": "ID of Agent",
+                      "required": true
+                    },
+                    "agentStateId": {
+                      "type": "integer",
+                      "description": "ID for Agent State"
+                    },
+                    "agentStateName": {
+                      "type": "string",
+                      "description": "Name of state for the Agent",
+                      "required": true,
+                      "enum": [
+                        "LoggedOut",
+                        "Available",
+                        "Unavailable",
+                        "InboundContact",
+                        "OutboundContact",
+                        "InboundConsult",
+                        "OutboundConsult",
+                        "Dialer",
+                        "LoggedIn"
+                      ]
+                    },
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of Business Unit",
+                      "required": true
+                    },
+                    "contactId": {
+                      "type": "integer",
+                      "description": "ID of active Contact if any",
+                      "required": true
+                    },
+                    "isActive": {
+                      "type": "boolean",
+                      "description": "Indicates if agent is in ACTIVE state",
+                      "required": true
+                    },
+                    "isAcw": {
+                      "type": "boolean",
+                      "description": "Indicates if Agent is in ACW state",
+                      "required": true
+                    },
+                    "isOutbound": {
+                      "type": "boolean",
+                      "description": "Indicates if active Contact is using an outbound Skill",
+                      "required": true
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "Agent first name",
+                      "required": true
+                    },
+                    "fromAddress": {
+                      "type": "string",
+                      "description": "Default From email address",
+                      "required": true
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "Agent last name",
+                      "required": true
+                    },
+                    "lastPollTime": {
+                      "type": "string",
+                      "description": " ISO 8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" paremeter on next call",
+                      "required": true
+                    },
+                    "lastUpdateTime": {
+                      "type": "string",
+                      "description": "Time of last record update",
+                      "required": true
+                    },
+                    "mediaName": {
+                      "type": "string",
+                      "description": "Channel name of Contact if any",
+                      "required": true
+                    },
+                    "mediaType": {
+                      "type": "integer",
+                      "description": "Channel ID of Contact if any",
+                      "required": true
+                    },
+                    "openContacts": {
+                      "type": "integer",
+                      "description": "Number of open Contacts",
+                      "required": true
+                    },
+                    "outStateDescription": {
+                      "type": "string",
+                      "description": "Name of Unavailable state",
+                      "required": true
+                    },
+                    "outStateId": {
+                      "type": "integer",
+                      "description": "ID for Unavailable state",
+                      "required": true
+                    },
+                    "skillId": {
+                      "type": "integer",
+                      "description": "ID of Skill Agent is working on",
+                      "required": true
+                    },
+                    "skillName": {
+                      "type": "string",
+                      "description": "Name of Skill Agent is working on",
+                      "required": true
+                    },
+                    "startDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 time the Agent started on current Skill",
+                      "required": true
+                    },
+                    "stationId": {
+                      "type": "integer",
+                      "description": "Agent Station for current session",
+                      "required": true
+                    },
+                    "stationPhoneNumber": {
+                      "type": "string",
+                      "description": "Agent Phone for current session ",
+                      "required": true
+                    },
+                    "teamId": {
+                      "type": "integer",
+                      "description": "ID of Agent Team",
+                      "required": true
+                    },
+                    "teamName": {
+                      "type": "string",
+                      "description": "Name of Agent Team",
+                      "required": true
+                    },
+                    "toAddress": {
+                      "type": "string",
+                      "description": "To email address for Contact if any",
+                      "required": true
+                    },
+                    "userName": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": true
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid Updated Since</p><p>Invalid Fields List</p><p>Invalid Skip</p><p>Invalid Top</p>"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "<p>Access to business unit is restricted.</p><p> Security permissions prevent access to data</p>"
+        },
+        "409": {
+          "description": "Failed Authorization (BU and Partner Tenant trusted relationship check) "
+        }
+      }
+    }
+  },
+  "agents_client-data": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": " Gets a JSON object client data",
+      "operationId": "get-agents-client-data",
+      "description": "Gets a JSON object client data. <div class='tabs_wrapper' data-path='realtime_agents_getclientdata.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "agentId",
+          "description": "Agent Id",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "errorArgList",
+          "description": "Error List",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "data": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Invalid Security User"
+        },
+        "404": {
+          "description": "Invalid Agent ID"
+        }
+      }
+    },
+    "put": {
+      "tags": [ "RealTime" ],
+      "summary": " Updates or inserts a clientData record",
+      "operationId": "put-agents-client-data",
+      "description": "Updates or inserts a clientData record. <div class='tabs_wrapper' data-path='realtime_agents_putclientdata.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "agentId",
+          "description": "Agent Id",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "dataSet",
+          "description": "Data Set",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success"
+        },
+        "401": {
+          "description": "InvalidSecurityUser"
+        },
+        "404": {
+          "description": "InvalidAgentId"
+        },
+        "405": {
+          "description": "DataBaseCommitFailed"
+        },
+        "406": {
+          "description": "InvalidJsonData"
+        }
+      }
+    }
+  },
+  "agents_agentId_states": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": "Returns the current state for an Agent",
+      "operationId": "getAgentStateByid",
+      "description": "This method returns information on the current state of the Agent identified by \"agentId\", however if \"updatedSince\" is included in the query string, then only agents whose status has changed since the \"updatedSince\" time will be returned.<div class='tabs_wrapper' data-path='RealTimeData_rtdSummaries_getAgentIDStates.html'></div>",
+      "responseClass": "AgentStateObjects",
+      "parameters": [
+        {
+          "name": "agentId",
+          "description": "An Agent Id",
+          "type": "integer",
+          "format": "int64",
+          "required": true,
+          "allowMultiple": false,
+          "in": "path"
+        },
+        {
+          "name": "updatedSince",
+          "description": "Only returns objects updated since this time",
+          "allowMultiple": false,
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "Comma separated list of elements to return in response",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "AgentStateObjects",
+            "description": "List of System Address Books",
+            "properties": {
+              "agentStates": {
+                "type": "array",
+                "items": {
+                  "title": "agentState",
+                  "description": "",
+                  "properties": {
+                    "agentId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "ID of Agent",
+                      "required": true
+                    },
+                    "agentStateId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "ID for Agent State"
+                    },
+                    "agentStateName": {
+                      "type": "string",
+                      "description": "Name of state for the Agent",
+                      "required": true,
+                      "enum": [
+                        "LoggedOut",
+                        "Available",
+                        "Unavailable",
+                        "InboundContact",
+                        "OutboundContact",
+                        "InboundConsult",
+                        "OutboundConsult",
+                        "Dialer",
+                        "LoggedIn"
+                      ]
+                    },
+                    "businessUnitId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "ID of Business Unit",
+                      "required": true
+                    },
+                    "contactId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "ID of active Contact if any",
+                      "required": true
+                    },
+                    "isACW": {
+                      "type": "boolean",
+                      "description": "Indicates if Agent is in ACW state",
+                      "required": true
+                    },
+                    "isOutbound": {
+                      "type": "boolean",
+                      "description": "Indicates if active Contact is using an outbound Skill",
+                      "required": true
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "Agent first name",
+                      "required": true
+                    },
+                    "fromAddress": {
+                      "type": "string",
+                      "description": "Default From email address",
+                      "required": true
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "Agent last name",
+                      "required": true
+                    },
+                    "lastPollTime": {
+                      "type": "date",
+                      "description": " ISO 8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" paremeter on next call",
+                      "required": true
+                    },
+                    "lastUpdateTime": {
+                      "type": "date",
+                      "description": "Time of last record update",
+                      "required": true
+                    },
+                    "mediaName": {
+                      "type": "string",
+                      "description": "Channel name of Contact if any",
+                      "required": true
+                    },
+                    "mediaType": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Channel ID of Contact if any",
+                      "required": true
+                    },
+                    "openContacts": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Number of open Contacts",
+                      "required": true
+                    },
+                    "outStateDescription": {
+                      "type": "string",
+                      "description": "Name of Unavailable state",
+                      "required": true
+                    },
+                    "outStateId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "ID for Unavailable state",
+                      "required": true
+                    },
+                    "skillId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "ID of Skill Agent is working on",
+                      "required": true
+                    },
+                    "skillName": {
+                      "type": "string",
+                      "description": "Name of Skill Agent is working on",
+                      "required": true
+                    },
+                    "startDate": {
+                      "type": "date",
+                      "description": "ISO 8601 time the Agent started on current Skill",
+                      "required": true
+                    },
+                    "stationId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Agent Station for current session",
+                      "required": true
+                    },
+                    "stationPhoneNumber": {
+                      "type": "string",
+                      "description": "Agent Phone for current session ",
+                      "required": true
+                    },
+                    "teamId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "ID of Agent Team",
+                      "required": true
+                    },
+                    "teamName": {
+                      "type": "string",
+                      "description": "Name of Agent Team",
+                      "required": true
+                    },
+                    "toAddress": {
+                      "type": "string",
+                      "description": "To email address for Contact if any",
+                      "required": true
+                    }
+                  }
+                },
+                "required": true
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid Updated Since</p><p>Invalid Fields List</p>"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "404": {
+          "description": "Invalid Agent Id"
+        }
+      }
+    }
+  },
+  "contacts_active": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": "%UPDATED_IN_V23%  Returns Active Contacts",
+      "operationId": "ActiveContacts",
+      "description": "This method will return a list of active Contacts for the Business Unit.  For this method, active Contacts are defined as those whose current state is not set to \"EndContact\"<div class='tabs_wrapper' data-path='RealTimeData_getActiveContacts.html'></div>",
+      "parameters": [
+        {
+          "$ref": "#/definitions/parameters/updatedSince"
+        },
+        {
+          "$ref": "#/definitions/parameters/fields"
+        },
+        {
+          "name": "mediaSubTypeId",
+          "description": "Media Sub Type Id",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "mediaTypeId",
+          "description": "ID of Media Type to filter by.  Allowable values can be retrieved using <b>GET /media-types</b> API.  The pick list here is for ease of use in the Portal",
+          "type": "integer",
+          "in": "query",
+          "enum": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        {
+          "name": "skillId",
+          "description": "Filters Contacts by Skill",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "campaignId",
+          "description": "Filters Contacts by Campaign",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "agentId",
+          "description": "Filters Contacts by Agent",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "teamId",
+          "description": "Filters Contacts by Team",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "toAddr",
+          "description": "Filters Contacts by DNIS or email address",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "fromAddr",
+          "description": "Filters Contacts by ANI or email address",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "digitalContactStateId",
+          "description": "Digital Contact State ID",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "stateId",
+          "description": "Filters Contacts by state",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "contactId",
+          "description": "Filters Contacts by contactId",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "$ref": "#/definitions/parameters/top"
+        },
+        {
+          "$ref": "#/definitions/parameters/skip"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "ActiveContactsResultSet",
+            "properties": {
+              "resultSet": {
+                "title": "ActiveContacts",
+                "description": "Payload Container",
+                "properties": {
+                  "businessUnitId": {
+                    "type": "integer",
+                    "description": "ID of Business Unit"
+                  },
+                  "lastPollTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call"
+                  },
+                  "activeContacts": {
+                    "type": "array",
+                    "items": {
+                      "title": "activeContacts",
+                      "description": "",
+                      "properties": {
+                        "agentId": {
+                          "type": "integer",
+                          "description": "ID of Agent"
+                        },
+                        "agentStartDate": {
+                          "type": "string",
+                          "description": "Agent Start Date"
+                        },
+                        "campaignId": {
+                          "type": "integer",
+                          "description": "ID of the Campaign"
+                        },
+                        "campaignName": {
+                          "type": "string",
+                          "description": "Name of the Campaign"
+                        },
+                        "contactId": {
+                          "type": "integer",
+                          "description": "ID of the Contact"
+                        },
+                        "contactStart": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp of when the Contact started"
+                        },
+                        "digitalContactState": {
+                          "type": "string",
+                          "description": "Digital Contact State"
+                        },
+                        "digitalContactStateId": {
+                          "type": "integer",
+                          "description": "Digital Contact State ID"
+                        },
+                        "fileName": {
+                          "type": "string",
+                          "description": "Name of file associated with Contact"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "description": "First Name"
+                        },
+                        "fromAdd": {
+                          "type": "string"
+                        },
+                        "holdCount": {
+                          "type": "integer",
+                          "description": "Count of Hold"
+                        },
+                        "isLogged": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact is logged"
+                        },
+                        "isOutbound": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact is an outbound contact"
+                        },
+                        "isTakeover": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact was taken over by a supervisor"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "description": "Last name of Agent handling the Contact"
+                        },
+                        "lastUpdateTime": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp of when the Contact was last updated"
+                        },
+                        "masterContactId": {
+                          "type": "integer",
+                          "description": "ID of the source Contact associated with this Contact"
+                        },
+                        "mediaSubTypeId": {
+                          "type": "integer",
+                          "description": "Media Sub Type ID"
+                        },
+                        "mediaSubTypeName": {
+                          "type": "string",
+                          "description": "Media Sub Type Name"
+                        },
+                        "mediaType": {
+                          "type": "integer",
+                          "description": "ID of the Media Type used for this Contact"
+                        },
+                        "pointOfContactId": {
+                          "type": "integer",
+                          "description": "ID of the Point of Contact"
+                        },
+                        "pointOfContactName": {
+                          "type": "string",
+                          "description": "Name of the Point of Contact"
+                        },
+                        "skillId": {
+                          "type": "integer",
+                          "description": "ID of the Skill"
+                        },
+                        "skillName": {
+                          "type": "string",
+                          "description": "Name of the Skill"
+                        },
+                        "state": {
+                          "type": "string",
+                          "description": "Name of the contact state"
+                        },
+                        "stateId": {
+                          "type": "integer",
+                          "description": "ID of the contact state"
+                        },
+                        "targetAgentId": {
+                          "type": "integer",
+                          "description": "ID of the Agent the Contact was targetted to.  May not be the same as agentId"
+                        },
+                        "teamId": {
+                          "type": "integer",
+                          "description": "ID of the Team"
+                        },
+                        "teamName": {
+                          "type": "string",
+                          "description": "Name of the Team"
+                        },
+                        "toAddr": {
+                          "type": "string",
+                          "description": "DNIS or email destination for Contact"
+                        },
+                        "transferIndicatorId": {
+                          "type": "integer",
+                          "description": "ID of what transfer type occurred",
+                          "enum": [
+                            "0",
+                            "1",
+                            "2",
+                            "3",
+                            "4"
+                          ]
+                        },
+                        "transferIndicatorName": {
+                          "type": "string",
+                          "description": "Name of transfer type mapped to transferIndicatorId",
+                          "enum": [
+                            "None",
+                            "ReSkill",
+                            "ReAgent",
+                            "Consult",
+                            "TakeOver"
+                          ]
+                        }
+                      }
+                    },
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "204": {
+          "description": "No Contacts for the specified period",
+          "schema": {
+            "type": "object",
+            "additionalProperties": false,
+            "title": "ActiveContactsResultSet",
+            "properties": {
+              "resultSet": {
+                "title": "ActiveContacts",
+                "description": "Payload Container",
+                "properties": {
+                  "businessUnitId": {
+                    "type": "integer",
+                    "description": "ID of Business Unit"
+                  },
+                  "lastPollTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call"
+                  },
+                  "activeContacts": {
+                    "type": "array",
+                    "items": {
+                      "title": "activeContacts",
+                      "description": "",
+                      "properties": {
+                        "agentId": {
+                          "type": "integer",
+                          "description": "ID of Agent"
+                        },
+                        "agentStartDate": {
+                          "type": "string",
+                          "description": "Agent Start Date"
+                        },
+                        "campaignId": {
+                          "type": "integer",
+                          "description": "ID of the Campaign"
+                        },
+                        "campaignName": {
+                          "type": "string",
+                          "description": "Name of the Campaign"
+                        },
+                        "contactId": {
+                          "type": "integer",
+                          "description": "ID of the Contact"
+                        },
+                        "contactStart": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp of when the Contact started"
+                        },
+                        "digitalContactState": {
+                          "type": "string",
+                          "description": "Digital Contact State"
+                        },
+                        "digitalContactStateId": {
+                          "type": "integer",
+                          "description": "Digital Contact State ID"
+                        },
+                        "fileName": {
+                          "type": "string",
+                          "description": "Name of file associated with Contact"
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "description": "First Name"
+                        },
+                        "fromAdd": {
+                          "type": "string"
+                        },
+                        "holdCount": {
+                          "type": "integer",
+                          "description": "Count of Hold"
+                        },
+                        "isLogged": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact is logged"
+                        },
+                        "isOutbound": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact is an outbound contact"
+                        },
+                        "isTakeover": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact was taken over by a supervisor"
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "description": "Last name of Agent handling the Contact"
+                        },
+                        "lastUpdateTime": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp of when the Contact was last updated"
+                        },
+                        "masterContactId": {
+                          "type": "integer",
+                          "description": "ID of the source Contact associated with this Contact"
+                        },
+                        "mediaSubTypeId": {
+                          "type": "integer",
+                          "description": "Media Sub Type ID"
+                        },
+                        "mediaSubTypeName": {
+                          "type": "string",
+                          "description": "Media Sub Type Name"
+                        },
+                        "mediaType": {
+                          "type": "integer",
+                          "description": "ID of the Media Type used for this Contact"
+                        },
+                        "pointOfContactId": {
+                          "type": "integer",
+                          "description": "ID of the Point of Contact"
+                        },
+                        "pointOfContactName": {
+                          "type": "string",
+                          "description": "Name of the Point of Contact"
+                        },
+                        "skillId": {
+                          "type": "integer",
+                          "description": "ID of the Skill"
+                        },
+                        "skillName": {
+                          "type": "string",
+                          "description": "Name of the Skill"
+                        },
+                        "state": {
+                          "type": "string",
+                          "description": "Name of the contact state"
+                        },
+                        "stateId": {
+                          "type": "integer",
+                          "description": "ID of the contact state"
+                        },
+                        "targetAgentId": {
+                          "type": "integer",
+                          "description": "ID of the Agent the Contact was targetted to.  May not be the same as agentId"
+                        },
+                        "teamId": {
+                          "type": "integer",
+                          "description": "ID of the Team"
+                        },
+                        "teamName": {
+                          "type": "string",
+                          "description": "Name of the Team"
+                        },
+                        "toAddr": {
+                          "type": "string",
+                          "description": "DNIS or email destination for Contact"
+                        },
+                        "transferIndicatorId": {
+                          "type": "integer",
+                          "description": "ID of what transfer type occurred",
+                          "enum": [
+                            "0",
+                            "1",
+                            "2",
+                            "3",
+                            "4"
+                          ]
+                        },
+                        "transferIndicatorName": {
+                          "type": "string",
+                          "description": "Name of transfer type mapped to transferIndicatorId",
+                          "enum": [
+                            "None",
+                            "ReSkill",
+                            "ReAgent",
+                            "Consult",
+                            "TakeOver"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid filter parameter</p><p>Invalid updatedSince</p><p>Invalid fields list</p><p>Invalid stateId, must be an integer value</p><p>Invalid stateId, not a valid stateId</p><p>Invalid skip</p><p>Invalid top</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "Security privileges prevent access to data"
+        }
+      }
+    }
+  },
+  "contacts-parked": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": "Returns Parked Contacts",
+      "operationId": "ParkedContactDetails",
+      "description": "This method will return a list of parked Email Contacts for the Business Unit.<div class='tabs_wrapper' data-path='RealTimeData_getParkedContacts.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "updatedSince",
+          "description": "Returns all Contacts updated since ISO 8601 time",
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "Comma separated list of elements to return in response",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "mediaTypeId",
+          "description": "ID of Media Type to filter by.  Allowable values can be retrieved using <b>GET /media-types</b> API.  The pick list here is for ease of use in the Portal",
+          "type": "integer",
+          "in": "query",
+          "enum": [
+            "1",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        {
+          "name": "skillId",
+          "description": "Filters Contacts by Skill",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "campaignId",
+          "description": "Filters Contacts by Campaign",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "agentId",
+          "description": "Filters Contacts by Agent",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "teamId",
+          "description": "Filters Contacts by Team",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "toAddr",
+          "description": "Filters Contacts by DNIS or email address",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "fromAddr",
+          "description": "Filters Contacts by ANI or email address",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "resultSet": {
+                "type": "object",
+                "properties": {
+                  "businessUnitId": {
+                    "type": "integer",
+                    "description": "ID of Business Unit",
+                    "required": true
+                  },
+                  "lastPollTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call",
+                    "required": true
+                  },
+                  "parkedContacts": {
+                    "type": "array",
+                    "items": {
+                      "title": "parkedContacts",
+                      "description": "",
+                      "properties": {
+                        "agentId": {
+                          "type": "integer",
+                          "description": "ID of Agent",
+                          "required": true
+                        },
+                        "campaignId": {
+                          "type": "integer",
+                          "description": "ID of the Campaign",
+                          "required": true
+                        },
+                        "campaignName": {
+                          "type": "string",
+                          "description": "Name of the Campaign",
+                          "required": true
+                        },
+                        "contactId": {
+                          "type": "integer",
+                          "description": "ID of the Contact",
+                          "required": true
+                        },
+                        "contactStart": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp of when the Contact started",
+                          "required": true
+                        },
+                        "fileName": {
+                          "type": "string",
+                          "description": "Name of file associated with Contact",
+                          "required": true
+                        },
+                        "firstName": {
+                          "type": "string",
+                          "description": "First name of Agent handling the Contact",
+                          "required": true
+                        },
+                        "fromAddr": {
+                          "type": "string",
+                          "description": "ANI or email source of Contact",
+                          "required": true
+                        },
+                        "isLogged": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact is logged",
+                          "required": true
+                        },
+                        "isOutbound": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact is an outbound contact",
+                          "required": true
+                        },
+                        "isTakeover": {
+                          "type": "boolean",
+                          "description": "Indicates if Contact was taken over by a supervisor",
+                          "required": true
+                        },
+                        "lastName": {
+                          "type": "string",
+                          "description": "Last name of Agent handling the Contact",
+                          "required": true
+                        },
+                        "lastUpdateTime": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "ISO 8601 timestamp of when the Contact was last updated",
+                          "required": true
+                        },
+                        "masterContactId": {
+                          "type": "integer",
+                          "description": "ID of the source Contact associated with this Contact",
+                          "required": true
+                        },
+                        "mediaType": {
+                          "type": "integer",
+                          "description": "ID of the Media Type used for this Contact",
+                          "required": true
+                        },
+                        "mediaTypeName": {
+                          "type": "string",
+                          "description": "Name of the Media Type used for this Contact",
+                          "required": true
+                        },
+                        "pointOfContactId": {
+                          "type": "integer",
+                          "description": "ID of the Point of Contact",
+                          "required": true
+                        },
+                        "pointOfContactName": {
+                          "type": "string",
+                          "description": "Name of the Point of Contact",
+                          "required": true
+                        },
+                        "primaryDispositionId": {
+                          "type": "integer",
+                          "description": "ID of the primary Disposition",
+                          "required": true
+                        },
+                        "secondaryDispositionId": {
+                          "type": "integer",
+                          "description": "ID of the secondary Disposition",
+                          "required": true
+                        },
+                        "skillId": {
+                          "type": "integer",
+                          "description": "ID of the Skill",
+                          "required": true
+                        },
+                        "skillName": {
+                          "type": "string",
+                          "description": "Name of the Skill",
+                          "required": true
+                        },
+                        "state": {
+                          "type": "string",
+                          "description": "Name of the contact state",
+                          "required": true
+                        },
+                        "stateId": {
+                          "type": "integer",
+                          "description": "ID of the contact state",
+                          "required": true
+                        },
+                        "subject": {
+                          "type": "string"
+                        },
+                        "tags": {
+                          "type": "string"
+                        },
+                        "targetAgentId": {
+                          "type": "integer"
+                        },
+                        "teamId": {
+                          "type": "integer"
+                        },
+                        "teamName": {
+                          "type": "string"
+                        },
+                        "toAddr": {
+                          "type": "string"
+                        },
+                        "transferIndicatorId": {
+                          "type": "integer"
+                        },
+                        "transferIndicatorName": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "204": {
+          "description": "No Contacts for the specified period"
+        },
+        "400": {
+          "description": "<p>Invalid filter parameter {0}</p><p>Invalid updatedSince {0}</p><p>Invalid fields list {0}</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "Security privileges prevent access to data"
+        }
+      }
+    }
+  },
+  "contacts_states": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": "Returns active Contact states",
+      "operationId": "getContactState",
+      "description": "This method will return the real time state for all active Contacts in the business unit.<div class='tabs_wrapper' data-path='RealTimeData_rtdSummaries_getContactsStates.html'></div>",
+      "responseClass": "ContactStateObjects",
+      "parameters": [
+        {
+          "$ref": "#/definitions/parameters/updatedSince"
+        },
+        {
+          "$ref": "#/definitions/parameters/agentId"
+        },
+        {
+          "$ref": "#/definitions/parameters/skip"
+        },
+        {
+          "$ref": "#/definitions/parameters/top"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "ContactStateObjects",
+            "description": "Array of Contacts",
+            "properties": {
+              "totalRecords": {
+                "type": "integer",
+                "description": "Returns total number of records"
+              },
+              "_links": {
+                "type": "object",
+                "title": "_links",
+                "description": "Links used to parse paginated response",
+                "properties": {
+                  "self": {
+                    "type": "string",
+                    "format": "URL",
+                    "description": " Link to same page of results"
+                  },
+                  "next": {
+                    "type": "string",
+                    "format": "URL",
+                    "description": " Link to next page of results"
+                  },
+                  "previous": {
+                    "type": "string",
+                    "format": "URL",
+                    "description": " Link to previous page of results"
+                  }
+                }
+              },
+              "contactStates": {
+                "type": "array",
+                "description": "Array of Contacts",
+                "items": {
+                  "title": "contactState",
+                  "properties": {
+                    "AgentId": {
+                      "type": "integer",
+                      "description": "ID of the Agent",
+                      "required": true
+                    },
+                    "BusinessUnitId": {
+                      "type": "integer",
+                      "description": "The business unit number",
+                      "required": true
+                    },
+                    "CampaignName": {
+                      "type": "string",
+                      "description": "Name of Campaign",
+                      "required": true
+                    },
+                    "CampaignId": {
+                      "type": "integer",
+                      "description": "ID of Campaign",
+                      "required": true
+                    },
+                    "ContactId": {
+                      "type": "integer",
+                      "description": "ID of the Contact",
+                      "required": true
+                    },
+                    "ContactStateCode": {
+                      "type": "integer",
+                      "description": "ID of the Contact state",
+                      "required": true
+                    },
+                    "CurrentContactState": {
+                      "type": "string",
+                      "description": "Name of the Contact state",
+                      "required": true
+                    },
+                    "FirstName": {
+                      "type": "string",
+                      "description": "Agent first name",
+                      "required": true
+                    },
+                    "FromAddr": {
+                      "type": "string",
+                      "description": "Default From email address",
+                      "required": true
+                    },
+                    "LastName": {
+                      "type": "string",
+                      "description": "Agent last name",
+                      "required": true
+                    },
+                    "LastPollTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Time of last cache update",
+                      "required": true
+                    },
+                    "LastUpdateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Time of last record update",
+                      "required": true
+                    },
+                    "MasterContactId": {
+                      "type": "integer",
+                      "description": "ID of original Contact.  Can be the same as \"ContactId\"",
+                      "required": true
+                    },
+                    "MediaName": {
+                      "type": "string",
+                      "description": "i.e Phone Call, Chat etc...",
+                      "required": true
+                    },
+                    "MediaType": {
+                      "type": "integer",
+                      "description": "Index for media type, i.e. 0,1,2,3,4",
+                      "required": true
+                    },
+                    "MediaSubTypeId": {
+                      "type": "integer",
+                      "description": "The numeric ID of the Media Type. Media Types are designated as 1 = Email, 2 = Fax, 3 = Chat, 4 = Phone call, 5 = Voicemail, 6 = Work items, 7 = SMS, 8 = Social and 9 = Digital."
+                    },
+                    "MediaSubTypeName": {
+                      "type": "string",
+                      "description": "The name of the Media Type or channel of the Contact. The Media Names are designated such as Email, Fax, Chat, Phone Call, Voicemail, Work Items, SMS, Social or Digital."
+                    },
+                    "SkillName": {
+                      "type": "string",
+                      "description": "Name of Skill",
+                      "required": true
+                    },
+                    "SkillId": {
+                      "type": "integer",
+                      "description": "ID of Skill",
+                      "required": true
+                    },
+                    "StartDate": {
+                      "type": "date",
+                      "description": "Start time of the contact",
+                      "required": true
+                    },
+                    "TeamName": {
+                      "type": "string",
+                      "description": "Name of Team",
+                      "required": true
+                    },
+                    "TeamId": {
+                      "type": "integer",
+                      "description": "ID of Team",
+                      "required": true
+                    },
+                    "Toaddr": {
+                      "type": "string",
+                      "description": "To email address if any",
+                      "required": true
+                    }
+                  }
+                },
+                "required": true
+              }
+            }
+          }
+        },
+        "202": {
+          "description": "Accepted"
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        }
+      }
+    }
+  },
+  "skills_activity": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": " Returns activity for all Skills",
+      "operationId": "SkillActivity",
+      "description": "This method returns activity information for all Skills.  This is some of the same data that was returned by the /skills/summary API in previous versions. <div class='tabs_wrapper' data-path='RealTimeData_rtdSummaries_getSkillActivity.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "mediaTypeId",
+          "description": "Filters based on the media type of the Skill",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "IsOutbound",
+          "description": "Indicates if the Skill is outbound",
+          "type": "boolean",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "Comma separated list of elements to return in response",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "updatedSince",
+          "description": "Returns all Skills with activity updates since ISO 8601 time",
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "$ref": "#/definitions/parameters/skip"
+        },
+        {
+          "$ref": "#/definitions/parameters/top"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "SkillActivityResultSet",
+            "properties": {
+              "resultSet": {
+                "schema": {
+                  "title": "SkillActivities",
+                  "description": "Payload Container",
+                  "properties": {
+                    "lastPollTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call",
+                      "required": true
+                    },
+                    "skillActivity": {
+                      "type": "array",
+                      "description": "Array of Skill Activities",
+                      "items": {
+                        "title": "skillActivity",
+                        "properties": {
+                          "serverTime": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "ISO 8601 time on server",
+                            "required": true
+                          },
+                          "businessUnitId": {
+                            "type": "integer",
+                            "description": "ID of Business Unit",
+                            "required": true
+                          },
+                          "agentsACW": {
+                            "type": "integer",
+                            "description": "Number of Agents in ACW on Skill",
+                            "required": true
+                          },
+                          "agentsAvailable": {
+                            "type": "integer",
+                            "description": "Number of Agents available on Skill",
+                            "required": true
+                          },
+                          "agentsIdle": {
+                            "type": "integer",
+                            "description": "Number of Agents idle on Skill",
+                            "required": true
+                          },
+                          "agentsLoggedIn": {
+                            "type": "integer",
+                            "description": "Number of Agents logged into Skill",
+                            "required": true
+                          },
+                          "agentsUnavailable": {
+                            "type": "integer",
+                            "description": "Number of Agents unavailable on Skill",
+                            "required": true
+                          },
+                          "agentsWorking": {
+                            "type": "integer",
+                            "description": "Number of Agents working on Skill",
+                            "required": true
+                          },
+                          "campaignId": {
+                            "type": "integer",
+                            "description": "ID of Campaign",
+                            "required": true
+                          },
+                          "campaignName": {
+                            "type": "string",
+                            "description": "Name of Campaign",
+                            "required": true
+                          },
+                          "contactsActive": {
+                            "type": "integer",
+                            "description": "Number of active Contacts for Skill",
+                            "required": true
+                          },
+                          "isOutbound": {
+                            "type": "boolean",
+                            "description": "Indicates if Skill is outbound",
+                            "required": true
+                          },
+                          "mediaTypeId": {
+                            "type": "integer",
+                            "description": "ID of Media Type",
+                            "required": true
+                          },
+                          "mediaTypeName": {
+                            "type": "string",
+                            "description": "Name of Media Type",
+                            "required": true
+                          },
+                          "queueCount": {
+                            "type": "integer",
+                            "description": "Number of Contacts in queue for Skill",
+                            "required": true
+                          },
+                          "serviceLevel": {
+                            "type": "integer",
+                            "description": "Percentage of contact within Service Level",
+                            "required": true
+                          },
+                          "serviceLevelGoal": {
+                            "type": "integer",
+                            "description": "Percentage Goal for Service Level",
+                            "required": true
+                          },
+                          "serviceLevelThreshold": {
+                            "type": "integer",
+                            "description": "Threshold in seconds that contacts should be answered in",
+                            "required": true
+                          },
+                          "skillName": {
+                            "type": "string",
+                            "description": "Name of Skill",
+                            "required": true
+                          },
+                          "skillId": {
+                            "type": "integer",
+                            "description": "ID of Skill",
+                            "required": true
+                          },
+                          "skillQueueCount": {
+                            "type": "integer",
+                            "description": "Number of Emails in the skill queue",
+                            "required": true
+                          },
+                          "personalQueueCount": {
+                            "type": "integer",
+                            "description": "Number of Emails in the personal queue",
+                            "required": true
+                          },
+                          "parkedCount": {
+                            "type": "integer",
+                            "description": "Number of Emails in the parked queue",
+                            "required": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid field list</p><p>Invalid updatedSince</p><p>Invalid MediaTypeId</p><p>Invalid skip</p><p>Invalid top</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "<p>Access to business unit is restricted.</p><p> Security permissions prevent access to data</p>"
+        }
+      }
+    }
+  },
+  "skills_skillId_activity": {
+    "get": {
+      "tags": [ "RealTime" ],
+      "summary": " Returns activity for a Skill",
+      "operationId": "SkillActivityById",
+      "responseClass": "SkillActivityResultSet",
+      "description": "This method returns activity information on the Skill identified by \"skillId\".  This is some of the same data that was returned by the /skills/summary API in previous versions.<div class='tabs_wrapper' data-path='RealTimeData_rtdSummaries_getSkillActivityByID.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "skillId",
+          "description": "ID of the Skill",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "in": "path"
+        },
+        {
+          "name": "fields",
+          "description": "Comma separated list of elements to return in response",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "updatedSince",
+          "description": "Returns for all Skills with activity updates since ISO 8601 time",
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "SkillActivityResultSet",
+            "properties": {
+              "resultSet": {
+                "schema": {
+                  "title": "SkillActivities",
+                  "description": "Payload Container",
+                  "properties": {
+                    "lastPollTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call",
+                      "required": true
+                    },
+                    "skillActivity": {
+                      "type": "array",
+                      "description": "Array of Skill Activities",
+                      "items": {
+                        "title": "skillActivity",
+                        "properties": {
+                          "serverTime": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "ISO 8601 time on server",
+                            "required": true
+                          },
+                          "businessUnitId": {
+                            "type": "integer",
+                            "description": "ID of Business Unit",
+                            "required": true
+                          },
+                          "agentsACW": {
+                            "type": "integer",
+                            "description": "Number of Agents in ACW on Skill",
+                            "required": true
+                          },
+                          "agentsAvailable": {
+                            "type": "integer",
+                            "description": "Number of Agents available on Skill",
+                            "required": true
+                          },
+                          "agentsIdle": {
+                            "type": "integer",
+                            "description": "Number of Agents idle on Skill",
+                            "required": true
+                          },
+                          "agentsLoggedIn": {
+                            "type": "integer",
+                            "description": "Number of Agents logged into Skill",
+                            "required": true
+                          },
+                          "agentsUnavailable": {
+                            "type": "integer",
+                            "description": "Number of Agents unavailable on Skill",
+                            "required": true
+                          },
+                          "agentsWorking": {
+                            "type": "integer",
+                            "description": "Number of Agents working on Skill",
+                            "required": true
+                          },
+                          "campaignId": {
+                            "type": "integer",
+                            "description": "ID of Campaign",
+                            "required": true
+                          },
+                          "campaignName": {
+                            "type": "string",
+                            "description": "Name of Campaign",
+                            "required": true
+                          },
+                          "contactsActive": {
+                            "type": "integer",
+                            "description": "Number of active Contacts for Skill",
+                            "required": true
+                          },
+                          "isOutbound": {
+                            "type": "boolean",
+                            "description": "Indicates if Skill is outbound",
+                            "required": true
+                          },
+                          "mediaTypeId": {
+                            "type": "integer",
+                            "description": "ID of Media Type",
+                            "required": true
+                          },
+                          "mediaTypeName": {
+                            "type": "string",
+                            "description": "Name of Media Type",
+                            "required": true
+                          },
+                          "queueCount": {
+                            "type": "integer",
+                            "description": "Number of Contacts in queue for Skill",
+                            "required": true
+                          },
+                          "serviceLevel": {
+                            "type": "integer",
+                            "description": "Percentage of contact within Service Level",
+                            "required": true
+                          },
+                          "serviceLevelGoal": {
+                            "type": "integer",
+                            "description": "Percentage Goal for Service Level",
+                            "required": true
+                          },
+                          "serviceLevelThreshold": {
+                            "type": "integer",
+                            "description": "Threshold in seconds that contacts should be answered in",
+                            "required": true
+                          },
+                          "skillName": {
+                            "type": "string",
+                            "description": "Name of Skill",
+                            "required": true
+                          },
+                          "skillId": {
+                            "type": "integer",
+                            "description": "ID of Skill",
+                            "required": true
+                          },
+                          "skillQueueCount": {
+                            "type": "integer",
+                            "description": "Number of Emails in the skill queue",
+                            "required": true
+                          },
+                          "personalQueueCount": {
+                            "type": "integer",
+                            "description": " Number of Emails in the personal queue",
+                            "required": true
+                          },
+                          "parkedCount": {
+                            "type": "integer",
+                            "description": " Number of Emails in the parked queue",
+                            "required": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid field list</p><p>Invalid updatedSince</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "404": {
+          "description": "Invalid skillId"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "parameters": {
+      "agentId": {
+        "name": "agentId",
+        "description": "ID of the Agent",
+        "type": "string",
+        "in": "path"
+      },
+      "updatedSince": {
+        "name": "updatedSince",
+        "description": "Return all records updated since ISO 8601 time",
+        "type": "string",
+        "format": "date-time",
+        "in": "query"
+      },
+      "fields": {
+        "name": "fields",
+        "description": "Comma separated list of elements to return in response",
+        "type": "string",
+        "in": "query"
+      },
+      "skip": {
+        "name": "skip",
+        "description": "Number of records to skip in the results",
+        "type": "integer",
+        "in": "query"
+      },
+      "top": {
+        "name": "top",
+        "description": "Number of records to return in the results",
+        "type": "integer",
+        "in": "query"
+      }
+    }
+  }
+}

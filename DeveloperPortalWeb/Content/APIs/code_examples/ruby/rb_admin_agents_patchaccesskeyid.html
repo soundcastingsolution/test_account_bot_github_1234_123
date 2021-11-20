@@ -1,0 +1,23 @@
+﻿<pre class="prettyprint linenums">
+def patchAccesskeysByID()
+ if($accessToken!='')
+ uri= URI.parse(($baseURI)+'/services/{version}/access-keys'+($accessKeyId))
+  # Create the Post request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer " + ($accessToken),
+      "Content-Type" => "application/json",
+      "Data-Type" => "json",
+      "Content-Length" => "0",
+      "Accept-Encoding" => "gzip,deflate"}
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+  # puts headers
+  # Make the request.
+  #http.use_ssl= true
+  res = http.patch(uri.path,headers)
+ else
+  #no token get one or handle error
+end
+    end
+</pre>

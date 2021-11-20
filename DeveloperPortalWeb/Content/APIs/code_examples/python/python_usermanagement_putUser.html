@@ -1,0 +1,21 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+import json
+def updateUser(updateUserData):
+# api-endpoint 
+#Give the specified url ,accessToken
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+#Check if accessToken is empty or null
+	if accessToken!="":
+
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken}
+# Make http put request
+		response = requests.put(Baseuri +'/user-management​/v1​/users', headers = header_param, json=updateUserData) 
+#print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

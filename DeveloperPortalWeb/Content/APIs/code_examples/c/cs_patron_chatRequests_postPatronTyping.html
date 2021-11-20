@@ -1,0 +1,57 @@
+﻿<pre class="prettyprint linenums">
+<pre>
+    protected void postContactsChatSessionTyping(string chatSession, string isTyping = "", string isTextEntered = "", string label = "testLabel")
+        {            
+            //Test to see if you have obtained a token            
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                string apiURL = "/services/{version}/contacts/chats/" + chatSession + "/typing";
+                //baseURL was returned with your successful token request
+                string endpoint = baseURL + apiURL;  
+             
+                string postData = "{\"isTyping\":" + isTyping +
+                                   ",\"isTextEntered\":" + isTextEntered +
+                                   ",\"label\":" + label + "}";
+
+                //Create the request object
+                var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                //Add any and all necessary headers
+                request.Headers.Add("Authorization", "bearer " + accessToken);
+                //Accept is a reserved header, so you must modify it rather than add
+                request.Accept = "application/json, text/javascript, */*; q=0.01";
+                //Write the PostData into the Request Body
+                byte[] postDataBytes = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(postData.ToLower());
+                request.ContentLength = postDataBytes.Length;
+                using (var writeStream = request.GetRequestStream())
+                {
+                    writeStream.Write(postDataBytes, 0, postDataBytes.Length);
+                }
+                //Make the request
+                try
+                {
+                    // Get the Response from the Web Request
+                    using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+                    {
+                        // Success do something with the response here.
+                        Console.WriteLine(response.StatusCode);
+                    }
+                }
+                catch (System.Net.WebException webException)
+                {
+                    // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+                    // You can catch that exception and retain the StatusCode for error handling.
+                }
+                catch (Exception ex)
+                {
+                    //Non Web Exception error, handle error
+                }
+            }
+            else
+            {
+                //No token - get one or handle error
+            }
+        }
+</pre>
+</pre>

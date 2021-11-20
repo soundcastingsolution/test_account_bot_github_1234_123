@@ -1,0 +1,197 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +agents->a hash
+
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+
+def PostAgent(token,
+"agents":{ 
+      "firstName"=>"",
+      "middleName"=> "",
+      "lastName"=> "",
+      "teamId"=> "",
+      "teamUuid"=> "",
+      "reportToId"=> 0,
+      "internalId"=> "",
+      "profileId"=> 0,
+      "roleId"=> "",
+      "password"=> "",
+      "isBillable"=>true,
+      "forceChangeOnLogon"=> true,
+      "emailAddress"=> "",
+      "userName"=> "",
+      "userId"=> "",
+      "timeZone"=> "",
+      "country"=> "",
+      "state"=> "",
+      "city"=> "",
+      "chatRefusalTimeout"=> 0,
+      "phoneRefusalTimeout"=> 0,
+      "workItemRefusalTimeout"=> 0,
+      "defaultDialingPattern"=> 0,
+      "useTeamMaxConcurrentChats"=> ,
+      "maxConcurrentChats"=> 0,
+      "isActive"=> true,
+      "locationId"=> 0,
+      "notes"=> "string",
+      "hireDate"=> "",
+      "terminationDate"=> "",
+      "hourlyCost"=> 0,
+      "rehireStatus"=> true,
+      "employmentType"=> "",
+      "referral"=> "",
+      "atHome"=> ,
+      "hiringSource"=> 0,
+      "custom1"=> "",
+      "custom2"=> "",
+      "custom3"=> "",
+      "custom4"=> "",
+      "custom5"=> "",
+      "scheduleNotification"=> "",
+      "federatedId"=> "",
+      "useTeamEmailAutoParkingLimit"=> true,
+      "maxEmailAutoParkingLimit"=> 0,
+      "sipUser"=> "",
+      "systemDomain"=> "",
+      "crmUserName"=> "",
+      "useAgentTimeZone"=> ,
+      "timeDisplayFormat"=> 0,
+      "sendEmailNotifications"=> true,
+      "apiKey"=> "",
+      "telephone1"=> "",
+      "telephone2"=> "",
+      "userType"=> "",
+      "isWhatIfAgent"=> true,
+      "requestContact"=> true,
+      "chatThreshold"=> 0,
+      "useTeamChatThreshold"=> true,
+      "emailThreshold"=> 0,
+      "useTeamEmailThreshold"=> true,
+      "workItemThreshold"=> 0,
+      "useTeamWorkItemThreshold"=> true,
+      "contactAutoFocus"=> true,
+      "useTeamContactAutoFocus"=> true,
+      "useTeamRequestContact"=> true},
+
+      "recordingNumbers": 
+        {
+         "number"=> ""
+        })
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/agents"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::Post.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+      "agents[firstName]"=>"name",
+      "agents[middleName]"=> "name",
+      "agents[lastName]"=> "name",
+      "agents[teamId]"=> "string value",
+      "agents[teamUuid]"=> "string value",
+      "agents[reportToId]"=> 0,
+      "agents[internalId]"=> "string value",
+      "agents[profileId]"=> 0,
+      "agents[roleId]"=> "string value",
+      "agents[password]"=> "string value",
+      "agents[forceChangeOnLogon]"=> true,
+      "agents[emailAddress]"=> "string value",
+      "agents[userName]"=> "string value",
+      "agents[userId]"=> "string value",
+      "agents[timeZone]"=> "string value",
+      "agents[country]"=> "string value",
+      "agents[state]"=> "string value",
+      "agents[city]"=> "string value",
+      "agents[chatRefusalTimeout]"=> 0,
+      "agents[phoneRefusalTimeout]"=> 0,
+      "agents[workItemRefusalTimeout]"=> 0,
+      "agents[defaultDialingPattern]"=> 0,
+      "agents[useTeamMaxConcurrentChats]"=> ,
+      "agents[maxConcurrentChats]"=> 0,
+      "agents[isActive]"=> true,
+      "agents[locationId]"=> 0,
+      "agents[notes]"=> "string value",
+      "agents[hireDate]"=> "",
+      "agents[terminationDate]"=> "string value",
+      "agents[hourlyCost]"=> 0,
+      "agents[rehireStatus]"=> true,
+      "agents[employmentType]"=> "string value",
+      "agents[referral]"=> "string value",
+      "agents[atHome]"=>"string value" ,
+      "agents[hiringSource]"=> 0,
+      "agents[custom1]"=> "string value",
+      "agents[custom2]"=> "string value",
+      "agents[custom3]"=> "string value",
+      "agents[custom4]"=> "string value",
+      "agents[custom5]"=> "string value",
+      "agents[scheduleNotification]"=> "string value",
+      "agents[federatedId]"=> "string value",
+      "agents[useTeamEmailAutoParkingLimit]"=> true,
+      "agents[maxEmailAutoParkingLimit]"=> 0,
+      "agents[sipUser]"=> "string value",
+      "agents[systemDomain]"=> "string value",
+      "agents[crmUserName]"=> "string value",
+      "agents[useAgentTimeZone]"=>0 ,
+      "timeDisplayFormat"=> 0,
+      "agents[sendEmailNotifications]"=> true,
+      "agents[apiKey]"=> "string value",
+      "agents[telephone1]"=> "string value",
+      "agents[telephone2]"=> "string value",
+      "agents[userType]"=> "string value",
+      "agents[isWhatIfAgent]"=> true,
+      "agents[requestContact]"=> true,
+      "agents[chatThreshold]"=> 0,
+      "agents[useTeamChatThreshold]"=> true,
+      "agents[emailThreshold]"=> 0,
+      "agents[useTeamEmailThreshold]"=> true,
+      "agents[workItemThreshold]"=> 0,
+      "agents[useTeamWorkItemThreshold]"=> true,
+      "agents[contactAutoFocus]"=> true,
+      "agents[useTeamContactAutoFocus]"=> true,
+      "agents[useTeamRequestContact]"=> true
+      "recordingNumbers[number]"=>"string value"})
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

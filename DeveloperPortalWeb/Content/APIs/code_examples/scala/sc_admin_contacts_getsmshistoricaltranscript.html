@@ -1,0 +1,18 @@
+﻿<pre class="prettyprint linenums">
+def GetContactidSmsHistoricalTranscript(contactId:Int,businessUnitId:String)
+{
+//Check if accessToken is empty or null
+if(accessToken!= null && !accessToken.isEmpty())
+{
+	//Add all necessary headers and Make the http request
+		var response = Http( baseURI +"/services/{version}/contacts/"+{contactId}+"/sms-historical-transcript")
+		.params("businessUnitId" ->businessUnitId)
+			.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json")).option(HttpOptions.connTimeout(10000)).option(HttpOptions.readTimeout(50000)).asString
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+			construct("Admin","Contacts","GET /contacts/{contactid}/sms-historical-transcript",cluster + " - v15.0" ,response.code, response.statusLine)
+}
+else{
+		//No token - get one or handle error
+	}
+}
+</pre>

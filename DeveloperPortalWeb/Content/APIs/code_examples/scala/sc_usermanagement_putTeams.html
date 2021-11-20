@@ -1,0 +1,30 @@
+﻿<pre class="prettyprint linenums">
+ // importing the scalaj-http library
+package scalaj.http
+object updateTeams {
+	def updateTeams() {
+       //Give the specified url ,accessToken
+       
+         val accessToken = "";
+	     val cxoneBaseURI = "";
+       //Create a Json string and pass all the post values as post data
+         val postData = "";
+		 
+       //Check if accessToken is empty or null
+		 if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http(cxoneBaseURI+ "​​/user-management​/v1​/teams")
+					.postData(postData)
+					.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json"))
+					.asString
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+		
+			println(response);
+		}
+		else{
+			   //No token - get one or handle error
+		}
+	}
+}
+</pre>

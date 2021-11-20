@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "Token Request Example Code";
+}
+
+<p>
+    Here are several examples of getting tokens using the three different "grant types":
+</p>
+
+<h3 class="primary-color">Client Token</h3>
+
+<pre class="prettyprint linenums">
+var result = {};
+var application = "SuperWidgets";
+var vendor = "WidgetsInc.com";
+var applicationId = "ZWJkNWM0MzNiODQ5NDAyYmIyZGFhNDg3ZDEzZgJkYzc=";
+var authCode = window.btoa(application + "&#64" + vendor + ":" + applicationId);
+$.ajax({
+    "url": 'https://api.incontact.com/InContactAuthorizationServer/Token',
+    "type": 'post',
+    "contentType": 'application/json',
+    "dataType": 'json',
+    "headers": {
+        'Authorization': 'basic ' + authCode
+    },
+    "data": JSON.stringify({
+        "grant_type": 'client_credentials',
+        "scope": 'PatronApi'
+    }),
+    "success": function (resp) {
+        result.access_token = resp.access_token;
+        result.token_type = resp.token_type;
+        result.resource_server_base_uri = resp.resource_server_base_uri;
+    },
+    "error": function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("Failed to retrieve token.\n" + XMLHttpRequest.status + ' ' 
+            + XMLHttpRequest.statusText);
+    }
+});
+</pre>
+
+<h3 class="primary-color">Password Token</h3>
+
+<pre class="prettyprint linenums">
+var result = {};
+var application = "SuperWidget";
+var vendor = "WidgetsInc.com";
+var businessunit = "1234567890";
+var user = "user&#64example.com";
+var pass = "test123";
+var authCode = window.btoa(application + "&#64" + vendor + ":" + businessunit);
+$.ajax({
+    "url": 'https://api.incontact.com/InContactAuthorizationServer/Token',
+    "type": 'post',
+    "contentType": 'application/json',
+    "dataType": 'json',
+    "headers": {
+        'Authorization': 'basic ' + authCode
+    },
+    "data": JSON.stringify({
+    "grant_type": 'password',
+    "username": user,
+    "password" : pass,
+    "scope": 'AdminApi AgentApi AuthenticationApi PatronApi RealTimeApi'
+    }),
+    "success": function (resp) {
+        result.access_token = resp.access_token;
+        result.token_type = resp.token_type;
+        result.resource_server_base_uri = resp.resource_server_base_uri;
+        result.expires_in = resp.expires_in;
+        result.refresh_token = resp.refresh_token;
+        result.scope = resp.scope;
+        result.refresh_token_server_uri = resp.refresh_token_server_uri;
+    },
+    "error": function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("Failed to retrieve token.\n" + XMLHttpRequest.status + ' ' 
+            + XMLHttpRequest.statusText);
+    }
+});
+</pre>
+
+<h3 class="primary-color">Using the Refresh Token</h3>
+
+<pre class="prettyprint linenums">
+var application = "appName";
+var vendor = "vendor.example.com";
+var businessunit = "1234567890";
+var authCode = window.btoa(application + "&#64" + vendor + ":" + businessunit);
+$.ajax({
+    url: result.refresh_token_server_uri;
+    type: "POST",
+    contentType: "application/json",
+    dataType: "json",
+    data: JSON.stringify({
+        "grant_type": "refresh_token",
+        "refresh_token": result.refresh_token
+    }),
+    headers: {
+        "Authorization": "basic " + authCode
+    },
+    success: function (data) {
+        result.access_token = data.access_token;
+        result.token_type = data.token_type;
+        result.expires_in = data.expires_in;
+        result.refresh_token = data.refresh_token;
+        result.scope = data.scope;
+        result.resource_server_base_uri = data.resource_server_base_uri;
+        result.refresh_token_server_uri = data.refresh_token_server_uri;
+    },
+    error: function (xhr, status) {
+        alert(xhr.status);
+    }
+});
+</pre>
+
+<h3 class="primary-color">Implicit Token</h3>
+
+<pre class="prettyprint linenums margin-bottom-none">
+var result = {};
+var implicitUri = "https://api.incontact.com/InContactAuthorizationServer/Authenticate";
+var client_id = "SuperWidgets&#64WidgetsInc.com";
+var token_scope = "RealTimeApi AdminApi AuthenticationApi PatronApi AgentApi";
+var redirect_uri = "https://customapplication.superwidgets.com";
+var state_object = "myState";
+function RedirectToAuthPage() {
+    var url = implicitUri;
+    url = url + "?state=" + state_object;
+    url = url + "&response_type=token";
+    url = url + "&client_id=" + encodeURIComponent(client_id);
+    url = url + "&redirect_uri=" + encodeURIComponent(redirect_uri);
+    url = url + "&scope=" + encodeURIComponent(token_scope);
+
+    window.location.href = url;
+}
+$(document).ready(function () {
+    var query_string = {};
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        query_string[pair[0]] = pair[1];
+    }
+    if (typeof(query_string.access_token) != "undefined") {
+        result.state = query_string.state;
+        result.scope = query_string.scope;
+        result.access_token = query_string.access_token;
+        result.expires_in = query_string.expires_in;
+        result.resource_server_base_uri = query_string.resource_server_base_uri;
+        result.token_type = query_string.token_type;            
+    }
+});
+</pre>

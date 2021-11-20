@@ -1,0 +1,74 @@
+<pre class="prettyprint linenums">
+/*
+* @description This method will start a script that is identified by scriptId.
+* Currently this only supports channel related scripts such as Email, Phone, 
+* Chat etc.
+* @param SkillId - ID of skill required to run the Script
+* @param startDate - ISO-8601 time for script to start in the future
+* @param parameters - A string of | delimited values i.e. "value1|value2|..."
+* @return the contact Id of the new contact
+*/
+public Long postStartScript(){
+    //Check to see if you obtained a token  
+    if(this.AccessToken!=null && this.apiScope!=null)
+    {
+        //scriptId and skillId are integer values on the page, but are converted
+        //to strings via the getParameters() method
+        String scriptId=ApexPages.currentPage().getParameters().get('scriptId');
+        String skillId=ApexPages.currentPage().getParameters().get('skillId');
+        String startDate=ApexPages.currentPage().getParameters().get('startDate');
+        String parameters=ApexPages.currentPage().getParameters().get('parameters');
+            
+        //Convert the start date to the correct ISO-8601 format
+        String[] tmp = startDate.split('-',3);
+        Integer yyyy= Integer.valueOf(tmp[0]);
+        Integer mm= Integer.valueOf(tmp[1]);
+        Integer dd= Integer.valueOf(tmp[2]);
+        Date d = Date.newInstance(yyyy,mm,dd);
+        String dt = d.format();
+        startDate=EncodingUtil.urlEncode(dt,'UTF-8');
+            
+        String postData = '{"skillId":'+skillId+',"startDate":"'+startDate+'","parameters":"'+parameters+'"}';
+        String apiURL = 'services/{version}/scripts/'+scriptId+'/start';
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setBody(postData);
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+    
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(this.statusCode==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+                return obj.contactId;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+                return null;
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;
+        }
+    }
+    return null;
+}
+</pre>

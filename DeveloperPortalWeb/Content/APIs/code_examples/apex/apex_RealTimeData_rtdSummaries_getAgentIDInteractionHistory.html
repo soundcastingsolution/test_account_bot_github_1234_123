@@ -1,0 +1,71 @@
+<pre class="prettyprint linenums">
+/****************************************************************************************
+*
+* @description This method takes an agentId as input and will return back information on
+* the contacts that Agent was involved in between the dates specified, or since the
+* ISO-8601 date/time provided in updatedSince parameter
+* @param agentId (integer): id of the agent
+* @param startDate (string): ISO-8601 beginning of report interval
+* @param endDate (string): ISO-8601 end of report interval
+* @param updatedSince (string): ISO-8601 beginning of report interval
+* @param mediaTypeId (integer): ID of Media Type to filter by (replaces MediaTypeName)    
+* @param fields (string): List of elements to return in response
+* @param skip (integer): number of records to skip in the results
+* @param top (integer): number of records to return in the results
+* @param orderBy (string): value used to order results before paginating them
+*
+* @return Returns Contact history for an Agent
+*/ 
+public void getAgentHistoryByid(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {    
+        //GET PAGE PARAMETERS
+        String agentId=ApexPages.currentPage().getParameters().get('agentId');
+        String StartDate=ApexPages.currentPage().getParameters().get('startDate');
+        String EndDate=ApexPages.currentPage().getParameters().get('endDate');    
+        String updatedSince=ApexPages.currentPage().getParameters().get('updatedSince');
+        String mediaTypeId=ApexPages.currentPage().getParameters().get('mediaType');    
+        String fields=ApexPages.currentPage().getParameters().get('fields');
+        String skip=ApexPages.currentPage().getParameters().get('skip');    
+        String top=ApexPages.currentPage().getParameters().get('top');
+        String orderBy=ApexPages.currentPage().getParameters().get('orderBy');
+
+        String apiURL = 'services/{version}/agents/' + agentId + '/interaction-history?' +
+                'startDate=' + startDate + '&endDate=' + endDate + 
+                '&updatedSince=' + updatedSince + '&mediaTypeId=' + mediaTypeId +
+                '&fields=' + fields + '&skip=' + skip + '&top=' + top + '&orderBy=' + orderBy;
+        try{
+        
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+        
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response = resp.getBody();
+        
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){               
+                //do something with the returned data
+            } else {
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+        }
+    }    
+}
+</pre>

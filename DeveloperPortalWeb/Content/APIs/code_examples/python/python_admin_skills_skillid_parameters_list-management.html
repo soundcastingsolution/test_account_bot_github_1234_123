@@ -1,0 +1,25 @@
+﻿<pre class="prettyprint linenums">
+def PutSkillListManagement(skillId):
+#Check if accessToken is empty or null
+if accessToken!="":
+ 
+#Give necessary parameters for http request
+    payload={
+    "displayField1Name": "string",
+    "displayField2Name": "string",
+    "listOrderingOptions": [{
+	"orderType": "string",
+    "direction": "string"}]}
+#add all necessary headers
+    header_param={
+    'Authorization': 'bearer ' + accessToken,
+    'content-Type': 'application/json; charset=UTF-8'}
+ 
+# Make http put request
+    response = requests.put(baseURI +'/services/v18.0/skills/' + skillId + '/parameters/list-management'  , headers = header_param,data=payload) 
+ 
+#print response appropriately
+ 
+else:
+    construct('error')
+</pre>

@@ -1,0 +1,69 @@
+<pre class="prettyprint linenums">
+# Calls the API to record a call.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +sessionID+ -> a string
+#  - +contactID+ -> a nonnegative integer
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if sessionID isn't a nonempty string
+#   - +ArgumentError+ -> if contactID isn't a nonnegative integer
+#
+def recordCall(token, sessionID, contactID)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that sessionID is a nonempty string.
+  unless sessionID.is_a?(String) && sessionID != ""
+    raise ArgumentError, "sessionID must be a nonempty string"
+  end
+  
+  # Check that contactID is a nonnegative integer.
+  unless contactID.is_a?(Integer) && contactID >= 0
+    raise ArgumentError, "contactID must be a nonnegative integer"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Encode the session ID.
+  sessionID.gsub! "=", "%3D"
+
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/agent-sessions/#{sessionID}/"\
+           "interactions/#{contactID.to_s}/record"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the request an HTTPS request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(baseURL + apiURL, "", headers)
+end
+</pre>

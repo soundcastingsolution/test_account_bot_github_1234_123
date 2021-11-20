@@ -1,0 +1,20 @@
+﻿<pre class="prettyprint linenums">
+def PostSuppresedContacts():
+    #Check if accessToken is empty or null
+    if accessToken!="":
+    #payload
+        PostSuppresedContactsPayload = {
+        "startDate": "string",
+        "endDate": "string",
+        "value": "string",
+        "skills":"string"}
+    #add all necessary headers
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+    # Make http post request
+        response = requests.post(baseURI+'/services/{version}/suppressed-contact', headers = header_param,data=PostSuppresedContactsPayload) 
+    #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

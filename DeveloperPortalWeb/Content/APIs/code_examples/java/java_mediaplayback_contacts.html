@@ -1,0 +1,19 @@
+    <pre class="prettyprint linenums">
+    public void GetMediaplaybackContacts(String acdID, String mediaType, String excludeWaveform) throws IOException {
+    final String API_PATH = "media-playback/v1/contacts/";
+    if (ACCESS_TOKEN_PROPERTY!= null) {
+    HttpsURLConnection urlConnection = (HttpsURLConnection) (new URL(
+    (CXONE_RESOURCE_SERVER_BASE_URI_PROPERTY) + API_PATH).openConnection());
+    urlConnection.setRequestProperty(AUTHORIZATION_HEADER, AUTHORIZATION_BEARER_PREFIX + ACCESS_TOKEN_PROPERTY);
+    urlConnection.setRequestProperty(ACCEPT_HEADER, APPLICATION_JSON_VALUE);
+    urlConnection.setRequestProperty(CONTENT_TYPE_HEADER, APPLICATION_JSON_VALUE);
+    urlConnection.setRequestProperty("acdID", acdID);
+    urlConnection.setRequestProperty("mediaType", mediaType);
+    urlConnection.setRequestProperty("excludeWaveform", excludeWaveform);
+    urlConnection.connect();
+    int responseCode = urlConnection.getResponseCode();
+    String responseLine = urlConnection.getResponseMessage();		
+    // Process success actions
+    else 
+    // No token - get one or handle error
+    </pre>

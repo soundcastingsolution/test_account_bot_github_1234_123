@@ -1,0 +1,75 @@
+<pre class="prettyprint linenums">
+/*************************************************************************************
+*
+* @description This method will download a specific calling list that has been
+* previously uploaded
+* @param listId (integer): id of calling list to download
+* @param startDate (datetime): ISO-8601 minimum date for records returned    
+* @param endDate (datetime): ISO-8601 maximum date for records returned    
+* @param finalized (boolean):  set to \"True\" will return only finalized records,
+* \"False\" will return only non-finalized
+* @param recordStart (integer): Number of first record returned in paginated result
+* @param batchSize (integer): Number of records to return if more than 10,000 records
+* are contained in calling list
+* @returns a calling list identified by list Id
+*
+*/
+public List<JSON2Apex.CallingLists> getCallingList(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        String listId=ApexPages.currentPage().getParameters().get('listId');
+        String startDate=ApexPages.currentPage().getParameters().get('startDate');
+        String endDate=ApexPages.currentPage().getParameters().get('endDate');
+        String finalized=ApexPages.currentPage().getParameters().get('finalized');
+        String recordStart=ApexPages.currentPage().getParameters().get('recordStart');           
+        String batchSize=ApexPages.currentPage().getParameters().get('batchSize');
+
+        String apiURL = 'services/{version}/lists/call-lists/' + listId + 
+                '?startDate=' + startDate + '&endDate=' + endDate + '&finalized=' +
+                finalized + '&recordStart=' + recordStart + '&batchSize=' + batchSize;
+
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is an arbitrary helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            //It also deserializes any errors returned by the inContact API
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+                return obj.callingLists;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+                return null;
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;
+        }
+    }
+    return null;
+}
+</pre>

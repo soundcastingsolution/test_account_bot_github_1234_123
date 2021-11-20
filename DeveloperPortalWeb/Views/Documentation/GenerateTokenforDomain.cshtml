@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "GenerateTokenforDomain";
+}
+
+<p>
+    To generate a token using the “accessKeyId” and “accessKeySecret” obtained in the previous task, invoke this endpoint:
+</p>
+    <p><a href="https://na1.nice-incontact.com/authentication/v1/token/access-key">https://na1.nice-incontact.com/authentication/v1/token/access-key</a></p>
+<p>
+    Your POST request should contain:
+    </p>   
+    <ul>
+        <li><b>Header:</b> Content-Type: application/json</li>
+        <li><b>Body:</b></li>
+    </ul>
+
+<pre class="prettyprint linenums">
+    {     
+    "accessKeyId": "{accessKeyId from step 2}",
+    "accessKeySecret":"{accessKeySecret from Step 2}"
+    }
+</pre>
+
+<p>
+    This request will generate the following:
+</p>
+
+<pre class="prettyprint linenums">
+    Response Body: {
+    "access_token": "string",
+    "token_type":"string",
+    "expires_in": "long",
+    "refresh_token": "string",
+    "refresh_token_expires_in": "long",
+    "id_token":"same as access token"
+    }
+</pre>
+
+<p>
+    From this point the ACD APIs methods listed on <a href="https://developer.niceincontact.com/API">https://developer.niceincontact.com/API</a> are available to invoke with
+    the access token provided in the response. The remaining access key management APIs to update, delete or
+    return a list of access keys will be documented on the developer portal.
+</p>
+

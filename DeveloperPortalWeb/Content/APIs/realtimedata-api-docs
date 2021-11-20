@@ -1,0 +1,41 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "description": "Real Time Data commands",
+    "version": "8.0",
+    "title": "RealTimeDataAPI"
+  },
+  "tags": [
+    {
+      "name": "RealTime",
+      "description": " : Real Time Reporting  <b><i><span style='color:red'>(Updated in v23.0)</span></i></b>"
+    }
+  ],
+  "schemes": [ "https" ],
+  "paths": {
+    "/agents/states": {
+      "$ref": "RealTimeData/RealTime#/agent_states"
+    },
+    "/agents/client-data": {
+      "$ref": "RealTimeData/RealTime#/agents_client-data"
+    },
+    "/agents/{agentId}/states": {
+      "$ref": "RealTimeData/RealTime#/agents_agentId_states"
+    },
+    "/contacts/active": {
+      "$ref": "RealTimeData/RealTime#/contacts_active"
+    },
+    "/contacts/parked": {
+      "$ref": "RealTimeData/RealTime#/contacts-parked"
+    },
+    "/contacts/states": {
+      "$ref": "RealTimeData/RealTime#/contacts_states"
+    },
+    "/skills/activity": {
+      "$ref": "RealTimeData/RealTime#/skills_activity"
+    },
+    "/skills/{skillId}/activity": {
+      "$ref": "RealTimeData/RealTime#/skills_skillId_activity"
+    }
+  }
+}

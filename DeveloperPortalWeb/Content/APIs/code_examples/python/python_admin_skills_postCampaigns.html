@@ -1,0 +1,22 @@
+﻿<pre class="prettyprint linenums">
+def Postcampaigns():
+    #Check if accessToken is empty or null
+    if accessToken!="":
+    #payload
+        PostcampaignsPayload = {
+        "campaigns": [
+        {
+        "campaignName": "new",
+        "isActive": "true",
+        "description": "",
+        "notes": ""}]}
+    #add all necessary headers
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+    # Make http post request
+        response = requests.post(baseURI+'/services/{version}/campaigns', headers = header_param,data=PostcampaignsPayload) 
+    #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

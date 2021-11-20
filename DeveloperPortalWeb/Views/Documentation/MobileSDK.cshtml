@@ -1,0 +1,40 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.AccordionItemViewModel>
+
+@{
+	ViewBag.Title = "Android Mobile SDK";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<div class="text-justify">
+	<p>
+		The NICE CXone Android Mobile SDK allows you to easily add chat and callback widgets
+		into your Android application. Additionally, it allows you to quickly retrieve
+		key queue statistics and show it within your mobile application. These features
+		can be added without much coding and without needing to be an expert on the
+		NICE CXone APIs. Once added, they can be customized to meet any additional
+		requirements you may have.
+	</p>
+    <p>
+        This article takes you through the steps of creating a simple Android application
+        and adding the widgets supported by the NICE CXone Mobile SDK. You will need to
+        download the Android SDK and Eclipse IDE and configure it before you start the steps
+        in the sections that follow.
+    </p>
+</div>
+
+@Html.Partial("_AccordionListItems", Model)
+
+@section Styles {
+	@Styles.Render("~/bundles/prettify.css")
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/prettify.js")
+	<script>
+		$(window).load(function () {
+			expandAccordionItem('accordionId');
+			prettyPrint();
+		});
+	</script>
+}

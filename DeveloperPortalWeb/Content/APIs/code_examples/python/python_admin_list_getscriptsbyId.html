@@ -1,0 +1,19 @@
+﻿<pre class="prettyprint linenums">
+def getscriptsbyId(scriptId):
+# api-endpoint  
+#Give the specified url ,accessToken
+Baseuri = "{Baseuri}"
+accessToken = "{accessToken}"
+#Check if accessToken is empty or null
+if accessToken!="":
+#add all necessary headers
+	header_param = {'Authorization': 'bearer ' + accessToken,'content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+# Make get http request
+	response = requests.get(Baseuri + 'services/{version}/scripts/' + scriptId , headers = header_param) 
+#print response appropriately
+	construct('Admin','General','Get /scripts/{scriptId}',cluster + ' v19.0',str(response.status_code), response.reason)
+	print (response)
+else:
+	#no token get one or handle error		
+	construct('error')
+</pre>

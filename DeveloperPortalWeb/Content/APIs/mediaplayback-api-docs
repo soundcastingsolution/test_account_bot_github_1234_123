@@ -1,0 +1,27 @@
+﻿{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Media Playback API",
+    "description" : "You can use this API to access CXone recording media. Depending on the media type, you get the metadata and transcript, or a link to the media file. This API is generally used for playing back media.",
+    "contact" : {
+      "email" : "R&DApiTeam@niceincontact.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "V1"
+  },  
+  "security" : [ {
+    "bearerAuth" : [ ]
+  } ],
+  "tags" : [ {
+    "name" : "Recordings",
+    "description" : ": Get link to media file or get chat/email transcript."
+  } ],
+  "paths": {
+    "/media-playback/v1/contacts": {
+      "$ref": "MediaPlayback/MediaPlayback#/media-playback_v1_contacts"
+    }
+  }
+}

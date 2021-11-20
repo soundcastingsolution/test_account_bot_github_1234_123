@@ -1,0 +1,159 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +skill->a hash
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def PutSkillbySkillID(token,skillId
+"skill":{ 
+    "skillName"=> "",
+    "campaignId"=> 0,
+    "callerIdOverride"=> "",
+    "emailFromAddress"=> "",
+    "emailFromEditable"=> true,
+    "emailBccAddress"=> "",
+    "scriptId"=> 0,
+    "reskillHours"=> 0,
+    "minWfiAgents"=> 0,
+    "minWfiAvailableAgents"=> 0,
+    "interruptible"=> true,
+    "enableParking"=> true,
+    "minWorkingTime"=> 0,
+    "agentless"=> true,
+    "agentlessPorts"=> 0,
+    "notes"=> "",
+    "acwTypeId"=> 0,
+    "requireDisposition"=> true,
+    "allowSecondaryDisposition"=> true,
+    "scriptDisposition"=> true,
+    "stateIdAcw"=> 0,
+    "maxSecondsAcw"=> 0,
+    "agentRestTime"=> 0,
+    "displayThankYou"=> true,
+    "thankYouLink"=> "",
+    "popThankYou"=> true,
+    "popThankYouUrl"=> "",
+    "makeTranscriptAvailable"=> true,
+    "transcriptFromAddress"=> "",
+    "priorityBlending"=> true,
+    "callSuppressionScriptId"=> 0,
+    "useScreenPops"=> true,
+    "screenPopTriggerEvent"=> 0,
+    "useCustomScreenPops"=> true,
+    "screenPopType"=> "",
+    "screenPopDetails"=> "",
+    "initialPriority"=> 0,
+    "acceleration"=> 0,
+    "maxPriority"=> 0,
+    "serviceLevelThreshold"=> 0,
+    "serviceLevelGoal"=> 0,
+    "enableShortAbandon"=> true,
+    "shortAbandonThreshold"=> 0,
+    "countShortAbandons"=> true,
+    "countOtherAbandons"=> true,
+    "chatWarningThreshold"=> 0,
+    "agentTypingIndicator"=> true,
+    "smsTransportCodeId"=> 0,
+    "messageTemplateId"=> 0}
+   "dispositions": 
+        {
+          "dispositionId"=> 0,
+          "priority"=> 0
+        })
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/skills/#{skillId}/"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::put.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+    "skill[skillName]"=> "string value",
+    "skill[campaignId]"=> 0,
+    "skill[callerIdOverride]"=> "string value",
+    "skill[emailFromAddress]"=> "string value",
+    "skill[emailFromEditable]"=> true,
+    "skill[emailBccAddress]"=> "string value",
+    "skill[scriptId]"=> 0,
+    "skill[reskillHours]"=> 0,
+    "skill[minWfiAgents]"=> 0,
+    "skill[minWfiAvailableAgents]"=> 0,
+    "skill[interruptible]"=> true,
+    "skill[enableParking]"=> true,
+    "skill[minWorkingTime]"=> 0,
+    "skill[agentless]"=> true,
+    "skill[agentlessPorts]"=> 0,
+    "skill[notes]"=> "string value",
+    "skill[acwTypeId]"=> 0,
+    "skill[requireDisposition]"=> true,
+    "skill[allowSecondaryDisposition]"=> true,
+    "skill[scriptDisposition]"=> true,
+    "skill[stateIdAcw]"=> 0,
+    "skill[maxSecondsAcw]"=> 0,
+    "skill[agentRestTime]"=> 0,
+    "skill[displayThankYou]"=> true,
+    "skill[thankYouLink]"=> "string value",
+    "skill[popThankYou]"=> true,
+    "skill[popThankYouUrl]"=> "string value",
+    "skill[makeTranscriptAvailable]"=> true,
+    "skill[transcriptFromAddress]"=> "string value",
+    "skill[priorityBlending]"=> true,
+    "skill[callSuppressionScriptId]"=> 0,
+    "skill[useScreenPops]"=> true,
+    "skill[screenPopTriggerEvent]"=> 0,
+    "skill[useCustomScreenPops]"=> true,
+    "skill[screenPopType]"=> "string value",
+    "skill[screenPopDetails]"=> "string value",
+    "skill[initialPriority]"=> 0,
+    "skill[acceleration]"=> 0,
+    "skill[maxPriority]"=> 0,
+    "skill[serviceLevelThreshold]"=> 0,
+    "skill[serviceLevelGoal]"=> 0,
+    "skill[enableShortAbandon]"=> true,
+    "skill[shortAbandonThreshold]"=> 0,
+    "skill[countShortAbandons]"=> true,
+    "skill[countOtherAbandons]"=> true,
+    "skill[chatWarningThreshold]"=> 0,
+    "skill[agentTypingIndicator]"=> true,
+    "skill[smsTransportCodeId]"=> 0,
+    "skill[messageTemplateId]"=> 0,
+    "dispositions[dispositionId]"=> 0,
+    "dispositions[priority]"=> 0 })
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

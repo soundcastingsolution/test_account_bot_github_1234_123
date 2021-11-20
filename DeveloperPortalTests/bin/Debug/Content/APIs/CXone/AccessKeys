@@ -1,0 +1,464 @@
+﻿{
+  "access-key-management_v1_access-keys": {
+    "post": {
+      "tags": [ "AccessKeys" ],
+      "summary": "Create an access key for a user",
+      "description": "This method will create an access key.</br></br> Note: This request uses “https://na1.nice-incontact.com” as its base URI.",
+      "operationId": "Create an access key for a user",
+      "requestBody": {
+        "description": "User ID and Tenant ID",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "dynamicData",
+              "$ref": "#/components/schemas/body"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postAccessKeysResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid Request</p> <p>tenantId does not exist</p> <p>userId does not exist in the tenant</p> <p>userId without tenantId or vice versa</p> <p>agentId without billingId or vice versa</p>"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Access is denied"
+        }
+      }
+    },
+    "patch" : {
+        "tags" : [ "AccessKeys" ],
+        "summary" : "Updates an access key for a user",
+        "description" : "This method will update an access key.Update will only allow an access key “isActive” flag to be set.</br></br> Note: This request uses “https://na1.nice-incontact.com” as its base URI.",
+        "operationId" : "Updates an access key for a user",
+        "parameters" : [ {
+          "name" : "tenantId",
+          "in" : "query",
+          "description" : "Tenant Id",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userId",
+          "in" : "query",
+          "description" : "user Id",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "accessKeyId",
+          "in" : "path",
+          "description" : "Access Key ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "is Active",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/body_1"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "400" : {
+            "description" : "<p>Invalid Input</p> <p>Invalid tenantId or billingId</p>"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Access is denied"
+          },
+          "404" : {
+            "description" : "Access key not found"
+          }
+        }
+      },
+    "get": {
+      "tags": [ "AccessKeys" ],
+      "summary": "Returns a list of access keys",
+      "description": "This method will return a list of access keys.  Permissions on the user’s role will affect the response.  Paging parameters top, skip, orderby, fields can be used to filter the request.</br></br> Note: This request uses “https://na1.nice-incontact.com” as its base URI.",
+      "operationId": "Returns a list of access keys",
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "query",
+          "description": "User Id",
+          "required": false,
+          "style": "form",
+          "explode": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "agentId",
+          "in": "query",
+          "description": "agent Id",
+          "required": false,
+          "style": "form",
+          "explode": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/getAccessKeysResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid tenantId or billingId</p> <p>agentId with tenantId not allowed</p> <p>userId with billingId not allowed</p> <p>Invalid skip</p> <p>Invalid top</p><p>Invalid order by</p><p>Invalid fields</p>"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Access is denied"
+        }
+      }
+    }
+  },
+  "access-key-management_v1_access-keys_accessKeyId" : {
+    "get": {
+      "tags": [ "AccessKeys" ],
+      "summary": "Returns an access key config",
+      "description": "This method will return an access key configuration.</br></br> Note: This request uses “https://na1.nice-incontact.com” as its base URI.",
+      "operationId": "Returns an access key config",
+      "parameters": [
+        {
+          "name": "accessKeyId",
+          "in": "path",
+          "description": "Access Key ID",
+          "required": true,
+          "style": "simple",
+          "explode": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAccessKeyIDResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid Access Key"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Access is denied"
+        },
+        "404": {
+          "description": "Access key not found"
+        }
+      }
+    },
+    "delete" : {
+      "tags" : [ "AccessKeys" ],
+      "summary" : "Deletes an access key",
+      "description" : "This method will delete an access key.  Once deleted it can’t be used again.</br></br> Note: This request uses “https://na1.nice-incontact.com” as its base URI.",
+      "operationId" : "Deletes an access key",
+      "parameters" : [ {
+          "name" : "accessKeyId",
+          "in" : "path",
+          "description" : "Access Key ID",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+      "responses" : {
+        "200" : {
+          "description" : "Success"
+        },
+        "401" : {
+          "description" : "Unauthorized"
+        },
+        "403" : {
+          "description" : "User's role doesn't have correct permission"
+        },
+        "404" : {
+          "description" : "Access key not found"
+        }
+      }
+    }
+  },
+  "access-key-management_v1_access-keys_validate": {
+    "post": {
+      "tags": ["AccessKeys"],
+      "summary": "Validate Access Key",
+      "description": "This method will validate a previously created access key.</br></br> Note: This request uses “https://na1.nice-incontact.com” as its base URI.",
+      "operationId": "Validate Access Key",
+	  "requestBody": {
+        "description": "AccessKey ID and AccessKey Secret",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "dynamicData",
+              "$ref": "#/components/schemas/postValidateBody"
+            }
+          }
+        }
+      },
+	  "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/postAccessKeyValidateResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid Input"
+        },
+        "401": {
+          "description": "Unauthorized"
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "postAccessKeysResponse" : {
+        "title" : "accessKey",
+        "properties" : {
+          "resultSet" : {
+            "title" : "accessKey",
+            "properties" : {
+              "accessKeyId" : {
+                "type" : "string",
+                "description" : "accessKey Id"
+              },
+              "accessKeySecret" : {
+                "type" : "string",
+                "description" : "accessKey Secret"
+              },
+              "userId" : {
+                "type" : "string",
+                "description" : "userId"
+              },
+              "tenantId" : {
+                "type" : "string",
+                "description" : "tenantId"
+              },
+              "agentId" : {
+                "type" : "integer",
+                "description" : "agentId"
+              },
+              "billingId" : {
+                "type" : "integer",
+                "description" : "billingId"
+              },
+              "isActive" : {
+                "type" : "boolean",
+                "description" : "isActive"
+              }
+            },
+            "description" : "contains accesskey"
+          }
+        },
+        "description" : "accessKey"
+      },
+      "getAccessKeysResponse" : {
+        "type" : "object",
+        "properties" : {
+          "totalRecords" : {
+            "type" : "integer"
+          },
+          "_links" : {
+            "$ref" : "#/components/schemas/getAccessKeysResponse__links"
+          },
+          "accessKeys" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/getAccessKeysResponse_accessKeys"
+            }
+          }
+        }
+      },
+      "GetAccessKeyIDResponse" : {
+        "title" : "accessKey",
+        "properties" : {
+          "resultSet" : {
+            "title" : "accessKey",
+            "properties" : {
+              "accessKeySecret" : {
+                "type" : "string",
+                "description" : "accessKey Secret"
+              },
+              "userId" : {
+                "type" : "string",
+                "description" : "userId"
+              },
+              "tenantId" : {
+                "type" : "string",
+                "description" : "tenantId"
+              },
+              "agentId" : {
+                "type" : "integer",
+                "description" : "agentId"
+              },
+              "billingId" : {
+                "type" : "integer",
+                "description" : "billingId"
+              },
+              "isActive" : {
+                "type" : "boolean",
+                "description" : "isActive"
+              },
+              "lastUsedDate" : {
+                "type" : "string",
+                "description" : "last Used Date"
+              }
+            },
+            "description" : "Returns accesskeys based on accesskeyID"
+          }
+        },
+        "description" : "accessKey"
+      },
+      "body" : {
+        "type" : "object",
+        "properties" : {
+          "userId" : {
+            "type" : "string"
+          },
+          "tenantId" : {
+            "type" : "string"
+          }
+        }
+      },
+      "body_1" : {
+        "type" : "object",
+        "properties" : {
+          "isActive" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "getAccessKeysResponse__links" : {
+        "type" : "object",
+        "properties" : {
+          "self" : {
+            "type" : "string"
+          },
+          "next" : {
+            "type" : "string"
+          },
+          "previous" : {
+            "type" : "string"
+          }
+        }
+      },
+      "getAccessKeysResponse_accessKeys": {
+        "type": "object",
+        "properties": {
+          "accessKeyId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string"
+          },
+          "agentId": {
+            "type": "integer"
+          },
+          "billingId": {
+            "type": "integer"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "lastUsedDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "postValidateBody": {
+        "additionalProperties": false,
+        "properties": {
+          "accessKeyId": {
+            "type": "string"
+          },
+          "accessKeySecret": {
+            "type": "string"
+          }
+        }
+      },
+      "postAccessKeyValidateResponse": {
+        "title": "response",
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "token_type": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "string"
+          },
+          "refresh_token": {
+            "type": "string"
+          },
+          "id_token": {
+            "type": "string"
+          }
+        }
+      }
+
+    }
+  }
+
+}

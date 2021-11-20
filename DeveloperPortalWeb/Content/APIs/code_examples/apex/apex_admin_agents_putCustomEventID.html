@@ -1,0 +1,63 @@
+<pre class="prettyprint linenums">
+/****************************************************************************************
+*
+* @description Creates a custom event
+* @param agentId (required) - Id of agent
+* @param eventName - string; A type name you want to give the custom event
+* @param persistInMemory - boolean; Controls whether or not the VC keeps the event in memory
+* @param data - data payload for this event
+*
+*/
+public void putCustomEvent(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        //agentId is an integer values on the page, but is converted to string
+        //via the getParameters() method
+        String agentId=ApexPages.currentPage().getParameters().get('agentId');
+        String eventName='Event for ' + agentId;
+        Boolean persistInMemory=false;
+        String data = "payload";
+
+        String apiURL = 'services/{version}/agents/'+agentId+'/custom-event';
+        String putData = '{"eventName":"' + eventName + '", "persistMemory":"' + 
+            persistMemory + '", "data":"' + data + '"}';
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setBody(putData);
+            request.setMethod('PUT');
+            request.setEndpoint(this.BaseUri + apiURL);
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');    
+            request.setHeader('Content-Type','application/json');    
+            request.setHeader('Content-Length','1024');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+        }
+    }
+}
+</pre>

@@ -1,0 +1,28 @@
+﻿<pre class="prettyprint linenums">
+// importing the scalaj-http library
+package scalaj.http
+
+object GetGroupsByAgentGroupID {
+
+	def GetGroupsByAgentGroupID(groupId:Int,top:Int,skip:Int,orderBy:String,searchString:String,assigned:Boolean,fields:String) {
+
+		//Give the specified url ,accessToken
+
+			val accessToken = "";
+			val Baseuri = "";
+
+		//Check if accessToken is empty or null
+		if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http( Baseuri +"/services/{version}/groups/" + groupId + "/agents" +"?top=" + top + "&skip=" + skip + "&orderby=" + orderBy + "&searchString=" + searchString + "&assigned=" + assigned + "&fields=" + fields)
+					.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json")).asString
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+			println(response);
+		}
+		else{
+			//No token - get one or handle error
+		}
+	}
+}
+</pre>

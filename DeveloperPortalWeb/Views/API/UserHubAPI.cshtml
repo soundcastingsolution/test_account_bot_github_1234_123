@@ -1,0 +1,89 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+	ViewBag.Title = "UserHub API";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<p>
+    The purpose of this page is to provide documentation on using Access Key APIs. There are some differences between the methods when invoked with a UserHub user or Central user. This page will focus on UserHub users. For Central users documentation will be under the Admin API section of the developer portal.
+</p>
+
+<p>
+    Access Keys are designed for application requests not made through a browser. OpenID Connect supports browser requests.
+</p>
+
+<p>
+    Access Keys have to be enabled in the general permission section of a role. “My Access Keys” allows a user to manage their own access keys. “Access Keys” enables a user to manage access keys for other users.
+</p>
+
+<p>
+    The first access key for a user must be created by going to the employee page, then access keys tab.
+</p>
+
+<p>
+    You must use area specific domains and developers should know the domains that apply to them before beginning this process. Contact your Technical Account Manager or Technical Account management team with domain questions. Current domains are:
+
+    <ul>
+        • na1
+    </ul>
+    <ul>
+        • au1
+    </ul>
+    <ul>
+        • eu1
+    </ul>
+</p>
+
+<p>
+    Examples will use the na1 area domain.
+</p>
+
+<p>
+    The base URI for using access keys is <a href="https://na1.nice-incontact.com">https://na1.nice-incontact.com</a>
+</p>
+
+<p>
+    As an example request urls should look like this:
+
+    <ul>
+        • Authentication Example:  POST <a href="https://na1.nice-incontact.com/authentication/v1/token/access-key">https://na1.nice-incontact.com/authentication/v1/token/access-key</a>
+    </ul>
+
+    <ul>
+        • Access Key API Example:  GET <a href="https://na1.nice-incontact.com/access-key-management/v1/access-keys">https://na1.nice-incontact.com/access-key-management/v1/access-keys</a>
+    </ul>
+</p>
+
+<p>
+    Discovery will return the base URI for all other API calls. CXone UserHub integrations should use “api_endpoint” from discovery.
+</p>
+
+<p>
+    <ul>
+        • Discovery URL: <a href="https://na1.nice-incontact.com/.well-known/cxone-configuration">https://na1.nice-incontact.com/.well-known/cxone-configuration</a>
+    </ul>
+    <ul>
+        • Example request with “api_endpoint”: https://\{api_endpoint}/inContactAPI/services/v15.0/campaigns
+    </ul>
+</p>
+
+<div class="swagger-section">
+	<div id="swagger-ui-container" class="swagger-ui-wrap">Loading...</div>
+</div>
+
+@Html.Partial("~/Views/Shared/_CodeSampleTabs.cshtml")
+
+
+@section Scripts {
+	<script>
+        $(document).ready(function () {
+            inContact.Swagger.init(
+                "@Url.Content("~/content/apis/cxone-api-docs")",
+                "@Url.Content("~/content/apis/code_examples")",
+                "@Url.Action("GetAccessToken", "Account")",
+                "@Url.Content("~/content/swagger/images/throbber.gif")",
+                false,
+                "UserHub");
+            });
+	</script>
+}

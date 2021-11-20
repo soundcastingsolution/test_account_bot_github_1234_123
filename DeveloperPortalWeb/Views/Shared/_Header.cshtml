@@ -1,0 +1,161 @@
+﻿@using System.Configuration
+@{
+    bool userIsAuthenticated = (User != null && User.Identity != null && User.Identity.IsAuthenticated);
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@if (userIsAuthenticated)
+{
+    <style type="text/css">
+        .secure-content-link:after {
+            content: '';
+            margin: 0;
+        }
+    </style>
+}
+
+<div id="header-v6">
+    <div id="header-hidden"></div>
+    <div id="user-menu-responsive-hidden"></div>
+    <div id="navbar-menu-responsive-hidden"></div>
+</div>
+<header id="header" class="header-global">
+    <div class="header-v6">
+        <div class="text-header color-white">
+            <div id="header-v6-search-container" class="background-gray-color search-container-v6">
+                <div class="container">
+                    <div class="search">
+                        <input type="text" class="searchText searchBoxV2" placeholder="Search" name="keywords" id="searchBoxV2" onkeydown="SearchValue()" maxlength="255">
+                        <i class="fa fa-times-circle-o iconCloseSearch" onclick="HeaderDisplaySerch(false)"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="main-menu-container">
+                <div class="container">
+                    <div class="user-container">
+                        <div class="user-bu">
+                            @if (userIsAuthenticated)
+                            {
+                                <div id="divBusinessUnit">Business Unit&nbsp;-&nbsp;</div>
+                            }
+                        </div>
+                        <div class="user-menu">
+                            <ul style="list-style-type: none">
+                                @if (userIsAuthenticated)
+                                {
+                                    <li id="user-logout-container" onclick="DisplayLogoutButton(true)" class="cursor-pointer">
+                                        <a id="user-name-text" href="#">
+                                            @User.Identity.Name
+                                        </a>
+                                        <span id="logout-button-container" class="tooltip-logout">
+                                            <button class="buttonLogout background-primary-color button-v6">
+                                                Logout
+                                            </button>
+                                        </span>
+                                        @Html.RouteLink("Logout", "Default", new { controller = "Account", action = "SignOut", returnUrl = Request.Url.PathAndQuery }, new { @id = "logout-link", @class = "display-none" })
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        @Html.RouteLink("Login", "Default", new { controller = "Home", action = "Login", returnUrl = Request.Url.PathAndQuery })
+                                    </li>
+
+                                    <li>
+                                        <a href="https://support.incontact.com/">Support</a>
+                                    </li>
+                                }
+                                <li>
+                                    <div id="contactUs-container" class="contactUs-container">
+                                        <button id="buttonContactUs" class="background-primary-color buttonContactUs button-v6">
+                                            Contact Us
+                                        </button>
+                                        <i id="iconContactUs" class="fa fa-chevron-right background-primary-dark-color iconContactUs">
+                                        </i>
+                                    </div>
+                                </li>
+                                <li>
+                                    @Html.RouteLink(" ", "Default", new {​​​​​ controller = "Search", action = "Index", searchTerm = "" }​​​​​, new {​​​​​ @id = "SearchText", @class = "fa fa-search iconSearch" }​​​​​)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu-container-v6">
+                        <div class="logo-container">
+                            @if (userIsAuthenticated)
+                            {
+                                <div class="user-bu-responsive">
+                                    <div id="divBusinessUnitResponsive">Business Unit&nbsp;-&nbsp;</div>
+                                </div>
+                            }
+                            <a href="/">
+                                <img class="logo-image" src="~/Content/images/NICE-DEVone-Logos_Horizontal-White_Blue.png" height="63" alt="DEVone NICE inContact">
+                            </a>
+                        </div>
+                        <div class="menu-normal-container">
+                            @Html.Partial("_NavBar")
+                        </div>
+                        <div class="menu-responsive-container">
+                            <button id="custom-navbar" class="navbar-toggle background-primary-color">
+                                <i class="fa fa-bars icon-responsive"></i>
+                            </button>
+                            <button id="user-button-responsive" type="button" class="navbar-toggle background-primary-color" onclick="switchMenuItemsResponsiveMode(this.id)">
+                                <i class="fa fa-user icon-responsive"></i>
+                            </button>
+                            <button id="search-button-responsive" class="navbar-toggle background-primary-color" onclick="HeaderDisplaySerch(true)">
+                                <i class="fa fa-search icon-responsive"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div id="user-menu-responsive">
+    <nav id="user-nav-v6" class="nav-v6 navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-collapse" id="navbar-v6">
+            <ul class="nav navbar-nav" style="list-style-type: none">
+                @if (userIsAuthenticated)
+                {
+                    <li class="dropdown">
+                        @Html.RouteLink("Logout", "Default", new { controller = "Account", action = "SignOut", returnUrl = Request.Url.PathAndQuery }, new { @class = "dropdown-toggle" })
+                    </li>
+                }
+                else
+                {
+                    <li class="dropdown">
+                        @Html.RouteLink("Login", "Default", new { controller = "Account", action = "SignIn", returnUrl = Request.Url.PathAndQuery }, new { @class = "dropdown-toggle" })
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="https://support.niceincontact.com/" onclick="cleanMenu()">
+                            Support
+                        </a>
+                    </li>
+                }
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="mailto:DEVone@niceincontact.com" onclick="cleanMenu()">
+                        Contact Us
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+
+<script>
+    var userIsAuthenticated = false;
+    @if (userIsAuthenticated)
+	{
+		<text>
+    userIsAuthenticated = true;
+    </text>
+	}
+    $(document).ready(function () {
+        $('#buttonContactUs,#iconContactUs').click(function () {
+            location.href = '@Url.Content("~/ContactUs")';
+        });
+    });
+</script>

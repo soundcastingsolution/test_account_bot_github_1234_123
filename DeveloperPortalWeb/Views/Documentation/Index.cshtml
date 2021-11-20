@@ -1,0 +1,11 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.SectionItemViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Documentation";
+}
+
+<h1 class="primary-color">
+    @ViewBag.Title
+</h1>
+@Html.Partial("_SectionListItems", Model)

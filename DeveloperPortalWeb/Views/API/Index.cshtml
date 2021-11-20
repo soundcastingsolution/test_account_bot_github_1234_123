@@ -1,0 +1,44 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.SectionItemViewModel>
+
+@{
+	Layout = "~/Views/Shared/_MasterLayout.cshtml";
+	ViewBag.Title = "API";
+}
+
+<div class="rest-api-home">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="margin-top-bottom">
+					<h1 class="text-center primary-color">NICE CXone REST APIs</h1>
+
+					<p>
+                        Each HTTPS request requires a valid "API access token," which is retrieved via an OAuth2, Access Key or OpenID Connect authentication process.  Because the RESTful API works over HTTPS, it can be used from any platform, programming language, or environment that supports HTTPS.
+					</p>
+					<div>
+						<p>
+                            When parsing the responses for our APIs, we recommend using publicly available internal or easily accessible third party libraries for serializing and deserializing JSON. If, however, you write your own JSON parser, please keep the following in mind:
+						</p>
+					</div>
+					<ul>
+						<li><b>You should accept JSON elements in any order.</b></li>
+						<li><b>Additional response elements may be added to released APIs.</b></li>
+						<li><b>You should be able to serialize the collection despite any missing element.</b></li>
+					</ul>
+					<p class="margin-bottom-none">
+                        API calls are grouped in documentation based on their common use or function. In order to use all of the APIs you will need to validate you have access under the Permissions tab, in your NICE CXone Central Security Profile or CXone UserHub Role. You will also need to review configuration in the Restrict Data tab as that may limit the data in the API responses based on your campaign and team data settings.
+					</p><br/>
+                        <p>
+                            For Central the current NICE CXone API Framework supports only the <b>Implicit</b>,<b>Password</b> and <b>Client OAuth2</b> grant types. <a href="https://developer.niceincontact.com/Documentation/APIAuthenticationToken">https://developer.niceincontact.com/Documentation/APIAuthenticationToken</a>
+                        </p>			
+                 </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="marged-1">
+		@Html.Partial("_SectionListItems", Model)
+	</div>
+</div>

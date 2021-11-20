@@ -1,0 +1,22 @@
+﻿<pre class="prettyprint linenums">
+def putclientdata():
+#Check if accessToken is empty or null
+if accessToken!="":
+ 
+#Give necessary parameters for http request
+    payload={
+	"agentId": "",
+	"dataSet": "{ \"settings\": \"true\" }"
+}
+#add all necessary headers
+    header_param={
+    'Authorization': 'bearer ' + accessToken,
+    'content-Type': 'application/json; charset=UTF-8'}
+ 
+# Make http put request
+    response = requests.put(baseURI +'/services/v19.0/agents/client-data'  , headers = header_param,data=payload) 
+ 
+#print response appropriately 
+else:
+    construct('error') 
+</pre>

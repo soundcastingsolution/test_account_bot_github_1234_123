@@ -1,0 +1,23 @@
+﻿    <pre class="prettyprint linenums">
+    public void DeleteViewsById(String viewId) throws IOException 
+{
+    final String API_PATH = "/authorization​/v1​/views​/"+ viewId;
+	if (ACCESS_TOKEN_PROPERTY != null)
+     {
+			HttpsURLConnection urlConnection = (HttpsURLConnection) (new URL(
+					(CXONE_RESOURCE_SERVER_BASE_URI_PROPERTY) + API_PATH).openConnection());
+			urlConnection.setRequestProperty(AUTHORIZATION_HEADER, AUTHORIZATION_BEARER_PREFIX + ACCESS_TOKEN_PROPERTY);
+			urlConnection.setRequestProperty(ACCEPT_HEADER, APPLICATION_JSON_VALUE);
+			urlConnection.setRequestProperty(CONTENT_TYPE_HEADER, APPLICATION_JSON_VALUE);
+            urlConnection.setRequestMethod("DELETE");
+			urlConnection.connect();
+			int responseCode = urlConnection.getResponseCode();
+			String responseLine = urlConnection.getResponseMessage();
+	} 
+    else 
+    {
+			// No token - get one or handle error
+	}
+}
+</pre>
+

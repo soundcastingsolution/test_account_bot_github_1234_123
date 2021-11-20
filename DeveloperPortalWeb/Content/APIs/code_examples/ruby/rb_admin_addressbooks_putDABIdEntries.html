@@ -1,0 +1,79 @@
+<pre class="prettyprint linenums">
+# Calls the API to create or update a dynamic address book.
+#
+# * *Arguments* :
+#   - +token+ -> a token hash
+#   - +addressBookID+ -> a nonnegative integer
+#   - +fullLoad+ -> a boolean
+#   - +addressBookEntries+ -> list of entries to be added
+#   Example:
+#       "addressBookEntries[0][externalId]=0"\    
+#       "&addressBookEntries[0][stateId]=0"\
+#       "&addressBookEntries[0][externalState]=0"\
+#       "&addressBookEntries[0][firstName]=First1"\
+#       "&addressBookEntries[0][middleName]Middle1"\
+#       "&addressBookEntries[0][lastName]Last1"\
+#       "&addressBookEntries[0][company]=Company1"\   
+#       "&addressBookEntries[0][phone]=1112223333"\
+#       "&addressBookEntries[0][mobile]=9998887777"\
+#       "&addressBookEntries[0][email]=user1@domain.com"
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if addressBookID isn't a nonnegative integer
+#   - +ArgumentError+ -> if fullLoad isn't a boolean
+#
+def putDABIdEntries(token, addressBookID=132955, fullLoad=true, addressBookEntries)
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "the function didn't receive a token it could understand"
+  end
+  
+  # Check that addressBookID is a nonnegative integer.
+  unless addressBookID.is_a?(Integer) && addressBookID >= 0
+    raise ArgumentError, "addressBookID must be a nonnegative integer"
+  end
+  
+  # Check that fullLoad is a boolean.
+  unless !!fullLoad == fullLoad
+    raise ArgumentError, "fullLoad must be a boolean"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/address-books/#{addressBookID}/dynamic-entries?"\
+           "fullLoad=#{fullLoad}"\
+           "&addressBookEntries=#{addressBookEntries}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the PUT request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+   http = Net::HTTP.new uri.host, uri.port
+
+  # Make the request an HTTPS request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.send_request('PUT', baseURL + apiURL)
+end
+</pre>

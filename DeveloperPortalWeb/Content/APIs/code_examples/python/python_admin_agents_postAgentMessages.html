@@ -1,0 +1,37 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def  PostAgentMessages(message,startDate,subject,targetId,targetType,validUntil,expireMinutes):
+
+# api-endpoint 
+#Give the specified url ,accessToken 
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+	if accessToken!="":
+
+    
+#Give necessary parameters for http request
+		payload={"agentMessages": [
+		{
+		"message":  message ,
+		"startDate":  startDate ,
+		"subject":  subject ,
+		"targetId":  targetId ,
+		"targetType":  targetType ,
+		"validUntil":  validUntil  ,
+		"expireMinutes": expireMinutes }]}
+
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken,'content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make http post request
+		response = requests.post(Baseuri +  '/services/{version}/agents/messages', headers = header_param, data=payload) 
+
+#print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

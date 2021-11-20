@@ -1,0 +1,20 @@
+﻿<pre class="prettyprint linenums">
+def deletecampaignsBySkill(campaignId):
+    #Check if accessToken is empty or null
+    if accessToken!="":
+    #payload
+        deletecampaignsBySkillPayload = {
+        "skills": [
+        {"skillId": 162779,
+        "transferCampaignId": 0
+        }]}
+    #add all necessary headers
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+    # Make http post request
+        response = requests.post(baseURI+'/services/{version}/campaigns/'+campaignId+'/skills', headers = header_param,data=deletecampaignsBySkillPayload) 
+    #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

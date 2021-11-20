@@ -1,0 +1,72 @@
+<pre class="prettyprint linenums">
+/*************************************************************************************
+*
+* @description This method will upload a calling list into the inContact platform to
+* allow it to be used in a Personal Connection calling campaign
+*
+* @param listName (string): Name of Calling List in inContact platform
+* @param skillId (integer): ID of Skill linked to list
+* @param fileName (string): Name of file for storage in inContact file system
+* @param forceOverwrite (boolean): Flag indicating if current file should be overwritten
+* @param listFile (base64binary): Base64 encoded binary file
+* @param parameters (callListParameters): List of optional parameters to upload a calling list
+* 
+* @returns call list details
+*
+*/
+public void postCallingList(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        //numeric and date fields are converted to strings when passed as page parameters
+        String listName=ApexPages.currentPage().getParameters().get('listName');    
+        String skillId=ApexPages.currentPage().getParameters().get('skillId');    
+        String fileName=ApexPages.currentPage().getParameters().get('fileName');    
+        String forceOverwrite=ApexPages.currentPage().getParameters().get('forceOverwrite');    
+        String listFile=ApexPages.currentPage().getParameters().get('listFile');    
+        String parameters=ApexPages.currentPage().getParameters().get('parameters');    
+
+        String apiURL = 'services/{version}/lists/call-lists';
+        String postData = '{"listName":"' + listName + '", "skillId":"' + skillId + 
+                '", "fileName":"' + fileName + '", "forceOverwrite":"' + forceOverwrite + 
+                '", "listName":"' + listName + '", "parameters":"' + parameters + '"}';
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setBody(postData);
+            request.setMethod('POST');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+        }
+    }
+}
+</pre>

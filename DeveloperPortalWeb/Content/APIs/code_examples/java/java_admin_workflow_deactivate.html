@@ -1,0 +1,22 @@
+﻿<pre class="prettyprint linenums">
+ public void PutWorkflowDataByIdDeactivate(String workflowDataId) throws IOException {
+	final String API_PATH = "/workflow-data/" + workflowDataId + "/deactivate"  ;
+	final String API_URL = "services/v16.0" + API_PATH;
+	if (ACCESS_TOKEN_PROPERTY != null) {
+		HttpsURLConnection urlConnection = (HttpsURLConnection) (new URL(
+		(RESOURCE_SERVER_BASE_URI_PROPERTY) + API_URL).openConnection());
+		urlConnection.setRequestProperty(AUTHORIZATION_HEADER, AUTHORIZATION_BEARER_PREFIX + ACCESS_TOKEN_PROPERTY);
+		urlConnection.setRequestProperty(ACCEPT_HEADER, APPLICATION_JSON_VALUE);
+		urlConnection.setRequestProperty(CONTENT_TYPE_HEADER, APPLICATION_JSON_VALUE);
+		urlConnection.setDoInput(true);
+		urlConnection.setDoOutput(true);
+		urlConnection.setRequestMethod("PUT");
+		urlConnection.connect();
+		int responseCode = urlConnection.getResponseCode();
+		String responseLine = urlConnection.getResponseMessage();
+	} 
+    else {
+			// No token - get one or handle error
+		}
+	}		
+</pre>

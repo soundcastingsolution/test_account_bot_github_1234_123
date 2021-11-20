@@ -1,0 +1,34 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+def agentEmailPark(sessionID,contactID,toAddress,fromAddress,ccAddress,bccAddress,subject,bodyHtml,attachments,isDraft,primaryDispositionId,secondaryDispositionId,tags,notes,originalAttachmentNames):
+# api-endpoint 
+#Give the specified url ,accessToken
+	BASEURL = "{BASEURL}"
+	accessToken = "{accessToken}"
+#Check if accessToken is empty or null
+if accessToken!="":
+#Give necessary parameters for http request
+	payload={"toAddress":toAddress,
+            "fromAddress":fromAddress,
+            "ccAddress":ccAddress,
+            "bccAddress":bccAddress,
+            "subject":subject,
+            "bodyHtml":bodyHtml,
+            "attachments":attachments,
+            "attachmentNames":attachmentNames,
+            "isDraft":isDraft,
+            "primaryDispositionId":primaryDispositionId,
+            "secondaryDispositionId":secondaryDispositionId,
+            "tags":tags,
+            "notes":notes,
+            "originalAttachmentNames":originalAttachmentNames} 
+#add all necessary headers
+	header_param = {'Authorization': 'bearer ' + '{accessToken}','content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+# Make http post request
+	response = requests.post(BASEURL+'/services/{version}/agent-sessions/' + sessionID +'/interactions/'+ contactID +'/email-park' , headers = header_param, data=payload) 
+#print response appropriately
+	print (response)
+else:
+	#no token get one or handle error
+</pre>    

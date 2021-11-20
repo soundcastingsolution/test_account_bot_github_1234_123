@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="eea2ab84-cb4d-482b-9abe-2ab220f44ed8" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="c57b476b-aae2-4573-93f0-00acf5dc8cfc" name="Browser">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="6ecf59f9-d3af-4012-8775-8482b5d249d8" direction="Bidirectional">
+          <layerMoniker Id="d55d5c45-2158-40b3-be60-d703e87750bc" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="d55d5c45-2158-40b3-be60-d703e87750bc" name="Web server">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="b4db8974-ea9d-4b29-af06-9f1800e8fecf" direction="Bidirectional">
+          <layerMoniker Id="c328cb59-a370-4b7d-beda-c25cd374dfd9" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="ddc7272e-1337-4e47-b30b-db846a64e8db" name="Dev Portal Web App">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="a9b38732-3dd8-4519-a635-447d70482b11" direction="Bidirectional">
+              <layerMoniker Id="10c59803-6f35-49c4-bf7a-64449231e03d" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="18fa748a-0e94-44bb-bf67-0a7f9a71dd93" name="Non-secure content" />
+            <layer Id="69f945ae-8dc3-4a24-8bae-e87d954ce5c4" name="Secure content:&#xD;&#xA;.json files,&#xD;&#xA;swagger integration" />
+          </childLayers>
+        </layer>
+        <layer Id="10c59803-6f35-49c4-bf7a-64449231e03d" name="Dev Forum Web App">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="5e226ab8-3536-47f7-a532-29b9367edb46" direction="Bidirectional">
+              <layerMoniker Id="e0b041d3-02e7-42f0-84e9-90050adc6a41" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="6cb45fa9-2247-4e52-be39-55947d309683" name="Forum" />
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="55c17360-b4a9-441a-aabe-6c177d1f12b6" name="inContact Central">
+      <childLayers>
+        <layer Id="c328cb59-a370-4b7d-beda-c25cd374dfd9" name="oAuth provider" />
+      </childLayers>
+    </layer>
+    <layer Id="e0b041d3-02e7-42f0-84e9-90050adc6a41" name="Database Server">
+      <childLayers>
+        <layer Id="77d0853b-34f9-4e88-b055-eb109cbbb3cf" name="DeveloperForum Database" />
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

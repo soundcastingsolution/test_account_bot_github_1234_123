@@ -1,0 +1,30 @@
+﻿<pre class="prettyprint linenums">
+// importing the scalaj-http library
+package scalaj.http
+
+object getAgentAddressBooks {
+
+	def getAgentAddressBooks() {
+       //Give the specified url ,accessToken
+       
+         val accessToken = "";
+	    val baseURI = "";
+		 
+       //Check if accessToken is empty or null
+		 if(accessToken!= null && !accessToken.isEmpty()){
+			//Add all necessary headers and Make the http request
+		    val response = Http( baseURI +"/services/{version}/agents/" + agentId + "/address-books")
+					.params("includeEntries"->"boolean - true or false",
+					"updatedSince"-> "ISO 8601 formatted date/time")
+				.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json"))
+				.asString
+			//TODO-> the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+		
+          	println(response);
+		 }
+      else{
+			   //No token - get one or handle error
+		 }
+	}
+}
+</pre>

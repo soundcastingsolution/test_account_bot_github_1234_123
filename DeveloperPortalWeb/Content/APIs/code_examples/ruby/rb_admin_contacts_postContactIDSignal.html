@@ -1,0 +1,74 @@
+<pre class="prettyprint linenums">
+# Calls the API to create a signal for a contact.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +contactID+ -> a nonnegative integer
+#  - +paramList+ -> a list of strings
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if contactID isn't a nonnegative integer
+#   - +ArgumentError+ -> if paramList isn't an array
+#
+def createSignal(token, contactID, paramList)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that contactID is a nonnegative integer.
+  unless contactID.is_a?(Integer) && contactID >= 0
+    raise ArgumentError, "contactID must be a nonnegative integer"
+  end
+  
+  # Check that paramList is a list.
+  raise ArgumentError, "paramList must be a list" unless paramList.kind_of?(Array)
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/interactions/#{contactID.to_s}/signal"
+  uri = URI.parse(baseURL + apiURL)
+  
+  # Create the POST data.
+  postData = "{\"p1\": \"#{paramList[0]}\",
+               \"p2\": \"#{paramList[1]}\",
+               \"p3\": \"#{paramList[2]}\",
+               \"p4\": \"#{paramList[3]}\",
+               \"p5\": \"#{paramList[4]}\",
+               \"p6\": \"#{paramList[5]}\",
+               \"p7\": \"#{paramList[6]}\",
+               \"p8\": \"#{paramList[7]}\",
+               \"p9\": \"#{paramList[8]}\"}"
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "#{postData.bytesize.to_s}",
+      "Content-Type" => "application/json",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(baseURL + apiURL, postData, headers)
+end
+</pre>

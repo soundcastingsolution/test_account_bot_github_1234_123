@@ -1,0 +1,51 @@
+﻿{
+  "openapi": "3.0.3",
+
+  "info": {
+    "description": "DFO API 3.0",
+    "version": "3.0",
+    "title": "DigitalEngagementAPI"
+  },
+  "tags": [
+    {
+      "name": "Message",
+      "description": " : Message Management"
+    },
+    {
+      "name": "Channel",
+      "description": " : Channel Management"
+    },
+    {
+      "name": "CustomFields",
+      "description": " : Customer Contact Management"
+    },
+    {
+      "name": "ConsumerContact",
+      "description": " : Consumer Contact Management"
+    }
+  ],
+  "schemes": [ "https" ],
+  "paths": {
+    "/channels/{channelId}/messages": {
+      "$ref": "DigitalEngagement/Message#/channels_channelId_messages"
+    },
+    "/channels/{channelId}/outbound": {
+      "$ref": "DigitalEngagement/Message#/channels_channelId_outbound"
+    },
+    "/channels": {
+      "$ref": "DigitalEngagement/Channel#/channels"
+    },
+    "/consumer-contact-custom-fields": {
+      "$ref": "DigitalEngagement/CustomFields#/consumer-contact-custom-fields"
+    },
+    "/consumer-custom-fields": {
+      "$ref": "DigitalEngagement/CustomFields#/consumer-custom-fields"
+    },
+    "/consumer-contact/{consumerContactId}": {
+      "$ref": "DigitalEngagement/ConsumerContact#/consumer-contact"
+    },
+    "/consumer-contact/{consumerContactId}/messages": {
+      "$ref": "DigitalEngagement/ConsumerContact#/consumer-contact-messages"
+    }
+  }
+}

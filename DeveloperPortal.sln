@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0A477B44-B7D0-4C0F-BBA9-9F8D49BC3620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperPortalWeb", "DeveloperPortalWeb\DeveloperPortalWeb.csproj", "{B622808A-5FE0-4128-BA13-8DCE3D192149}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75091971-BA4C-452F-B0D3-A1898B1445BF} = {75091971-BA4C-452F-B0D3-A1898B1445BF}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperPortalWebTests", "DeveloperPortalTests\DeveloperPortalWebTests.csproj", "{BF8E29DE-329C-48F1-B612-7C8B72680562}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperForumWeb", "DeveloperForumWeb\DeveloperForumWeb.csproj", "{75091971-BA4C-452F-B0D3-A1898B1445BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperPortalCommon", "DeveloperPortalCommon\DeveloperPortalCommon.csproj", "{48857229-CBED-4C60-8A90-7F0B61EB4300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperForumWebTests", "DeveloperForumWebTests\DeveloperForumWebTests.csproj", "{78292D0E-4B90-43F9-BFC1-0FC139287458}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HtmlToPdfGenerator", "HtmlToPdfGenerator\HtmlToPdfGenerator.csproj", "{B7D5F078-5B64-4724-B0EB-CDCA70DB9BC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B622808A-5FE0-4128-BA13-8DCE3D192149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B622808A-5FE0-4128-BA13-8DCE3D192149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B622808A-5FE0-4128-BA13-8DCE3D192149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B622808A-5FE0-4128-BA13-8DCE3D192149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF8E29DE-329C-48F1-B612-7C8B72680562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF8E29DE-329C-48F1-B612-7C8B72680562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF8E29DE-329C-48F1-B612-7C8B72680562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF8E29DE-329C-48F1-B612-7C8B72680562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75091971-BA4C-452F-B0D3-A1898B1445BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75091971-BA4C-452F-B0D3-A1898B1445BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75091971-BA4C-452F-B0D3-A1898B1445BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75091971-BA4C-452F-B0D3-A1898B1445BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48857229-CBED-4C60-8A90-7F0B61EB4300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48857229-CBED-4C60-8A90-7F0B61EB4300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48857229-CBED-4C60-8A90-7F0B61EB4300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48857229-CBED-4C60-8A90-7F0B61EB4300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78292D0E-4B90-43F9-BFC1-0FC139287458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78292D0E-4B90-43F9-BFC1-0FC139287458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78292D0E-4B90-43F9-BFC1-0FC139287458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78292D0E-4B90-43F9-BFC1-0FC139287458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D5F078-5B64-4724-B0EB-CDCA70DB9BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D5F078-5B64-4724-B0EB-CDCA70DB9BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D5F078-5B64-4724-B0EB-CDCA70DB9BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D5F078-5B64-4724-B0EB-CDCA70DB9BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BF8E29DE-329C-48F1-B612-7C8B72680562} = {0A477B44-B7D0-4C0F-BBA9-9F8D49BC3620}
+		{78292D0E-4B90-43F9-BFC1-0FC139287458} = {0A477B44-B7D0-4C0F-BBA9-9F8D49BC3620}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9A03E4F-22B9-4B11-9B33-2F247D487CB1}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://corptfs02.ucn.net:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DeveloperPortalWeb\\DeveloperPortalWeb.csproj
+		SccProjectName1 = DeveloperPortalWeb
+		SccLocalPath1 = DeveloperPortalWeb
+		SccProjectUniqueName2 = DeveloperPortalTests\\DeveloperPortalWebTests.csproj
+		SccProjectTopLevelParentUniqueName2 = DeveloperPortal.sln
+		SccProjectName2 = DeveloperPortalTests
+		SccLocalPath2 = DeveloperPortalTests
+		SccProjectUniqueName3 = DeveloperForumWeb\\DeveloperForumWeb.csproj
+		SccProjectName3 = DeveloperForumWeb
+		SccLocalPath3 = DeveloperForumWeb
+		SccProjectUniqueName4 = DeveloperPortalCommon\\DeveloperPortalCommon.csproj
+		SccProjectName4 = DeveloperPortalCommon
+		SccLocalPath4 = DeveloperPortalCommon
+		SccProjectUniqueName5 = DeveloperForumWebTests\\DeveloperForumWebTests.csproj
+		SccProjectTopLevelParentUniqueName5 = DeveloperPortal.sln
+		SccProjectName5 = DeveloperForumWebTests
+		SccLocalPath5 = DeveloperForumWebTests
+		SccProjectUniqueName6 = HtmlToPdfGenerator\\HtmlToPdfGenerator.csproj
+		SccProjectName6 = HtmlToPdfGenerator
+		SccLocalPath6 = HtmlToPdfGenerator
+	EndGlobalSection
+EndGlobal

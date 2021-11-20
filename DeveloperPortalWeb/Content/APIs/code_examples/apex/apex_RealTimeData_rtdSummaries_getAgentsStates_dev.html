@@ -1,0 +1,66 @@
+<pre class="prettyprint linenums">
+/****************************************************************************************
+*
+* @description  returns information on the current state of all Agents in the business unit
+* @param updatedSince - Returns objects updated since this time.
+* @param fields - List of elements to return in response
+* @returns AgentStates - collection of agent state records
+*
+*/
+public List<JSON2Apex.AgentStates> getAgentStates(){
+    //Check to see if you obtained a token
+    if(this.AccessToken!=null){
+        String myDate='';
+    
+        //GET PAGE PARAMETERS
+        String updatedSince= ApexPages.currentPage().getParameters().get('updatedSince');               
+        String fields= ApexPages.currentPage().getParameters().get('fields');
+      
+        //convert date to the correct format
+        if(updatedSince!=null && updatedSince!=''){
+            String[] tmp = updatedSince.split('-',3);
+            Integer yyyy = Integer.valueOf(tmp[0]);
+            Integer mm = Integer.valueOf(tmp[1]);
+            Integer dd = Integer.valueOf(tmp[2]);
+            Date d = Date.newInstance(yyyy,mm,dd);
+            system.debug(d);
+            String dt = d.format();
+            myDate = EncodingUtil.urlEncode(dt, 'UTF-8');
+        }
+
+        String apiURL = 'services/{version}/agents/states?updatedSince='+myDate+
+            '&fields='+fields;
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri+apiURL);
+            
+            //Add any and all necessary headers
+            request.setHeader('Authorization',this.tokenType+' '+this.AccessToken);
+            request.setHeader('Accept', '*/*');    
+            
+            //Make the request
+            HttpResponse resp = new System.Http().send(request);    
+            this.AgentData = resp.getBody();
+      
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.AgentData);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.AgentData;
+                return obj.agentStates;
+            } else {
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error_description);
+                ApexPages.addMessage(msg);
+                return null;
+            }
+        } catch (Exception ex){               
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;          
+        }
+    }    
+}
+</pre>

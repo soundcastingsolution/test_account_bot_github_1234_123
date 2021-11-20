@@ -1,0 +1,236 @@
+﻿@{
+    ViewBag.SideBarToShow = "_FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "FAQ";
+}
+
+<h1 class="primary-color">
+    @ViewBag.Title
+</h1>
+<div class="panel-group text-justify incontact-question incontact-answer" id="accordion" >
+    <div class="panel panel-default">
+        <div class="panel-heading cursor-pointer accordion-toggle" data-toggle="collapse" href="#collapseOne">
+            <h4 class="panel-title accordion-header-icon-more-less">
+                General API Questions
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        Where do I go to start learning about NICE CXone APIs?
+                    </strong>
+                </p>
+                <p>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            The best place to start is by reading the  @Html.ActionLink("getting started", "GettingStarted", "Documentation", null, new { @class = "primary-color" }) tutorial from the Documentation section.
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        How can I register an API application with NICE CXone?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            You will need to login to NICE CXone Central and under the Manage &#x21e8; API Applications section you can create a new application by providing an Application and Vendor name.
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        What is the difference between the 200 and 202 return codes?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            A 200 return code means that a <strong>synchronous</strong> request was completed successfully. A 202 return code means that an <b>asynchronous</b> action request completed successfully but further action should be done by the client to complete the final status.<br>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        Why are all of the JavaScript code examples written using jQuery?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            jQuery was chosen as a good way to provide an easy to understand example that can be used to better understand how the method functions.<br>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        What causes a "401 Client application 'application_name@vendor' not authorized for user" error to be returned?
+                    </strong>
+                </p>
+                <div class="text-align-answer">
+                    <div class="text-answer margin-left-16px">
+                    </div>
+                    <div class="margin-left-7px">
+                        Typically this indicates that you have not sent the correct credentials or application name. Double check your inputs and compare with the API Application registered in Central to verify you are sending the correct names.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading cursor-pointer accordion-toggle" data-toggle="collapse" href="#collapseTwo">
+            <h4 class="panel-title accordion-header-icon-more-less">
+                OAuth2 Authorization Questions
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        Does the NICE CXone API authorization service support all OAuth2 "grant types"?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            In the current version of the NICE CXone API Framework, only the Implicit, Password and Client OAuth "grant types" are supported. Support for the Authorization Code grant type will be added in a future release.
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        What authorization type should I choose for my application?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            Each supported OAuth2 grant type is designed for optimal security and usability of specific types of applications:
+                            <div class="text-align-answer">
+                                <div class="text-answer margin-left-16px">
+                                </div>
+                                <div class="margin-left-7px">
+                                    Implicit : Best for browser client applications or web applications that run on a server.
+                                </div>
+                            </div>
+                            <div class="text-align-answer">
+                                <div class="text-answer margin-left-16px">
+                                </div>
+                                <div class="margin-left-7px">
+                                    Password : Best for applications that are not web-based.
+                                </div>
+                            </div>
+                            <div class="text-align-answer">
+                                <div class="text-answer margin-left-16px">
+                                </div>
+                                <div class="margin-left-7px">
+                                    Client : Best for applications that do not access resources for a specific authenticated user.
+                                </div>
+                            </div>
+                            For more specific information on tokens, see the @Html.ActionLink("API authentication token", "APIAuthenticationToken", "Documentation", null, new { @class = "primary-color" }) tutorial for details.
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        What should I do when I receive a "token expired" response?
+                    </strong>
+                    <div class="text-align-answer">
+                        <span class="text-answer margin-left-16px">
+                        </span>
+                        <div class="margin-left-7px">
+                            Password and Client tokens are generally set to expire after an hour. When a token has expired, using the token with an API call will generate an error. Your application must then re-request a new token. This can be done by sending the authorization key again (for the Password and Client grant types), or by using a <b>refresh_token</b> to request a new API token (for the Implicit grant type). The <b>refresh_token</b> is provided with the API token when the API token is initially granted. Your application can store the refresh token for use when it is notified by the NICE CXone API Framework that your API token has expired. To learn more, see the @Html.ActionLink("getting started", "GettingStarted", "Documentation", null, new { @class = "primary-color" }) tutorial.
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        Why would I get "403 Forbidden" return code when using a valid token?
+                    </strong>
+                </p>
+                <div class="text-align-answer">
+                    <div class="text-answer margin-left-16px">
+                    </div>
+                    <div class="margin-left-7px">
+                        This can occur when you are using "Client" authentication type to call APIs that require an "Implicit" or "Password" authentication type.<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading cursor-pointer accordion-toggle" data-toggle="collapse" href="#collapseThree">
+            <h4 class="panel-title accordion-header-icon-more-less">
+                Agent API Questions
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        Why do I get a '409 Conflict' error when dealing with an agent session?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            When you attempt to start a session for a user that already has an active session, or end a session that has already been ended, the API will return an error code (409 Conflict).<br>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        When I join an existing session, will I get the same sessionId?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            No. When any device or application joins running session it receives a unique identifier for that session.
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        What will happen if a session which has other joined applications ends?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            All events for a running session are available to every joined application or client so the session would end for all connected applications.<br>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        How can I make sure that my request to change a system resource state was completed?
+                    </strong>
+                    <div class="text-align-answer">
+                        <div class="text-answer margin-left-16px">
+                        </div>
+                        <div class="margin-left-7px">
+                            All state changes will trigger an event to indicate that the state has been changed. See the @Html.ActionLink("Using events", "UsingEvents", "Documentation", null, new { @class = "primary-color" }) tutorial to learn more about how events can be used.<br>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <strong class="paragraph-text-padding-none">
+                        Why do I get a different sessionId every time I get each new event?
+                    </strong>
+                </p>
+                <div class="text-align-answer">
+                    <div class="text-answer margin-left-16px">
+                    </div>
+                    <div class="margin-left-7px">
+                        Your sessionId contains a timestamp that tells the system the last time you got events.  This is used to keep the platform and client applications in sync.<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

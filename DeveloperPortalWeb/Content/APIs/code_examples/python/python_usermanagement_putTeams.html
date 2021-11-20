@@ -1,0 +1,22 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+import json
+def updateTeams(updateTeamData):
+# api-endpoint 
+#Give the specified url ,accessToken
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+#Check if accessToken is empty or null
+	if accessToken!="":
+#Give necessary parameters for http request
+		payload='updateTeamData': 'json string values'}
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken}
+# Make http put request
+		response = requests.put(Baseuri +'/user-management​/v1​/teams', headers = header_param, json=updateTeamData) 
+#print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

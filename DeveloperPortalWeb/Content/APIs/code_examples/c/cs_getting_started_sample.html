@@ -1,0 +1,374 @@
+<pre class="prettyprint linenums">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+// Add a reference to System.Web.Extensions to resolve this compiler error.
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace GettingStarted
+{
+  class Program
+  {
+      /// Instance variables
+      private string _vendorName;
+      private string _appName;
+      private string _busNo;
+      private string _username;
+      private string _password;
+      private string _scope;
+      private string accessToken;
+      private string baseURL;
+      private string scope;
+      private TokenResponse _tokenResponse;
+      
+      /// Default constructor. For simplicity this example is set up to be hard 
+      /// coded with all the authentication info. The info needs to be filled 
+      /// in with valid info before the application will run. 
+      /// 
+      /// A default null scope is included and can be altered with the _scope 
+      /// variable. The scope variable is used in this example to display what 
+      /// scope is returned  with the access token.
+      public Program()
+      {
+          _vendorName = string.Empty;
+          _appName = string.Empty;
+          _busNo = string.Empty;
+          _username = string.Empty;
+          _password = string.Empty;
+          _scope = string.Empty;
+          accessToken = string.Empty;
+          baseURL = string.Empty;
+          scope = string.Empty;
+      }
+      
+      /// Struct to contain the token response object. 
+      /// 
+      /// There are many ways to deal with the JSON token response body.
+      /// This example shows how to use .NET 3.5 or later standard libraries, 
+      /// specifically using the JavaScriptSerializer class to de-serialize 
+      /// the response into a custom object.
+      [Serializable]
+      public struct TokenResponse
+      {
+          public string access_token;
+          public string token_type;
+          public int expires_in;
+          public string refresh_token;
+          public string scope;
+          public string resource_server_base_uri;
+          public string refresh_token_server_uri;
+          public int agent_id;
+          public int team_id;
+      }
+      
+      /// C# code to get a token for use with the inContact API
+      /// 
+      /// _appName, _vendorName, and _busNo are values created in Central when 
+      /// registering  an API application. They will need to be stored in your 
+      /// application or as part  of a data store attached to your application.
+      /// 
+      /// _username and _password are the credentials of an agent on your 
+      /// business unit.
+      /// 
+      /// _scope should be one or more of the following: 
+      ///         AdminAPI AgentAPI RealTimeAPI PatronAPI CustomAPI
+      /// for example, if you would like your application to ONLY access the 
+      /// Admin and Real-Time APIs, the scope string would be "AdminAPI 
+      /// RealTimeAPI".
+      private void GetToken()
+      {
+          //Authorization endpoint
+          string endpoint = 
+            @"https://api.incontact.com/InContactAuthorizationServer/Token";
+          //Encoded request string
+          string AuthToken = _appName + "@" + _vendorName + ":" + _busNo;
+          string encodedAuthToken = Convert.ToBase64String(
+                System.Text.Encoding.UTF8.GetBytes(AuthToken));
+
+          // Since this is a desktop application that is not running in a 
+          // browser we will use  the password "grant type" to complete the 
+          // post data. 
+          string postData = "{\"grant_type\":\"password\",\"username\":\"" + 
+                            _username + 
+                            "\",\"password\":\"" + _password + 
+                            "\",\"scope\":\"" + _scope + "\"}";
+
+          //Create the request object
+          var request = 
+                (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+          request.Method = "POST";
+          request.ContentType = "application/json; charset=UTF-8";
+          //Add headers to the request object
+          request.Headers.Add("Authorization", "basic " + encodedAuthToken);
+          request.Accept = "application/json, text/javascript, */*; q=0.01";
+          //Write Post Data to the request stream
+          var encoding = new System.Text.UTF8Encoding();
+          var bytes = 
+                System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(postData);
+          request.ContentLength = bytes.Length;
+          using (var writeStream = request.GetRequestStream())
+          {
+              writeStream.Write(bytes, 0, bytes.Length);
+          }
+
+          // Make the request.
+          // Much of the error handling was omitted from this example for the 
+          // sake of brevity.
+          int statusCode;
+          string statusDescription;
+          string responseBody;
+          using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+          {
+              int numericStatusCode = (int)response.StatusCode;
+              if (response.StatusCode != System.Net.HttpStatusCode.OK)
+              {
+                  // Failure.
+                  statusCode = numericStatusCode;
+                  statusDescription = String.Format("Request failed. " +
+                      "Received HTTP {0}", response.StatusCode);
+                  responseBody = string.Empty;
+              }
+              else
+              {
+                  // Success.
+                  var responseValue = string.Empty;
+                  using (var responseStream = response.GetResponseStream())
+                  {
+                      if (responseStream != null)
+                      {
+                          using (var reader = 
+                              new System.IO.StreamReader(responseStream))
+                          {
+                              responseValue = reader.ReadToEnd();
+                          }
+                      }
+                  }
+                  statusCode = numericStatusCode;
+                  statusDescription = response.StatusCode.ToString();
+                  responseBody = responseValue;
+
+                  // Print out the full HTTP response.
+                  Console.WriteLine(responseBody);
+              }
+          }
+
+           //Deserialize the response
+          if (!string.IsNullOrEmpty(responseBody))
+          {
+              // Place a breakpoint here to debug the tokenResponse struct as it
+              // fills up with the deserialized JSON response.  Other JSON 
+              // responses can be handled similarly for cleaner output and 
+              // access to the data.   
+              System.Web.Script.Serialization.JavaScriptSerializer javaScriptSerializer 
+                = new System.Web.Script.Serialization.JavaScriptSerializer();
+              _tokenResponse = 
+                  javaScriptSerializer.Deserialize&#60TokenResponse&#62(responseBody);
+              
+              // Save or store the token.  
+              // For this example we will store it in the Instance variables.
+              if (!string.IsNullOrEmpty(_tokenResponse.access_token))
+              {
+                  this.accessToken = _tokenResponse.access_token.ToString();
+                  this.baseURL = _tokenResponse.resource_server_base_uri;
+                  this.scope = _tokenResponse.scope;
+              }
+              else
+              {
+                  //Error branch for empty response
+              }
+          }
+      }
+      
+      /// C# code to make a getAgents call a token for use with the API.
+      ///
+      /// The variables baseURL and accessToken were returned with the 
+      /// successful getToken request.
+      protected void GetAgents()
+      {
+          //Test to see if you have obtained a token
+          //See the sample on obtaining a token [link to token code] here
+          if (!string.IsNullOrEmpty(accessToken))
+          {
+              string apiURL = "/services/{version}/agents";
+
+              // baseURL was returned with your successful token request
+              string endpoint = baseURL + apiURL; 
+              string authorizationHeader = "Authorization:bearer " + accessToken;
+
+              // Create the request object
+              var request = 
+                 (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+              request.Method = "GET";
+              request.ContentType = "application/x-www-form-urlencoded";
+
+              // Add any and all necessary headers
+              request.Headers.Add("Authorization", "bearer " + accessToken);
+
+              // Accept is a reserved header, so you must modify it rather than 
+              // add.
+              request.Accept = "application/json, text/javascript, */*; q=0.01";
+
+              //Make the request
+              int statusCode;
+              string statusDescription;
+              string responseBody;
+              try
+              {
+                  using (var response = 
+                        (System.Net.HttpWebResponse)request.GetResponse())
+                  {
+                      // StatusCode is an enumeration, so you can cast the 
+                      // result to an integer to get the numeric StatusCode.
+                      int numericStatusCode = (int)response.StatusCode;
+                      if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                      {
+                          // Failure.
+                          statusCode = numericStatusCode;
+                          statusDescription = 
+                                String.Format("Request failed. Received HTTP {0}",
+                                               response.StatusCode);
+                          responseBody = string.Empty;
+                      }
+                      else
+                      {
+                          // Success
+                          var responseValue = string.Empty;
+                          using (var responseStream = 
+                              response.GetResponseStream())
+                          {
+                              if (responseStream != null)
+                              {
+                                 using (var reader = 
+                                     new System.IO.StreamReader(responseStream))
+                                 {
+                                     responseValue = reader.ReadToEnd();
+                                 }
+                              }
+                          }
+                          statusCode = numericStatusCode;
+                          statusDescription = response.StatusCode.ToString();
+                          responseBody = responseValue;
+                      }
+                  }
+                  if (!string.IsNullOrEmpty(responseBody))
+                  {
+                      // Success. Do something with the response.
+                      // This method returns JSON.  You will most likely want 
+                      // to deserialize the JSON and work with the agent 
+                      // objects. For simplicity this example just writes the 
+                      // JSON string directly to a label on the page.
+                      Console.WriteLine(statusCode.ToString() + " " + 
+                          statusDescription + " " + responseBody);
+                  }
+                  else
+                  {
+                      //response body was empty.
+                      Console.WriteLine(statusCode.ToString() + " " + 
+                          statusDescription + " Response Body was empty");
+                  }
+              }
+              catch (System.Net.WebException webException)
+              {
+                  // .NET will throw a System.Net.WexException on StatusCodes 
+                  // other than 200. You can catch that exception and retain 
+                  // the StatusCode for error handling.
+                  if (webException.Status == 
+                      System.Net.WebExceptionStatus.ProtocolError)
+                  {
+                      // Protocol Error, you can read the response and handle 
+                      // the error based on the StatusCode.
+                      var exceptionResponse = 
+                           webException.Response as System.Net.HttpWebResponse;
+                      if (exceptionResponse != null)
+                      {
+                          var exceptionResponseValue = string.Empty;
+                          using (var exceptionResponseStream = 
+                              exceptionResponse.GetResponseStream())
+                          {
+                              if (exceptionResponseStream != null)
+                              {
+                                  using (var exceptionReader = 
+                                       new System.IO.StreamReader(
+                                       exceptionResponseStream))
+                                  {
+                                      exceptionResponseValue = 
+                                        exceptionReader.ReadToEnd();
+                                  }
+                              }
+                          }
+                          // Enumerated Protocol Error.
+                          statusCode = (int)exceptionResponse.StatusCode;
+                          statusDescription = exceptionResponse.StatusDescription;
+                          responseBody = exceptionResponseValue;
+                          Console.WriteLine(statusCode.ToString() + " " + 
+                               statusDescription + " " + responseBody);
+                      }
+                      else
+                      {
+                          // Unknown Protocol Error, handle error.
+                          Console.WriteLine("Unknown Protocol Error");
+                      }
+                  }
+                  else
+                  {
+                      // Unknown Non Protocol Error, handle error.
+                      Console.WriteLine("Unknown Non Protocol Error");
+                  }
+              }
+              catch (Exception ex)
+              {
+                  // Non Web Exception error, handle error.
+                  Console.WriteLine(ex.Message);
+              }
+          }
+          else
+          {
+              //No token - get one or handle error
+              Console.WriteLine("Please get a valid token");
+          }
+      }
+       
+      /// This is just a sample main method that makes one call to GetToken and
+      /// one call to GetAgents along with some commentary in the console 
+      /// output describing each line is.
+      static void Main(string[] args)
+      {
+         // See the constructor above and fill in the authentication 
+         // information.
+         Program p = new Program();
+         Console.WriteLine("This is the response body from a successful token" +
+             " request.\n");
+            
+         p.GetToken();
+            
+         Console.WriteLine("\nThis is the access token for the token response" +
+             " that you can reuse to make RESTful API calls.'\n'" + 
+             p.accessToken + '\n');
+         Console.WriteLine("This is the scope that the token was created with " +
+             "and sets the permissions for what APIs can be accessed'\n'" + 
+             p.scope + '\n');
+            
+         Console.WriteLine("This is the base URL for the token response that " +
+             "you can reuse to make RESTful API calls.'\n'" + 
+             p.baseURL + '\n');
+         Console.WriteLine("We need to append an API URL to the end of the " +
+             "base URL to make a call to the API. In this demo the resource " +
+             "for the API call that we will be making is:\n services/{version}/agents\n");
+         Console.WriteLine("Now we will be making a call to the Admin API " +
+             "using the getAgents method. This raw data would need to be " +
+             "deserialized to be more useful in an application. \n");
+
+         p.GetAgents();
+                      
+         // This loop simply keeps the console open so the output can be read 
+         // however long you would like.
+         while (true)
+             Console.ReadLine();
+      }
+  }
+}
+</pre>

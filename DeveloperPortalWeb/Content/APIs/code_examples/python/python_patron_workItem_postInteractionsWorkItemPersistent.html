@@ -1,0 +1,32 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library
+import requests
+
+def postInteractionsWorkItemPersistent():
+
+    # api-endpoint
+    #Give the specified url ,accessToken
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+
+    #Check if accessToken is empty or null
+	if accessToken!="":
+
+    #Give necessary parameters for http request
+		payload={'workItemID': 'string',
+        'workItemPayload': 'string',
+        'workItemType': 'string',
+        'from': 'string',
+        'pointOfContact': 'string'}
+
+    #add all necessary headers
+		header_param = {'Authorization': 'bearenr ' + accessToken,'content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+    # Make http post request
+		response = requests.post(Baseuri +  '/services/{version}/interactions/work-items-persistent' , headers = header_param, data=payload)
+
+    #print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

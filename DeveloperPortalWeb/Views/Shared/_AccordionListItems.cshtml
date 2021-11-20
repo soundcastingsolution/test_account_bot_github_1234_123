@@ -1,0 +1,21 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.AccordionItemViewModel>
+
+<div class="panel-group text-justify" id="accordion">
+    @{int counterIndex = 1;}
+    @foreach (var item in Model)
+    {
+        <div id="parent-@item.FileNameOfView" class="panel panel-default">
+            <div class="panel-heading cursor-pointer accordion-toggle collapsed" data-toggle="collapse" href="#collapse-@item.FileNameOfView">
+                <h4 class="panel-title display-flex">
+                    <span>@counterIndex.</span>
+                    <span class="margin-left-16px text-left">@item.Title</span>
+                    <span class="accordion-header-icon-more-less margin-left-16px flex-1"></span>
+                </h4>
+            </div>
+            <div id="collapse-@item.FileNameOfView" class="panel-collapse collapse">
+                <div class="panel-body">@Html.Partial(item.FileNameOfView)</div>
+            </div>
+        </div>
+        counterIndex++;
+    }
+</div>

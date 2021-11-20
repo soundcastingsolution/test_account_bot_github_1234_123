@@ -1,0 +1,54 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "description": "Commands For Next Release",
+    "version": "8.0",
+    "title": "CommingSoonAPI"
+  },
+  "tags": [
+    {
+      "name": "AdminScope",
+      "description": "Admin APIs <b><i><span style=color:red>(Updated in v9.0)</span></i></b>"
+    },
+    {
+      "name": "AgentScope",
+      "description": "Agent APIs"
+    },
+    {
+      "name": "PatronScope",
+      "description": "Patron APIs"
+    },
+    {
+      "name": "RealTimeScope",
+      "description": "RealTimeData APIs"
+    },
+    {
+      "name": "ReportingScope",
+      "description": "Reporting APIs <b><i><span style=color:red>(Updated in v9.0)</span></i></b>"
+    }
+  ],
+  "schemes": [ "https" ],
+  "paths": {    
+    "/permissions": {
+      "$ref": "comingsoon/AdminScope#/permissions"
+    },
+    "/wfm-data/agents": {
+      "$ref": "comingsoon/ReportingScope#/wfm_agents"
+    },
+    "/wfm-data/agents/schedule-adherence": {
+      "$ref": "comingsoon/ReportingScope#/wfm_agents_schedule-adherence"
+    },
+    "/wfm-data/agents/scorecards": {
+      "$ref": "comingsoon/ReportingScope#/wfm_agents_scorecards"
+    },
+    "/wfm-data/skills/agent-performance": {
+      "$ref": "comingsoon/ReportingScope#/wfm_skills_agent-performance"
+    },
+    "/wfm-data/skills/contacts": {
+      "$ref": "comingsoon/ReportingScope#/wfm_skills_contacts"
+    },
+    "/wfm-data/skills/dialer-contacts": {
+      "$ref": "comingsoon/ReportingScope#/wfm_skills_dialer-contacts"
+    }
+  }    
+}

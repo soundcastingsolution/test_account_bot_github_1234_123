@@ -1,0 +1,31 @@
+﻿@using System.Configuration
+@model MVCForum.Website.ViewModels.BreadcrumbViewModel
+
+<section class="breadcrumb-trail page-header">
+    <a href="/">Home</a> &raquo;
+    <a href="@ConfigurationManager.AppSettings["ForumHomeUrl"]">Forum</a> &raquo;
+    @Html.ActionLink("All Categories", "Index", "Category") &raquo;
+    @if (Model.Categories.Any())
+    {
+        var catCount = Model.Categories.Count;
+        foreach (var cat in Model.Categories)
+        {
+            <a href="@cat.NiceUrl">@cat.Name</a>
+            <text> &raquo; </text>
+        }
+    }
+
+    @if (Model.Topic != null)
+    {
+        if (Model.Topic.Category != null && !Model.Categories.Contains(Model.Topic.Category))
+        {
+            <a href="@Model.Topic.Category.NiceUrl">@Model.Topic.Category.Name</a>
+            <text> &raquo; </text>
+        }
+        @Model.Topic.Name
+    }
+    else
+    {
+        @Model.Category.Name
+    }
+</section>

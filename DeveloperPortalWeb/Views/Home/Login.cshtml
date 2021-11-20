@@ -1,0 +1,89 @@
+﻿@using System.Configuration
+@using InContact.DeveloperPortal.Web.Common;
+@{
+    bool userIsAuthenticated = (User != null && User.Identity != null && User.Identity.IsAuthenticated);
+}
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .buttonLogin {
+        margin: 2px 0;
+        width: 130px;
+        height: 30px;
+        display: block;
+        text-decoration: none;
+        padding-left: 5px;
+        background-color: #009edb;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    a:hover {
+        color: white;
+    }
+
+</style>
+
+
+
+<div>
+    <div class="col-xs-12 col-md-12">
+        <h1 class="text-center sub-title">CXone Login</h1>
+    </div>
+    @if (!ConfigurationReader.IsLoginEnabled)
+    {
+        <div class="col-xs-12 col-md-12 paragraph-container no-padding">
+            <div class="paragraph text-left">
+                <h2> The DEVone site Login is currently unavailable due to maintenance.</h2>
+                <h2>We're sorry for the inconvenience.</h2>
+            </div>
+        </div>
+    }
+    else
+    {
+    <div class="col-xs-12 col-md-12 paragraph-container no-padding">
+        <div class="paragraph text-left">
+
+            <div class="small-margin-bottom">
+                The Developer Portal has updated its login to support OpenId connect. This means upon selecting CXone Login or CXone Gov Login it will redirect to separate login page asking for username and a drop down to select an area.
+                Then a password page. Once credentials are confirmed you will be redirected back to the Developer Portal.
+            </div>
+            <br />
+            <div class="row">
+                <div class="small-margin-bottom col-sm-4">
+                    For UserHub select "CXone Login"
+                    Then select an area: North America, Frankfurt, London, Canada.
+                    <br /> <br /><br /><br />
+                    @Html.RouteLink("CXone Login", "Default", new { controller = "Account", action = "SignIn", returnUrl = ViewBag.returnUrl, isFedramp = false }, new { @class = "buttonLogin  button-v6" })
+                    <img src="~/Content/images/Login/CXone UserHub.png" />
+
+                </div>
+                <div class="small-margin-bottom col-sm-4">
+                    For Central select "CXone Login"
+                    Then select Central from the drop down it is the last one after scrolling to the bottom.
+                    <br /> <br /><br />
+                    @Html.RouteLink("CXone Login", "Default", new { controller = "Account", action = "SignIn", returnUrl = ViewBag.returnUrl, isFedramp = false }, new { @class = "buttonLogin  button-v6" })
+                    <img src="~/Content/images/Login/CXone Central.png" />
+                </div>
+                <div class="small-margin-bottom col-sm-4">
+                    For Government (FedRamp) select "CXone Gov Login"
+                    Then select an area based on your admin UI.  North Virginia for UserHub or Central from the dropdown
+                    <br /><br />
+                    @Html.RouteLink("CXone Gov Login", "Default", new { controller = "Account", action = "SignIn", returnUrl = ViewBag.returnUrl, isFedramp = true }, new { @class = "buttonLogin button-v6" })
+                    <img src="~/Content/images/Login/CXone Gov.png" />
+                </div>
+            </div>
+            <br />
+            <div class="row small-margin-bottom">
+                <b>Note:</b> If you don't know your area or admin UI contact your Technical Account Manager
+            </div>
+            <br />
+        </div>
+    </div>
+    }
+</div>
+

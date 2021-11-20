@@ -1,0 +1,48 @@
+﻿@model APIDocUnitTest.Models.APIproperties
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>API Test Results</h2>
+<head>
+    <link href="@Url.Content("~/Content/Table.css")" rel="stylesheet" type="text/css" />
+   
+</head>
+
+<body>
+@using (Html.BeginForm())
+{
+
+    <table id="customers">
+        <tr>
+            <th>APIName</th>
+            <th>APISubType</th>
+            <th>APIType</th>
+            <th>Version</th>
+            <th>APIResult</th>
+       </tr>
+       
+            @foreach (var view in ViewBag.data)
+            { 
+                <tr>
+                    <td>@view.APIType</td>
+                    <td>@view.APISubType</td>
+                    <td>@view.MethodName </td>
+                    <td>@view.APIversion </td>
+                    @if (@view.APIresultStatus != "Failure")
+                    {
+                    <td>@view.APIresultStatus</td>
+                    }
+                    else
+                    {
+                        <td style="background-color:red">@view.APIresultStatus</td>
+                    }
+
+                </tr>
+            }
+
+</table>
+
+       
+}
+</body>

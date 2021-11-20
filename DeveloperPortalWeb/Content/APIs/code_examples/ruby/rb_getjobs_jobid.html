@@ -1,0 +1,23 @@
+﻿<pre class="prettyprint linenums">
+def getJobsByID()
+if($accessToken!='')
+uri= URI.parse(($CXone_baseURI)+'data-extraction/v1/jobs/' +$jobID)
+ 
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer " + ($accessToken),
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json",
+		"Accept-Encoding" => "deflate"}
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+  # Make the request.
+  res = http.get(uri.path , headers)
+construct('DataExtraction','ExtractData','GET jobs/jobID','so32-v1.0',res.code,res.message)
+else
+construct('DataExtraction','ExtractData','GET jobs/jobID','so32-v1.0',res.code,res.message)
+    end
+end
+</pre>

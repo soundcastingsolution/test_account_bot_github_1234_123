@@ -1,0 +1,7 @@
+C:\New folder\DeveloperPortal\Main\HtmlToPdfGenerator\bin\Debug\HtmlToPdfGenerator.exe.config
+C:\New folder\DeveloperPortal\Main\HtmlToPdfGenerator\bin\Debug\HtmlToPdfGenerator.exe
+C:\New folder\DeveloperPortal\Main\HtmlToPdfGenerator\bin\Debug\HtmlToPdfGenerator.pdb
+C:\New folder\DeveloperPortal\Main\HtmlToPdfGenerator\obj\Debug\HtmlToPdfGenerator.csproj.AssemblyReference.cache
+C:\New folder\DeveloperPortal\Main\HtmlToPdfGenerator\obj\Debug\HtmlToPdfGenerator.csproj.CoreCompileInputs.cache
+C:\New folder\DeveloperPortal\Main\HtmlToPdfGenerator\obj\Debug\HtmlToPdfGenerator.exe
+C:\New folder\DeveloperPortal\Main\HtmlToPdfGenerator\obj\Debug\HtmlToPdfGenerator.pdb

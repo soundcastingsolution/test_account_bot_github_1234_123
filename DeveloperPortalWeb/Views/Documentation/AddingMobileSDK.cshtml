@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Adding Mobile SDK";
+}
+
+<p>To add the NICE CXone mobile widgets to your Android application, you will need to do the following:</p>
+<ol class="margin-bottom-none break-word">
+    <li>
+        Download the @Html.ActionLink("Mobile Android Kit", "Download", "Downloads", new { id = 2 }, null) which contains
+        the androidKit.zip file.
+    </li>
+
+    <li>
+        Unzip the code in any location. We recommend adding it to the same directory as the project you want to add the widgets to.
+    </li>
+
+    <li>
+        Open the Eclipse IDE as administrator.
+    </li>
+
+    <li>
+        <p>
+            Import both the inContactMobileSDK and inContactMobileUISDK projects
+            from the location you just unzipped into by right-clicking on the project
+            explorer and clicking on the Import option.
+        </p>
+        <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk1.png")">
+    </li>
+
+    <li>
+        <p> Select the "Existing Android Code into Workspace" option.</p>
+        <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk2.png")">
+    </li>
+
+    <li>
+        Click on the "Next" button.
+    </li>
+
+    <li>
+        Click the "Browse" button, and browse to the location where you unzipped the SDK.
+    </li>
+
+    <li>
+        <p> Select the "SDK" folder, and Eclipse will find the two SDK projects (inContactMobileSDK and inContactMobileUISDK) and list them for you:</p>
+        <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk3.png")">
+    </li>
+
+    <li>
+        <p>
+            Ensure both SDK projects are selected, and click the "Finish" button. With this,
+            the SDK will be imported and you will be ready to add the widgets to your Android application.
+        </p>
+        <img class="img-responsive center-block img-size-lg padding-right" src="@Url.Content("~/Content/images/masdk4.png")">
+    </li>
+</ol>

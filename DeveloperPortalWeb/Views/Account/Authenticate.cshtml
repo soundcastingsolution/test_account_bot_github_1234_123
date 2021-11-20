@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Authenticate";
+}
+
+<div id="spinner" style="margin-left:30px">
+    <h2>You are being Authenticated please wait.</h2>
+    <img src="~/Content/images/Home/spinner.png" alt="spinner not available" />
+</div>
+<div id="errorMessage">
+    <h2 id="DisplayError"></h2>
+</div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(function () {
+        var error = '@ViewBag.error';
+        @* if the Auth code is generated and if there are no errors *@
+        if (error == null || error == "") {
+            var authCode = '@ViewBag.AuthCode';
+            var clientState = '@ViewBag.ClientState';
+            var uri = "/account/AuthenticateUser"
+            $.post(uri, { Authcode: authCode, ClientState: clientState }, function (data) {
+                $("#spinner").hide();
+                if (typeof (data.url) != "undefined") {
+                    window.location = data.url;
+                }
+                else {                                    
+                    window.location = data.logoutUrl;
+                }
+
+
+            })
+        }
+        else {
+            $("#spinner").hide();
+            var errorDesc = '@ViewBag.errorDesc';
+            if (errorDesc == null || errorDesc == "") {
+                $("#DisplayError").html("User authentication failed, find below the error details."+"<br/>" +" Error: " + error);
+            }
+            else {
+                $("#DisplayError").html("User authentication failed, find below the error details." + "\n Error: " + error + "<br/>"+"Error Description : " + errorDesc);
+            }
+           
+        }
+    })
+</script>

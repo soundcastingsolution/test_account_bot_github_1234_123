@@ -1,0 +1,58 @@
+﻿<pre class="prettyprint linenums">
+    public string updateTeamsById(string updateTeamData, string teamId)
+    {
+        string updateTeamPayLoad=updateTeamData;
+       //Test to see if you have obtained a token            
+        if (!string.IsNullOrEmpty(accessToken))
+            {
+                string apiURL = "​/user-management​/v1​/users​/teams​/"+teamId;
+                //baseURL was returned with your successful token request
+                string endpoint = CXone_baseURI + apiURL;
+                //Create the request object
+                var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+                request.Method = "PATCH";
+                request.ContentType = "application/x-www-form-urlencoded";
+                //Add any and all necessary headers
+                request.Headers.Add("Authorization", "bearer " + accessToken);
+                //Accept is a reserved header, so you must modify it rather than add
+                request.Accept = "application/json, text/javascript, */*; q=0.01";
+                //Create Post Data and add it to the request
+                string postData = updateUserPayLoad; //team JSON data
+                var encoding = new System.Text.UTF8Encoding();
+                var bytes = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(postData);
+                request.ContentLength = bytes.Length;
+                using (var writeStream = request.GetRequestStream())
+                {
+                    writeStream.Write(bytes, 0, bytes.Length);
+                }
+                //Make the request
+               //Create Patch Data and add it to the request
+                string patchData = updateTeamPayLoad; //team JSON data
+                // Make the request
+                try
+                {
+                    // Get the Response from the Web Request
+                    using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+                    {
+                        return response.StatusDescription;
+                    }
+                }
+                catch (System.Net.WebException webException)
+                {
+                    // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+                    // You can catch that exception and retain the StatusCode for error handling.
+                    return webException.Message;
+                }
+                catch (Exception ex)
+                {
+                    // Catch any non Web Exception error
+                    return ex.Message;
+                }
+            }
+            else
+            {
+                // No token - get one or handle error
+                return "Failure";
+            }
+   }
+</pre>

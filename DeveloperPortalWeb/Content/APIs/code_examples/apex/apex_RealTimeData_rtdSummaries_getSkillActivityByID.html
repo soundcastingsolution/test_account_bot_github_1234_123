@@ -1,0 +1,51 @@
+<pre class="prettyprint linenums">
+/****************************************************************************************
+*
+* @description  This method returns activity information on the Skill identified by skillId
+* @param skillId (required) - ID of the skill
+* @returns SkillActivities 
+*
+*/
+public List<JSON2Apex.SkillActivities> getSkillActivityById(){
+    //Check to see if you obtained a token
+    if(this.AccessToken!=null){
+                   
+        //GET PAGE PARAMETERS
+        this.skillId=ApexPages.currentPage().getParameters().get('skillId');
+    
+        String apiURL='services/{version}/skills/'+skillId+'/activity';
+        system.debug(apiURL);
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri+apiURL);
+            
+            //Add any and all necessary headers
+            request.setHeader('Authorization',this.tokenType+' '+this.AccessToken);
+            request.setHeader('Accept', '*/*');    
+            
+            //Make the request
+            HttpResponse resp = new System.Http().send(request);    
+            this.SkillData = resp.getBody();
+      
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.SkillData);
+            if(resp.getStatusCode()==200){               
+                //do something with the returned data
+                this.RawJSON=this.SkillData;
+                return obj.skillActivities;
+            } else {
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error_description);
+                ApexPages.addMessage(msg);
+                return null;
+            }
+        } catch (Exception ex){               
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;          
+        }
+    }    
+}
+</pre>

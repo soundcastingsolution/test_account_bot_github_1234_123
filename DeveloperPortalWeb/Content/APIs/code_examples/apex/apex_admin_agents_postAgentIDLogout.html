@@ -1,0 +1,59 @@
+<pre class="prettyprint linenums">
+/*************************************************************************************
+*
+* @description This can be useful if an agent has left their computer, and remains
+* logged in, or if an agent session somehow becomes \"stuck\" and the agent is not
+* able to log off using agent software (a rare occurrence)
+* @param agentId (required) - id of an agent
+*
+*/
+public List<JSON2Apex.Indicators> postAgentLogout(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        String agentId=ApexPages.currentPage().getParameters().get('agentId');
+        String apiURL = 'services/{version}/agents/' + agentId + '/indicators';
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setBody(''); //body required with POST request
+            request.setMethod('POST');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+                return obj.indicators;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+                return null;
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;
+        }
+    }
+    return null;
+}
+</pre>

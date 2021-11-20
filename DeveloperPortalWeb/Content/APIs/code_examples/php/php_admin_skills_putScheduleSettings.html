@@ -1,0 +1,55 @@
+﻿<pre class="prettyprint linenums">
+<br />
+
+function updateSkillsSchedulesettingsBySkillId($skillId,$scheduleSettingsJSONData)
+{
+     if($_SESSION["access_token"]!="")
+   {
+     $data = array(  
+    '$scheduleSettingsJSONData'=> $scheduleSettingsJSONData
+	);
+    //create post json data
+    $data_json = json_encode($data);	
+    $api_URL='/services/v10.0/skills/'.$skillId.'/parameters/schedule-settings';
+    $endpoint=$_SESSION["resource_server_base_uri"].$api_URL;
+    $handle = curl_init($endpoint);
+	curl_setopt($handle, CURLOPT_HEADER, true);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true); 
+	curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+    $headers=array();
+    $headers[] = 'Content-type: Content-Type: application/json';
+    $headers[] = 'Authorization: bearer '.$_SESSION["access_token"];
+    $headers[] = 'Accept: application/json, text/javascript, */*; q=0.01';
+	curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_setopt($handle, CURLOPT_POST, 1);
+	curl_setopt($handle, CURLOPT_POSTFIELDS,$data_json);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    // Make the request         
+    $response = curl_exec($handle);      
+    //Handling valid response
+    if($response!=FALSE)
+    {
+      $http_code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+      $parts = explode("\r\n\r\nHTTP/", $response);
+      $parts = (count($parts) > 1 ? 'HTTP/' : '').array_pop($parts);
+      list($response_headers, $response_body) = explode("\r\n\r\n", $parts, 2); 
+       if (!empty($response_body))
+      {
+        $parsed_json=json_decode($response_body);  
+     	echo $parsed_json;
+      }
+    }
+ 
+    // Close the curl session  
+    curl_close($handle);
+ 
+    //Report all PHP errors (notices, errors, warnings, etc.)  
+    error_reporting(E_ALL);
+  }
+  else
+    // No token - get one or handle error
+    echo "No access Token";
+}
+<br />
+</pre>

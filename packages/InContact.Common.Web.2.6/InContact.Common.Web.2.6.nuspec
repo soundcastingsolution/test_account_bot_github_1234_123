@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>InContact.Common.Web</id>
+    <version>2.6</version>
+    <authors>inContact Corporate IT Dept.</authors>
+    <owners>inContact Corporate IT Dept.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library of common web functionality produced by Corporate IT developers.</description>
+  </metadata>
+</package>

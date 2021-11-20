@@ -1,0 +1,732 @@
+﻿{
+  "/views": {
+    "post": {
+      "x-cxone-api-key": "46778112-f85f-40b7-800a-83e465cbe2ae",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": {
+        "-viewManagement": "create"
+      },
+      "summary": "Create a new view",
+      "description": "This api creates a new view and returns created view with viewId.<div class='tabs_wrapper' data-path='authorization_postViews.html'></div>",
+      "operationId": "createView",
+      "tags": [
+        "Authorization-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ViewRequestV1"
+            },
+            "examples": {
+              "jsonExample": {
+                "summary": "CreateViewRequest",
+                "value": {
+                  "name": "view1",
+                  "description": "new view",
+                  "objectType": "USER"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success, view created successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewResponseV1"
+              },
+              "example": {
+                "jsonExample": {
+                  "summary": "CreateViewRequest",
+                  "value": {
+                    "id": "11e9d2b7-a96c-f8d0-ab21-c85b76b87f57",
+                    "name": "view2",
+                    "description": "new view",
+                    "createdBy": "viewTest@do34.com",
+                    "createdTime": "2019-09-09T04:09:47.482+0000",
+                    "lastModifiedBy": "viewTest@do34.com",
+                    "lastModifiedTime": "2019-09-09T04:09:47.482+0000",
+                    "objectType": "USER"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation or internal error"
+        },
+        "401": {
+          "description": "Unauthorized. Invalid credentials."
+        },
+        "403": {
+          "description": "Forbidden. Access Denied"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    }
+  },
+  "/views/{id}": {
+    "put": {
+      "x-cxone-api-key": "154464da-8a9c-4eaf-a9ed-d5cae68119ab",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": {
+        "-viewManagement": "edit"
+      },
+      "summary": "Update View details",
+      "description": "This API updates the existing view and returns updated view.<div class='tabs_wrapper' data-path='authorization_putViewsById.html'></div>",
+      "operationId": "updateView",
+      "tags": [
+        "Authorization-Management"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Id of view to update view details",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "ddd0a5ce-8a23-4b8a-9a29-28dde50deab5"
+          }
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ViewRequestV1"
+            },
+            "examples": {
+              "jsonExample": {
+                "summary": "UpdateViewRequest",
+                "value": {
+                  "name": "view1",
+                  "description": "new view",
+                  "objectType": "USER"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewResponseV1"
+              },
+              "example": {
+                "jsonExample": {
+                  "summary": "UpdateViewRequest",
+                  "value": {
+                    "id": "11e9d2b7-a96c-f8d0-ab21-c85b76b87f57",
+                    "name": "view2",
+                    "description": "new view",
+                    "createdBy": "viewTest@do34.com",
+                    "createdTime": "2019-09-09T04:09:47.482+0000",
+                    "lastModifiedBy": "viewTest@do34.com",
+                    "lastModifiedTime": "2019-09-09T04:09:47.482+0000",
+                    "objectType": "USER"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Insufficient permissions"
+        },
+        "404": {
+          "description": "Not found"
+        },
+        "500": {
+          "description": "Server error"
+        }
+      }
+    },
+    "get": {
+      "x-cxone-api-key": "62e97789-5493-45e7-a6ae-04afa3b73f38",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": {
+        "-viewManagement": "view"
+      },
+      "summary": "Get view details by view Id",
+      "description": "This API returns view details for given view Id.<div class='tabs_wrapper' data-path='authorization_getViewsById.html'></div>",
+      "operationId": "getViewById",
+      "tags": [
+        "Authorization-Management"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Id of view to get view details",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "ddd0a5ce-8a23-4b8a-9a29-28dde50deab5"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewResponseV1"
+              },
+              "example": {
+                "jsonExample": null,
+                "summary": "GetTeamDetails",
+                "value": {
+                  "id": "11e9d2b7-a96c-f8d0-ab21-c85b76b87f57",
+                  "name": "view2",
+                  "description": "new view updated",
+                  "createdBy": "viewTest@do34.com",
+                  "createdTime": "2019-09-09T04:09:47.000+0000",
+                  "lastModifiedBy": "viewTest@do34.com",
+                  "lastModifiedTime": "2019-09-09T04:14:58.000+0000",
+                  "objectType": "USER"
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    },
+    "delete": {
+      "x-cxone-api-key": "2d49e97f-1dea-4127-af76-04d4af78536e",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": {
+        "-viewManagement": "delete"
+      },
+      "summary": "Delete view details by view Id",
+      "description": "This API deletes view details for given view Id.<div class='tabs_wrapper' data-path='authorization_deleteViewsById.html'></div>",
+      "operationId": "deleteByViewId",
+      "tags": [
+        "Authorization-Management"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Id of view to delete view details",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "ddd0a5ce-8a23-4b8a-9a29-28dde50deab5"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success"
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    }
+  },
+  "/views/search": {
+    "post": {
+      "x-cxone-api-key": "c8e6fdf9-5157-4e59-8d4a-33acb37e5148",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": {
+        "-viewManagement": "view"
+      },
+      "summary": "Gets view details as per given filter and metrices",
+      "description": "This API takes input as a search criteria which can accept any combination of given attributes as a filter and can return only expected fields.<div class='tabs_wrapper' data-path='authorization_postViewsSearch.html'></div>",
+      "operationId": "getTeamsByCriteria",
+      "tags": [
+        "Authorization-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SearchCritera"
+            },
+            "example": {
+              "jsonExample": null,
+              "summary": "Search Criteria to get view details by filter and metrics",
+              "value": {
+                "filter": {
+                  "id": [
+                    "view-uuid"
+                  ],
+                  "name": [
+                    "view-name"
+                  ],
+                  "description": [
+                    "description"
+                  ],
+                  "objectType": [
+                    "OU"
+                  ]
+                },
+                "operations": {
+                  "id": "NOT"
+                },
+                "page": {
+                  "pageSize": 100000,
+                  "pageNo": 0
+                },
+                "metrices": {
+                  "columns": [
+                    "id",
+                    "name",
+                    "description",
+                    "createdBy",
+                    "createdTime",
+                    "lastModifiedBy",
+                    "lastModifiedTime",
+                    "objectType"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewsResponseV1"
+              },
+              "example": {
+                "jsonExample": null,
+                "summary": "get view details",
+                "value": {
+                  "views": [
+                    {
+                      "id": "11e9d2b7-a96c-f8d0-ab21-c85b76b87f57",
+                      "name": "view2",
+                      "description": "new view updated",
+                      "createdBy": "viewTest@do34.com",
+                      "createdTime": "2019-09-09T04:09:47.000+0000",
+                      "lastModifiedBy": "viewTest@do34.com",
+                      "lastModifiedTime": "2019-09-09T04:14:58.000+0000",
+                      "objectType": "USER"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    }
+  },
+  "/roles/search": {
+    "post": {
+      "x-cxone-api-key": "fc0b82ea-bf82-4af7-890c-6c782911848c",
+      "x-cxone-audience": "external-public",
+      "summary": "Get role details as per given filter and metrices",
+      "description": "This API searches for roles based on given search criteria and can return only expected fields.<div class='tabs_wrapper' data-path='authorization_postRolesSearch.html'></div>",
+      "operationId": "searchRole",
+      "tags": [
+        "Authorization-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SearchCritera"
+            },
+            "example": {
+              "filter": {
+                "roleId": [
+                  "11e91ef8-c08c-8cb0-8a53-0242ac110004"
+                ],
+                "roleName": [
+                  "Employee"
+                ],
+                "status": [
+                  "ACTIVE"
+                ]
+              },
+              "page": {
+                "pageSize": 100000,
+                "pageNo": 0
+              },
+              "metrices": {
+                "columns": [
+                  "roleId",
+                  "roleName",
+                  "displayName",
+                  "description",
+                  "status",
+                  "sequence",
+                  "modifiable",
+                  "internal"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleSearchResponseV1"
+              },
+              "example": {
+                "roles": [
+                  {
+                    "roleId": "11e91ef8-c08c-8cb0-8a53-0242ac110004",
+                    "roleName": "Employee",
+                    "permissions": null,
+                    "applications": [ ],
+                    "displayName": "Agent",
+                    "sequence": 999,
+                    "description": "Employee(Agent)",
+                    "modifiable": 0,
+                    "internal": 0,
+                    "status": "ACTIVE",
+                    "lastModifiedTime": "2019-11-11T18:55:27.000+0000",
+                    "parentAccess": false,
+                    "loginAuthenticatorId": "bf88c44a-1ef8-11e9-9d74-02186b0fb2ca"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden - invalid request data"
+        },
+        "500": {
+          "description": "Internal Error"
+        },
+        "502": {
+          "description": "Bad Gateway"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Page": {
+        "type": "object",
+        "properties": {
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalRecords": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SearchCritera": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "operations": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "LIKE",
+                "BETWEEN",
+                "NOT"
+              ],
+              "description": "operations:\n  * `LIKE` - to filter data based on any string in any field e.g name\n  * `BETWEEN` - to filter data based on values mentioned in BETWEEN two values\n  * `NOT` - to filter data based on value not present\n"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          },
+          "metrices": {
+            "$ref": "#/components/schemas/Metrices"
+          },
+          "orderBy": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "description": "Sort orderBy:\n  * `asc` - Ascending, from A to Z\n  * `desc` - Descending, from Z to A\n"
+            }
+          }
+        }
+      },
+      "Metrices": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ViewRequestV1": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "objectType": {
+            "type": "string"
+          }
+        }
+      },
+      "ViewResponseV1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string"
+          },
+          "lastModifiedTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "objectType": {
+            "type": "string",
+            "enum": [
+              "USER"
+            ]
+          }
+        }
+      },
+      "ViewsResponseV1": {
+        "type": "object",
+        "properties": {
+          "views": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/ViewResponseV1"
+            }
+          }
+        }
+      },
+      "RoleSearchResponseV1": {
+        "type": "object",
+        "properties": {
+          "roles": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/RoleV1"
+            }
+          }
+        }
+      },
+      "RoleV1": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "roleName": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Permission"
+            }
+          },
+          "applications": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/Application"
+            }
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "sequence": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": {
+            "type": "string"
+          },
+          "modifiable": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "internal": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "DELETED",
+              "DRAFT"
+            ]
+          },
+          "lastModifiedTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "parentAccess": {
+            "type": "boolean"
+          },
+          "loginAuthenticatorId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "Permission": {
+        "type": "object",
+        "properties": {
+          "permission": {
+            "type": "string"
+          }
+        }
+      },
+      "Privilege": {
+        "type": "object",
+        "properties": {
+          "privilegeId": {
+            "type": "string"
+          },
+          "actions": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Application": {
+        "type": "object",
+        "properties": {
+          "applicationId": {
+            "type": "string"
+          },
+          "privileges": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/Privilege"
+            }
+          },
+          "features": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/Feature"
+            }
+          }
+        }
+      },
+      "Feature": {
+        "type": "object",
+        "properties": {
+          "featureId": {
+            "type": "string"
+          },
+          "privileges": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/Privilege"
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

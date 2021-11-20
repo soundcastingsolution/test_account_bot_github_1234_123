@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Expired Tokens";
+}
+
+<p>
+    When you retrieve a token from the Token Service, the token response contains a parameter called "expires_in" which indicates how long the token will last before it expires. This is one hour for <i>Password</i> and <i>Client</i> tokens and 60 days for <i>Implicit</i> tokens.
+</p>
+
+<p class="indentation">
+    <b>expires_in:</b> 3600
+    <br /><i>or</i>
+    <br /><b>expires_in:</b> 5184000
+</p>
+
+<p>
+    You will also receive a "refresh_token" and "refresh_token_server_uri" that you should use to obtain a new token <b><i>before</i></b> your original token expires for <i>Password</i> and <i>Client</i> tokens. All refresh tokens expire in 7200 seconds or two hours from the original token grant.
+</p>
+
+<p>
+    A best practice is to use the refresh request 55 minutes after you receive the first token to get a new token that can be used for an additional 60 minutes.   This way the user only needs to enter their credentials on startup and you do not need to store the information they enter anywhere in your application.
+</p>
+
+<p>
+    See sample code to use refresh tokens in <a data-toggle="collapse" onclick="scrollToId('TokenRequestExampleCode')">step eight</a>
+</p>
+
+<p class="indentation">
+    <b>grant_type:</b> "refresh_token"
+    <br /><b>refresh_token: </b><span class="break-word">"PX3SnlieM0a22Ij2hGfIxg=="</span>
+    <br /><b>refresh_token_server_uri:</b>
+    <span class="break-word">"https://api-{cluster}.incontact.com/InContactAuthorizationServer/Token"</span>
+</p>
+
+<p>
+    <b>NOTE:</b> The <i>Implicit</i> token request does not return a refresh token.  This is because the request
+    requires the user to login directly to the NICE CXone Authorization server and grant access.  The user will need
+    to login in directly after the token expires in 60 days.
+</p>
+
+<p class="margin-bottom-none">
+    If you attempt to use a token that is expired in an API call, the API service will return an HTTPS status of "401 Unauthorized." If you get this response, simply request a new token using the same method that you used to retrieve the original token, and send the API request again with the new token.
+</p>

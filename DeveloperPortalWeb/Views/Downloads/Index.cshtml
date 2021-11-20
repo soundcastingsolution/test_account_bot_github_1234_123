@@ -1,0 +1,22 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.SectionItemViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Downloads";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+@Html.Partial("_SectionListItems", Model)
+
+
+@section Scripts
+{
+    @if (TempData.ContainsKey("DownloadId"))
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                window.location = '@Url.Action("Download", "Downloads", new { id = TempData["DownloadId"] })';
+            };
+        </script>
+    }
+}

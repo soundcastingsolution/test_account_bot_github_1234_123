@@ -1,0 +1,77 @@
+<pre class="prettyprint linenums">
+# Starts an agent session.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +stationParams+ -> information about the agent session, as a JSON string
+#
+# * *Returns* :
+#   - a session ID
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if the station parameters aren't a JSON string
+#
+def startAgentSession(token, stationParams="")
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that stationParams is a JSON string.
+  begin
+    JSON.parse(stationParams)
+  rescue
+    raise ArgumentError, "stationParams couldn't be parsed as a JSON string"
+  end
+  
+  # Create default station parameters as an example.
+  require 'json' # gem install json
+  params = { :stationPhoneNumber => "8012222222",
+             :stationId => "holiday",
+             :inactivityTimeout => "30", # Must be 30 to 300, or 0 for default.
+             :forceLogout => "True",
+             :asAgentId => "294936" }
+            
+  # If special station parameters haven't been given, use these defaults.
+  stationParams = stationParams == "" ? params.to_json : stationParams
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+                        
+  # Find the byte length of the parameters, which we'll need for a request header.
+  parametersLength = stationParams.bytesize
+
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/agent-sessions"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => parametersLength.to_s,
+      "Content-Type" => "application/json",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the request an HTTPS request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(uri.path, stationParams, headers)
+  
+  # Retrieve the session ID.
+  sessionID = JSON.parse(response.body)["sessionId"]
+end
+</pre>

@@ -1,0 +1,31 @@
+﻿  <pre class="prettyprint linenums">
+  // importing the scalaj-http library
+package scalaj.http
+
+object getLocations {
+
+	def getLocations() {
+
+       //Give the specified url ,accessToken
+       
+         val accessToken = "";
+	    val baseURI = "";
+		 
+       //Check if accessToken is empty or null
+		 if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+		    val response = Http( baseURI +"services/{version}/locations")
+					.params("includeAgents"->"boolean")
+			.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json"))
+			.asString
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+		
+          	println(response);
+		 }
+      else{
+			   //No token - get one or handle error
+		 }
+	}
+}
+</pre>

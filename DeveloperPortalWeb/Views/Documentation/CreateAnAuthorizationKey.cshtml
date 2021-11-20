@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Create An Authorization Key";
+}
+
+<p>
+    To retrieve a <i>Password</i> or <i>Client</i> token, you must send an authorization key to the NICE CXone token service.
+</p>
+
+<p class="indentation">
+    <b>NOTE:</b> For <i>Implicit</i> tokens, the authorization key is not required. You can skip this step and proceed to <a data-toggle="collapse" onclick="scrollToId('SendAnImplicitRequest')">step four</a>
+</p>
+
+<p>
+    The authorization key is the base-64 encoding of a string that is comprised of the Vendor Name, Application Name, and the Business Unit number for your application (see <a data-toggle="collapse" onclick="scrollToId('RegisterYourApplication')">step one</a>):
+</p>
+
+<p class="indentation">
+    <b class="break-word">AppName@VendorName:BusinessUnitNumber</b>
+</p>
+
+<p>
+    For example, if you register your application with a Vendor Name of "WidgetsInc.com", and an Application Name of "SuperWidget", and your Business Unit number is "123456," the string would be:
+</p>
+
+<p class="indentation">
+    <b class="break-word">SuperWidget@WidgetsInc.com:123456</b>
+</p>
+
+<p>
+    The base-64 encoding of this string is:
+</p>
+
+<p class="indentation">
+    <b class="break-word">U3VwZXJXaWRnZXRAV2lkZ2V0c0luYy5jb206MTIzNDU2</b>
+</p>
+
+<p class="margin-bottom-none">
+    You provide the Application and Vendor Names when you register your application with NICE CXone. You can always look them up, if needed, in the <b>Manage >> API Applications</b> section of the NICE CXone Central website. If you have not yet registered your application, you will need to do so in this section of the Central website. (See <a data-toggle="collapse" onclick="scrollToId('RegisterYourApplication')">step one</a>.)
+</p>

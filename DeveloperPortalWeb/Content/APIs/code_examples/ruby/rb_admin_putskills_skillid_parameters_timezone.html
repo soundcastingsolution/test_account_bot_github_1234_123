@@ -1,0 +1,57 @@
+﻿<pre class="prettyprint linenums">
+# Calls the API to creates or update an agent's proficiency level for a skill, 
+# and whether or not the skill is active for the agent.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +skillID+ -> a nonnegative integer
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if skillID isn't a nonnegatives integer
+#   - +ArgumentError+ -> if timeZoneSttings isn't a string 
+#
+def PutSkillIDParameterTimezone(token, skillID=94706, timeZoneSettings="")
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "the function didn't receive a token it could understand"
+  end
+  
+  # Check that skillID is a nonnegative integer.
+  unless skillID.is_a?(Integer) && skillID >= 0
+    raise ArgumentError, "skillID must be a nonnegative integer"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/skills"+(skillId)+"/parameters/time-zones"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json",
+      "Transfer-Encoding" => "chunked" }
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+  # Note: the request might work even if the response is an HTTP 411 error.
+  response = http.send_request('PUT', baseURL + apiURL)
+end
+</pre>

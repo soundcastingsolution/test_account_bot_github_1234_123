@@ -1,0 +1,20 @@
+﻿<pre class="prettyprint linenums">
+    def PutUnavailableCodeByID(unavailableCodeId):
+    #Check if accessToken is empty or null
+    if accessToken!="":
+    #payload
+        PutUnavailableCodeByIDPayload = {
+        "unavailableCodeName": "string",
+        "postContact": "true",
+        "agentTimeout": 0,
+        "isActive": "true"}
+    #add all necessary headers
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+    # Make http post request
+        response = requests.put(baseURI+'/services/{version}/unavailable-codes/'+unavailableCodeId, headers = header_param,data=PutUnavailableCodeByIDPayload) 
+    #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

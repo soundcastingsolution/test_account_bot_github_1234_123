@@ -1,0 +1,1075 @@
+{
+    "apiVersion": "6.0",
+    "swaggerVersion": "1.2",
+    "basePath": "",
+    "resourcePath": "/comingsoon/admin",
+    "produces": [
+        "application/json"
+    ],
+    "apis": [
+    ],
+    "models": {
+        "Dispositions": {
+            "id": "skillDispositions",
+            "description": "Collection of Dispositions",
+            "properties": {
+                "skillId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of Skill",
+                    "required": true
+                },
+                "skillName": {
+                    "type": "string",
+                    "description": "Name of Skill",
+                    "required": true
+                },
+                "dispositions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "disposition"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "disposition": {
+            "id": "disposition",
+            "description": "Disposition for Skills",
+            "properties": {
+                "dispositionId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of the Disposition",
+                    "required": true
+                },
+                "dispositionName": {
+                    "type": "string",
+                    "description": "Name of the Disposition",
+                    "required": true
+                },
+                "displayOrder": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Order to display the Disposition to Agent",
+                    "required": true
+                },
+                "classification": {
+                    "type": "string",
+                    "description": "",
+                    "required": true
+                },
+                "reportingGroup": {
+                    "type": "string",
+                    "description": "Group that contacts can be reported against",
+                    "required": true
+                },
+                "systemOutcome": {
+                    "type": "string",
+                    "description": "Final outcome of the Contact",
+                    "required": true
+                },
+                "requireCommitmentAmount": {
+                    "type": "boolean",
+                    "description": "Indicates if commitment amount must be entered",
+                    "required": true
+                },
+                "requireRescheduleDate": {
+                    "type": "boolean",
+                    "description": "Indicates if reschedule date must be entered",
+                    "required": true
+                },
+                "agentSpecific": {
+                    "type": "boolean",
+                    "description": "Indicates if Disposition is unique to Agent",
+                    "required": true
+                }
+            }
+        },
+        "Timezones": {
+            "id": "Timezones",
+            "description": "Collection of Timezones",
+            "properties": {
+                "timeZones": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "timezone"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "timezone": {
+            "id": "timezone",
+            "description": "Timezone element",
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "Name to display to Agent",
+                    "required": true
+                },
+                "standardName": {
+                    "type": "string",
+                    "description": "Common name of Timezone",
+                    "required": true
+                },
+                "offset": {
+                    "type": "string",
+                    "description": "Offset from UTC Timezone",
+                    "required": true
+                }
+            }
+        },
+        "BusUnitResultSet": {
+            "id": "BusUnitResultSet",
+            "description": "",
+            "properties": {
+                "resultSet": {
+                    "type": "BusUnitConfig",
+                    "required": true
+                }
+            }
+        },
+        "BusUnitConfig": {
+            "id": "BusUnitConfig",
+            "description": "Collection of Business Units",
+            "properties": {
+                "businessUnits": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "busUnitConfig"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "busUnitConfig": {
+            "id": "busUnitConfig",
+            "description": "Business Unit elements",
+            "properties": {
+                "businessUnitId": {
+                    "type": "integer",
+                    "description": "The Business Unit number",
+                    "required": true
+                },
+                "businessUnitName": {
+                    "type": "string",
+                    "description": "Name of the Business Unit",
+                    "required": true
+                },
+                "globalCallerId": {
+                    "type": "string",
+                    "description": "Default Caller ID for outbound contacts",
+                    "required": true
+                },
+                "phoneTimeout": {
+                    "type": "integer",
+                    "description": "Timeout in seconds for outbound contacts",
+                    "required": true
+                },
+                "userSessionTimeout": {
+                    "type": "integer",
+                    "description": "Timeout in seconds for Agent sessions",
+                    "required": true
+                },
+                "startDayOfWeek": {
+                    "type": "integer",
+                    "description": "Integer indicator of which day to use as start of the week. 1 is Monday, 7 is Sunday",
+                    "required": true
+                },
+                "defaultTimeZone": {
+                    "type": "string",
+                    "description": "Default Time Zone for Business Unit",
+                    "required": true
+                },
+                "agentsUseDefaultTimeZone": {
+                    "type": "boolean",
+                    "description": "Indicates if Agent must use defaultTimeZone",
+                    "required": true
+                },
+                "maxScriptHistory": {
+                    "type": "integer",
+                    "description": "Maximum number of script versions",
+                    "required": true
+                },
+                "authGUID": {
+                    "type": "string",
+                    "description": "",
+                    "required": true
+                },
+                "coBrand": {
+                    "type": "boolean",
+                    "description": "Co-branding enabled or disabled",
+                    "required": true
+                },
+                "coBrandProfileId": {
+                    "type": "integer",
+                    "description": "ID of Co-branding profile",
+                    "required": true
+                },
+                "coBrandProfileName": {
+                    "type": "string",
+                    "description": "Name of Co-branding profile",
+                    "required": true
+                },
+                "connectivityType": {
+                    "type": "string",
+                    "description": "Description of connectivity type",
+                    "required": true
+                },
+                "clientConnectorPort": {
+                    "type": "string",
+                    "description": "Description of connectivity type",
+                    "required": true
+                },
+                "callSuppression": {
+                    "type": "boolean",
+                    "description": "Call Suppression enabled or disabled",
+                    "required": true
+                },
+                "priorityBasedBlending": {
+                    "type": "boolean",
+                    "description": "Priority blending enabled or disabled",
+                    "required": true
+                },
+                "enableFiltering": {
+                    "type": "boolean",
+                    "description": "Filtering enabled or disabled",
+                    "required": true
+                },
+                "enableTrueBlending": {
+                    "type": "boolean",
+                    "description": "True blending enabled or disabled",
+                    "required": true
+                },
+                "enableSkillAbandonRate": {
+                    "type": "boolean",
+                    "description": "Skill abandon rate enabled or disabled",
+                    "required": true
+                },
+                "abandonRateScope": {
+                    "type": "integer",
+                    "description": "",
+                    "required": true
+                },
+                "defaultConfirmationDeliveryModeId": {
+                    "type": "integer",
+                    "description": "",
+                    "required": true
+                },
+                "defaultConfirmationDeliveryMode": {
+                    "type": "string",
+                    "description": "",
+                    "required": true
+                },
+                "defaultComplianceRecordTypeId": {
+                    "type": "integer",
+                    "description": "",
+                    "required": true
+                },
+                "defaultComplianceRecordType": {
+                    "type": "string",
+                    "description": "",
+                    "required": true
+                },
+                "scriptNamespace": {
+                    "type": "string",
+                    "description": "",
+                    "required": true
+                },
+                "apiPublishedLimit": {
+                    "type": "integer",
+                    "description": "Number of daily REST API calls allowed before an Event is triggered.  This Event can be managed in Central through the Event Manager to send an email alert",
+                    "required": true
+                },
+                "concurrentPortLimit": {
+                    "type": "integer",
+                    "description": "Number of concurrent ports allowed",
+                    "required": true
+                },
+                "ivrSurveyCallbackLimit": {
+                    "type": "integer",
+                    "description": "",
+                    "required": true
+                },
+                "stationLimit": {
+                    "type": "integer",
+                    "description": "",
+                    "required": true
+                },
+                "userLimit": {
+                    "type": "integer",
+                    "description": "",
+                    "required": true
+                },
+                "concurrentAgentLimit": {
+                    "type": "integer",
+                    "description": "Number of concurrent Agents allowed",
+                    "required": true
+                },
+                "outboundPortLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of outbound ports allowed",
+                    "required": true
+                },
+                "agentlessPortLimit": {
+                    "type": "integer",
+                    "description": "Maximum number of Agentless outbound ports allowed",
+                    "required": true
+                },
+                "maxConferenceParties": {
+                    "type": "integer",
+                    "description": "Maximum number of legs allowed in a conference",
+                    "required": true
+                },
+                "custom1": {
+                    "type": "string",
+                    "description": "Custom value",
+                    "required": true
+                },
+                "custom2": {
+                    "type": "string",
+                    "description": "Custom value",
+                    "required": true
+                },
+                "custom3": {
+                    "type": "string",
+                    "description": "Custom value",
+                    "required": true
+                },
+                "custom4": {
+                    "type": "string",
+                    "description": "Custom value",
+                    "required": true
+                },
+                "custom5": {
+                    "type": "string",
+                    "description": "Custom value",
+                    "required": true
+                },
+                "fileExtensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "fileExtensions"
+                    },
+                    "required": true
+                },
+                "timeZones": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "timeZones"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "fileExtensions": {
+            "id": "fileExtensions",
+            "description": "Collection of fileExtensions",
+            "properties": {
+                "extension": {
+                    "type": "string",
+                    "description": "File extension allowed for Email, file upload etc...",
+                    "required": true
+                }
+            }
+        },
+        "timeZones": {
+            "id": "timeZones",
+            "description": "Collection of timeZones",
+            "properties": {
+                "displayName": {
+                    "type": "string",
+                    "description": "Name of Time Zone authorized in Business Unit",
+                    "required": true
+                },
+                "standardName": {
+                    "type": "string",
+                    "description": "Standard name of Time Zone authorized in Business Unit",
+                    "required": true
+                }
+            }
+        },
+        "AgentSkillResultSet": {
+            "id": "AgentSkillResultSet",
+            "description": "",
+            "properties": {
+                "resultSet": {
+                    "type": "AgentSkillAssignments",
+                    "required": true
+                }
+            }
+        },
+        "AgentSkillAssignments": {
+            "id": "AgentSkillAssignments",
+            "description": "Collection of AgentSkillAssignments",
+            "properties": {
+                "lastPollTime": {
+                    "type": "date-time",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> ISO-8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call",
+                    "required": true
+                },
+                "businessUnitId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> The business unit number",
+                    "required": true
+                },
+                "agentSkillAssignments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "agentSkillAssignment"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "agentSkillAssignment": {
+            "id": "agentSkillAssignment",
+            "description": "Single AgentSkillAssignment map",
+            "properties": {
+                "businessUnitId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> ID of Business Unit",
+                    "required": true
+                },
+                "agentId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> ID of Agent",
+                    "required": true
+                },
+                "agentName": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> Name of Agent",
+                    "required": true
+                },
+                "agentProficiencyValue": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> ID of Agent's skill proficiency",
+                    "required": true
+                },
+                "agentProficiencyName": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> Name of Agent's skill proficiency",
+                    "required": true
+                },
+                "campaignId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> ID of Skill's Campaign",
+                    "required": true
+                },
+                "campaignName": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Name of Skill's Campaign",
+                    "required": true
+                },
+                "internalId": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Custom ID used",
+                    "required": true
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Agent is active",
+                    "required": true
+                },
+                "isDialer": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill is Dialer",
+                    "required": true
+                },
+                "isNaturalCalling": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill is Personal Connection",
+                    "required": true
+                },
+                "isNaturalCallingRunning": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Personal Connection Skill is running",
+                    "required": true
+                },
+                "isOutbound": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill is outbound",
+                    "required": true
+                },
+                "lastUpdateTime": {
+                    "type": "date-time",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> ISO-8601 time of last update of Skill",
+                    "required": true
+                },
+                "mediaType": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> ID of Media Type",
+                    "required": true
+                },
+                "mediaTypeName": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Name of Media Type",
+                    "required": true
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Notes associated with the Skill",
+                    "required": true
+                },
+                "outboundStrategy": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> ID of outbound strategy.  Returns -1 if no strategy defined",
+                    "required": true
+                },
+                "priorityBlending": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill uses priority blending",
+                    "required": true
+                },
+                "requireDisposition": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill requires a Disposition during ACW",
+                    "required": true
+                },
+                "scriptDisposition": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill allows scripting a Disposition",
+                    "required": true
+                },
+                "skillId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> ID of Skill",
+                    "required": true
+                },
+                "skillName": {
+                    "type": "string",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> Name of Skill",
+                    "required": true
+                },
+                "teamId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> ID of Team Agent belongs to",
+                    "required": true
+                },
+                "useACW": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill requires ACW",
+                    "required": true
+                },
+                "useDisposition": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill requires Disposition",
+                    "required": true
+                },
+                "useSecondaryDisposition": {
+                    "type": "boolean",
+                    "description": "<b><i><span style=color:red>(New in v5.0)</span></i></b> Indicates if Skill requires Secondary Disposition",
+                    "required": true
+                }
+            }
+        },
+        "HoursResultSet": {
+            "id": "HoursResultSet",
+            "description": "",
+            "properties": {
+                "resultSet": {
+                    "type": "HoursofOperationList",
+                    "required": true
+                }
+            }
+        },
+        "HoursofOperationList": {
+            "id": "HoursofOperationList",
+            "description": "Collection of Hours of Operation",
+            "properties": {
+                "lastPollTime": {
+                    "type": "date-time",
+                    "description": "ISO-8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call",
+                    "required": true
+                },
+                "hoursOfOperationProfiles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "hoursofOperation"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "hoursResultSet": {
+            "id": "HoursResultSet",
+            "description": "",
+            "properties": {
+                "resultSet": {
+                    "type": "hoursofOperationList",
+                    "required": true
+                }
+            }
+        },
+        "hoursofOperationList": {
+            "id": "HoursofOperationList",
+            "description": "Collection of Hours of Operation",
+            "properties": {
+                "hoursOfOperationProfiles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "hoursofOperation"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "hoursofOperation": {
+            "id": "hoursofOperation",
+            "description": "Hours of Operation",
+            "properties": {
+                "profileId": {
+                    "type": "integer",
+                    "description": "ID of the profile",
+                    "required": true
+                },
+                "profileName": {
+                    "type": "string",
+                    "description": "Name profile",
+                    "required": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description given to profile",
+                    "required": true
+                },
+                "notes": {
+                    "type": "integer",
+                    "description": "Any notes associated with profile",
+                    "required": true
+                },
+                "overrideBranch": {
+                    "type": "string",
+                    "description": "Name of configured Override Branch in profile",
+                    "required": true
+                },
+                "overrideExpirationDate": {
+                    "type": "date-time",
+                    "description": "ISO-8601 date of when Override expires",
+                    "required": true
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "description": "ISO-8601 date of last profile update",
+                    "required": true
+                },                
+                "days": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "days"
+                    },
+                    "required": true
+                },
+                "holidays": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "holidays"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "days": {
+            "id": "days",
+            "description": "WorkDay",
+            "properties": {
+                "day": {
+                    "type": "string",
+                    "description": "Name of day",
+                    "required": true
+                },
+                "openTime": {
+                    "type": "time",
+                    "description": "Time of opening in 24-hour clock",
+                    "required": true
+                },
+                "closeTime": {
+                    "type": "time",
+                    "description": "Time of closing in 24-hour clock",
+                    "required": true
+                },
+                "hasAdditionalHours": {
+                    "type": "boolean",
+                    "description": "Any additional hours configured",
+                    "required": true
+                },
+                "additionalOpenTime": {
+                    "type": "date-time",
+                    "description": "Time of additional opening in 24-hour clock",
+                    "required": true
+                },
+                "additionalCloseTime": {
+                    "type": "date-time",
+                    "description": "Time of additional closing in 24-hour clock",
+                    "required": true
+                },
+                "isClosedAllDay": {
+                    "type": "boolean",
+                    "description": "Is profile closed for entire day",
+                    "required": true
+                }
+            }
+        },
+        "holidays": {
+            "id": "holidays",
+            "description": "Holiday",
+            "properties": {
+                "date": {
+                    "type": "date-time",
+                    "description": "Date of configured holiday",
+                    "required": true
+                },
+                "openTime": {
+                    "type": "time",
+                    "description": "Time of opening in 24-hour clock",
+                    "required": true
+                },
+                "closeTime": {
+                    "type": "time",
+                    "description": "Time of closing in 24-hour clock",
+                    "required": true
+                },
+                "hasAdditionalHours": {
+                    "type": "boolean",
+                    "description": "Any additional hours configured",
+                    "required": true
+                },
+                "additionalOpenTime": {
+                    "type": "date-time",
+                    "description": "Time of additional opening in 24-hour clock",
+                    "required": true
+                },
+                "additionalCloseTime": {
+                    "type": "date-time",
+                    "description": "Time of additional closing in 24-hour clock",
+                    "required": true
+                },
+                "isClosedAllDay": {
+                    "type": "boolean",
+                    "description": "Is profile closed for entire day",
+                    "required": true
+                }
+            }
+        },
+        "teamsResultSet": {
+            "id": "TeamsResultSet",
+            "description": "",
+            "properties": {
+                "resultSet": {
+                    "type": "teams",
+                    "required": true
+                }
+            }
+        },
+        "teams": {
+            "id": "teams",
+            "description": "Collection of Team objects",
+            "properties": {
+                "lastPollTime": {
+                    "type": "date-time",
+                    "description": "<b><i><span style=color:red>(Updated in v5.0)</span></i></b> ISO-8601 timestamp of last database poll.  Value should be passed in \"updatedSince\" parameter on next call",
+                    "required": true
+                },
+                "teams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "team"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "team": {
+            "id": "team",
+            "description": "Single Team object",
+            "properties": {
+                "businessUnitId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of Business Unit",
+                    "required": true
+                },
+                "teamId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of Team",
+                    "required": true
+                },
+                "teamName": {
+                    "type": "string",
+                    "description": "Name of Team",
+                    "required": true
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "description": "Indicates whether or not the Team is active",
+                    "required": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description given to Team",
+                    "required": true
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "Notes associated with the Team",
+                    "required": true
+                },
+                "lastUpdateTime": {
+                    "type": "date-time",
+                    "description": "ISO-8601 time of last update of Team",
+                    "required": true
+                },
+                "agentCount": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Number of Agents assigned to Team",
+                    "required": true
+                }
+            }
+        },
+        "DncGroupsResultSet": {
+            "id": "DncGroupsResultSet",
+            "description": "",
+            "properties": {
+                "resultSet": {
+                    "type": "DncGroups",
+                    "required": true
+                }
+            }
+        },
+        "DncGroups": {
+            "id": "DncGroups",
+            "description": "Collection of DncGroups",
+            "properties": {
+                "totalGroups": {
+                    "type": "integer",
+                    "description": "Number of DNC Groups returned",
+                    "required": true
+                },
+                "dncGroups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "dncGroup"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "dncGroup": {
+            "id": "dncGroup",
+            "description": "Single dncGroup",
+            "properties": {
+                "dncGroupId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of DNC Group",
+                    "required": true
+                },
+                "dncGroupName": {
+                    "type": "string",
+                    "description": "Name of DNC Group",
+                    "required": true
+                },
+                "dncGroupDescription": {
+                    "type": "string",
+                    "description": "Description of DNC Group",
+                    "required": true
+                },
+                "validRecords": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Number of valid records in DNC Group",
+                    "required": true
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "description": "Indicates if DNC Group is active",
+                    "required": true
+                },
+                "isRemoved": {
+                    "type": "boolean",
+                    "description": "Indicates if DNC Group is scheduled for deletion",
+                    "required": true
+                },
+                "createDate": {
+                    "type": "date-time",
+                    "description": "ISO-8601 time DNC Group was created",
+                    "required": true
+                },
+                "lastUpdateTime": {
+                    "type": "date-time",
+                    "description": "ISO-8601 time DNC Group was created",
+                    "required": true
+                }
+            }
+        },
+        "DncGroupsContribSkills": {
+            "id": "DncGroupsContribSkills",
+            "description": "Collection of DncGroupsContribSkills",
+            "properties": {
+                "contributingSkills": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "contributingSkill"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "contributingSkill": {
+            "id": "contributingSkill",
+            "description": "Single contributingSkill",
+            "properties": {
+                "skillId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of contributing Skill",
+                    "required": true
+                },
+                "skillName": {
+                    "type": "string",
+                    "description": "Name of contributing Skill",
+                    "required": true
+                }
+            }
+        },
+        "DncGroupsScrubbedSkills": {
+            "id": "DncGroupsScrubbedSkills",
+            "description": "Collection of DncGroupsScrubbedSkills",
+            "properties": {
+                "scrubbedSkills": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "scrubbedSkill"
+                    },
+                    "required": true
+                }
+            }
+        },
+        "scrubbedSkill": {
+            "id": "scrubbedSkill",
+            "description": "Single scrubbedSkill",
+            "properties": {
+                "skillId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of scrubbed Skill",
+                    "required": true
+                },
+                "skillName": {
+                    "type": "string",
+                    "description": "Name of scrubbed Skill",
+                    "required": true
+                }
+            }
+        },
+        "DncGroupsRecordsResultSet": {
+            "id": "DncGroupsRecordsResultSet",
+            "description": "",
+            "properties": {
+                "resultSet": {
+                    "type": "DncGroupsRecords",
+                    "required": true
+                }
+            }
+        },
+        "DncGroupsRecords": {
+            "id": "DncGroupsRecords",
+            "description": "Response Collection of DncGroupsRecords",
+            "properties": {
+                "_links": {
+                    "type": "links",
+                    "required": false                    
+                },
+                "totalRecords": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Number of Records in DNC Group",
+                    "required": true
+                },
+                "dncRecords": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "dncRecord"
+                    },
+                    "required": false
+                }
+            }
+        },
+        "dncRecord": {
+            "id": "dncRecord",
+            "description": "Single dncRecord",
+            "properties": {
+                "recordId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "ID of record",
+                    "required": true
+                },
+                "createdBy": {
+                    "type": "string",
+                    "description": "Name of user who created record",
+                    "required": true
+                },
+                "phoneNumber": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Phone number sent when record was created",
+                    "required": true
+                },
+                "formattedPhone": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "PC formatted instance of phoneNumber",
+                    "required": true
+                },
+                "expiredDate": {
+                    "type": "date-time",
+                    "description": "ISO-8601 time record expires from DNC Group",
+                    "required": true
+                },
+                "dateCollected": {
+                    "type": "date-time",
+                    "description": "ISO-8601 time record was added to DNC Group",
+                    "required": true
+                },
+                "lastUpdateTime": {
+                    "type": "date-time",
+                    "description": "ISO-8601 time record was last updated",
+                    "required": true
+                }
+            }
+        },
+        "links": {
+            "id": "links",
+            "description": "Pagination Links",
+            "properties": {
+                "self": {
+                    "type": "URL",
+                    "description": "Link to same page of results",
+                    "required": false
+                },
+                "next": {
+                    "type": "URL",
+                    "description": "Link to next page of results",
+                    "required": false
+                },
+                "previous": {
+                    "type": "URL",
+                    "description": "Link to previous page of results",
+                    "required": false
+                }
+            }
+        }
+    }
+}

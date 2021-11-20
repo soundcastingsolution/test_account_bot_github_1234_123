@@ -1,0 +1,12 @@
+﻿<pre class="prettyprint linenums">
+    def patchAccessKeysByID(accessKeyId,isActive):
+    #Check if accessToken is empty or null
+    if accessToken!="":
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+        response=requests.patch(baseURI + '/services/{version}/access-keys/'+ accessKeyId + '?isActive=' + isActive,headers=header_param)
+        #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

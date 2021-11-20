@@ -1,0 +1,40 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+	ViewBag.Title = "Patron API";
+}
+
+<h1 class="primary-color">@ViewBag.Title </h1>
+<p>
+	The Patron Services API is a collection of API calls that can be used to create patron-facing applications.  A few examples may be:
+	<ul>
+		<li>Mobile application that allows a patron to request a call back at a future time</li>
+		<li>Web site that allows users to request a live chat session with an agent</li>
+        <li>Applications or services that create "work items" to be routed in the NICE CXone system (such as routing trouble tickets or sales opportunities from a web request, or from a process that is monitoring a CRM system.)</li>
+	</ul>
+</p>
+
+<h3 class="primary-color">
+	General Requirements
+</h3>
+<p>
+    To use any of the NICE CXone APIs in your application, you must have an API authentication token from the token service. See the @Html.ActionLink("API authentication token", "APIAuthenticationToken", "Documentation") tutorial for information on what type of token is needed for your application and the @Html.ActionLink("getting started", "GettingStarted", "Documentation") tutorial to get to know how to get an API authentication token.
+</p>
+
+<div class="swagger-section">
+	<div id="swagger-ui-container" class="swagger-ui-wrap">Loading...</div>
+</div>
+
+@Html.Partial("~/Views/Shared/_CodeSampleTabs.cshtml")
+
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+            inContact.Swagger.init(
+                "@Url.Content("~/content/apis/patron-api-docs")",
+                "@Url.Content("~/content/apis/code_examples")",
+                "@Url.Action("GetAccessToken", "Account")",
+                "@Url.Content("~/content/swagger/images/throbber.gif")");
+        });
+	</script>
+}

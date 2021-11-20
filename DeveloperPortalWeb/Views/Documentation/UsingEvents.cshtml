@@ -1,0 +1,69 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.AccordionItemViewModel>
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Using Events";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<div class="text-justify">
+	<p>
+		Many things related to an agent session can occur on the platform, unprompted by your application.
+		For example, the ACD can route a call to the agent. Or the agent phone can be disconnected.
+		Or an active contact can end when the caller hangs up. You will want your agent application to know
+		about these events so it can notify the agent by updating its UI, synchronize data with a third party
+		system, etc.
+
+    <p>
+        Your application must request notification about events by polling the platform. You should begin polling
+        for events as soon as the session is started. When the session is started, you will receive a "session ID".
+        You will use this session ID in each event poll request. The polling model supported by the NICE CXone
+        platform employs the "comet" pattern (a.k.a. "reverse ajax").
+    </p>
+
+	<p>
+		In this pattern, your application makes a REST-ful call (over HTTPS) to request new events.
+		The server will only respond when there are new events related to the agent session, the agent leg,
+		or any of its active contacts, or when the "timeout" period elapses without any new events. The timeout
+		period is between 0 and 60 seconds, and is specified by your application in the new event poll request.
+	</p>
+
+	<p>
+		If there are new events, the API will return with an HTTP status of 200, and the response body will
+		contain a JSON-encoded payload that contains one or more events.
+	</p>
+
+	<p>
+		If the timeout period elapses without any new events, the API will return an HTTP status code of 304,
+		and a description that indicates that there were no new events.
+	</p>
+
+	<p>
+		Whether there are new events or not, your application should immediately request new events again when
+		the API request returns, so there isn’t a lag when new events occur. In effect, your application will
+		always be polling for new events. The comet pattern prevents your application from being very "chatty",
+		and reduces the request-response cycle to a minimum of traffic.
+	</p>
+
+	<p>
+		There are a number of events that can occur on the platform. In step four, you can find links for each
+		event type.
+	</p>
+</div>
+
+@Html.Partial("_AccordionListItems", Model)
+
+
+@section Styles {
+	@Styles.Render("~/bundles/prettify.css")
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/prettify.js")
+	<script>
+		$(window).load(function () {
+			expandAccordionItem('accordionId');
+			prettyPrint();
+		});
+	</script>
+}

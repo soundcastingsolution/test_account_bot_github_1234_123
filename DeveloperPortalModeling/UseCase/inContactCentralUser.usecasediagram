@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="d0fcaef3-0fd7-4304-8011-c2ff6687afa5" name="inContactCentralUser" linkedPackageId="ca875269-291a-4c1c-8f24-f5668c116b1d" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="e3db1109-2a39-4a77-b02a-590145d9cccc">
+      <profileInstance Id="ca40d6cd-6405-476c-a13a-06cc9aca7d25" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="c44068f9-9628-4924-a093-9ba2850ff7cd">
+      <profileInstance Id="b86f5181-7308-4646-9b07-e53e832add30" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="d074b910-9741-4033-a1aa-59f26a81681e" name="inContact Central user" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="463d730e-7c84-4884-921a-80c75a519453" />
+        <targetEnds>
+          <association Id="31039989-9d07-47c9-ae7f-4bdd87e9e342" isDerived="false" sourceEndRoleName="inContact Central user" targetEndRoleName="Browses developer portal to learn general inContact API information" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0f2cfe98-d095-439e-adc0-8b67455437dd" LastKnownName="Browses developer portal to learn general, non-secure inContact API information" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0936268b-2f4d-47f5-936f-c8213efef8de" name="inContact Central user" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4da46310-6526-4a12-bf0b-43d0250f90af" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="62da5892-dbe3-44d1-98eb-c83ec54136ce" name="Browses developer portal to learn general inContact API information" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bcc94837-4b3b-46c3-b10c-3004b0cd5dce" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="00b38c60-4792-4eb3-aa81-448914b035f8" />
+          </association>
+          <association Id="7d818990-e72c-494c-9182-c20cc9701561" isDerived="false" sourceEndRoleName="inContact Central user" targetEndRoleName="Browses developer portal to find specific inContact API details" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="e63763d1-f38f-4f02-b86a-66f749ce9698" LastKnownName="Browses developer portal to find secure inContact API details only available to inContact customers" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8c7175f2-3af8-4e94-b091-465a895c7741" name="inContact Central user" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="37280ae4-770b-41e6-b286-eb15ad82a510" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a0a019cd-e2d8-4a96-a2ad-5dff5eb84eea" name="Browses developer portal to find specific inContact API details" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="912a81a7-4b29-4786-8401-37b81c7f48f8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="9361ca32-38ba-4cba-b037-7c7628a2bcb6" />
+          </association>
+          <association Id="3a3839c8-51d4-4c0f-a719-e62930fa9848" isDerived="false" sourceEndRoleName="inContact Central user" targetEndRoleName="Uses developer forum to search questions and ask answers" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="7d443d86-814f-44d5-80c4-9b69e56551e8" LastKnownName="Uses developer forum to search questions and ask answers" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f784f0b2-0a04-4ff1-bb91-150b42d358db" name="inContact Central user" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5e2f66e3-b35d-4ada-88c9-488a081ea121" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="68118033-9c86-432e-b79a-671b762dafd5" name="Uses developer forum to search questions and ask answers" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="5d87001d-2885-4cb7-b78a-1bb92d4baed0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="10ce700b-2525-4248-a3b6-825f48eb10e4" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0f2cfe98-d095-439e-adc0-8b67455437dd" name="Browses developer portal to learn general, non-secure inContact API information" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="72be5044-a072-4b5d-97a9-3a2edd1c6405" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="e63763d1-f38f-4f02-b86a-66f749ce9698" name="Browses developer portal to find secure inContact API details only available to inContact customers" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5d52de9b-0229-49d9-8c82-129b9025f1b6" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="7d443d86-814f-44d5-80c4-9b69e56551e8" name="Uses developer forum to search questions and ask answers" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fbc3d6f0-ffe7-4098-98f5-141dc3bda8c2" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="ca875269-291a-4c1c-8f24-f5668c116b1d" name="DeveloperPortalModeling">
+    <elementDefinition Id="8803fc24-99ad-4dd7-897f-73ae34383926" />
+  </package>
+</useCaseModelRoot>

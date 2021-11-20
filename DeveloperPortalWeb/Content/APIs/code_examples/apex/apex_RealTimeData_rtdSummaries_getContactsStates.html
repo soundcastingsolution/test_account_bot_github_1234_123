@@ -1,0 +1,69 @@
+<pre class="prettyprint linenums">
+/****************************************************************************************
+*
+* @description  This method will return the real time state for all active Contacts in
+* the business unit, or if an agentId is provided, then for the Contacts being handled
+* by that Agent.
+* @param agentId - an agent Id
+* @param updatedSince - Only returns Contacts updated since this time
+* @returns ContactStates - collection of contact state records
+*
+*/
+public List<JSON2Apex.ContactStates> getContactStates(){
+    //Check to see if you obtained a token
+    if(this.AccessToken!=null){
+        String myDate='';
+    
+        //GET PAGE PARAMETERS
+        String updatedSince= ApexPages.currentPage().getParameters().get('updatedSince');               
+        String agentId= ApexPages.currentPage().getParameters().get('agentId');
+      
+        //convert date to the correct format
+        if(updatedSince!=null && updatedSince!=''){
+            String[] tmp = updatedSince.split('-',3);
+            Integer yyyy = Integer.valueOf(tmp[0]);
+            Integer mm = Integer.valueOf(tmp[1]);
+            Integer dd = Integer.valueOf(tmp[2]);
+            Date d = Date.newInstance(yyyy,mm,dd);
+            system.debug(d);
+            String dt = d.format();
+            myDate = EncodingUtil.urlEncode(dt, 'UTF-8');
+        }
+
+        String apiURL='services/{version}/contacts/states?agentId=' + agentId +
+            '&updatedSince=' + myDate;
+        system.debug(apiURL);
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri+apiURL);
+            
+            //Add any and all necessary headers
+            request.setHeader('Authorization',this.tokenType+' '+this.AccessToken);
+            request.setHeader('Accept', '*/*');    
+            
+            //Make the request
+            HttpResponse resp = new System.Http().send(request);    
+            this.StateData = resp.getBody();
+      
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.StateData);
+            if(resp.getStatusCode()==200){               
+                //do something with the returned data
+                this.RawJSON=this.StateData;
+                return obj.contactStates;
+            } else {
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error_description);
+                ApexPages.addMessage(msg);
+                return null;
+            }
+        } catch (Exception ex){               
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;          
+        }
+    }    
+}
+</pre>

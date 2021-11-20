@@ -1,0 +1,98 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +scheduleSettings->a hash
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def Putschedulesettings(token,skillid,
+"scheduleSettings":{ 
+    "isScheduled"=> true,
+    "sundayStartTime"=> "",
+    "sundayEndTime"=> "",
+    "sundayIsActive"=> true,
+    "mondayStartTime"=> "",
+    "mondayEndTime"=> "",
+    "mondayIsActive"=> true,
+    "tuesdayStartTime"=> "",
+    "tuesdayEndTime"=> "",
+    "tuesdayIsActive"=> true,
+    "wednesdayStartTime"=> "",
+    "wednesdayEndTime"=> "",
+    "wednesdayIsActive"=> true,
+    "thursdayStartTime"=> "",
+    "thursdayEndTime"=> "",
+    "thursdayIsActive"=> true,
+    "fridayStartTime"=> "",
+    "fridayEndTime"=> "",
+    "fridayIsActive"=> true,
+    "saturdayStartTime"=> "",
+    "saturdayEndTime"=> "",
+    "saturdayIsActive"=> true})
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/skills/#{skillid}/parameters/schedule-settings"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::put.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+    "scheduleSettings[isScheduled]"=> true,
+    "scheduleSettings[sundayStartTime]"=> "string value",
+    "scheduleSettings[sundayEndTime]"=> "string value",
+    "scheduleSettings[sundayIsActive]"=> true,
+    "scheduleSettings[mondayStartTime]"=> "string value",
+    "scheduleSettings[mondayEndTime]"=> "string value",
+    "scheduleSettings[mondayIsActive]"=> true,
+    "scheduleSettings[tuesdayStartTime]"=> "string value",
+    "scheduleSettings[tuesdayEndTime]"=> "string value",
+    "scheduleSettings[tuesdayIsActive]"=> true,
+    "scheduleSettings[wednesdayStartTime]"=> "string value",
+    "scheduleSettings[wednesdayEndTime]"=> "string value",
+    "scheduleSettings[wednesdayIsActive]"=> true,
+    "scheduleSettings[thursdayStartTime]"=> "string value",
+    "scheduleSettings[thursdayEndTime]"=> "string value",
+    "scheduleSettings[thursdayIsActive]"=> true,
+    "scheduleSettings[fridayStartTime]"=> "string value",
+    "scheduleSettings[fridayEndTime]"=> "string value",
+    "scheduleSettings[fridayIsActive]"=> true,
+    "scheduleSettings[saturdayStartTime]"=> "string value",
+    "scheduleSettings[saturdayEndTime]"=> "string value",
+    "scheduleSettings[saturdayIsActive]"=> true})
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

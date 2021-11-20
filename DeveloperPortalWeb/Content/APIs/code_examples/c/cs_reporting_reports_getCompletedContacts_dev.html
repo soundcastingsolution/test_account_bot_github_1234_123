@@ -1,0 +1,57 @@
+<pre class="prettyprint linenums">
+protected void GetCompletedContacts(string startDate, string endDate, string updatedSince,
+            string fields, int skip, int top, string orderBy, int mediaTypeId, int skillId,
+            int campaignId, int agentId, int teamId, string toAddr, string fromAddr,
+            bool isLogged, bool isRefused, bool isTakeover, string tags)
+{
+  //Test to see if you have obtained a token
+  if (!string.IsNullOrEmpty(accessToken))
+  {
+    string apiURL = "/services/{version}/contacts/completed?startDate=" + startDate + 
+                    "&endDate=" + endDate + "&updatedSince=" + updatedSince +
+                    "&fields=" + fields + "&skip=" + skip.ToString() + "&top=" + top +
+                    "&orderBy=" + orderBy + "&mediaTypeId=" + mediaTypeId.ToString() +
+                    "&skillId=" + skillId.ToString() + "&campaignId=" + campaignId +
+                    "&agentId=" + agentId.ToString() + "&teamId=" + teamId.ToString() +
+                    "&toAddr=" + toAddr + "&fromAddr=" + fromAddr + "&isLogged=" +
+                    isLogged.ToString() + "&isRefused=" + isRefused.ToString() +
+                    "&isTakeover=" + isTakeover.ToString() + "&tags=" + tags;
+                    
+    //baseURL was returned with your successful token request
+    string endpoint = baseURL + apiURL; 
+    string authorizationHeader = "Authorization:bearer " + accessToken;
+
+    //Create the request object
+    var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+    request.Method = "GET";
+    request.ContentType = "application/x-www-form-urlencoded";
+
+    //Add any and all necessary headers
+    request.Headers.Add("Authorization", "bearer " + accessToken);
+    //Accept is a reserved header, so you must modify it rather than add
+    request.Accept = "application/json, text/javascript, */*; q=0.01"; 
+
+    //Make the request
+    try
+    {
+        using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+        {
+            //Success.  Do something with the response.
+        }
+    }
+    catch (System.Net.WebException webException)
+    {
+        //.NET will throw a System.Net.webException on StatusCodes other than 200.  
+        //You can catch that exception and retain the StatusCode for error handling.
+    }
+    catch (Exception ex)
+    {
+        //Non Web Exception error, handle error
+    }
+  }
+    else
+    {
+        //No token - get one or handle error
+    }
+}
+</pre>

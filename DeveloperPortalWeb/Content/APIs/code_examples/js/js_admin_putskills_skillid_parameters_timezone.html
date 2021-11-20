@@ -1,0 +1,32 @@
+﻿<pre class="prettyprint linenums">
+function PutSkillIDParameterTimezone() {
+	var PutSkillIDParameterTimezonePayload = {
+		'agents': [
+			{
+				'skillId': 'integer - required',
+				'timeZoneSettings': 'string'
+			}
+		]
+	}
+	$.ajax({
+		//The baseURI variable is created by the result.resource_server_base_uri,
+		//which is returned when getting a token and should be used to create the URL base
+		'url': baseURI + 'services/{version}/skills/' + skillId + '/parameters/time-zones',
+		'type': 'PUT',
+		'headers': {
+			//Use access_token previously retrieved from inContact token service
+			'Authorization': 'bearer ' + accessToken,
+			'content-Type': 'application/json'
+		},
+		'data': JSON.stringify(PutSkillIDParameterTimezonePayload),
+		'success': function (result, status, statusCode) {
+			//Process success actions
+			return result;
+		},
+		'error': function (XMLHttpRequest, textStatus, errorThrown) {
+			//Process error actions
+			return false;
+		}
+	});
+}
+</pre>

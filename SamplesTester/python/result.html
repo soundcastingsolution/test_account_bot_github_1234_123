@@ -1,0 +1,123 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="table.css">
+    </head>
+    <body class="rTable">
+    <h2>API Test Results for Python Functions</h2>
+    <title>Python</title>
+    <br/>
+    <div class="rTableHead small"><strong>APIName</strong></div>
+    <div class="rTableHead small"><span style="font-weight: bold;">APISubType</span></div>
+    <div class="rTableHead med"><span style="font-weight: bold;">APIType</span></div>
+    <div class="rTableHead small"><span style="font-weight: bold;">Version</span></div>
+    <div class="rTableHead"><span style="font-weight: bold;">APIResult</span></div>
+    </div>
+    </body>
+    </html>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Data extraction</div>
+    <div class="rTableCell small">Extract Data</div>
+    <div class="rTableCell med">POST /job-sync</div>
+    <div class="rTableCell small">s032 v1.0</div>
+    <div class="rTableCell">500:</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Mediaplayback</div>
+    <div class="rTableCell small">AccessingRecordedMedia</div>
+    <div class="rTableCell med">GET /media-playback/v1/contacts/{contactId}</div>
+    <div class="rTableCell small">s032 v1.0</div>
+    <div class="rTableCell">200:</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Mediaplayback</div>
+    <div class="rTableCell small">AccessingRecordedMedia</div>
+    <div class="rTableCell med">GET /media-playback/v1/contacts/{contactId}/segments/{segmentId}</div>
+    <div class="rTableCell small">s032 v1.0</div>
+    <div class="rTableCell">200:</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Mediaplayback</div>
+    <div class="rTableCell small">AccessingRecordedMedia</div>
+    <div class="rTableCell med">GET /media-playback/v1/contacts</div>
+    <div class="rTableCell small">s032 v1.0</div>
+    <div class="rTableCell">400:</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Admin</div>
+    <div class="rTableCell small">Workflow </div>
+    <div class="rTableCell med">GET /services/v16.0/workflow-data/list</div>
+    <div class="rTableCell small">s032 v16.0</div>
+    <div class="rTableCell">400:Invalid parameter 'workflowDataId', must be type Int32</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Admin</div>
+    <div class="rTableCell small">Workflow </div>
+    <div class="rTableCell med">POST /services/v16.0/workflow-data</div>
+    <div class="rTableCell small">s032 v16.0</div>
+    <div class="rTableCell">415:Unsupported Media Type</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Admin</div>
+    <div class="rTableCell small">Workflow </div>
+    <div class="rTableCell med">GET /services/v16.0/workflow-data/ID</div>
+    <div class="rTableCell small">s032 v16.0</div>
+    <div class="rTableCell">404:Workflow Data Profile Not Found</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Admin</div>
+    <div class="rTableCell small">Workflow</div>
+    <div class="rTableCell med">PUT /services/v16.0/workflow-data/ID</div>
+    <div class="rTableCell small">s032 v16.0</div>
+    <div class="rTableCell">405:Method Not Allowed</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Admin</div>
+    <div class="rTableCell small">Workflow</div>
+    <div class="rTableCell med">PUT /services/v16.0/workflow-data/ID/activate</div>
+    <div class="rTableCell small">s032 v16.0</div>
+    <div class="rTableCell">200:Success</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Admin</div>
+    <div class="rTableCell small">Workflow</div>
+    <div class="rTableCell med">PUT /services/v16.0/workflow-data/ID/deactivate</div>
+    <div class="rTableCell small">s032 v16.0</div>
+    <div class="rTableCell">200:Success</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Data extraction</div>
+    <div class="rTableCell small">Extract Data</div>
+    <div class="rTableCell med">POST /job</div>
+    <div class="rTableCell small">s032 v1.0</div>
+    <div class="rTableCell">500:</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Data extraction</div>
+    <div class="rTableCell small">Extract Data</div>
+    <div class="rTableCell med">POST /jobs</div>
+    <div class="rTableCell small">s032 v1.0</div>
+    <div class="rTableCell">500:</div>
+    </div>
+    
+    <div class="rTableRow">
+    <div class="rTableCell small">Data extraction</div>
+    <div class="rTableCell small">Extract Data</div>
+    <div class="rTableCell med">POST /job/jobid</div>
+    <div class="rTableCell small">s032 v1.0</div>
+    <div class="rTableCell">405:</div>
+    </div>
+    

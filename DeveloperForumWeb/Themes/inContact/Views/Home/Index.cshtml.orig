@@ -1,0 +1,7 @@
+﻿             
+@{
+    ViewBag.Title = "Forum White Site";
+        @T("greeting")
+}
+
+@Html.Action("ListMainCategories", "Category")

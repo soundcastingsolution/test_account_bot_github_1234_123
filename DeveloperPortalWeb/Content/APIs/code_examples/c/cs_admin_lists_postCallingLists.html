@@ -1,0 +1,91 @@
+﻿<pre class="prettyprint linenums">
+protected void PostCallingListMapping(string listName, string externalIdColumn,
+        string scoreColumn, string customer1column, string customer2Column,
+        string callerIdColumn, string priorityColumn, string complianceReqColumn,
+        string firstNameColumn, string lastNameColumn, string addressColumn,
+        string cityColumn, string cityColumn, string stateColumn, string zipColumn,
+        string timeZoneColumn, string confirmReqColumn, string overrideFinalizationColumn,
+        string agentIdColumn, string callRequestTimeColumn, string callRequestStaleColumn,
+        PhoneMappings phoneMappings, CustomDataDefinitions customFieldMappings)
+{
+        //Test to see if you have obtained a token
+    if (!string.IsNullOrEmpty(accessToken))
+    {
+        string apiURL = "/services/{version}/lists/call-lists";
+        //baseURL was returned with your successful token request
+        string endpoint = baseURL + apiURL;
+        //Create the request object
+        var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        //Add any and all necessary headers
+        request.Headers.Add("Authorization", "bearer " + accessToken);
+        //Accept is a reserved header, so you must modify it rather than add
+        request.Accept = "application/json, text/javascript, */*; q=0.01";
+    
+        //Create post data
+        //{listName (string): name of calling list container,
+        //externalIdColumn (string): column name containing external ID,    
+        //scoreColumn (string): column name containing score,    
+        //customer1Column (string): column name containing custom value,    
+        //customer2Column (string): column name containing custom value,    
+        //callerIdColumn (string): column name containing caller ID,    
+        //priorityColumn (string): column name containing priority,    
+        //complianceReqColumn (string): column name containing compliance,    
+        //firstNameColumn (string): column name containing first name,    
+        //lastNameColumn (string): column name containing last name,    
+        //addressColumn (string): column name containing address,    
+        //cityColumn (string): column name containing city,    
+        //stateColumn (string): column name containing state,    
+        //zipColumn (string): column name containing zip code,    
+        //timeZoneColumn (string): column name containing time zone,    
+        //confirmReqColumn (string): column name containing confirmation required,    
+        //overrideFinalizationColumn (string): column name containing override finalization,    
+        //agentIdColumn (string): column name containing ID of an agent,    
+        //callRequestTimeColumn (string): column name containing call request time,    
+        //callRequestStaleColumn (string): column name containing call request stale,    
+        //expirationDateColumn (string): column name containing expiration date,    
+        //phoneMappings (string): array of phone fields mappings,    
+        //customFieldMappings (string): array of custom data fields mappings}
+        System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding ;
+        byte[] bytes = encoding.GetBytes(postData);
+        request.ContentLength = bytes.Length;
+        
+        //Make the request
+        try
+        {
+            using (var response = (System.Net.HttpWebResponse)request.GetResponse )
+            {
+                string responseBody = "";
+                int statusCode = (int)response.StatusCode;
+                string statusDescription = response.StatusDescription;
+                using (var responseStream = response.GetResponseStream )
+                {
+                    if (responseStream != null)
+                    {
+                        using (var reader = new System.IO.StreamReader(responseStream))
+                        {
+                            responseBody = reader.ReadToEnd ;
+                            //responseBody now contains the JSON string of the response.
+                            //save and parse it as you see fit.
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Net.WebException webException)
+        {
+            // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+            // You can catch that exception and retain the StatusCode for error handling.
+        }
+        catch (Exception ex)
+        {
+            //Non Web Exception error, handle error       
+        }
+    }
+    else
+    {
+    //No token - get one or handle error
+    }   
+}
+</pre>

@@ -1,0 +1,47 @@
+<pre class="prettyprint linenums">
+    protected void getAgentSkillsByAgentId(int AgentId)
+        {          
+            
+            //Test to see if you have obtained a token            
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                 string apiURL = "/services/{version}/agents/" + AgentId + "/skills" + "?fields=" + fields + "&updatedSince=" + updatedSince + "&mediaTypeId=" + mediaTypeId + "&outboundStrategy=" + outboundStrategy +
+                 "&outboundStrategy=" + outboundStrategy + "&isSkillActive=" + isSkillActive + "&searchString=" + searchString + "&orderBy=" + orderBy + "&skip=" + skip + "&top=" + top;               
+                //baseURL was returned with your successful token request
+                string endpoint = baseURL + apiURL;
+                string authorizationHeader = "Authorization:bearer " + accessToken;
+                //Create the request object
+                var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+                request.Method = "GET";
+                request.ContentType = "application/x-www-form-urlencoded";
+                //Add any and all necessary headers
+                request.Headers.Add("Authorization", "bearer " + accessToken);
+                //Accept is a reserved header, so you must modify it rather than add
+                request.Accept = "application/json, text/javascript, */*; q=0.01";
+                // Make the request
+                try
+                {
+                    // Get the Response from the Web Request
+                    using (var response = (System.Net.HttpWebResponse)request.GetResponse )
+                    {
+                        // Success do something with the response here.
+                        Console.WriteLine(response.StatusCode + " " + response.StatusDescription);
+                    }
+                }
+                catch (System.Net.WebException webException)
+                {
+                    Console.WriteLine(webException.StackTrace);
+                    // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+                    // You can catch that exception and retain the StatusCode for error handling.
+                }
+                catch (Exception ex)
+                {
+                    // Catch any non Web Exception error
+                }
+            }
+            else
+            {
+                // No token - get one or handle error
+            }
+        }
+</pre>

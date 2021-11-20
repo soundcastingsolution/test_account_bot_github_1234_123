@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>@ViewBag.Title</title>
+	<link rel="shortcut icon" href="@Url.Content("/favicon.ico")" type="image/vnd.microsoft.icon" />
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	@{ var appSettings = System.Configuration.ConfigurationManager.AppSettings["CorporateStylesLocation"]; }
+	@Styles.Render(appSettings + "/Content/V2/css/bootstrap")
+	@Styles.Render(appSettings + "/Content/V2/kendo/css")
+	@Styles.Render(appSettings + "/Content/V2/css")
+	<!--[if IE]>
+	@Styles.Render(appSettings + "/Content/V2/css/IE")
+	<![endif]-->
+	@Styles.Render("/Content/Site.css")
+	@RenderSection("Styles", required: false)
+</head>
+<body>
+	@Html.Partial("_Header")
+	<div id="body">@RenderBody()</div>
+	@Html.Partial("_Footer")
+
+	@Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render(appSettings + "/bundles/V2/bootstrap")
+	@Scripts.Render(appSettings + "/bundles/custom")
+	<script src="~/Scripts/misc.js"></script>
+	@RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<pre class="prettyprint linenums">
+    function deleteTeamsAgentbyTeamId($teamId,$transferTeamId,$agentId='')
+{
+	//Check if you have obtained a token
+  if($_SESSION["access_token"]!="")
+  {
+	  
+    $data = array(
+      'transferTeamId'=>$transferTeamId,
+      'agents'=>[array(
+      'agentId'=>$agentId)]);
+	  //create post json data
+      $data_json = json_encode($data);
+	  $api_URL='/services/{version}/teams/'.$teamId.'/agents';
+      $endpoint=$_SESSION["resource_server_base_uri"].$api_URL;
+      $handle = curl_init($endpoint);
+      curl_setopt($handle, CURLOPT_HEADER, true); 
+      curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "DELETE");
+	  curl_setopt($handle, CURLOPT_POSTFIELDS, $data_json);
+      curl_setopt($handle, CURLOPT_RETURNTRANSFER, true); 
+     curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+    $headers=array();
+    $headers[] = 'Content-type: application/x-www-form-urlencoded; charset=UTF-8';
+    $headers[] = 'Authorization: bearer '.$_SESSION["access_token"];
+    $headers[] = 'Accept: application/json, text/javascript, */*; q=0.01';
+    $headers[] = 'Access-Control-Allow-Origin:http://eng-ngpcl07';
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+ 
+    // Make the request         
+    $response = curl_exec($handle);  
+    //Handling valid response
+    if($response!=FALSE)
+    {
+      $http_code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+      $parts = explode("\r\n\r\nHTTP/", $response);
+      $parts = (count($parts) > 1 ? 'HTTP/' : '').array_pop($parts);
+      list($response_headers, $response_body) = explode("\r\n\r\n", $parts, 2);   
+      if (!empty($response_body))
+      {
+        $parsed_json=json_decode($response_body);  
+        echo $parsed_json;
+
+      }	  
+    }
+ 
+    // Close the curl session  
+    curl_close($handle);
+ 
+    //Report all PHP errors (notices, errors, warnings, etc.)  
+    error_reporting(E_ALL);
+  }
+  else
+    // No token - get one or handle error
+    echo "No access Token";
+}
+
+</pre>

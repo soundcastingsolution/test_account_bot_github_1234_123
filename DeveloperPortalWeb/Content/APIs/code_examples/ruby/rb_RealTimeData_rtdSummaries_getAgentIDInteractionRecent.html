@@ -1,0 +1,57 @@
+<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +agentId+ -> ID of agent
+#  - +top+ -> number of recent contacts to be returned
+#  - +fields+ -> list of elements to return in response
+#  - +startDate+ -> ISO 8601 beginning of report interval
+#  - +endDate+ -> ISO 8601 end of report interval
+#
+# * *Returns* :
+#   - information for all outbound phone contacts handled by the Agent 
+#        identified by agentId over the reporting period specified by 
+#        startDate and endDate
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def getRecentContactHistory(token, agentId, top, fields, startDate, endDate)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/agents/#{agentId}/interaction-recent?"\
+           "top=#{top}&fields=#{fields}&startDate=#{startDate}&endDate=#{endDate}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(baseURL + apiURL, "", headers)
+end
+</pre>

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Adding Callback Widget";
+}
+
+<div class="break-word">
+    <p>
+        The Callback Widget can be used to allow your users to queue a callback request
+        with the NICE CXone platform. The widget allows the user to register an immediate
+        callback or a callback in the future (Promise Keeper).
+    </p>
+    <p>To add the Callback widget into your Android app, you will need to do the following:</p>
+    <ol class="margin-bottom-none">
+        <li>
+            You will first need to do steps 1-12 and 14-16 of the steps listed in the section above,
+            if you haven’t done so already.
+        </li>
+        <li>
+            <p>Open the AndroidManifest.xml file, and add the following lines of code in the application section.</p>
+<pre class="prettyprint linenums">
+&lt;activity 
+    android:name="com.incontact.sdk.ui.screen.ScheduleActivity"
+    android:screenorientation="portrait">
+&lt;/activity>           
+</pre>
+        </li>
+        <li>
+            Create another button to launch the widget in the onClick action.
+        </li>
+        <li>
+            <p>
+                Finally in the action method of the created button call the ScheduleActivity.class Activity
+                and start it with the following code.
+            </p>
+<pre class="prettyprint linenums">
+Intent intent = new Intent( this, ScheduleActivity.class);
+startActivity(intent);
+</pre>
+        </li>
+        <li>
+            <p>
+                Launch the activity and try the application. On clicking the "Request Callback" button,
+                the NICE CXone Callback widget will be shown. Your patrons can now enter phone number they
+                would like to be reached at, as well as a preferred time (optional) and then click on the
+                "Submit" button to send the callback request to the NICE CXone platform as shown below:
+            </p>
+            <center>
+                <img class="img-responsive center-block img-size-lg padding-right" src="@Url.Content("~/Content/images/masdk16.png")" width="540">
+            </center>
+        </li>
+    </ol>
+</div>

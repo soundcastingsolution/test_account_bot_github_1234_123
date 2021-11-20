@@ -1,0 +1,94 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +generalSettings->a hash
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def PutSkillParameterGeneralSetting(token,skillid
+"generalSettings":{ 
+    "minimumRetryMinutes"=> 0,
+    "maximumAttempts"=> 0,
+    "defaultContactExpiration"=> 0,
+    "maximumRingingDuration"=> 0,
+    "beginDampenPercentage"=> 0,
+    "abandonRateCutoff"=> 0,
+    "abandonRateThreshold"=> 0,
+    "inactiveBlenderTimer"=> 0,
+    "maximumRatio"=> 0,
+    "aggressiveness"=> "",
+    "endOfListNotificationsDelay"=> 0,
+    "notifyAgentsWhenListIsEmpty"=> true,
+    "percentageOfAgentsBeforeOverdial"=> 0,
+    "blockMultipleCalls"=> true,
+    "consecutiveAttemptsWithoutALiveConnect"=> 0,
+    "enableDialingByProficiency"=> true,
+    "proficiencyFactor"=> 0,
+    "waitTimeFactor"=> 0,
+    "maxConcurrentCallsPerAgent"=> 0,
+    "maxWaitTimeSeconds"=> 0})
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/skills/#{skillid}/parameters/general-settings"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::put.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+    "generalSettings[minimumRetryMinutes]"=> 0,
+    "generalSettings[maximumAttempts]"=> 0,
+    "generalSettings[defaultContactExpiration]"=> 0,
+    "generalSettings[maximumRingingDuration]"=> 0,
+    "generalSettings[beginDampenPercentage]"=> 0,
+    "generalSettings[abandonRateCutoff]"=> 0,
+    "generalSettings[abandonRateThreshold]"=> 0,
+    "generalSettings[inactiveBlenderTimer]"=> 0,
+    "generalSettings[maximumRatio]"=> 0,
+    "generalSettings[aggressiveness]"=> "string value",
+    "generalSettings[endOfListNotificationsDelay]"=> 0,
+    "generalSettings[notifyAgentsWhenListIsEmpty]"=> true,
+    "generalSettings[percentageOfAgentsBeforeOverdial]"=> 0,
+    "generalSettings[blockMultipleCalls]"=> true,
+    "generalSettings[consecutiveAttemptsWithoutALiveConnect]"=> 0,
+    "generalSettings[enableDialingByProficiency]"=> true,
+    "generalSettings[proficiencyFactor]"=> 0,
+    "generalSettings[waitTimeFactor]"=> 0,
+    "generalSettings[maxConcurrentCallsPerAgent]"=> 0,
+    "generalSettings[maxWaitTimeSeconds]"=> 0})
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

@@ -1,0 +1,226 @@
+﻿@model InContact.DeveloperPortal.Web.Models.SearchModel
+@{
+    Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+    ViewBag.Title = "Search";
+}
+
+<div id="nav">
+    <h3>Filters</h3>
+    <div><input type="checkbox" id="chkAPI" checked />API</div>
+    <div><input type="checkbox" id="chkDocumentation" />Documentation</div>
+    <div><input type="checkbox" id="chkDownloads" />Downloads</div>
+    <div><input type="checkbox" id="chkFAQ" />FAQ</div>
+    <div><input type="checkbox" id="chkForumPost" />Forum Posts</div>
+    <div><a href="#" onclick="resetFilters();">Reset Filters</a></div>
+</div>
+
+
+<div id="section">
+    <div>
+        <input type="text" id="searchBox" placeholder="Enter Search term..." class="search-box" style="padding-left:.2em;width: 531px;" value="@Model.SearchTerm">
+        <a class="search-button" onclick="submitSearch();"></a>
+
+    </div>
+    <div class="clear-both" style="height:1em;"></div>
+
+    @(Html.Kendo().Grid<InContact.DeveloperPortal.Web.Models.SearchResult>()
+        .Name("resultsGrid")
+        .DataSource(ds => ds
+            .Ajax()
+            .ServerOperation(false)
+            .Read(read => read.Action("Results", "Search").Data("GetSearchTerm"))
+        )
+        .AutoBind(true)
+        .Columns(columns => { columns.Bound(r => r.Title).ClientTemplate("#=gridTemplate(data)#"); })
+        .Pageable(p => p
+            .Enabled(true)
+            .ButtonCount(5)
+            .PageSizes(false)
+            .PreviousNext(false))
+        .Filterable()
+        .Events(events => events.DataBound("gridDataBoundEvent"))
+    )
+    <div class="info-message clear-both" style="margin-top:.5em; display: none;" id="NoItemsToDisplay">No records found.</div>
+</div>
+@section Styles {
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <script src="/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+
+
+    <style>
+        .k-grid .k-header {
+            display: none;
+        }
+
+        .k-grid {
+            min-height: 50px;
+        }
+
+        #nav {
+            line-height: 30px;
+            background-color: #eeeeee;
+            height: 250px;
+            width: 150px;
+            float: left;
+            padding: 5px;
+        }
+
+        #section {
+            width: 600px;
+            float: left;
+            padding: 10px;
+        }
+
+        .NoItemsToDisplay {
+            background-color: #202020;
+            background-image: linear-gradient(to bottom,#202020 0%,#58595b 100%);
+            outline: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            border-width: 1px 0 0;
+            clear: both;
+            overflow: hidden;
+            border-style: solid;
+            line-height: 2.0em;
+            padding: .333em .333em .333em .250em;
+            text-align: right;
+            white-space: normal;
+            background-clip: border-box;
+            box-sizing: content-box;
+            background-repeat: repeat;
+            background-position: 0 center;
+            box-shadow: none;
+            color: #fff;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script id="gridItemTemplate" type="text/x-kendo-template">
+        <text>
+            <div>
+                # if(Location == 1 || Location == 3 || Location == 4 ){ #
+                <div><a href="../#: Link#">#: Title#</a> - #: locationString(Location)#</div>
+                # } else { #
+
+                <div><a href="../#: Link#" class="secure-content-link">#: Title#</a> - #: locationString(Location)#</div>
+
+                # } #
+
+            </div>
+            <div class="info_description">
+                #: Blerb #
+            </div>
+            <br />
+        </text>
+
+    </script>
+
+    <script type="text/javascript">
+        var firstLoad = true;
+
+        function locationString(e) {
+            switch (e) {
+                case 1:
+                    return "Documentation";
+                case 2:
+                    return "Forum";
+                case 3:
+                    return "API";
+                case 4:
+                    return "FAQ";
+                case 5:
+                    return "Downloads";
+            }
+        }
+
+        function resetFilters() {
+            $('#chkForumPost').prop('checked', false);
+            $('#chkDocumentation').prop('checked', false);
+            $('#chkAPI').prop('checked', true);
+            $('#chkDownloads').prop('checked', false);
+            $('#chkFAQ').prop('checked', false);
+            $('#resultsGrid').data("kendoGrid").dataSource.filter([]);
+        }
+
+        function gridDataBoundEvent() {
+            if ($('#searchBox').val().length == 0) {
+                $('#resultsGrid').hide();
+                $('#NoItemsToDisplay').hide();
+                this.pager.element.hide();
+            }
+            else if (this.dataSource.data().length == 0) {
+                $('#resultsGrid').hide();
+                $('#NoItemsToDisplay').show();
+                this.pager.element.hide();
+            }
+            else {
+                $('#resultsGrid').show();
+                $('#NoItemsToDisplay').hide();
+                this.pager.element.show();
+            }
+
+        }
+
+        var gridTemplate = kendo.template($('#gridItemTemplate').html());
+
+        $(document).ready(function () {
+            $('#chkForumPost').change(filterChanged);
+            $('#chkDocumentation').change(filterChanged);
+            $('#chkAPI').change(filterChanged);
+            $('#chkDownloads').change(filterChanged);
+            $('#chkFAQ').change(filterChanged);
+
+            $('#resultsGrid').data("kendoGrid").pager.element.hide();
+
+            $("#searchBox").keypress(function (e) {
+                if (e.which == 13) {
+                    submitSearch();
+                }
+            });
+
+            filterChanged();
+        });
+
+        function submitSearch() {
+            filterChanged();
+            $('#resultsGrid').data("kendoGrid").dataSource.read();
+        }
+
+        function GetSearchTerm() {
+            return {
+                searchTerm: $('#searchBox').val()
+            }
+        }
+
+
+        function filterChanged() {
+            var filterArray = [];
+            if ($('#chkDocumentation').prop("checked") == true) {
+                filterArray.push({ field: "Location", operator: "equals", value: 1 });
+            }
+            if ($('#chkForumPost').prop("checked") == true) {
+                filterArray.push({ field: "Location", operator: "equals", value: 2 });
+            }
+            if ($('#chkAPI').prop("checked") == true) {
+                filterArray.push({ field: "Location", operator: "equals", value: 3 });
+            }
+            if ($('#chkFAQ').prop("checked") == true) {
+                filterArray.push({ field: "Location", operator: "equals", value: 4 });
+            }
+            if ($('#chkDownloads').prop("checked") == true) {
+                filterArray.push({ field: "Location", operator: "equals", value: 5 });
+            }
+
+            if (filterArray.length > 0) {
+                var filterObj = { logic: "or", filters: filterArray };
+            }
+            else {
+                var filterObj = { field: "Location", operator: "equals", value: 0 };
+            }
+            $('#resultsGrid').data("kendoGrid").dataSource.filter(filterObj);
+
+
+        }
+    </script>
+}

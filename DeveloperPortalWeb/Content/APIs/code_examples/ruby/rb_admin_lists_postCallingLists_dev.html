@@ -1,0 +1,130 @@
+<pre class="prettyprint linenums">
+# Calls the API to set an agent status.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +listName+ -> a string    
+#  - +externalIdColumn+ -> a string    
+#  - +scoreColumn+ -> a string    
+#  - +customer1Column+ -> a string    
+#  - +customer2Column+ -> a string    
+#  - +callerIdColumn+ -> a string    
+#  - +priorityColumn+ -> a string    
+#  - +complianceReqColumn+ -> a string    
+#  - +firstNameColumn+ -> a string    
+#  - +lastNameColumn+ -> a string    
+#  - +addressColumn+ -> a string    
+#  - +cityColumn+ -> a string    
+#  - +stateColumn+ -> a string
+#  - +zipColumn+ -> a string
+#  - +timeZoneColumn+ -> a string    
+#  - +confirmReqColumn+ -> a string    
+#  - +overrideFinalizationColumn+ -> a string
+#  - +agentIdColumn+ -> a string    
+#  - +callRequestTimeColumn+ -> a string    
+#  - +callRequestStaleColumn+ -> a string    
+#  - +expirationDateColumn+ -> a string    
+#  - +phoneMappings+ -> a hash    
+#  - +customFieldMappings+ -> a hash
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if sessionID isn't a nonempty string
+#
+def postCallingList(token, listName=>"", externalIdColumn=>"", scoreColumn=>"",
+        customer1Column=>"",customer2Column=>"",callerIdColumn=>"", priorityColumn=>"",
+        complianceReqColumn=>"",firstNameColumn=>"", lastNameColumn=>"", addressColumn=>"",
+        cityColumn=>"", stateColumn=>"", zipColumn=>"", timeZoneColumn=>"",
+        confirmReqColumn=>"", overrideFinalizationColumn=>"", agentIdColumn=>"",
+        callRequestTimeColumn=>"", callRequestStateColumn=>"", expirationDateColumn=>"",
+        phoneMappings={
+            :fieldName=>"",
+            :fieldValue=>""
+        },
+        customFileMappings={    
+            :fieldName=>"",
+            :fieldValue=>""
+        })
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that sessionID is a nonempty string.
+  unless sessionID.is_a?(String) && sessionID != ""
+    raise ArgumentError, "sessionID must be a nonempty string"
+  end
+
+  # Pull the access token and base URL from the request body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Encode the session ID.
+  sessionID.gsub! "=", "%3D"
+
+  # Create the URL that accesses the API.
+  # parameter input updated in v6.0 and later
+  apiURL = "/services/{version}/lists/call-lists"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::Post.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+
+  request.set_form_data({    
+    "listName" => #{listName},    
+    "externalIdColumn" => #{externalIdColumn},    
+    "scoreColumn" => #{scoreColumn},    
+    "customer1Column" => #{customer1Column},    
+    "customer2Column" => #{customer2Column},    
+    "callerIdColumn" => #{callerIdColumn},    
+    "priorityColumn" => #{priorityColumn},    
+    "complianceReqColumn" => #{complianceReqColumn},    
+    "firstNameColumn" => #{firstNameColumn},    
+    "lastNameColumn" => #{lastNameColumn},    
+    "addressColumn" => #{addressColumn},    
+    "cityColumn" => #{cityColumn},    
+    "stateColumn" => #{stateColumn},    
+    "zipColumn" => #{zipColumn},    
+    "timeZoneColumn" => #{timeZoneColumn},    
+    "confirmReqColumn" => #{confirmReqColumn},    
+    "overrideFinalizationColumn" => #{overrideFinalizationColumn},    
+    "agentIdColumn" => #{agentIdColumn},    
+    "callRequestTimeColumn" => #{callRequestTimeColumn},    
+    "callRequestStaleColumn" => #{callRequestStaleColumn},    
+    "expirationDateColumn" => #{expirationDateColumn},    
+    "phoneMappings[fieldName]" => "name"    
+    "phoneMappings[fieldValue]" => "string value"    
+    "customFieldMapping[fieldName]" => "name"    
+    "customFieldMapping[fieldValue]" => "string value"})
+
+  # Make the request an HTTPS request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.request(request)
+end
+</pre>

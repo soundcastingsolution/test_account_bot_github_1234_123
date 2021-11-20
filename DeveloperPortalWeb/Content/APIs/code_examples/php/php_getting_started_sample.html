@@ -1,0 +1,155 @@
+<pre class="prettyprint linenums">
+&lt?php
+  $base_URL = "https://api.incontact.com/InContactAuthorizationServer/Token";
+  $vendor_name = "";//Provide the vendor name
+  $app_name = "";//Provide the application name
+  $bus_no = "";//Provide the business unit
+  $user_name = "";//Provide the username
+  $password = "";//Provide the password
+  $scope = "";//By default pass in the NULL string ("")
+
+  // Creating base 64 encoded authkey
+  $Auth_Key = $app_name."@".$vendor_name.":".$bus_no;
+  $encoded_Auth_Key=base64_encode($Auth_Key);
+
+  // Creating HTTP POST request to the resource
+  $handle=curl_init();
+  curl_setopt($handle, CURLOPT_URL, $base_URL);
+  curl_setopt($handle, CURLOPT_POST, true);
+
+  // Setting POST data
+  $data = array("grant_type" => "password", 
+                "username" => $user_name, 
+                "password" => $password, 
+                "scope" => $scope);                                                                    
+  $data_string = json_encode($data); 
+  curl_setopt($handle, CURLOPT_POSTFIELDS, $data_string);
+  curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+
+  // Setting header options
+  $headers=array();
+  $headers[] = 'Content-length: '.strlen($data_string);
+  $headers[] = 'Content-type: application/json; charset=utf-8';
+  $headers[] = 'Authorization: basic '.$encoded_Auth_Key;
+  curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+
+  // By default, cURL is setup to not trust any CAs
+  // Hence does not support any server's certificate
+  // Here we configure cURL to accept any server(peer) certificate
+  // For more security 
+  // Set the CURLOPT_CAINFO parameter to a CA certificate that cURL should trust
+  // curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, true);
+  // curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 2);
+  // curl_setopt($handle, CURLOPT_CAINFO, getcwd() . "certificate.crt");
+  curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+  
+  // Make the request
+  $json = curl_exec($handle);
+  
+  // Handling valid response
+  if($json === false){
+      // Throw new Exception('Curl error: ' . curl_error());
+      print_r('Curl error: ' . curl_error($handle));
+  }
+  else
+  {
+      // Parsing json string
+      $parsed_json=json_decode($json);
+      echo"Token Response:";
+      echo "&ltbr&gt";
+
+      session_start();
+
+      foreach($parsed_json as $i=>$val)
+      {
+          // debug_output
+          echo $i." : ".$val;
+          echo "&ltbr&gt";
+          //Saving token response to session
+          $_SESSION[$i]=$val;
+      }
+
+      echo "making a request to get agents...";
+
+      // Check if you have obtained a token
+      if($_SESSION["access_token"]!="")
+      {
+          $api_URL = "services/{version}/agents";
+          // Creating the endpoint for the request
+          // Appending api uri with the base uri obtained from the successful 
+          // token request
+          $endpoint=$_SESSION["resource_server_base_uri"].$api_URL;
+      
+          // Creating a HTTP GET request to the api
+          $curl_handle = curl_init($endpoint);
+          curl_setopt($curl_handle, CURLOPT_HEADER, true); 
+
+          // Set to TRUE to return the output of curl_exec as a string 
+          curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+         
+          curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+
+          // Setting necessary header options
+          $request_headers=array();
+          $request_headers[] = 
+              'Content-type: application/x-www-form-urlencoded';
+          $request_headers[] = 
+              'Authorization: bearer '.$_SESSION["access_token"];
+          $request_headers[] = 
+              'Accept: application/json, text/javascript, */*; q=0.01';
+          curl_setopt($curl_handle, CURLOPT_HTTPHEADER, $request_headers);
+
+          // Make the request         
+          $api_response = curl_exec($curl_handle); 
+
+          //handling valid response
+          if($api_response!=FALSE)
+          {
+              $http_code = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
+              echo "Status Code of the Response:".$http_code;
+              echo "&ltbr&gt";
+
+              // Parsing the response
+              // Each property in header is a line by itself.
+              // The header and the web page content sent together are separated 
+              // by \r\n\r\n
+              $parts = explode("\r\n\r\nHTTP/", $api_response);
+
+              // For HTTP status code 100 interim responses exists before the 
+              // final response
+              // Getting the final response header using array_pop
+              $parts = (count($parts) > 1 ? 'HTTP/' : '').array_pop($parts);
+              list($response_headers, $response_body) = explode("\r\n\r\n", 
+                   $parts, 2);        
+              echo "Response Header:".$response_headers;
+              echo "&ltbr&gt";
+              echo "&ltbr&gt";
+
+              if (!empty($response_body))
+              {
+                  //The Response from the api is in JSON
+                  //Parsing the json response
+                  echo "Response Body:";  
+                  //json_decode converts a json string to a PHP variable
+                  $parsed_json=json_decode($response_body);  
+
+                  //Use the response data
+                  print_r($parsed_json);
+              }
+          } 
+         
+          // Close the curl session  
+          curl_close($curl_handle);
+
+          //Report all PHP errors (notices, errors, warnings, etc.)  
+          error_reporting(E_ALL);
+      }
+      else
+          // No token - get one or handle error
+          echo "No access Token";
+  }
+
+  curl_close($handle);
+
+?>
+</pre>

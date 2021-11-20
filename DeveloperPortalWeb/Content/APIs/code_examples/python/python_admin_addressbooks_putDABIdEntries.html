@@ -1,0 +1,48 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def addDynamicAddressBookEntries():
+# api-endpoint 
+#Give the specified url ,accessToken
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+	if accessToken!="":
+
+#Give necessary parameters for http request
+		payload={'fullLoad': 'boolean - required - true or false',
+		'addressBookEntries': [
+		{
+		'externalId': 'integer - required',
+		'stateId': 'integer',
+		'externalState': 'string',
+		'firstName': 'string',
+		'middleName': 'string',
+		'lastName': 'string',
+		'company': 'string',
+		'phone': 'integer',
+		'mobile': 'integer',
+		'email': 'string'},
+		{
+		'externalId': 'integer - required',
+		'stateId': 'integer',
+		'externalState': 'string',
+		'firstName': 'string',
+		'middleName': 'string',
+		'lastName': 'string',
+		'company': 'string',
+		'phone': 'integer',
+		'mobile': 'integer',
+		'email': 'string'}]}
+
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken,'content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make http put request
+		response = requests.put(Baseuri +  'services/{version}/address-books/' + addressBookId + '/dynamic-entries' , headers = header_param, data=payload) 
+
+#print response appropriately
+		print (response)
+</pre>

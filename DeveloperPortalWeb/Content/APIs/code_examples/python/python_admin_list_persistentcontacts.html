@@ -1,0 +1,24 @@
+﻿<pre class="prettyprint linenums">
+def putpersistentcontacts(contactId):
+#Check if accessToken is empty or null
+if accessToken!="":
+#Give necessary parameters for http request
+    payload={
+	"persistentContact": {
+	"SkillId": 0,
+	"TargetAgentId": 0,
+	"InitialPriority": 0,
+	"Acceleration": 0,
+	"MaxPriority": 0
+	}
+}
+#add all necessary headers
+    header_param={
+    'Authorization': 'bearer ' + accessToken,
+    'content-Type': 'application/json; charset=UTF-8'}
+# Make http put request
+    response = requests.put(baseURI +'/services/v19.0/persistent-contacts/'+ contactId  , headers = header_param,data=payload) 
+#print response appropriately 
+else:
+    construct('error') 
+</pre>

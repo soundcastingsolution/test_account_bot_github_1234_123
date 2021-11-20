@@ -1,0 +1,43 @@
+﻿<pre class="prettyprint linenums">
+//importing the scalaj-http library
+package scalaj.http
+
+object queueCallback {
+
+	def queueCallback() {
+
+		//Give the specified url ,accessToken
+
+			val accessToken = "";
+			val Baseuri = "";
+
+		//Check if accessToken is empty or null
+		if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http(Baseuri+"services/{version}/queuecallback")
+					.postData("""{"phoneNumber": "string",
+						"callerID": "string",
+						"callDelaySec": "integer",
+						"skill": "integer",
+						"taretAgent": "integer",
+						"priorityManagement": "string - DefaultFromSkill or Custom",
+						"intialPriority": "integer",
+						"acceleration": "integer",
+						"maxPriority": "integer",
+						"sequence": "string",
+						"zipTone": "string - NoZipTone or BeforeSequence or AfterSequence",
+						"screenPopSrc": "string - DefaultFromSkill or UseOnPageOpen or Custom",
+						"screenPopUrl": "string",
+						"timeout": "integer","json":"data"}""")
+					.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json")).asString
+
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+			println(response);
+		}
+		else{
+			//No token - get one or handle error
+		}
+	}
+}
+</pre>

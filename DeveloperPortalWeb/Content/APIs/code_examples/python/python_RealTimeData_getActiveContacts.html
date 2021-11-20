@@ -1,0 +1,38 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def getContactsActive():
+
+# api-endpoint 
+#Give the specified url ,accessToken 
+	BASEURL = "{BASEURL}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+if accessToken!="":
+
+#Give necessary parameters for http request
+	payload={'updatedSince': 'string - ISO 8601 formatted date/time',
+	'fields': 'string',
+	'mediaTypeId': 'integer',
+	'skillId': 'integer',
+	'campaignId': 'integer',
+	'agentId': 'integer',
+	'teamId': 'integer',
+	'toAddr': 'string',
+	'fromAddr': 'string',
+	'stateId': 'integer'}
+
+#add all necessary headers
+	header_param = {'Authorization': 'bearer ' + '{accessToken}','content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make get http request
+	response = requests.get(BASEURL + 'services/{version}/contacts/active' , headers = header_param, params=payload) 
+
+#print response appropriately
+	print (response)
+
+else:
+	#no token get one or handle error
+</pre>

@@ -1,0 +1,20 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+import json
+def updateViewDataById(updateTeamData, teamId):
+# api-endpoint 
+#Give the specified url ,accessToken
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+#Check if accessToken is empty or null
+	if accessToken!="":
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken}
+# Make http put request
+		response = requests.patch(Baseuri +'​​/user-management​/v1​/users​/teams​/' + '{teamId}', headers = header_param, json=updateTeamData) 
+#print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

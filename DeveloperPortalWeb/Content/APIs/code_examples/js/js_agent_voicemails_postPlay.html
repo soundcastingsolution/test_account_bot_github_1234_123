@@ -1,0 +1,28 @@
+﻿<pre class="prettyprint linenums">
+function playVoicemail() {
+    playVoicemailPayload = {
+        'playTimestamp': 'boolean - true or false',
+        'position': 'integer'
+    }
+    $.ajax({
+        //The baseURI variable is created by the result.base_server_base_uri,
+        //which is returned when getting a token and should be used to create the URL base
+        'url': baseURI + 'services/{version}/agent-sessions/' + sessionId + '/interactions/' + contactId + '/play-voicemail',
+        'type': 'POST',
+        'headers': {
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/json'
+        },
+        'data': JSON.stringify(playVoicemailPayload),
+        'success': function (result, status, statusCode) {
+            //Process success actions
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions
+            return false;
+        }
+    })
+}
+</pre>

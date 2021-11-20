@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Adding Chat Widget";
+}
+
+<div class="break-word">
+    <p>
+        The Chat Widget can be used to allow your patrons to chat with your agents using your mobile application. The widget will take user input and send it to the NICE CXone system. It automatically handles the events that the NICE CXone platform sends back, and displays the data returned in the chat window.
+    </p>
+    <p>
+        The inContactMobileSdkUI project you just imported has all the resources needed to quickly add the chat widget to your application. To add the chat widget, you will need to do the following:
+    </p>
+    <ol class="margin-bottom-none">
+        <li>
+            <p>Create an empty Android project in the same workspace you imported the inContactMobileSdkUI and name the project "TestProject".</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk5.png")">
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk6.png")">
+        </li>
+
+        <li>
+            <p>Copy and paste the contents of the assets folder from the inContactMobileUISDK project into the assets folder of the TestProject project. This includes the "fonts" folder and the "timezones.csv" file. You can copy and paste the files from within Eclipse:</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk7.png")">
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk8.png")">
+        </li>
+
+        <li>
+            You will now need to import the inContactMobileSdkUI project to your TestProject as a library. To do that right-click on the project and click on "Properties".
+        </li>
+
+        <li>
+            <p>Open the "Android" tab and locate the "Library" section.</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk9.png")">
+        </li>
+
+        <li>
+            Click on the "Add" button.
+        </li>
+
+        <li>
+            <p> Select inContactMobileSdkUI and press the "OK" button. You only need to add the inContactMobileUISDK project, not the inContactMobileSDK project.</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk10.png")">
+        </li>
+
+        <li>
+            <p>You will see the project added to the library list.</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk11.png")">
+        </li>
+
+        <li>
+            <p>Now go to the Java Build Path option and locate it in the "Libraries" tab.</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk12.png")">
+        </li>
+
+        <li>
+            <p>Click the "Add JARs…" button and select the "incontactmobilesdkui.jar" file and press the "OK" button.</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk13.png")">
+        </li>
+
+        <li>
+            <p> Now select the "Order and Export" tab, and select the "Android Dependencies" and the "incontactmobileuisdk.jar" items (along with any other dependencies your project has).</p>
+            <img class="img-responsive center-block img-size-lg small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk14.png")">
+        </li>
+
+        <li>
+            Press the "OK" button to save all changes.
+        </li>
+
+        <li>
+            Now create a button and assign it an onClick event.
+        </li>
+
+        <li>
+            <p>Open the AndroidManifest.xml, and as with all Android applications, copy these permissions in the corresponding section.</p>
+<pre class="prettyprint linenums">
+&lt;uses-permission android:name="android.permission.INTERNET" />
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+&lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+&lt;uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+&lt;uses-permission android:name="android.permission.READ_PHONE_STATE" />
+&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+</pre>
+        </li>
+
+        <li>
+            <p> Copy this code to the section where you define all the activities in the AndroidManifest.xml file:</p>
+<pre class="prettyprint linenums">
+&lt;activity android:name="com.incontact.sdk.ui.screen.ChatActivity"
+    android:theme="&#64;style/Theme.Transparent"
+    android:launchMode="singleTop"
+    android:screenOrientation="portrait">
+&lt;/activity>
+&lt;service android:name="com.incontact.sdk.chat.ChatService">&lt;/service>
+</pre>
+        </li>
+
+        <li>
+            <p>Open the Activity that inflates the layout and contains the button, add the following code in the "onCreate" method to set the require configurations. You will need to provide the Application ID of the API Application that you have registered with NICE CXone. For information on how to register your application in the NICE CXone Central website, please refer to the API Developers Guide. If you are using the OAuth 2.0 Client flow, your code should like something like this:</p>
+<pre class="prettyprint linenums">
+ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+JHttpUtil.initialize(connectivityManager);
+HttpConnectionConfiguration httpConnectionConfiguration = new HttpConnectionConfiguration();
+httpConnectionConfiguration.setServerUrl("https://api.incontact.com");
+httpConnectionConfiguration.setClientId("AppName@VendorName");
+httpConnectionConfiguration.setClientSecretKey("your_app_id");
+httpConnectionConfiguration.setPointOfContact("chat-point-of-contact-guid");
+HttpConnectionManager.getInstance().setConfiguration(httpConnectionConfiguration);
+</pre>
+        </li>
+
+        <li>
+            <p>Finally, in the action method of the created button, call the ChatActivity.class Activity and start it.</p>
+<pre class="prettyprint linenums">
+Intent intent = new Intent(this, ChatActivity.class);
+startActivity(intent);
+</pre>
+        </li>
+
+        <li class="margin-botton-none">
+            <p>Launch the application and press the "Chat with Agent" button, and the chat widget will be shown.</p>
+            <img class="img-responsive center-block img-size-lg padding-right" src="@Url.Content("~/Content/images/masdk15.png")">
+        </li>
+    </ol>
+</div>

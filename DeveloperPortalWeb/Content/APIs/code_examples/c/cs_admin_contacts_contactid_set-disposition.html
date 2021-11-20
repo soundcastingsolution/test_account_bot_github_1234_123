@@ -1,0 +1,71 @@
+﻿<pre class="prettyprint linenums">
+     public string postSetDisposition(uint contactId)
+        {
+            string postSetDisposition = @"{""dispositionInfo"":{""Skill"": ""1007"",""DispositionCode"":""1"",""CallbackNumber"":"""", ""CallbackTime"":"""",""notes"":"""",""CommitmentAmount"":""""}}";
+            //Test to see if you have obtained a token
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                string apiURL = "services/{version}/contacts/"+contactId+"/set-disposition";
+                //baseURL was returned with your successful token request
+                string endpoint = baseURL + apiURL;
+                string authorizationHeader = "Authorization:bearer " + accessToken;
+                //Create the request object
+                var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                //Add any and all necessary headers
+                request.Headers.Add("Authorization", "bearer " + accessToken);
+                //Accept is a reserved header, so you must modify it rather than add
+                request.Accept = "application/json, text/javascript, */*; q=0.01";
+                //Create Post Data and add it to the request
+                string postData = postSetDisposition; //team JSON data
+                var encoding = new System.Text.UTF8Encoding();
+                var bytes = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(postData);
+                request.ContentLength = bytes.Length;
+                using (var writeStream = request.GetRequestStream())
+                {
+                    writeStream.Write(bytes, 0, bytes.Length);
+                }
+                //Make the request
+                try
+                {
+                    using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+                    {
+                        string responseBody = "";
+                        int statusCode = (int)response.StatusCode;
+                        string statusDescription = response.StatusDescription;
+                        using (var responseStream = response.GetResponseStream())
+                        {
+                            if (responseStream != null)
+                            {
+                                using (var reader = new System.IO.StreamReader(responseStream))
+                                {
+                                    responseBody = reader.ReadToEnd();
+                                    return response.StatusDescription;
+                                    //responseBody now contains the JSON string of the response.
+                                    //save and parse it as you see fit.
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (System.Net.WebException webException)
+                {
+                    return (((System.Net.HttpWebResponse)webException.Response).StatusDescription);
+                    // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+                    // You can catch that exception and retain the StatusCode for error handling.
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                    //Non Web Exception error, handle error       
+                }
+            }
+            else
+            {
+                //No token - get one or handle error
+                return "No token";
+            }
+            return "";
+        }
+</pre>

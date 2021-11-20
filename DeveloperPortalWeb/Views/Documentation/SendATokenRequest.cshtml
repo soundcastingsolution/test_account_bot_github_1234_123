@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Title = "Send A Token Request";
+}
+
+<p>
+    You must decide which token type you will use in your application: <em>Implicit, Password</em> or <em>Client.</em>
+</p>
+
+<p>
+    If your application is a web-server-based application, or a browser-based application, and if it needs access to resources on behalf of a specific user, you should use the implicit grant type.
+</p>
+
+<p>
+    If your application is server-based (but not running on a web server), or desktop-based (but not running in a browser), or a native mobile application, and if it needs access to resources on behalf of a specific user, you should use the password grant type.
+</p>
+
+<p>
+    If your application needs access to NICE CXone resources that are not owned by a specific user, regardless of whether it is server-based, browser-based, desktop-based, or mobile, you should use the client grant type.
+</p>
+
+<p>
+    To learn more about token types, read the @Html.ActionLink("API authentication token", "APIAuthenticationToken", "Documentation") tutorial.
+</p>
+
+<p>
+    Once you have the authorization key from <a data-toggle="collapse" onclick="scrollToId('CreateAnAuthorizationKey')">step two</a>, send an HTTPS request to the token service, including the authorization key, to receive a token. The token type is specified in the request payload (described below).
+</p>
+
+<p>
+    For <em>Password</em> and <em>Client</em> tokens the request must be sent to the NICE CXone Token Service URL:
+</p>
+
+<p class="indentation">
+    <b class="break-word">https://api.incontact.com/InContactAuthorizationServer/Token</b>
+</p>
+
+<p>
+    The HTTPS request must have an "authorization" header. The authorization header must be included using the following syntax: <b>Authorization: basic {code}</b>
+</p>
+
+<p>
+    For instance, using the base-64 encoded authorization code from the example in <a data-toggle="collapse" onclick="scrollToId('CreateAnAuthorizationKey')">step two</a>, you would create an authorization header like this:
+</p>
+
+<p class="indentation text-left">
+    <b class="break-word">Authorization: basic U3VwZXJXaWRnZXRAV2lkZ2V0c0luYy5jb206MTIzNDU2</b>
+</p>
+
+<p>
+    You must also include a "request payload" in the body of the request. The payload is a JSON object that identifies the supported OAuth grant type you selected (see <a data-toggle="collapse" onclick="scrollToId('CreateAnAuthorizationKey')">step two</a>), and that provides any other information needed by the selected grant type.
+</p>
+
+<p>
+    If you selected the "password" grant type, the request body should look like this:
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "grant_type" : "password",
+    "username" : "myuser@mydomain.com",
+    "password" : "myP@ssw0rd",
+    "scope" : ""
+}
+</pre>
+
+<p>
+    <b>NOTE:</b> The username and password are required parameters for the password grant type. The "scope"
+    parameter identifies the APIs for which the token can be used. By default, you should pass in the NULL
+    string ("") unless you want specifically restrict your application to a subset of APIs. For example, you
+    can select PatronApi for an external-facing chat application.
+</p>
+
+<p>
+    You can also control the scopes an application has access to by passing in the NULL ("") string in your application and using the API Application configuration in Central to give and remove scope access.
+</p>
+
+<p>
+    Currently in the NICE CXone API Framework, the following API’s can be specified:
+</p>
+
+<ul class="text-left">
+    <li><b>AdminAPI</b> - Administrative APIs such as assigning a Skill to an Agent</li>
+    <li><b>AgentAPI</b> - Agent Session APIs such as accepting a Contact</li>
+    <li><b>AuthenticationAPI</b> - Authentication APIs such as resetting passwords</li>
+    <li><b>RealTimeDataAPI</b> - Real Time Data APIs such as getting current state of Agents</li>
+    <li><b>ReportingAPI</b> - Historical or calculated data</li>
+    <li><b>PatronAPI</b> - APIs that do not require NICE CXone credentials such as Click-to-call</li>
+    <li><b>CustomAPI</b> - Any APIs you create from the Studio scripting tool</li>
+</ul>
+
+<p>
+    Any of these APIs can be used with a password token.
+</p>
+
+<p>
+    If you want to retrieve a Client token, the request body should look like this:
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "grant_type" : "client_credentials",
+    "scope" : "PatronApi"
+}
+</pre>
+
+<p>
+    <b>NOTE:</b> The "grant_type" for the Client token request is "client_credentials". Also note that since
+    no user is required for this client token, the only API scope that it can be used for is the "Patron" API scope. The Admin, Authentication, Agent, RealTime and
+    Reporting API scopes require a user context, so client tokens cannot be used with these API scopes.
+</p>
+
+<p>
+    <b>NOTE:</b> In case of using Client auth type you must use Application ID
+    (see screenshot two in <a data-toggle="collapse" onclick="scrollToId('RegisterYourApplication')">step one</a>) instead of business unit when creating authorization key, i.e.
+</p>
+
+<p class="indentation">
+    <b class="break-word">SuperWidget@WidgetsInc.com:ZWJkNWM0MzNiODQ5NDAyYmIyZGFhNDg3ZDEzZgJkYzc</b>
+</p>
+
+<p>
+    instead of
+</p>
+
+<p class="indentation">
+    <b class="break-word">SuperWidget@WidgetsInc.com:123456</b>
+</p>
+
+<p>
+    Below are examples of HTTP requests for each of these grant types:
+</p>
+
+<div class="panel-group small-margin-bottom">
+    <div class="panel panel-default">
+        <div class="panel-heading not-hover code-header-gray">
+            <h4 class="panel-title">
+                "Password" grant REQUEST
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in">
+            <div class="panel-body">
+                <pre class="margin-bottom-none no-padding">
+<b>Request URL:</b> https://api.incontact.com/InContactAuthorizationServer/Token 
+<b>Request Method:</b> POST
+<b>Request Headers:</b> POST /InContactAuthorizationServer/Token HTTP/1.1
+<b>Host:</b> api.incontact.com
+<b>Connection:</b> keep-alive
+<b>Content-Length:</b> 98
+<b>Origin:</b> http://myapp.example.com 
+<span class="background-yellow"><b>Authorization:</b> basic U3VwZXJXaWRnZXRAV2lkZ2V0c0luYy5jb206MTIzNDU2 </span>
+<b>User-Agent:</b> Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) 
+            Chrome/23.0.1271.95 Safari/537.11 
+<b>Content-Type:</b> application/json; charset=UTF-8 
+<b>Accept:</b> application/json, text/javascript, */*; q=0.01 
+<b>Referer:</b> http://myapp.example.com/mainPage 
+<b>Accept-Encoding:</b> gzip,deflate,sdch 
+<b>Accept-Language:</b> en-US,en;q=0.8 
+<b>Accept-Charset:</b> ISO-8859-1,utf-8;q=0.7,*;q=0.3
+<b>Request Payload:</b> 
+&#123;
+&nbsp;&nbsp;&nbsp;<span class="background-yellow">"grant_type" : "password", </span>
+&nbsp;&nbsp;&nbsp;<span class="background-yellow">"username" : "myuser@mydomain.com", </span>
+&nbsp;&nbsp;&nbsp;<span class="background-yellow">"password" : "myP@ssw0rd", </span>
+&nbsp;&nbsp;&nbsp;<span>"scope" : ""</span> 
+&#125;
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group small-margin-bottom">
+    <div class="panel panel-default">
+        <div class="panel-heading not-hover code-header-gray">
+            <h4 class="panel-title">
+                "Client" grant REQUEST
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in">
+            <div class="panel-body">
+                <pre class="margin-bottom-none no-padding">
+<b>Request URL:</b> https://api.incontact.com/InContactAuthorizationServer/Token
+<b>Request Method:</b> POST
+<b>Request Headers:</b>
+        POST /InContactAuthorizationServer/Token HTTP/1.1
+<b>Host:</b> api.incontact.com
+<b>Connection:</b>  keep-alive
+<b>Content-Length:</b> 65
+<b>Origin:</b> http://myapp.example.com
+<span class="background-yellow"><b>Authorization:</b> basic H6CwZTJfYaWKnZDeAV2lkZS5o2V7U0c4lgIy5jb2675B6+MTIzNDdfgd9786dg/0hdUfyhuDFHDA2=</span>
+<b>User-Agent:</b> Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko)
+            Chrome/23.0.1271.95 Safari/537.11
+<b>Content-Type:</b> application/json; charset=UTF-8
+<b>Accept:</b> application/json, text/javascript, */*; q=0.01
+<b>Referer:</b> http://myapp.example.com/mainPage
+<b>Accept-Encoding:</b> gzip,deflate,sdch
+<b>Accept-Language:</b> en-US,en;q=0.8
+<b>Accept-Charset:</b> ISO-8859-1,utf-8;q=0.7,*;q=0.3
+<b>Request Payload:</b>
+&#123;
+&nbsp;&nbsp;&nbsp;<span class="background-yellow">"grant_type" : "client_credentials", </span>
+&nbsp;&nbsp;&nbsp;<span>"scope" : "PatronAPI"</span>
+&#125;
+</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="margin-bottom-none">
+    Other than different "grant_type" values in the request payload (and the inclusion of "username" and "password" parameters for the "password" flow), the requests are identical.
+</p>

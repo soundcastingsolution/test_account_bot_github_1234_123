@@ -1,0 +1,50 @@
+﻿<pre class="prettyprint linenums">
+# Deletes an file.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +fileFullName+ -> the name of file to be deleted
+#
+# * *Returns* :
+#   - an HTTP response
+#
+#
+def deleteScriptFile(token, fileFullName)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end 
+
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  apiURL = 
+    "service/{version}/scripts/files/#{fileFullName.to_s}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request.
+  http.delete(uri.path, headers)
+end
+</pre>

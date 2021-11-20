@@ -1,0 +1,40 @@
+﻿@using MVCForum.Website.Application
+@using MVCForum.Website.ViewModels
+@using System.Configuration
+@model TagTopicsViewModel
+@{
+    ViewBag.Title = string.Concat(Html.LanguageString("Topic.DiscussionTaggedWith"), Model.Tag);
+    var totalCount = Convert.ToInt32(Model.TotalCount);
+    ViewBag.Canonical = Html.Raw(AppHelpers.CanonicalPagingTag(totalCount, Html.Settings().TopicsPerPage, Html));
+}
+
+@section side
+{
+    @Html.Action("ListCategorySideMenu", "Category")
+    @Html.Action("SideSearch", "Search")
+    @Html.Action("PopularTags", "Tag")
+    @*@Html.Action("CurrentWeekHighPointUsers", "Point")*@
+}
+
+<section class="breadcrumb-trail page-header">
+    <a href="/">Home</a> &raquo;
+    <a href="@ConfigurationManager.AppSettings["ForumHomeUrl"]">Forum</a> &raquo;
+    @ViewBag.Title
+</section>
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+@foreach (var topic in Model.Topics)
+{
+    // Get the permissions for this topic via its parent category
+    var permissions = Model.AllPermissionSets[topic.Category];
+    
+
+    var viewModel = new ViewTopicViewModel {Permissions = permissions, Topic = topic, User = Model.User, ShowCategoryName = true};
+    Html.RenderPartial("_Topic", viewModel);
+}
+
+@if (Model.Topics.TotalPages > 1)
+{
+    @Html.Pager(Convert.ToInt32(Model.PageIndex), Html.Settings().TopicsPerPage, totalCount, null)
+}

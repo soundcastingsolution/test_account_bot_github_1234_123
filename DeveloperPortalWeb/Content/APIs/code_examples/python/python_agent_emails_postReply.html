@@ -1,0 +1,30 @@
+<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+def agentEmailReply(sessionID,contactID,skillId,toAddress,fromAddress,ccAddress,bccAddress,subject,bodyHtml,attachments,attachmentNames,originalAttachmentNames):
+# api-endpoint 
+#Give the specified url ,accessToken
+	BASEURL = "{BASEURL}"
+	accessToken = "{accessToken}"
+#Check if accessToken is empty or null
+if accessToken!="":
+#Give necessary parameters for http request
+	payload={"skillId":skillId,
+            "toAddress":toAddress,
+            "fromAddress":fromAddress,
+            "ccAddress":ccAddress,
+            "bccAddress":bccAddress,
+            "subject":subject,
+            "bodyHtml":bodyHtml,
+            "attachments":attachments,
+            "attachmentNames":attachmentNames,
+            "originalAttachmentNames":originalAttachmentNames} 
+#add all necessary headers
+	header_param = {'Authorization': 'bearer ' + '{accessToken}','content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+# Make http post request
+	response = requests.post(BASEURL+'/services/{version}/agent-sessions/' + sessionID +'/interactions/'+ contactID +'/email-reply' , headers = header_param, data=payload) 
+#print response appropriately
+	print (response)
+else:
+	#no token get one or handle error
+</pre>    

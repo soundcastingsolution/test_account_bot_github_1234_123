@@ -1,0 +1,81 @@
+<HTML><head><link rel='stylesheet' type='text/css' href='table.css'></head>
+<body class='rTable'>
+<h2>API Test Results For Ruby Functions </h2>
+<title>Ruby</title>
+<div class='rTableHead small'><strong>APIName</strong></div>
+<div class='rTableHead small'><span style='font-weight: bold;'>APISubType</span></div>
+<div class='rTableHead med'><span style='font-weight: bold;'>APIType</span></div>
+<div class='rTableHead small'><span style='font-weight: bold;'>Version</span></div>
+<div class='rTableHead'><span style='font-weight: bold;'>APIResult</span></div>
+</body>
+</HTML>
+<div class='rTableRow'>
+<div class='rTableCell small'>DataExtraction</div>
+<div class='rTableCell small'>ExtractData</div>
+<div class='rTableCell med'>POST jobs-sync</div>
+<div class='rTableCell small'>so32-v1.0</div>
+<div class='rTableCell'>200:</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Mediaplayback</div>
+<div class='rTableCell small'>AccessingRecordedMedia</div>
+<div class='rTableCell med'>GET /media-playback/v1/contacts/{contactId}</div>
+<div class='rTableCell small'>so32-v1.0</div>
+<div class='rTableCell'>500:</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Mediaplayback</div>
+<div class='rTableCell small'>AccessingRecordedMedia</div>
+<div class='rTableCell med'>GET /media-playback​/v1​/contacts​/{contactId}​/segments​/{segmentId}}</div>
+<div class='rTableCell small'>so32-v1.0</div>
+<div class='rTableCell'>500:</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Mediaplayback</div>
+<div class='rTableCell small'>AccessingRecordedMedia</div>
+<div class='rTableCell med'>GET /media-playback/v1/contacts</div>
+<div class='rTableCell small'>so32-v1.0</div>
+<div class='rTableCell'>400:</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Admin</div>
+<div class='rTableCell small'>Workflow</div>
+<div class='rTableCell med'>GET /workflow-data/list</div>
+<div class='rTableCell small'>so32-v16.0</div>
+<div class='rTableCell'>200:Success</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Admin</div>
+<div class='rTableCell small'>Workflow</div>
+<div class='rTableCell med'>POST /workflow-data</div>
+<div class='rTableCell small'>so32-v16.0</div>
+<div class='rTableCell'>400:Invalid workflow data object format: System.Collections.Generic.List`1[System.String]</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Admin</div>
+<div class='rTableCell small'>Workflow</div>
+<div class='rTableCell med'>GET /workflow-data/ID</div>
+<div class='rTableCell small'>so32-v16.0</div>
+<div class='rTableCell'>404:Workflow Data Profile Not Found</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Admin</div>
+<div class='rTableCell small'>Workflow</div>
+<div class='rTableCell med'>PUT /workflow-data/ID</div>
+<div class='rTableCell small'>so32-v16.0</div>
+<div class='rTableCell'>405:Method Not Allowed</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Admin</div>
+<div class='rTableCell small'>Workflow</div>
+<div class='rTableCell med'>PUT /workflow-data/ID/activate</div>
+<div class='rTableCell small'>so32-v16.0</div>
+<div class='rTableCell'>200:Success</div>
+</div>
+<div class='rTableRow'>
+<div class='rTableCell small'>Admin</div>
+<div class='rTableCell small'>Workflow</div>
+<div class='rTableCell med'>PUT /workflow-data/ID/deactivate</div>
+<div class='rTableCell small'>so32-v16.0</div>
+<div class='rTableCell'>200:Success</div>
+</div>

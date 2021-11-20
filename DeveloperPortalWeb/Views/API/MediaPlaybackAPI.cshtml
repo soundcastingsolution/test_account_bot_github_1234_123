@@ -1,0 +1,67 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+	ViewBag.Title = "Media Playback API";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+
+<Div>
+    You can use this API to access CXone Recording media and metadata.<br />
+    <ul><li>When playing back an interaction: <br /><ul><li>For voice-only_and _voice-and-screen media types, the API transfers the interaction metadata and a link to the media file.</li><li>For chat_and _email media types, the API transfers the interaction metadata and the transcript. If the media type is set to all (and not specifically set to chat or email), then if there is a screen recording, you will also get a link to the media file for digital interactions.</li></ul></li><li>When downloading, the API transfers a link to the media file.You can use this API to access CXone Recording media and metadata.</li></ul>
+
+</Div>
+
+<button type="button" class="collapsible">Supported Products</button>
+    <div class="content">
+          <ul>
+                •CXone Quality Management
+            </ul>
+            <ul>
+                •CXone Recording
+            </ul>
+    </div>
+   
+
+
+    <h3 class="primary-color">General Requirements</h3>
+    <p>
+        In order to use these APIs, you must create an Access Key then generate a CXone API token that you can use as a bearer token when calling Media-Playback APIs.  Access Keys can be created after enabling the Access Key permissions, then creating an Access Key in the users Profile or by navigating to the access key tab on the employee page.
+    </p>
+
+    <div class="swagger-section">
+        <div id="swagger-ui-container" class="swagger-ui-wrap">Loading...</div>
+    </div>
+
+    @Html.Partial("~/Views/Shared/_CodeSampleTabs.cshtml")
+
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                inContact.Swagger.init(
+                    "@Url.Content("~/content/apis/mediaplayback-api-docs")",
+                    "@Url.Content("~/content/apis/code_examples")",
+                    "@Url.Action("GetAccessToken", "Account")",
+                    "@Url.Content("~/content/swagger/images/throbber.gif")",
+                     false,
+                     "UserHub");
+            });
+        </script>
+
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+        </script>
+    }

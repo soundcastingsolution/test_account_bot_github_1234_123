@@ -1,0 +1,12 @@
+﻿@{
+	Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="container">
+	<div class="margin-top-bottom">
+		@RenderBody()
+	</div>
+</div>
+
+@section Styles { @RenderSection("Styles", false) }
+@section Scripts { @RenderSection("Scripts", false) }

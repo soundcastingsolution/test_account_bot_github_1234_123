@@ -1,0 +1,12 @@
+﻿<pre class="prettyprint linenums">
+def getJobs():
+    #Check if accessToken is empty or null
+	if accessToken!="":
+		header_param = {'Authorization': 'bearer ' + accessToken,
+		'content-Type': 'application/x-www-form-urlencoded'}
+		response=requests.post(CXone_baseURI + '/data-extraction/v1/jobs', headers = header_param)
+		#print response appropriately
+	else:
+		#no token get one or handle error
+		 construct('error')
+</pre>

@@ -1,0 +1,70 @@
+﻿<pre class="prettyprint linenums">
+function createCallingListMapping() {
+	var createCallingListMappingPayload = {
+		'listName': 'string - required',
+		'listExpirationDate': 'ISO 8601 formatted date/time',
+		'externalIdColumn': 'string - required',
+		'scoreColumn': 'string',
+		'customer1Column': 'string',
+		'customer2Column': 'string',
+		'callerIdColumn': 'string',
+		'priorityColumn': 'string',
+		'complianceReqColumn': 'string',
+		'firstNameColumn': 'string',
+		'lastNameColumn': 'string',
+		'addressColumn': 'string',
+		'cityColumn': 'string',
+		'stateColumn': 'string',
+		'zipColumn': 'string',
+		'timeZoneColumn': 'string',
+		'confirmReqColumn': 'string',
+		'overrideFinalizationColumn': 'string',
+		'agentIdColumn': 'string',
+		'callRequestTimeColumn': 'string',
+		'callRequestStaleColumn': 'string',
+		'notesColumn': 'string',
+		'expirationDateColumn': 'string',
+		//NOTE: The only default value for 'fieldName' within the destinationMappings is currently
+		//"phoneNumber" other parameters that may be needed must first be defined within Central >
+		//Manage > Lists > Calling > Custom Data Definitions.  'fieldName' will either be
+		//"phoneNumber" or the Custom Data Definition that was setup.  'fieldValue' is the column
+		//name within the list that has the corresponding information that pairs with 'fieldName'.
+		'destinationMappings': [
+			{
+				'fieldName': 'string - required',
+				'fieldValue': 'string - required'
+			}
+		],
+		//NOTE: the customFieldMappings value that is entered for the 'fieldName' parameter must
+		//first be defined within Central > Manage > Lists > Calling > Custom Data Definitions.
+		//The 'fieldValue' is the column name within the list that has the corresponding information
+		//that pairs with 'fieldName'.
+		'customFieldMappings': [
+			{
+				'fieldName': 'string',
+				'fieldValue': 'string'
+			}
+		]
+	}
+	$.ajax({
+		//The baseURI variable is created by the result.resource_server_base_uri,
+		//which is returned when getting a token and should be used to create the URL base
+		'url': baseURI + 'services/{version}/lists/call-lists',
+		'type': 'POST',
+		'headers': {
+			//Use access_token previously retrieved from inContact token service
+			'Authorization': 'bearer ' + accessToken,
+			'content-Type': 'application/json'
+		},
+		'data': JSON.stringify(createCallingListMappingPayload),
+		'success': function (result, status, statusCode) {
+			//Process success actions
+			return result;
+		},
+		'error': function (XMLHttpRequest, textStatus, errorThrown) {
+			//Process error actions
+			return false;
+		}
+	});
+}
+</pre>

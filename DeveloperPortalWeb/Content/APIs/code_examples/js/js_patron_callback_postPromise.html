@@ -1,0 +1,35 @@
+<pre class="prettyprint linenums">
+function createPromiseKeeper() {
+    var createPromiseKeeperPayload = {
+        'firstName': 'string',
+        'lastName': 'string',
+        'phoneNumber': 'string',
+        'skill': 'integer',
+        'taretAgent': 'integer',
+        'promiseDate': 'date',
+        'promiseTime': 'time',
+        'notes': 'string',
+        'timeZone': 'string',
+    }
+    $.ajax({
+        //The baseURI variable is created by the result.base_server_base_uri
+        //which is returned when getting a token and should be used to create the URL base
+        'url': baseURI + 'services/{version}/promise',
+        'type': 'POST',
+        'headers': {
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/json',
+        },
+        'data': JSON.stringify(createPromiseKeeperPayload),
+        'success': function (result) {
+            //Process success actions
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions
+            return false;
+        }
+    });
+}
+</pre>

@@ -1,0 +1,26 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.AccordionItemViewModel>
+@{
+	ViewBag.Title = "Central: Getting Started";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<p>
+    In this tutorial, you will learn how to retrieve access tokens from the NICE CXone token service and use them to make API calls. This tutorial is for Central users only.
+</p>
+
+@Html.Partial("_AccordionListItems", Model)
+
+@section Styles {
+	@Styles.Render("~/bundles/prettify.css")
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/prettify.js")
+	<script>
+		$(window).load(function () {
+			expandAccordionItem('accordionId');
+			prettyPrint();
+		});
+	</script>
+}

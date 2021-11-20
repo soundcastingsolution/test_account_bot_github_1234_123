@@ -1,0 +1,2114 @@
+﻿{
+  "/teams": {
+    "post": {
+      "x-cxone-api-key": "be599e8e-8072-4982-8746-25e4e00b89a6",
+      "x-cxone-audience": "external-public",
+      "summary": "Create a new team",
+      "description": "This api creates a new team and returns created team with teamId.<div class='tabs_wrapper' data-path='usermanagement_postTeams.html'></div>",
+      "operationId": "createTeam",
+      "tags": [
+        "User-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/TeamRequest"
+            },
+            "examples": {
+              "jsonExample": {
+                "summary": "CreateTeamRequest",
+                "value": {
+                  "name": "TestTeam12",
+                  "leadUserId": null,
+                  "unavailableCodes": [
+                    {
+                      "outStateId": 146,
+                      "outStateName": "UC1",
+                      "isActive": true,
+                      "isAcw": false,
+                      "agentTimeoutMins": 120,
+                      "id": 146
+                    },
+                    {
+                      "outStateId": 148,
+                      "outStateName": "UC3",
+                      "isActive": true,
+                      "isAcw": false,
+                      "agentTimeoutMins": 120,
+                      "id": 148
+                    }
+                  ],
+                  "customAttributes": {
+                    "inViewGamification": {
+                      "id": "inViewGamification",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "niceQualityManagement": {
+                      "id": "niceQualityManagement",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "niceQualityOptimization": {
+                      "id": "niceQualityOptimization",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "niceScreenRecording": {
+                      "id": "niceScreenRecording",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "inViewChatMessaging": {
+                      "id": "inViewChatMessaging",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "niceAudioRecording": {
+                      "id": "niceAudioRecording",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "inViewCoaching": {
+                      "id": "inViewCoaching",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "maxReleasePreview": {
+                      "id": "maxReleasePreview",
+                      "values": [
+                        {
+                          "value": false
+                        }
+                      ]
+                    },
+                    "niceWfoAdvanced": {
+                      "id": "niceWfoAdvanced",
+                      "values": [
+                        {
+                          "value": false
+                        }
+                      ]
+                    },
+                    "niceWfmEssentials": {
+                      "id": "niceWfmEssentials",
+                      "values": [
+                        {
+                          "value": false
+                        }
+                      ]
+                    },
+                    "niceWfmAdvanced": {
+                      "id": "niceWfmAdvanced",
+                      "values": [
+                        {
+                          "value": false
+                        }
+                      ]
+                    },
+                    "niceWfmWorkloadManager": {
+                      "id": "niceWfmWorkloadManager",
+                      "values": [
+                        {
+                          "value": false
+                        }
+                      ]
+                    },
+                    "inViewPerformanceManagement": {
+                      "id": "inViewPerformanceManagement",
+                      "values": [
+                        {
+                          "value": true
+                        }
+                      ]
+                    },
+                    "niceWfoEssentials": {
+                      "id": "niceWfoEssentials",
+                      "values": [
+                        {
+                          "value": false
+                        }
+                      ]
+                    }
+                  },
+                  "voiceThreshold": 1,
+                  "chatThreshold": 1,
+                  "maxConcurrentChats": 3,
+                  "emailThreshold": 1,
+                  "maxEmailAutoParkingLimit": 1,
+                  "workItemThreshold": 1,
+                  "deliveryMode": "Single Contact",
+                  "totalContactCount": 1,
+                  "requestContact": false,
+                  "contactAutoFocus": false,
+                  "status": "ACTIVE"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success, team created successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeamResponse"
+              },
+              "example": {
+                "jsonExample": {
+                  "summary": "CreateTeamRequest",
+                  "value": {
+                    "message": "Team TestTeam12 created at ACD",
+                    "httpCode": 200,
+                    "team": {
+                      "id": "e4cc7518-2629-49fe-95b9-27f7b318b588",
+                      "name": "TestTeam12",
+                      "status": "ACTIVE",
+                      "leadUserId": "",
+                      "createdBy": "sandip@do31.com",
+                      "lastModified": "2019-08-05T14:55:53.263+0000",
+                      "voiceThreshold": 0,
+                      "chatThreshold": 0,
+                      "maxConcurrentChats": 0,
+                      "emailThreshold": 0,
+                      "maxEmailAutoParkingLimit": 0,
+                      "workItemThreshold": 0,
+                      "requestContact": false,
+                      "contactAutoFocus": false,
+                      "deliveryMode": "Single Contact",
+                      "totalContactCount": 1,
+                      "customAttributes": {
+                        "maxReleasePreview": {
+                          "id": "maxReleasePreview",
+                          "values": [
+                            {
+                              "value": "false",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceQualityManagement": {
+                          "id": "niceQualityManagement",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceWfmAdvanced": {
+                          "id": "niceWfmAdvanced",
+                          "values": [
+                            {
+                              "value": "false",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "inViewChatMessaging": {
+                          "id": "inViewChatMessaging",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceAudioRecording": {
+                          "id": "niceAudioRecording",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "inViewCoaching": {
+                          "id": "inViewCoaching",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceWfmEssentials": {
+                          "id": "niceWfmEssentials",
+                          "values": [
+                            {
+                              "value": "false",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceWfoAdvanced": {
+                          "id": "niceWfoAdvanced",
+                          "values": [
+                            {
+                              "value": "false",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "inViewGamification": {
+                          "id": "inViewGamification",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceWfmWorkloadManager": {
+                          "id": "niceWfmWorkloadManager",
+                          "values": [
+                            {
+                              "value": "false",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceQualityOptimization": {
+                          "id": "niceQualityOptimization",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceWfoEssentials": {
+                          "id": "niceWfoEssentials",
+                          "values": [
+                            {
+                              "value": "false",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "niceScreenRecording": {
+                          "id": "niceScreenRecording",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        },
+                        "inViewPerformanceManagement": {
+                          "id": "inViewPerformanceManagement",
+                          "values": [
+                            {
+                              "value": "true",
+                              "resolvedValue": null
+                            }
+                          ]
+                        }
+                      },
+                      "isDefault": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation or internal error"
+        },
+        "401": {
+          "description": "Unauthorized. Invalid credentials."
+        },
+        "403": {
+          "description": "Forbidden. Access Denied"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    },
+    "put": {
+      "x-cxone-api-key": "b68de099-6dde-4327-91b3-9f7c1bbbad84",
+      "x-cxone-audience": "external-public",
+      "summary": "Update Team details",
+      "description": "This API updates the existing team and returns updated team.<div class='tabs_wrapper' data-path='usermanagement_putTeams.html'></div>",
+      "operationId": "updateTeam",
+      "tags": [
+        "User-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/TeamRequest"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeamResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Insufficient permissions"
+        },
+        "404": {
+          "description": "Not found"
+        },
+        "500": {
+          "description": "Server error"
+        }
+      }
+    }
+  },
+  "/teams/{teamId}": {
+    "get": {
+      "x-cxone-api-key": "2b0fdb0b-af9d-43ae-9319-0cffe700ae45",
+      "x-cxone-audience": "external-public",
+      "summary": "Get team details by team Id",
+      "description": "This API returns team details for given teamId. <div class='tabs_wrapper' data-path='usermanagement_getTeamsById.html'></div>",
+      "operationId": "getTeamById",
+      "tags": [
+        "User-Management"
+      ],
+      "parameters": [
+        {
+          "name": "teamId",
+          "in": "path",
+          "description": "Id of team to get Team details",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "ddd0a5ce-8a23-4b8a-9a29-28dde50deab5"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTeamResponse"
+              },
+              "example": {
+                "jsonExample": null,
+                "summary": "CreateTeamRequest",
+                "value": {
+                  "team": {
+                    "id": "65594a70-2d67-49d3-991a-dfab16a4376b",
+                    "name": "TeamTest508",
+                    "description": "new team description",
+                    "status": "ACTIVE",
+                    "leadUserId": "",
+                    "createdBy": "sandip@do31.com",
+                    "lastModified": "2019-08-05T16:55:33.000+0000",
+                    "voiceThreshold": 0,
+                    "chatThreshold": 0,
+                    "maxConcurrentChats": 0,
+                    "emailThreshold": 0,
+                    "maxEmailAutoParkingLimit": 0,
+                    "workItemThreshold": 0,
+                    "requestContact": false,
+                    "contactAutoFocus": false,
+                    "deliveryMode": "Single Contact",
+                    "totalContactCount": 1,
+                    "customAttributes": {
+                      "maxReleasePreview": {
+                        "id": "maxReleasePreview",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceQualityManagement": {
+                        "id": "niceQualityManagement",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfmAdvanced": {
+                        "id": "niceWfmAdvanced",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewChatMessaging": {
+                        "id": "inViewChatMessaging",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceAudioRecording": {
+                        "id": "niceAudioRecording",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewCoaching": {
+                        "id": "inViewCoaching",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfmEssentials": {
+                        "id": "niceWfmEssentials",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfoAdvanced": {
+                        "id": "niceWfoAdvanced",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewGamification": {
+                        "id": "inViewGamification",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfmWorkloadManager": {
+                        "id": "niceWfmWorkloadManager",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceQualityOptimization": {
+                        "id": "niceQualityOptimization",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfoEssentials": {
+                        "id": "niceWfoEssentials",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceScreenRecording": {
+                        "id": "niceScreenRecording",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewPerformanceManagement": {
+                        "id": "inViewPerformanceManagement",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      }
+                    },
+                    "isDefault": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    }
+  },
+  "/teams/search": {
+    "post": {
+      "x-cxone-api-key": "fa8aa18b-b963-4274-bf5b-671ab7501c3a",
+      "x-cxone-audience": "external-public",
+      "summary": "Gets team details as per given filter and metrices",
+      "description": "This API takes input as a search criteria which can accept any combination of given attributes as a filter and can return only expected fields.<div class='tabs_wrapper' data-path='usermanagement_postTeamsSearch.html'></div>",
+      "operationId": "getTeamsByCriteria",
+      "tags": [
+        "User-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/SearchCritera"
+            },
+            "example": {
+              "filter": {
+                "id": [
+                  "team-uuid"
+                ],
+                "name": [
+                  "team-name"
+                ],
+                "description": [
+                  "description"
+                ],
+                "status": [
+                  "ACTIVE",
+                  "INACTIVE"
+                ],
+                "leadUserId": [
+                  "lead-user-uuid"
+                ],
+                "isDefault": [
+                  "true",
+                  "false"
+                ]
+              },
+              "page": {
+                "pageSize": 100000,
+                "pageNo": 0
+              },
+              "metrices": {
+                "columns": [
+                  "id",
+                  "name",
+                  "description",
+                  "status",
+                  "leadUserId",
+                  "isDefault",
+                  "createdBy",
+                  "lastModified",
+                  "userCount"
+                ]
+              },
+              "orderBy": {
+                "name": "ASC"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTeamsResponse"
+              },
+              "example": {
+                "teams": [
+                  {
+                    "id": "00070b01-96e5-490a-92bf-8ac65c313dcf",
+                    "name": "mukesh_test_team_20052019_1130_85",
+                    "status": "ACTIVE",
+                    "leadUserId": "",
+                    "lastModified": "2019-07-30T06:53:04.000+0000",
+                    "createdBy": "nidhi.morolia@do31.com",
+                    "customAttributes": {
+                      "maxReleasePreview": {
+                        "id": "maxReleasePreview",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceQualityManagement": {
+                        "id": "niceQualityManagement",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfmAdvanced": {
+                        "id": "niceWfmAdvanced",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewChatMessaging": {
+                        "id": "inViewChatMessaging",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceAudioRecording": {
+                        "id": "niceAudioRecording",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewCoaching": {
+                        "id": "inViewCoaching",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfmEssentials": {
+                        "id": "niceWfmEssentials",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfoAdvanced": {
+                        "id": "niceWfoAdvanced",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewGamification": {
+                        "id": "inViewGamification",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfmWorkloadManager": {
+                        "id": "niceWfmWorkloadManager",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceQualityOptimization": {
+                        "id": "niceQualityOptimization",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceWfoEssentials": {
+                        "id": "niceWfoEssentials",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "niceScreenRecording": {
+                        "id": "niceScreenRecording",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      },
+                      "inViewPerformanceManagement": {
+                        "id": "inViewPerformanceManagement",
+                        "values": [
+                          {
+                            "value": "false",
+                            "resolvedValue": null
+                          }
+                        ]
+                      }
+                    },
+                    "isDefault": false
+                  }
+                ],
+                "page": {
+                  "pageSize": 1,
+                  "pageNo": 0,
+                  "totalRecords": 529
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    }
+  },
+  "/users": {
+    "get": {
+      "x-cxone-api-key": "c68a94d9-47e4-479c-ae84-463107524e83",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": [
+        {
+          "user": "view",
+          "user:my": "view"
+        }
+      ],
+      "summary": "Get list of all users for a tenant",
+      "description": "This API is used to get list of users under a tenant based on filters includeDeleted, withAndWithoutEmail, includeDeletedAfter, fullNameContains, onlyImpersonated, excludeImpersonated.<div class='tabs_wrapper' data-path='usermanagement_getUser.html'></div>",
+      "operationId": "getUserList",
+      "tags": [
+        "User-Management"
+      ],
+      "parameters": [
+        {
+          "name": "includeDeleted",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "boolean",
+            "default": false
+          },
+          "description": "include deleted users in the user list"
+        },
+        {
+          "name": "withAndWithoutEmail",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "include users which are with and without email"
+        },
+        {
+          "name": "includeDeletedAfter",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "include users which are deleted after this datetime"
+        },
+        {
+          "name": "fullNameContains",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "include users where full name matches given input string"
+        },
+        {
+          "name": "excludeImpersonated",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "boolean"
+          },
+          "description": "include users which are not impersonated"
+        },
+        {
+          "name": "onlyImpersonated",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          },
+          "description": "return only impersonated user"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden - invalid request data"
+        },
+        "500": {
+          "description": "Internal Error"
+        },
+        "502": {
+          "description": "Bad Gateway"
+        }
+      }
+    },
+    "post": {
+      "x-cxone-api-key": "58b5b32c-c9e1-4d5b-bb00-973cdaf80c1c",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": [
+        {
+          "user": "register"
+        }
+      ],
+      "summary": "Create user under tenant",
+      "description": "This API is used to create user under a tenant. <div class='tabs_wrapper' data-path='usermanagement_postUser.html'></div>",
+      "operationId": "registerUserV1",
+      "tags": [
+        "User-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserRegistrationRequest"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden - invalid request data"
+        },
+        "500": {
+          "description": "Internal Error"
+        },
+        "502": {
+          "description": "Bad Gateway"
+        }
+      }
+    },
+    "put": {
+      "x-cxone-api-key": "0ca9dc3b-eb5d-49ad-9163-7b5f183e1184",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": [
+        {
+          "user": "edit"
+        }
+      ],
+      "summary": "API to update user details",
+      "description": "This API is used to update user details.<div class='tabs_wrapper' data-path='usermanagement_putUser.html'></div>",
+      "operationId": "updateUserV1",
+      "tags": [
+        "User-Management"
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserUpdateRequest"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden - invalid request data"
+        },
+        "500": {
+          "description": "Internal Error"
+        },
+        "502": {
+          "description": "Bad Gateway"
+        }
+      }
+    }
+  },
+  "/users/{userId}": {
+    "get": {
+      "x-cxone-api-key": "45caaf9b-1da9-4116-81ea-176836ec36b9",
+      "x-cxone-audience": "external-public",
+      "summary": "API to get user details by user Id",
+      "description": "This API is used to get user details by user Id. <div class='tabs_wrapper' data-path='usermanagement_getUserById.html'></div>",
+      "operationId": "getUserByIdV1",
+      "tags": [
+        "User-Management"
+      ],
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "Id of user to get user details",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden - invalid request data"
+        },
+        "500": {
+          "description": "Internal Error"
+        },
+        "502": {
+          "description": "Bad Gateway"
+        }
+      }
+    }
+  },
+  "/users/teams/{teamId}": {
+    "patch": {
+      "x-cxone-api-key": "1c62e582-1e74-43d7-b553-f4d4f6e712d8",
+      "x-cxone-audience": "external-public",
+      "x-cxone-productCatalogPermissions": [
+        {
+          "user": "edit"
+        }
+      ],
+      "summary": "Assign Team to Users",
+      "description": "This API is to assign a team to given list of users. <div class='tabs_wrapper' data-path='usermanagement_users_pacthTeamsById.html'></div>",
+      "operationId": "assignTeamV1",
+      "tags": [
+        "User-Management"
+      ],
+      "parameters": [
+        {
+          "name": "teamId",
+          "in": "path",
+          "description": "Id of team to get team details",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "02ed5dca-3de0-4136-b11f-a0652f04f3a2"
+          }
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "description": "list of user ids for whom the given team is to be assigned",
+              "items": {
+                "type": "string",
+                "example": [
+                  "11e9206b-d986-7d10-9945-0242ac110002",
+                  "11e9acfd-2b74-f7a0-9076-0242ac110002"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkEntityUserAssignResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden - invalid request data"
+        },
+        "500": {
+          "description": "Internal Error"
+        },
+        "502": {
+          "description": "Bad Gateway"
+        }
+      }
+    }
+  },
+  "/views/{id}": {
+    "get": {
+      "x-cxone-api-key": "2b0fdb0b-af9d-44ae-9419-0cffe711ae45",
+      "x-cxone-audience": "external-public",
+      "summary": "Get view member details by view id",
+      "description": "This API returns view member details for given view id.<div class='tabs_wrapper' data-path='usermanagement_getViewsById.html'></div>",
+      "operationId": "getViewMemberById",
+      "tags": [
+        "User-Management"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Id of view to get view member details",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "ddd0a5ce-8a23-4b8a-9a29-28dde50deab5"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewMemberResponseV1"
+              },
+              "example": {
+                "jsonExample": null,
+                "summary": "GetViewMemberResponse",
+                "value": {
+                  "id": "a9acd4a2-3355-4b6a-b87f-0fc873a7270c",
+                  "definedBy": "OU",
+                  "viewMembersInfo": [
+                    {
+                      "parentId": "bae0b463-a74a-46db-abcd-f6a3fc2b3cad",
+                      "id": "3ad741c0-9920-4201-827a-fe6bd6af4029",
+                      "createdBy": "aboli.avadhani@do31.com",
+                      "createdTime": "2019-09-04T09:53:00.000+0000",
+                      "memberRecursive": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    },
+    "put": {
+      "x-cxone-api-key": "2b0fdb0b-af8d-55ae-9418-0cffe711ae45",
+      "x-cxone-audience": "external-public",
+      "summary": "Update View members mapping",
+      "description": "This API updates an existing View members mapping and returns an updated mapping. <div class='tabs_wrapper' data-path='usermanagement_putViewById.html'></div>",
+      "operationId": "updateViewMemberDetails",
+      "tags": [
+        "User-Management"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Id of view to update view member details",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ViewMemberRequestV1"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Success",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewMemberResponseV1"
+              },
+              "example": {
+                "jsonExample": null,
+                "summary": "GetViewMemberResponse",
+                "value": {
+                  "id": "a9acd4a2-3355-4b6a-b87f-0fc873a7270c",
+                  "definedBy": "OU",
+                  "viewMembersInfo": [
+                    {
+                      "parentId": "bae0b463-a74a-46db-abcd-f6a3fc2b3cad",
+                      "id": "3ad741c0-9920-4201-827a-fe6bd6af4029",
+                      "createdBy": "aboli.avadhani@do31.com",
+                      "createdTime": "2019-09-04T09:53:00.000+0000",
+                      "memberRecursive": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Validation error"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "500": {
+          "description": "Server Error"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TeamRequest": {
+        "title": "",
+        "type": "object",
+        "description": "With tenant-id userId needs to be passed and with billing-id agentId needs to be passed.",
+        "required": [
+          "name and status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id (UUID) of team"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the team"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of team created"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ],
+            "description": "status:\n    * `ACTIVE` - active status of team\n    * `INACTIVE` - inactive status of team\n"
+          },
+          "leadUserId": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "voiceThreshold": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chatThreshold": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxConcurrentChats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "emailThreshold": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxEmailAutoParkingLimit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "workItemThreshold": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestContact": {
+            "type": "boolean"
+          },
+          "contactAutoFocus": {
+            "type": "boolean"
+          },
+          "deliveryMode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalContactCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "unavailableCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnavailableCode"
+            }
+          },
+          "customAttributes": {
+            "$ref": "#/components/schemas/CustomAttribute"
+          },
+          "isDefault": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UnavailableCode": {
+        "title": "",
+        "type": "object",
+        "description": "Unavailable code of team at ACD.",
+        "properties": {
+          "outStateId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "outStateName": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isAcw": {
+            "type": "boolean"
+          },
+          "agentTimeoutMins": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CustomAttribute": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "canBeScheduled"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeValue"
+            }
+          }
+        }
+      },
+      "AttributeValue": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "true"
+          },
+          "resolvedValue": {
+            "type": "object",
+            "example": null
+          }
+        }
+      },
+      "TeamResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "detailedMessage": {
+            "type": "string"
+          },
+          "httpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "errorCode": {
+            "type": "string"
+          },
+          "team": {
+            "$ref": "#/components/schemas/TeamRequest"
+          }
+        }
+      },
+      "GetTeamResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "detailedMessage": {
+            "type": "string"
+          },
+          "httpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "errorCode": {
+            "type": "string"
+          },
+          "team": {
+            "$ref": "#/components/schemas/TeamRequest"
+          }
+        }
+      },
+      "GetTeamsResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "detailedMessage": {
+            "type": "string"
+          },
+          "httpCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "errorCode": {
+            "type": "string"
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamRequest"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        }
+      },
+      "Page": {
+        "type": "object",
+        "properties": {
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalRecords": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SearchCritera": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "operations": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "LIKE",
+                "BETWEEN",
+                "NOT"
+              ],
+              "description": "operations:\n  * `LIKE` - to filter data based on any string in any field e.g name\n  * `BETWEEN` - to filter data based on values mentioned in BETWEEN two values\n  * `NOT` - to filter data based on value not present\n"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          },
+          "metrices": {
+            "$ref": "#/components/schemas/Metrices"
+          },
+          "orderBy": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
+            }
+          }
+        }
+      },
+      "Metrices": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ViewMemberRequestV1": {
+        "type": "object",
+        "properties": {
+          "definedBy": {
+            "type": "string",
+            "enum": [
+              "OU"
+            ],
+            "description": "definedBy:\n  * `OU` - Organization Unit in hierarchy (OU is the only type supported by view)\n"
+          },
+          "viewMembersInfo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewMembersInfo"
+            },
+            "minItems": 1,
+            "maxItems": 1,
+            "description": "A view can contain only one member"
+          }
+        }
+      },
+      "ViewMemberResponseV1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "definedBy": {
+            "type": "string",
+            "enum": [
+              "OU"
+            ],
+            "description": "definedBy:\n  * `OU` - Organization Unit in hierarchy (OU is the only type supported by view)\n"
+          },
+          "viewMembersInfo": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ViewMembersInfo"
+            },
+            "minItems": 1,
+            "maxItems": 1,
+            "description": "A view can contain only one member"
+          }
+        }
+      },
+      "ViewMembersInfo": {
+        "type": "object",
+        "properties": {
+          "parentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "memberRecursive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UsersResponse": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "11e9239f-f6eb-ede0-8601-0242ac110002"
+          },
+          "userName": {
+            "type": "string",
+            "example": "testuser6454@do31.com"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Test"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "User"
+          },
+          "emailAddress": {
+            "type": "string",
+            "example": "test.user@nice.com"
+          },
+          "customAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CustomAttribute"
+            }
+          },
+          "organizationName": {
+            "type": "string"
+          },
+          "mobileNumber": {
+            "type": "string"
+          },
+          "assignedGroup": {
+            "type": "string",
+            "example": "11e91ef8-bfc2-37d0-a74e-0242ac110002"
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "country": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string",
+            "example": "US/Hawaii"
+          },
+          "role": {
+            "type": "string",
+            "example": "Employee"
+          },
+          "roleUUID": {
+            "type": "string",
+            "example": "11e91ef8-c08c-8cb0-8a53-0242ac110004"
+          },
+          "hireDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2019-01-29T00:00:00.000+0000"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "UNREGISTERED",
+              "PENDING",
+              "ACTIVE",
+              "BLOCKED",
+              "DELETED"
+            ]
+          },
+          "invitationExpired": {
+            "type": "boolean",
+            "example": true
+          },
+          "acdUserMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcdUserMapping"
+            }
+          },
+          "acdInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcdInfo"
+            }
+          },
+          "groupIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deletedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "icBUId": {
+            "type": "string"
+          },
+          "icClusterId": {
+            "type": "string"
+          },
+          "impersonated": {
+            "type": "boolean",
+            "example": false
+          },
+          "applicationAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ApplicationAttribute"
+              }
+            }
+          },
+          "billable": {
+            "type": "boolean"
+          },
+          "modifiable": {
+            "type": "boolean"
+          },
+          "idmType": {
+            "type": "string",
+            "enum": [
+              "KEYCLOAK",
+              "COGNITO",
+              "EVOLVECG"
+            ]
+          },
+          "passwordPolicyUpdated": {
+            "type": "boolean",
+            "example": false
+          },
+          "teamId": {
+            "type": "string",
+            "example": "00070b01-96e5-490a-92bf-8ac65c313dcf"
+          },
+          "update": {
+            "type": "boolean",
+            "example": false
+          },
+          "defaultAdminUserRequired": {
+            "type": "boolean",
+            "example": true
+          },
+          "externalIdentity": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "emailToBeVerified": {
+            "type": "string"
+          },
+          "secondaryRoleIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "password": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Test User"
+          }
+        }
+      },
+      "UserRegistrationRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Test"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "User"
+          },
+          "emailAddress": {
+            "type": "string",
+            "example": "test.user@xyz.com"
+          },
+          "customAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CustomAttribute"
+            }
+          },
+          "mobileNumber": {
+            "type": "string"
+          },
+          "assignedGroup": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string",
+            "example": "US/Hawaii"
+          },
+          "role": {
+            "type": "string",
+            "example": "Employee"
+          },
+          "teamId": {
+            "type": "string",
+            "example": "96047232-8cee-11e9-9ccd-54ff2fb0780d"
+          },
+          "hireDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2019-01-29"
+          },
+          "acdInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcdInfo"
+            }
+          },
+          "groupIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userName": {
+            "type": "string"
+          },
+          "applicationAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ApplicationAttribute"
+              }
+            }
+          },
+          "emailToBeVerified": {
+            "type": "string"
+          },
+          "externalIdentity": {
+            "type": "string"
+          },
+          "billable": {
+            "type": "boolean"
+          },
+          "secondaryRoleIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AcdInfo": {
+        "type": "object",
+        "properties": {
+          "loginId": {
+            "type": "string",
+            "example": "testuser6454@do31.com"
+          }
+        }
+      },
+      "ApplicationAttribute": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "objects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "AcdUserMapping": {
+        "type": "object",
+        "properties": {
+          "loginId": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterUserResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          },
+          "msg": {
+            "type": "string",
+            "example": "User created on Evolve"
+          }
+        }
+      },
+      "UserUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "emailAddress": {
+            "type": "string"
+          },
+          "customAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CustomAttribute"
+            }
+          },
+          "mobileNumber": {
+            "type": "string"
+          },
+          "assignedGroup": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "country": {
+            "type": "string"
+          },
+          "timeZone": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "teamId": {
+            "type": "string"
+          },
+          "hireDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "acdInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AcdInfo"
+            }
+          },
+          "groupIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "userName": {
+            "type": "string"
+          },
+          "applicationAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ApplicationAttribute"
+              }
+            }
+          },
+          "emailToBeVerified": {
+            "type": "string"
+          },
+          "externalIdentity": {
+            "type": "string"
+          },
+          "billable": {
+            "type": "boolean"
+          },
+          "secondaryRoleIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string",
+            "example": "User updated on Evolve"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      },
+      "BulkEntityUserAssignResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "example": "Users assigned to team successfully."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+<pre class="prettyprint linenums">
+/**
+ * EndVoicemail.java
+ */
+package com.incontact.example.agent.voicemail;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Base64;
+import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+/**
+ * EndVoicemail
+ *
+ * Ends a voicemail contact
+ */
+public class EndVoicemail
+{
+    public static final String  TOKEN_SERVICE_URL = "https://api.incontact.com/InContactAuthorizationServer/Token";
+    public static final String  VERSION = "{version}"; // TODO: replace with applicable version (v6.0, etc)
+    public static final String  SERVICES_PATH = "services/".concat(VERSION);
+    public static final String  API_PATH = "/agent-sessions/{sessionId}/interactions/{contactId}/end";
+    public static final String  AUTHORIZATION_BASIC_PREFIX = "Basic ";
+    public static final String  AUTHORIZATION_BEARER_PREFIX = "Bearer ";
+    public static final String  ACCEPT_HEADER = "Accept";
+    public static final String  AUTHORIZATION_HEADER = "Authorization";
+    public static final String  CONTENT_TYPE_HEADER = "Content-Type";
+    public static final String  RESOURCE_SERVER_BASE_URI_PROPERTY = "resource_server_base_uri";
+    public static final String  ACCESS_TOKEN_PROPERTY = "access_token";
+    public static final String  APPLICATION_JSON_VALUE = "application/json";
+    public static final String  APPLICATION = "{application}"; // TODO: replace with valid account application name
+    public static final String  VENDOR = "{vendor}"; // TODO: replace with valid account vendor name
+    public static final Integer BUSINESS_UNIT_ID = 0; // TODO: replace with valid account business unit id
+    public static final String  USER_NAME = "{user name}"; // TODO: replace with valid account user name
+    public static final String  PASSWORD = "{password}"; // TODO: replace with valid account password
+
+    public static final String  TOKEN_REQUEST_BODY = String.format("{\"grant_type\":\"password\",\"username\":\"%s\",\"password\":\"%s\"}", USER_NAME, PASSWORD);
+    public static final String  TOKEN_AUTHORIZATION_HEADER_VALUE = AUTHORIZATION_BASIC_PREFIX + Base64.getEncoder().encodeToString((APPLICATION + "@" + VENDOR + ":" + BUSINESS_UNIT_ID).getBytes());
+    
+    public static final String  SESSION_ID = ""; // TODO: replace with valid session id
+    public static final Long    CONTACT_ID = 0L; // TODO: replace with valid contact id
+    
+    public static final String  API_URL = (SERVICES_PATH + API_PATH).replace("{sessionId}", SESSION_ID).replace("{contactId}", CONTACT_ID.toString());
+    
+    /**
+     * Ends a voicemail for agent session based on account information, user credentials, session id, and contact id
+     * Using this information, the method
+     *  1. Contacts the Token Service
+     *  2. Gets the access token and base server URI from the response
+     *  3. Contacts the API Service using the appropriate access token and full server URI
+     * @throws IOException if unable to contact the API services
+     */
+    public void endVoicemail() throws IOException
+    {
+        // Open a connection to the inContact Token Authorization Service
+        URLConnection  tokenService = new URL(TOKEN_SERVICE_URL).openConnection();
+        
+        // Set required headers
+        tokenService.setRequestProperty(AUTHORIZATION_HEADER, TOKEN_AUTHORIZATION_HEADER_VALUE);
+        tokenService.setRequestProperty(CONTENT_TYPE_HEADER, APPLICATION_JSON_VALUE);
+        
+        // Post the token request to the connection stream
+        tokenService.setDoOutput(true);        
+        tokenService.getOutputStream().write((TOKEN_REQUEST_BODY).getBytes());
+
+        // Read the response
+        String  response = new BufferedReader(new InputStreamReader(tokenService.getInputStream())).lines().collect(Collectors.joining());
+
+        // TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON package to
+        // handle the response appropriately
+        Map<String, String> map = Pattern.compile(",").splitAsStream(response.replaceAll("\"|\\{|\\}", "")).map(nvp->nvp.split(":", 2)).collect(Collectors.toMap(nvp->nvp[0], nvp->nvp[1]));
+
+        // Create a connection to the API using the appropriate base uri
+        URLConnection  urlConnection = new URL(map.get(RESOURCE_SERVER_BASE_URI_PROPERTY) + API_URL).openConnection();
+       
+        // Set the required headers and connect
+        urlConnection.setRequestProperty(AUTHORIZATION_HEADER, AUTHORIZATION_BEARER_PREFIX + map.get(ACCESS_TOKEN_PROPERTY));
+        urlConnection.setRequestProperty(ACCEPT_HEADER, APPLICATION_JSON_VALUE);
+                
+        // Post an empty request to the connection stream (forces a POST)
+        urlConnection.setDoOutput(true);        
+        urlConnection.getOutputStream().write(0);
+
+        // Read the response
+        response = new BufferedReader(new InputStreamReader(urlConnection.getInputStream())).lines().collect(Collectors.joining());
+        
+        // TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON package to
+        // handle the response appropriately
+        System.out.println(response);
+    }
+}
+</pre>

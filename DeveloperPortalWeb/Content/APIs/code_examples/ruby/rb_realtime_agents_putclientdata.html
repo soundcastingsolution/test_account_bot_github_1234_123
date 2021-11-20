@@ -1,0 +1,29 @@
+﻿<pre class="prettyprint linenums">
+def putclientdata()
+if($accessToken!='')
+uri= URI.parse(($baseURI)+'/services/v19.0/agents/client-data')
+headers = 
+{ "Accept" => "application/json, text/javascript, */*; q=0.01",
+    "Authorization" => "bearer " + ($accessToken),
+    "Content-Type" => "application/json",
+    "Data-Type" => "json",
+	"Content-Length" => "0",
+	"Accept-Encoding" => "gzip,deflate"}
+	body= 
+	{
+	$data = array(
+	"agentId"=> 1001,
+	"dataSet"=> array(
+	"settings"=> "true" )
+	)
+}
+params=body.to_json	
+	# Set up an HTTP object.
+http = Net::HTTP.new uri.host, uri.port
+# puts headers
+# Make the request.
+res = http.put(uri.path ,params, headers)
+else
+end
+end
+</pre>

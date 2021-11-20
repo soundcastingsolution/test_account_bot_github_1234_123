@@ -1,0 +1,22 @@
+﻿<pre class="prettyprint linenums">
+def PutSkillIDParameterTimezone():
+# api-endpoint 
+#Give the specified url ,accessToken
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+#Check if accessToken is empty or null
+	if accessToken!="":
+#Give necessary parameters for http request
+		payload={'timezone': [
+		{
+		'skillId': 'integer - required',
+		'timeZoneSettings': 'string'}]}
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken,'content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+# Make http put request
+		response = requests.put(Baseuri + 'services/{version}/skills/' + {skillId} + '/parameters/time-zones' , headers = header_param, data=payload) 
+#print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

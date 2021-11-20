@@ -1,0 +1,28 @@
+﻿    <pre class="prettyprint linenums">
+    def PostSetDisposition()
+    if($accessToken!='')
+    uri = URI.parse(($baseURI)+'/services/v18/contacts/'+$contactId+'/set-disposition')
+    headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+        "Authorization" => "bearer " + ($accessToken),
+        "Content-Type" => "application/json",
+        "Data-Type" => "json",
+        "Content-Length" => "0",
+        "Accept-Encoding" => "deflate"}
+        body = {
+		    "dispositionInfo": {
+		    "Skill": "1007",
+		    "DispositionCode": "1",
+		    "CallbackNumber": "",
+		    "CallbackTime": "",
+		    "notes": "",
+		    "CommitmentAmount": ""
+		    }
+    }
+    params= body.to_json
+    # Set up an HTTP object.
+    http = Net::HTTP.new uri.host,uri.port
+    else
+    end
+    end
+    </pre>

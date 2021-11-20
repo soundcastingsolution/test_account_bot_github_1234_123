@@ -1,0 +1,190 @@
+﻿@using System.Configuration
+@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+    ViewBag.Title = "Home";
+}
+
+<div>
+    <section class="background-image-banner">
+        <div class="background-button-banner-container">
+            <div>
+                <div>
+                    <h1 class="background-text-banner">
+                        DEVone Developer Community
+                    </h1>
+                </div>
+                <div>
+                    Part of&nbsp;
+                    <a class="background-link-banner" href="https://www.niceincontact.com/devone-ecosystem">DEVone Ecosystem</a>
+                </div>
+                <div>
+                    <a class="background-button-banner sweep-to-right" href="https://www.niceincontact.com/devone-ecosystem/devone-partner-enablement/become-incloud-partner">
+                        Become a<br /> DEVone Partner
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <div class="custom-container">
+        <div class="container">
+            <div class="row second-section">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="text-center sub-title">The tools you need to power the innovation customers want</h1>
+                        </div>
+                    </div>
+                    <div class="row paragraph-container">
+                        <div class="col-md-12">
+                            <p class="text-center paragraph">
+                                Access the right tools and resources to develop product integrations and applications for the NICE CXone suite of solutions. The DEVone Developer Community is where you'll find our library of RESTful APIs and SDKs, on-demand documentation, and FAQs and tutorials on best practices for developing applications and solutions of any size.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row link-icons-container">
+                        <div class="link-icons-col col-xs-12 col-sm-12 col-md-4">
+                            <div class="row">
+                                <div class="col-xs-6 link-icon text-center">
+                                    <a href="/API">
+                                        <img src="~/Content/images/Home/API_BlueCircle.png">
+                                    </a>
+                                    <p>
+                                        <a href="/API">
+                                            APIs
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="col-xs-6 link-icon text-center">
+                                    <a href="/Documentation">
+                                        <img src="~/Content/images/Home/Documentation_Icon.png">
+                                    </a>
+                                    <p>
+                                        <a href="/Documentation">
+                                            Documentation
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="link-icons-col col-xs-12 col-sm-12 col-md-4">
+                            <div class="row">
+                                <div class="col-xs-6 link-icon text-center">
+                                    <a href="/Downloads">
+                                        <img src="~/Content/images/Home/Download_BlueCircle.png">
+                                    </a>
+                                    <p>
+                                        <a href="/Downloads">
+                                            Downloads
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="col-xs-6 link-icon text-center">
+                                    <a href="/FAQ">
+                                        <img src="~/Content/images/Home/FAQ_blueCircle.png">
+                                    </a>
+                                    <p>
+                                        <a href="/FAQ">
+                                            FAQ
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="link-icons-col col-xs-12 col-sm-12 col-md-4">
+                            <div class="row">
+                                <div class="col-xs-6 col-xs-pushset-6 link-icon text-center">
+                                    <a href="/Forumhome">
+                                        <img src="~/Content/images/Home/Forum_BlueCircle.png">
+                                    </a>
+                                    <p>
+                                        <a href="/ForumHome">
+                                            Forum
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="col-xs-6 col-xs-pushset-6 link-icon text-center">
+                                    <a href="https://cxexchange.niceincontact.com/home">
+                                        <img src="~/Content/images/Home/NICE-EcosystemPartners-NICE-02.png">
+                                    </a>
+                                    <p>
+                                        <a href="https://cxexchange.niceincontact.com/home">
+                                            CXexchange
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 button-container text-center">
+                            <a class="button-collapse blue background-primary-color color-white" href="https://www.niceincontact.com/become-incloud-partner">Become a DEVone Partner</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="third-section">
+            <div class="container">
+                <div class="col-xs-12 col-md-12">
+                    <h1 class="text-center sub-title">Latest News</h1>
+                </div>
+                <div class="col-xs-12 col-md-12 paragraph-container no-padding">
+                    <div class="paragraph text-left">
+                        <div class="small-margin-bottom">
+                            The API Façade is available for customer integration use.  It provides a single endpoint to access CXone suite APIs.  Using the Façade does not require a change to authentication for Central or Userhub.  The API Facade does use a separate base URI that is no longer cluster specific.  The new uri for the API façade will be: 
+                            
+                            “[https://api-\\\\ {area}|https://api-/].niceincontact.com”. 
+                            
+                            Before using the API Façade your area should be add to your whitelist. To see a list of the domain names including the API Façade got to the Port, Domain, Voice, and IP Address Requirements page on the help site.                           
+                        </div>
+                    </div>
+                    <br />
+                    <div class="paragraph text-left">
+                        <div class="small-margin-bottom">
+                            <b>Central:</b>
+                        </div>
+                        <div class="small-margin-bottom">
+                            <a href="https://help.incontact.com/Summer20/EN/Content/PlatformRequirements/Ports.htm?Highlight =ip%20ranges">https://help.incontact.com/Summer20/EN/Content/PlatformRequirements/Ports.htm?Highlight =ip%20ranges</a>
+                        </div>
+                        <div class="small-margin-bottom">
+                            <b>UserHub:</b>
+                        </div>
+                        <div class="small-margin-bottom">
+                            <a href="https://help.nice-incontact.com/content/platformrequirements/ports.htm?Highlight =ports">https://help.nice-incontact.com/content/platformrequirements/ports.htm?Highlight =ports</a>
+                        </div>
+                        <div class="small-margin-bottom">
+                            <div>
+                                <p>
+                                    Select your Cluster and the domain list templates will be displayed.<br />
+
+                                    If you do not know your area the Port, Domain, Voice, and IP Address Requirements page will show your area after selecting a cluster.<br />                                    
+                                </p>
+                            </div>
+                            <div>
+                                NA1 Example:<br />
+
+                                "resource_server_base_uri": <br />
+
+                                <a href="https://api-na1.niceincontact.com/inContactAPI/">https://api-na1.niceincontact.com/inContactAPI/</a><br /><br />
+
+                                The refresh token will not be different and will reflect your cluster just as before.<br />
+
+                                "refresh_token_server_uri":<br />
+
+                                <a href="https://api-c24.incontact.com/InContactAuthorizationServer/Token">https://api-c24.incontact.com/InContactAuthorizationServer/Token</a><br /><br />
+
+                                To make API requests to endpoints like GET /v18.0/agents you will use the API façade’s  as the base URI.<br />
+
+                                NA1 Example:<br />
+
+                                <a href="https://api-na1.niceincontact.com/incontactapi/services/v18.0/agents">https://api-na1.niceincontact.com/incontactapi/services/v18.0/agents</a><br /><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

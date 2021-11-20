@@ -1,0 +1,112 @@
+<pre class="prettyprint">
+# Returns the details for a specific DNC list in your business unit.
+#
+# * *Arguments* :
+#   - +token+ -> a token hash
+#   - +listID+ -> a nonnegative integer
+#   - +expired+ -> a boolean or null
+#   - +startDate+ -> an ISO 8601 compliant date in yyyy-mm-ddThh:mm:ss+/-hh:mm form
+#   - +endDate+ -> an ISO 8601 compliant date in yyyy-mm-ddThh:mm:ss+/-hh:mm form
+#   - +batchSize+ -> an integer between 1 and 10,000
+#   - +recordStart+ -> an integer
+#
+# * *Returns* :
+#   - details for a specific DNC list
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if listID isn't a nonnegative integer
+#   - +ArgumentError+ -> if startDate isn't an appropriate date
+#   - +ArgumentError+ -> if endDate isn't an appropriate date
+#   - +ArgumentError+ -> if batchSize isn't an integer between 1 and 10,000
+#   - +ArgumentError+ -> if recordStart isn't an integer
+#
+def getDNCListsByID(token,
+                    listID = 10,
+                    expired="null",
+                    startDate="2014-01-01", 
+                    endDate="2014-01-10",
+                    batchSize=10000,
+                    recordStart=10001)
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "the function didn't receive a token it could understand"
+  end
+  
+  # Check that listID is a nonnegative integer.
+  unless listID.is_a?(Integer) && listID >= 0
+    raise ArgumentError, "agentID must be a nonnegative integer"
+  end
+  
+  # Check that startDate is a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form.
+  unless startDate.is_a?(String) && 
+         startDate =~ /\d\d\d\d-\d\d-\d\d(T\d\d:\d\d:\d\d[\S]*)?/
+    raise ArgumentError, 
+      "startDate must be a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form"
+  end
+  
+  # Check that endDate is a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form.
+  unless endDate.is_a?(String) && 
+         endDate =~ /\d\d\d\d-\d\d-\d\d(T\d\d:\d\d:\d\d[\S]*)?/
+    raise ArgumentError, 
+      "endDate must be a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form"
+  end
+  
+  # Check that batchSize is an integer between 1 and 10000.
+  unless batchSize.is_a?(Integer) &&
+         batchSize >= 1 &&
+         batchSize <= 10000
+    raise ArgumentError, "batchSize must be an integer between 1 and 10000"
+  end
+  
+  # Check that recordStart is an integer.
+  unless recordStart.is_a? Integer 
+    raise ArgumentError, "recordStart must an integer" 
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/lists/dnc-lists/#{listID}?" + 
+           "startDate=#{startDate}&" +
+           "endDate=#{endDate}&" +
+           "batchSize=#{batchSize}&" +
+           "recordStart=#{recordStart}"
+  uri = URI.parse(baseURL + apiURL)
+  puts uri
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.request_get(uri.to_s, headers)
+
+  # The data the API returns is in JSON, so parse it if it's valid.
+  data = if response.body != ""
+      JSON.parse(response.body)
+    else
+      "The response was empty."
+  end
+
+  # Now you can do something with the data the API returned.
+end
+</pre>

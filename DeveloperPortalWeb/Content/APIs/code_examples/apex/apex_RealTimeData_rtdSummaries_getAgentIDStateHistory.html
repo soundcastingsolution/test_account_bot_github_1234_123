@@ -1,0 +1,57 @@
+<pre class="prettyprint linenums">
+/****************************************************************************************
+*
+* @description This method returns the total time the Agent specified by \"agentId\"
+* spent in each state over the time period spanned by \"startDate\" and \"endDate\"
+* @param agentId (integer): id of the agent
+* @param startDate (string): ISO-8601 beginning of report interval
+* @param endDate (string): ISO-8601 end of report interval
+*
+* @return Returns state duration for an agent
+*/ 
+public void getAgentStateHistory(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {    
+        //GET PAGE PARAMETERS
+        String agentId=ApexPages.currentPage().getParameters().get('agentId');
+        String StartDate=ApexPages.currentPage().getParameters().get('startDate');
+        String EndDate=ApexPages.currentPage().getParameters().get('endDate');
+
+        String apiURL = 'services/{version}/agents/' + agentId + '/statehistory?' +
+                'startDate=' + startDate + '&endDate=' + endDate;
+        try{
+        
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+        
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response = resp.getBody();
+        
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){               
+                //do something with the returned data
+                this.RawJSON=this.Response;
+            } else {
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+        }
+    }    
+}
+</pre>

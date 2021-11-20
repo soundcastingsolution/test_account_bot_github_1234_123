@@ -1,0 +1,31 @@
+﻿<pre class="prettyprint linenums">
+def putSuppressedContactBySuppressedContactId()
+ if($accessToken!='')
+ uri = URI.parse(($baseURI)+'/services/{version}/suppressed-contact'+($suppressedContactId))
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer " + ($accessToken),
+      "Content-Type" => "application/json",
+      "Data-Type" => "json",
+      "Content-Length" => "0",
+      "Accept-Encoding" => "deflate"}
+      body = {
+             "suppressedContactData":
+{
+             "startDate": "2019-12-04T13:27:01.766Z" ,
+             "endDate": "2019-12-04T13:27:01.766Z",
+             "value": "new",
+             "skills": "string"
+}
+     }
+  params= body.to_json
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host,uri.port
+  # puts headers
+  # Make the request.
+  res = http.put(uri.path , params, headers)
+ else
+  #no token get one or handle error
+    end
+end
+</pre>

@@ -1,0 +1,742 @@
+﻿{
+  "consumer-contact": {
+    "get": {
+      "tags": [
+        "ConsumerContact"
+      ],
+      "summary": "Get consumer contact details",
+      "parameters": [
+        {
+          "name": "consumerContactId",
+          "in": "path",
+          "description": "ID of the consumer contact",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsumerContact"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "consumer-contact-messages": {
+    "get": {
+      "tags": [
+        "ConsumerContact"
+      ],
+      "summary": "Get consumer contact messages",
+      "parameters": [
+        {
+          "name": "consumerContactId",
+          "in": "path",
+          "description": "ID of the consumer contact",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Ok",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "hits": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/MessageDetail"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Channel": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "channelIntegrationId",
+          "realExternalPlatformId",
+          "idOnExternalPlatform",
+          "isPrivate",
+          "hasTreeStructure"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique ID of channel"
+          },
+          "name": {
+            "type": "string",
+            "description": "Channel name e.g. My Twitter Page"
+          },
+          "channelIntegrationId": {
+            "type": "string",
+            "description": "Channel integration ID (UUID)"
+          },
+          "realExternalPlatformId": {
+            "enum": [
+              "apple-apps-reviews",
+              "apple-business-chat",
+              "chat",
+              "bw",
+              "custom",
+              "email",
+              "fb",
+              "forum",
+              "google-places",
+              "google-play",
+              "ig",
+              "kik",
+              "line",
+              "li",
+              "microsoft-teams",
+              "ok-ru",
+              "rss",
+              "slack",
+              "sms",
+              "social-watch",
+              "telegram",
+              "tw",
+              "viber",
+              "vk",
+              "voice",
+              "whatsapp",
+              "youscan",
+              "yt"
+            ],
+            "type": "string",
+            "description": "Identifier of external platform. This identifier has no impact on business logic and is for read only purposes, e.g. when grouping channels by 3rd party providers for displaying them."
+          },
+          "idOnExternalPlatform": {
+            "type": "string",
+            "description": "Identifier of external platform e.g. twitter account id"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "hasTreeStructure": {
+            "type": "boolean"
+          },
+          "contentFormat": {
+            "type": "string",
+            "default": "plain",
+            "description": "Format of content, Security warning: if you set html, content in html format would not be escaped",
+            "enum": [
+              "plain",
+              "html"
+            ]
+          },
+          "externalPlatformIcon": {
+            "type": "string",
+            "enum": [
+              "",
+              "amazon",
+              "apple",
+              "apple-apps",
+              "apple-imessage",
+              "co-browsing",
+              "contact-form",
+              "email",
+              "facebook",
+              "facebook-dm",
+              "facebook-messenger",
+              "forum",
+              "google",
+              "google-dm",
+              "google-maps",
+              "google-play",
+              "google-search",
+              "instagram",
+              "instagram-dm",
+              "kakao-talk",
+              "line-message",
+              "linkedin",
+              "listening",
+              "kik",
+              "ok-ru",
+              "pinterest",
+              "rcs",
+              "rss",
+              "slack",
+              "sms",
+              "snapchat",
+              "tango",
+              "telegram",
+              "tumblr",
+              "twitter",
+              "twitter-dm",
+              "viber",
+              "vkontakte",
+              "vkontakte-dm",
+              "voice",
+              "whatsapp",
+              "youtube",
+              "wechat"
+            ],
+            "default": "",
+            "description": "Channel icon identifier"
+          },
+          "hasAbilityToSendFiles": {
+            "type": "boolean",
+            "description": "Define if channel is able to process attachments in reply requests. Also if this is set to TRUE it will show ability to send file to the agent in the Agent Console.",
+            "default": false
+          },
+          "hasOutboundFlow": {
+            "type": "boolean",
+            "description": "Define if channel is able to do outbounds, meaning to start manualy (either agent in Agent Console or over API) completely new conversation without previous conversation from Agent.",
+            "default": false
+          },
+          "translationGroup": {
+            "type": "string",
+            "enum": [
+              "default",
+              "email",
+              "phone"
+            ],
+            "description": "Translation group for platform specific naming"
+          },
+          "externalPlatformAvatar": {
+            "type": "string",
+            "description": "URL to channel avatar (make sure url will not expire and is accesible over the internet for users)",
+            "default": ""
+          },
+          "ownerUserId": {
+            "type": "integer",
+            "description": "Define owner of the channel (user who will be notified if channel errors occured). UserId is DFO User ID.",
+            "default": 0
+          },
+          "hasReply": {
+            "type": "boolean",
+            "default": true,
+            "description": "Define if channel is able to send reply and whether replybox will be displayed to agent in the Agent Console."
+          },
+          "hasAbilityToShare": {
+            "type": "boolean",
+            "default": false,
+            "description": "Define if channel is able to send share message actions"
+          },
+          "hasAbilityToLike": {
+            "type": "boolean",
+            "default": false,
+            "description": "Define if channel is able to send like message actions"
+          },
+          "hasAbilityToTag": {
+            "type": "boolean",
+            "default": false,
+            "description": "Define if channel is able to send tag message actions"
+          },
+          "hasAbilityToChangeFrom": {
+            "type": "boolean",
+            "default": false,
+            "description": "Define if channel is able to change sender of reply"
+          },
+          "wysiwygEnabled": {
+            "type": "boolean",
+            "default": false,
+            "description": "Define if wysiwyg is used for reply box in the Agent Console. Also the content type HTML needs to be used at that point."
+          }
+        }
+      },
+      "NewMessage": {
+        "type": "object",
+        "required": [
+          "idOnExternalPlatform",
+          "thread",
+          "messageContent",
+          "createdAtWithMilliseconds",
+          "authorConsumerIdentity"
+        ],
+        "properties": {
+          "idOnExternalPlatform": {
+            "type": "string"
+          },
+          "deletedOnExternalPlatform": {
+            "type": "boolean",
+            "default": false
+          },
+          "url": {
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "inbound",
+              "outbound"
+            ],
+            "default": "inbound",
+            "type": "string"
+          },
+          "createdAtWithMilliseconds": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2019-10-12T03:20:50.52-04:00"
+          },
+          "tagIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "default": []
+          },
+          "reactionStatistics": {
+            "$ref": "#/components/schemas/ReactionStatistics"
+          },
+          "thread": {
+            "$ref": "#/components/schemas/Thread"
+          },
+          "replyToMessage": {
+            "$ref": "#/components/schemas/ReplyToMessage"
+          },
+          "messageContent": {
+            "$ref": "#/components/schemas/MessageContent"
+          },
+          "authorConsumerIdentity": {
+            "$ref": "#/components/schemas/AuthorConsumerIdentity"
+          },
+          "browserFingerprint": {
+            "$ref": "#/components/schemas/BrowserFingerprint"
+          },
+          "consumerContact": {
+            "$ref": "#/components/schemas/ConsumerContactCustomFieldsOnly"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Recipient"
+            }
+          }
+        }
+      },
+      "SendOutbound": {
+        "type": "object",
+        "required": [
+          "thread",
+          "messageContent"
+        ],
+        "properties": {
+          "thread": {
+            "$ref": "#/components/schemas/Thread"
+          },
+          "replyToMessage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ReplyToMessage"
+              }
+            ],
+            "description": "Can be used to build multilevel structure of message thread"
+          },
+          "messageContent": {
+            "$ref": "#/components/schemas/MessageContent"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "endUserRecipients": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/Recipient"
+            }
+          },
+          "browserFingerprint": {
+            "$ref": "#/components/schemas/BrowserFingerprint"
+          }
+        }
+      },
+      "MessageDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "idOnExternalPlatform": {
+            "type": "string"
+          },
+          "deletedOnExternalPlatform": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "inbound",
+              "outbound"
+            ],
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2019-10-12T03:20:50-04:00"
+          },
+          "reactionStatistics": {
+            "$ref": "#/components/schemas/ReactionStatistics"
+          },
+          "messageContent": {
+            "$ref": "#/components/schemas/MessageContent"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          }
+        }
+      },
+      "Thread": {
+        "type": "object",
+        "required": [
+          "idOnExternalPlatform"
+        ],
+        "properties": {
+          "idOnExternalPlatform": {
+            "type": "string",
+            "description": "Unique ID of the thread on external platform e.g. Facebook post ID"
+          },
+          "threadName": {
+            "type": "string",
+            "description": "E.g. Email subject, forum thread title...",
+            "default": ""
+          }
+        }
+      },
+      "ReplyToMessage": {
+        "type": "object",
+        "properties": {
+          "idOnExternalPlatform": {
+            "type": "string",
+            "description": "ID of parent message. Only for channels with hasTreeStructure is true"
+          }
+        }
+      },
+      "ReactionStatistics": {
+        "type": "object",
+        "properties": {
+          "likes": {
+            "type": "integer"
+          },
+          "shares": {
+            "type": "integer"
+          }
+        }
+      },
+      "AuthorConsumerIdentity": {
+        "type": "object",
+        "required": [
+          "idOnExternalPlatform"
+        ],
+        "properties": {
+          "idOnExternalPlatform": {
+            "type": "string",
+            "description": "Unique ID of user on external platform, e.g. Facebook user ID"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "nickname": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "description": "URL to Consumer image, it has to be availble from public internet so DFO can download the image into its own file storage."
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            }
+          }
+        }
+      },
+      "CustomField": {
+        "type": "object",
+        "properties": {
+          "ident": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "Attachment": {
+        "type": "object",
+        "required": [
+          "friendlyName",
+          "url"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "Recipient": {
+        "type": "object",
+        "required": [
+          "idOnExternalPlatform"
+        ],
+        "properties": {
+          "idOnExternalPlatform": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BrowserFingerprint": {
+        "type": "object",
+        "properties": {
+          "browser": {
+            "type": "string"
+          },
+          "browserVersion": {
+            "type": "string"
+          },
+          "os": {
+            "type": "string"
+          },
+          "osVersion": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "ConsumerContact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID of Customer Contact (case) where message is located."
+          },
+          "consumerContactStorageId": {
+            "type": "string",
+            "description": "ID of consumer storage where message is stored. This is internal ID of DFO and by additional post processing this ID may change. That's why you should always rely on Message.idOnExternalPlatform and on Thread.idOnExternalPlatform."
+          },
+          "channelId": {
+            "type": "string"
+          },
+          "direction": {
+            "enum": [
+              "inbound",
+              "outbound"
+            ],
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2019-10-12T03:20:50-04:00"
+          },
+          "customFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            }
+          }
+        }
+      },
+      "ConsumerContactCustomFieldsOnly": {
+        "type": "object",
+        "properties": {
+          "customFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            }
+          }
+        }
+      },
+      "MessageContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "payload"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "TEXT",
+              "PLUGIN",
+              "POSTBACK"
+            ]
+          },
+          "payload": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TextPayload"
+              },
+              {
+                "$ref": "#/components/schemas/ElementsPayload"
+              },
+              {
+                "$ref": "#/components/schemas/PostbackPayload"
+              }
+            ]
+          }
+        },
+        "example": {
+          "$ref": "#/components/examples/MessageContentExample"
+        }
+      },
+      "ElementsPayload": {
+        "type": "object",
+        "properties": {
+          "postback": {
+            "type": "string"
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Element"
+            }
+          }
+        }
+      },
+      "PostbackPayload": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "postback": {
+            "type": "string"
+          }
+        }
+      },
+      "TextPayload": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "Element": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "TEXT",
+              "BUTTON",
+              "MENU",
+              "TITLE"
+            ]
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Element"
+            }
+          }
+        }
+      },
+      "CustomFieldDefinition": {
+        "type": "object",
+        "properties": {
+          "ident": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "visibleInPostDetail": {
+            "type": "boolean"
+          },
+          "visibleInLiveChat": {
+            "type": "boolean"
+          },
+          "isEditable": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "examples": {
+      "MessageContentExample": {
+        "value": {
+          "type": "TEXT",
+          "payload": {
+            "text": "Hello world!"
+          }
+        }
+      }
+    }
+  }
+}

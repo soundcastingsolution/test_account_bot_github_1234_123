@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Refresh Token";
+}
+
+<p>
+    To refresh a token, you must invoke the token refresh API endpoint:
+</p>
+    <p>https://na1.nice-incontact.com/public/user/refresh</p>
+   <p><b>This will generate a bearer token and a refresh token.</b></p>
+    <p>
+    Your POST request should contain:
+</p>
+<p>
+    <ul>
+        <li><b>Header:</b> Content-Type: application/json</li>
+        <li><b>JSON RequestBody:</b></li></ul>
+<pre class="prettyprint linenums">
+    {
+    "token": "{refresh_token value from original token response in Step 2}"
+    }
+</pre>   
+</p>
+
+<p>This request will generate the following:</p>
+
+<pre class="prettyprint linenums">
+   { 
+    Response: 200 success
+    Body: {    
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9….”
+        "tokenExpirationTimeSec": 3600,
+        "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9…. ",
+        "refreshTokenExpirationTimeSec": 0,
+        "sessionId": null
+        }
+    }
+</pre>

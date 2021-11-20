@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Register Your Application";
+}
+
+<p>
+    In order to retrieve an API token, you must register your application. You do this in the NICE CXone Central website, under the <b>ACD >> ACD Configuration >> API Applications</b> menu. (If you do not see this menu option, your security profile is likely preventing you from seeing it. Contact your NICE CXone administrator, or consult <a href=http://help.incontact.com>Help.inContact.com</a> or NICE CXone technical support <span class="break-word">forAppName@VendorName:BusinessUnitNumber</span> assistance.)
+</p>
+
+<p>
+    When you register your application, you must specify a "Vendor Name" and an "Application Name." You must also specify which of the available APIs your application is authorized to use by selecting the Scopes authorized for this application.  This does not change the permissions for any Agent that calls an API using this application.  It only controls the ability to request those API methods.  If the Agent does not have permissions to execute the API functions, they will receive an error message indicating that the requested action is forbidden.  You can select from the following API scopes:
+</p>
+
+<ul class="text-left">
+    <li><b>AdminAPI</b> - Administrative APIs such as assigning a Skill to an Agent</li>
+    <li><b>AgentAPI</b> - Agent Session APIs such as accepting a Contact</li>
+    <li><b>AuthenticationAPI</b> - Authentication APIs such as resetting passwords</li>
+    <li><b>RealTimeDataAPI</b> - Real Time Data APIs such as getting current state of Agents</li>
+    <li><b>ReportingAPI</b> - Historical or calculated data</li>
+    <li><b>PatronAPI</b> - APIs that do not require NICE CXone credentials such as Click-to-call</li>
+    <li><b>CustomAPI</b> - Any APIs you create from the Studio scripting tool</li>
+</ul>
+
+<p>
+    <b>NOTE:</b> <i>It is a best practice to use the API Application configuration to control what API scopes your application will use, rather than the "scope" parameter in the token request.</i>
+</p>
+
+<p>
+    <img class="img-responsive center-block img-size-lg" src="@Url.Content("~/Content/images/icccas1.png")">
+</p>
+
+<p>
+    <b>NOTE:</b> If you are going to use an <i>Implicit Grant</i> token for your development, you will need to add all of the possible URLs that will be used to launch your application as an Authorized Callback URL. For example you could register a URL like below and use it when requesting an <i>Implicit Grant</i> tokenas described in <a data-toggle="collapse" onclick="scrollToId('SendAnImplicitRequest')">step four</a> of this tutorial.
+</p>
+
+<p class="indentation">
+    <b class="break-word">https://customapplication.superwidgets.com/authenticated</b>
+</p>
+
+<p>
+    The Vendor Name, Application Name, and Business Unit number will be used to retrieve a valid and current <i>Password</i> or <i>Client</i> API token.
+</p>
+
+<img class="img-responsive center-block img-size-lg" src="@Url.Content("~/Content/images/iccca.png")">
+
+

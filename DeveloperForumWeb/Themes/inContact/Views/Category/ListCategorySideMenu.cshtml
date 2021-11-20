@@ -1,0 +1,20 @@
+﻿@using MVCForum.Domain.Constants
+@model MVCForum.Website.ViewModels.CategoryListViewModel
+
+<div class="side-box categories-box">
+    <h4 class="top-level-header" style="font-weight:bold;">@Html.LanguageString("Category.CategoriesSideHeading")</h4>
+    <div class="sidebar-content">
+        <ul>
+            <li><a href="@Url.Action("Index")">@Html.LanguageString("Category.AllCategories")</a></li>
+            @foreach (var category in Model.AllPermissionSets.Keys)
+            {
+                var permissions = Model.AllPermissionSets[category];
+                if (!permissions[AppConstants.PermissionDenyAccess].IsTicked)
+                {
+                    <li><a href="@Html.Raw(category.NiceUrl)">@Html.Raw(@category.Name)</a></li>
+                }
+            }
+        </ul>
+    </div>
+
+</div>

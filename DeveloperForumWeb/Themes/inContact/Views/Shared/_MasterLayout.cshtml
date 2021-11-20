@@ -1,0 +1,337 @@
+﻿@using System.Configuration
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic|Lato:400,700,400italic" rel="stylesheet" type="text/css" />
+
+    @{
+        string corporateStyleBaseUrl = System.Configuration.ConfigurationManager.AppSettings["CorporateStylesLocation"];
+        bool userIsAuthenticated = (User != null && User.Identity != null && User.Identity.IsAuthenticated);
+    }
+    @RenderSection("Styles", required: false)
+
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <style>
+        .search-container .search-box {
+            color: #FFF;
+            background-image: url(/content/images/search-bg.jpg);
+            background-repeat: no-repeat;
+            background-color: #162732;
+            border: 0;
+            color: #fff;
+            font-size: 13px;
+            height: 15px;
+            padding-left: 7px;
+            width: 140px;
+            outline: none;
+            padding-top: 0px;
+            box-shadow: 0px 0px 0px transparent;
+        }
+
+        .search-container .top-menu-search-button {
+            position: relative;
+            border: 0;
+            left: -6px;
+            top: -3px;
+            background: transparent;
+        }
+
+        .top-menu-search-image {
+            margin: -1px 8px 0px -6px;
+            padding-top: 0;
+        }
+    </style>
+
+    @if (userIsAuthenticated)
+    {
+        <style type="text/css">
+            .secure-content-link:after {
+                content: '';
+                margin: 0;
+            }
+        </style>
+    }
+</head>
+<body>
+    <header>
+        <div class="search-container">
+            <div class="centered-fixed-width-content">
+                @if (userIsAuthenticated)
+                {
+                    <div class="login-information  float-left">
+                        <div class="logged-in-username" id="divBusinessUnit">Business Unit&nbsp;-&nbsp;</div>
+                    </div>
+                }
+                <div class="login-information float-right">
+                    <div class="float-right" style="margin-left:15px; margin-top: 5px">
+
+                        @*<form action="/Forum/search" method="get">
+                                <input class="search-box" type="text" id="term" name="term" />
+                                <button class="top-menu-search-button" type="submit">
+                                    <input type="image" class="top-menu-search-image" src="/content/images/search-icon.png"/>
+                                </button>
+                            </form>*@
+                    </div>
+                    @if (userIsAuthenticated)
+                    {
+                        <a class="pop-over-menu-trigger">
+                            <img src="@Url.Content(corporateStyleBaseUrl + "/Content/images/settings-gear.png")" />
+                            <div class="logged-in-username">
+                                @User.Identity.Name
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        @Html.RouteLink("Sign In", "Default", new { controller = "Account", action = "SignIn", returnUrl = Request.Url.PathAndQuery })
+                    }
+                    <div class="clear-both"></div>
+                    <div class="pop-over-menu">
+                        <span class="tail-top">
+                            <img src="@Url.Content(corporateStyleBaseUrl + "/Content/images/grfx_dropmenu_whitearrow.png")" />
+                        </span>
+                        <nav>
+                            @if (userIsAuthenticated)
+                            {
+                                <a href="/Account/SignOut?returnUrl=@Request.Url.PathAndQuery">Sign Out</a>
+                            }
+                            else
+                            {
+                                <a href="/Account/SignIn?returnUrl=@Request.Url.PathAndQuery">Sign In</a>
+                            }
+                        </nav>
+                    </div>
+                </div>
+                <div class="clear-both"></div>
+            </div>
+        </div>
+        <div class="menu-container">
+            <div class="centered-fixed-width-content">
+                <a href="/" class="float-left logo-link">
+                    <img src="~/Content/Images/in-contact-logo.png" />
+                </a>
+                <nav id="Menu" class="primary">
+                    <a id="API-link" onclick="ActivateSubMenu('API');">API</a>
+                    <a id="Documentation-link" onclick="ActivateSubMenu('Documentation');">Documentation</a>
+                    <a id="Downloads-link" href="/Downloads">Downloads</a>
+                    <a id="FAQ-link" href="/FAQ">FAQ</a>
+                    <a id="Forum-link" href="@ConfigurationManager.AppSettings["ForumHomeUrl"]" class="secure-content-link">Forum</a>
+                </nav>
+            </div>
+        </div>
+        <div class="sub-menu-container">
+            <div class="centered-fixed-width-content">
+                <nav id="API-sub-menu" class="sub-menu">
+                    <div class="navigation-link">» <a href="/API">API Home</a></div>
+                    <div class="navigation-link">» <a href="/API/AdminAPI">Admin API</a></div>
+                    <div class="navigation-link">» <a href="/API/AgentAPI">Agent API</a></div>
+                    <div class="navigation-link">» <a href="/API/AuthenticationAPI">Authentication API</a></div>
+                    <div class="navigation-link">» <a href="/API/ComingSoon">Coming Soon</a></div>
+                    <div class="navigation-link">» <a href="/API/CompleteRequestExampleCode">Complete Request Example Code</a></div>
+                    <div class="navigation-link">» <a href="/API/PatronAPI">Patron API</a></div>
+                    <div class="navigation-link">» <a href="/API/RealTimeDataAPI">Real-Time Data API</a></div>
+                    @*<div class="navigation-link">» <a href="/API/ReportingAPI">Reporting API</a></div>*@
+                </nav>
+                <nav id="Documentation-sub-menu" class="sub-menu">
+                    <div class="navigation-link">» <a href="/Documentation">Documentation Home</a></div>
+                    <div class="navigation-link">» <a href="/Documentation/AgentSessionEvents">Agent Session Events</a></div>
+                    <div class="navigation-link">» <a href="/Documentation/APIAuthenticationToken">API Authentication Token</a></div>
+                    <div class="navigation-link">» <a href="/Documentation/GettingStarted">Getting Started</a></div>
+                    <div class="navigation-link">» <a href="/Documentation/MobileSDK">Mobile SDK</a></div>
+                    <div class="navigation-link">» <a href="/Documentation/UsingEvents">Using Events</a></div>
+                </nav>
+                <div class="clear-both"></div>
+                <a onclick="$('.sub-menu-container').slideUp('fast', function(){$('.primary > a.on').attr('class', ''); $('nav.sub-menu').hide();});" class="mega-menu-close">
+                    <img src="@Url.Content(corporateStyleBaseUrl + "/Content/images/grfx_megamenu_arrow.png")" />
+                </a>
+            </div>
+        </div>
+        <div class="clear-both"></div>
+    </header>
+    @RenderBody()
+    <footer>
+        <div class="centered-fixed-width-content">
+            <div class="float-left">
+                <div style="color: #FA8c00" class="float-left footer-line">
+                    <a href="http://www.incontact.com/call-center-software-company/legal">Legal</a>
+                    |
+                    <a href="http://www.incontact.com/call-center-software-company/legal/privacy-policy">Privacy</a>
+                </div>
+                <div class="float-left clear-both footer-line">
+                    <span>&copy; @DateTime.Now.Year inContact Inc.</span>
+                </div>
+            </div>
+            <div class="float-right">
+                <a class="twitter-link float-right" target="_blank" href="http://www.twitter.com/incontact"></a>
+                <a class="linkedin-link float-right" target="_blank" href="http://www.linkedin.com/company/niceincontact"></a>
+                <a class="facebook-link float-right" target="_blank" href="http://www.facebook.com/niceincontact"></a>
+                <a class="blog-link float-right" target="_blank" href="http://www.niceincontact.com/blog"></a>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#sideSearchBox").keypress(function (e) {
+                if (e.which == 13) {
+                    window.location = '/Search?searchTerm=' + $('#sideSearchBox').val();
+                }
+            });
+
+
+            $('.pop-over-menu-trigger').click(function () {
+                $('.pop-over-menu').fadeIn(250);
+                setTimeout(function () {
+                    if (typeof document.onmousedown !== 'function') {
+                        $(document).bind('mousedown', function () { $('.pop-over-menu').fadeOut(250); $(document).unbind('mousedown'); });
+                    }
+                }, 100);
+            });
+
+            // In the sidebar, put the current page in bold.
+            $("#menu-item-list a").each(function () {
+                if ($(this).text() == document.title)
+                    $(this).css("font-weight", "bold");
+            });
+
+            @if (userIsAuthenticated)
+            {
+                //set the business unit using the cookie created server-side
+                <text>
+                setBusinessUnit();
+            </text>
+            }
+            else
+            {
+                <text>
+            $('.secure-content-link').attr('title', 'Sign in to view more.')
+            </text>
+            }
+
+            $('nav.sub-menu').each(function (navIndex, navElement) {
+                $('<div>')
+                    .attr('id', $(navElement).attr('id') + '-section-1')
+                    .attr('class', 'float-left')
+                    .width(275)
+                    .appendTo(navElement);
+
+                if ($(navElement).children('.navigation-link').size() > 1) {
+                    $('<div>')
+                        .attr('id', $(navElement).attr('id') + '-section-2')
+                        .attr('class', 'float-left')
+                        .width(275)
+                        .appendTo(navElement);
+                }
+
+                if ($(navElement).children().size('.navigation-link') > 2) {
+                    $('<div>')
+                        .attr('id', $(navElement).attr('id') + '-section-3')
+                        .attr('class', 'float-left')
+                        .width(275)
+                        .appendTo(navElement);
+                }
+
+                var numLinksPerColumn = Math.ceil($(navElement).children('.navigation-link').size() / 3);
+                var column = 1;
+                $(navElement).children('.navigation-link').each(function (index, linkElement) {
+                    if (index >= (numLinksPerColumn * column)) {
+                        column++;
+                    }
+                    $(linkElement).appendTo('#' + $(navElement).attr('id') + '-section-' + column);
+                });
+            });
+        });
+
+        function toggleSection(currentElement) {
+            $(currentElement).siblings().toggle();
+            $(currentElement).children('b.float-right').text($(currentElement).children('b.float-right').text() === '-' ? '+' : '-');
+        }
+
+        function setBusinessUnit() {
+            try {
+                var devCookieString = getCookie("zDevToken");
+                var divBusinessUnit = document.getElementById("divBusinessUnit");
+
+                if (devCookieString && divBusinessUnit) {
+                    var devCookie = $.parseJSON(devCookieString);
+                    divBusinessUnit.innerText += devCookie.BusinessUnitNumber;
+                }
+            }
+            catch (ex) {
+                //Disregard error here. End result: No business unit displayed. Could redirect to login I guess.
+            }
+        }
+
+        function getCookie(cookieName) {
+            var returnValue = null;
+            var all = document.cookie;  // Get all cookies in one big string
+            if (all && all !== "") {
+                var list = all.split("; "); // Split into individual name=value pairs
+                for (var i = 0; i < list.length; i++) {  // For each cookie
+                    var cookie = list[i];
+                    var p = cookie.indexOf("=");        // Find the first = sign
+                    var name = cookie.substring(0, p);   // Get cookie name
+                    if (name === cookieName) {
+                        returnValue = cookie.substring(p + 1);  // Get cookie value
+                        returnValue = decodeURIComponent(returnValue);  // Decode the value
+                        break;
+                    }
+                }
+            }
+            return returnValue;
+        }
+
+
+
+        function ActivateSubMenu(subMenuId) {
+            if ($('#' + subMenuId + '-link').hasClass('on')) {
+                $('.sub-menu-container').slideUp('fast', function () { $('.primary > a.on').removeClass('on'); $('nav.sub-menu').hide(); });
+            }
+            else {
+                $('.sub-menu-container').slideDown();
+
+                var openNav = $('nav.sub-menu:not(:hidden)');
+                var navToOpen = $('#' + subMenuId + '-sub-menu');
+
+                if (openNav.length > 0) {
+                    openNav.slideUp("fast", function () {
+                        $('.primary > a.on').removeClass('on');
+                        navToOpen.slideToggle('fast');
+                        $('#' + subMenuId + '-link').addClass('on');
+                    });
+                }
+                else {
+                    navToOpen.slideToggle('fast');
+                    $('#' + subMenuId + '-link').addClass('on');
+                };
+            }
+        }
+
+        if ($.browser == 'firefox') {
+
+        }
+
+
+        //Google Tag Manager
+        (function (w, d, s, l, i) {
+            try {
+                w[l] = w[l] || [];
+                w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            }
+            catch (ex) {
+                //Disregard error here. End result: no google analytics
+            }
+        })(window, document, 'script', 'dataLayer', 'GTM-PJC75W');
+    </script>
+</body>
+</html>

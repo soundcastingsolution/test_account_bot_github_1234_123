@@ -1,0 +1,3659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="8803fc24-99ad-4dd7-897f-73ae34383926"
+  name="DeveloperPortalModeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="1ab65ffc-e527-4afb-a22c-37d6b3fd68cf"
+        name="Person without inContact Central credentials"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="dd33270d-6e7d-41a6-90dd-22f889f6a690"
+            isDerived="false"
+            sourceEndRoleName="Person without inContact Central credentials"
+            targetEndRoleName="Browses developer portal to learn inContact API information"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="72be5044-a072-4b5d-97a9-3a2edd1c6405"
+              LastKnownName="Browses developer portal to learn general, non-secure inContact API information"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4886d921-9fda-4ca1-831e-1149ffd9d7ab"
+                  name="Person without inContact Central credentials"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d1bfb48c-0486-4dfa-bd7d-671e6cd690f8"
+                  name="Browses developer portal to learn inContact API information"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="72be5044-a072-4b5d-97a9-3a2edd1c6405"
+        name="Browses developer portal to learn general, non-secure inContact API information"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="778c96b4-b47a-4329-9ced-da0c940e1db6"
+        name="inContact Central user"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="463d730e-7c84-4884-921a-80c75a519453"
+        name="inContact Central user"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="00b38c60-4792-4eb3-aa81-448914b035f8"
+            isDerived="false"
+            sourceEndRoleName="inContact Central user"
+            targetEndRoleName="Browses developer portal to learn general inContact API information"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="72be5044-a072-4b5d-97a9-3a2edd1c6405"
+              LastKnownName="Browses developer portal to learn general, non-secure inContact API information"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4da46310-6526-4a12-bf0b-43d0250f90af"
+                  name="inContact Central user"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bcc94837-4b3b-46c3-b10c-3004b0cd5dce"
+                  name="Browses developer portal to learn general inContact API information"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="9361ca32-38ba-4cba-b037-7c7628a2bcb6"
+            isDerived="false"
+            sourceEndRoleName="inContact Central user"
+            targetEndRoleName="Browses developer portal to find specific inContact API details"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="5d52de9b-0229-49d9-8c82-129b9025f1b6"
+              LastKnownName="Browses developer portal to find secure inContact API details only available to inContact customers"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="37280ae4-770b-41e6-b286-eb15ad82a510"
+                  name="inContact Central user"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="912a81a7-4b29-4786-8401-37b81c7f48f8"
+                  name="Browses developer portal to find specific inContact API details"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="10ce700b-2525-4248-a3b6-825f48eb10e4"
+            isDerived="false"
+            sourceEndRoleName="inContact Central user"
+            targetEndRoleName="Uses developer forum to search questions and ask answers"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="fbc3d6f0-ffe7-4098-98f5-141dc3bda8c2"
+              LastKnownName="Uses developer forum to search questions and ask answers"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5e2f66e3-b35d-4ada-88c9-488a081ea121"
+                  name="inContact Central user"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5d87001d-2885-4cb7-b78a-1bb92d4baed0"
+                  name="Uses developer forum to search questions and ask answers"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="5d52de9b-0229-49d9-8c82-129b9025f1b6"
+        name="Browses developer portal to find secure inContact API details only available to inContact customers"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="fbc3d6f0-ffe7-4098-98f5-141dc3bda8c2"
+        name="Uses developer forum to search questions and ask answers"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="ac9fa91a-d44f-429d-891f-e571fdf4f50d"
+        name="inContact CIMS person"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="bde5ccda-734e-49e3-b112-dce15ecb5479"
+            isDerived="false"
+            sourceEndRoleName="inContact CIMS person"
+            targetEndRoleName="Modifies static content on developer portal"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="3e91552e-a299-4220-90fc-9c9a0782d11c"
+              LastKnownName="Modifies static content on developer portal"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1d4947ad-af38-4dc6-87ad-043dfbe55ec1"
+                  name="inContact CIMS person"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="045182c9-a75f-4cf7-9420-e76c11ced5cf"
+                  name="Modifies static content on developer portal"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="6bdd8c80-2591-4483-8c9f-0495285a3882"
+            isDerived="false"
+            sourceEndRoleName="inContact CIMS person"
+            targetEndRoleName="Adds API calls to developer portal"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c9e7fbe5-9984-423b-b84e-adf30ab42760"
+              LastKnownName="Adds API call details to developer portal"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d8788685-7c9b-4d24-b1f2-dcb89865b59b"
+                  name="inContact CIMS person"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7d6e80f7-f8e6-487f-bb2f-fce49acfa673"
+                  name="Adds API calls to developer portal"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="196a326e-f8a3-46e3-b57d-2fabb63aab9a"
+            isDerived="false"
+            sourceEndRoleName="inContact CIMS person"
+            targetEndRoleName="Monitors and answers forum questions"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="45fdb3ec-c6ee-4b90-b1e6-a62a8a2faaac"
+              LastKnownName="Monitors and answers forum questions"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3241092e-fd87-48fd-9c0c-609924d7b8cf"
+                  name="inContact CIMS person"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="dec70f60-ef7e-458c-92ec-66fdd6bed7d5"
+                  name="Monitors and answers forum questions"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="3e91552e-a299-4220-90fc-9c9a0782d11c"
+        name="Modifies static content on developer portal"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="937096bd-91fa-4d46-b229-f14f8ef36c6f"
+            isDerived="false"
+            sourceEndRoleName="Modifies static content on developer portal"
+            targetEndRoleName="Deploys new content automatically"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d952cda3-62ee-49ec-9867-b9b75d85a8f4"
+              LastKnownName="Deploys new content without waiting for product delivery cycle of 6+ months"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4a99ba81-f3ab-40de-ad0b-c75e35ba99b4"
+                  name="Modifies static content on developer portal"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="61abafb0-26c0-4de3-9605-4c05491e8468"
+                  name="Deploys new content automatically"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c9e7fbe5-9984-423b-b84e-adf30ab42760"
+        name="Adds API call details to developer portal"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="899a694c-3756-45e1-8bcb-afad0e1695e3"
+            isDerived="false"
+            sourceEndRoleName="Adds API call details to developer portal"
+            targetEndRoleName="Deploys new content automatically"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d952cda3-62ee-49ec-9867-b9b75d85a8f4"
+              LastKnownName="Deploys new content without waiting for product delivery cycle of 6+ months"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3a4c6f14-28af-4afe-943e-f7570652f2a4"
+                  name="Adds API call details to developer portal"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7a1a85b4-4721-45e0-97a4-99677451ed12"
+                  name="Deploys new content automatically"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="323915ed-f489-41f4-a033-4f06d0135efd"
+        name="Corporate IT developer"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="101210be-74e2-4eec-9d40-fd01e4176309"
+            isDerived="false"
+            sourceEndRoleName="Corporate IT developer"
+            targetEndRoleName="Adds features to the developer portal"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="8620cd89-19d1-4c35-bf51-a118bf6b2bfb"
+              LastKnownName="Adds features to the developer portal"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="80ab4a4e-c470-4067-bf6a-0d9b4d460b27"
+                  name="Corporate IT developer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3faf8432-21c1-4964-be49-c78395c61399"
+                  name="Adds features to the developer portal"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8620cd89-19d1-4c35-bf51-a118bf6b2bfb"
+        name="Adds features to the developer portal"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="0236435b-8497-4d87-8264-a4acf4cc733e"
+            isDerived="false"
+            sourceEndRoleName="Adds features to the developer portal"
+            targetEndRoleName="Deploys new features using CCR / CCB process"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="f40aa527-c72c-40d1-a553-263b972aa801"
+              LastKnownName="Deploys new features using CCR / CCB process"
+              LastKnownLocation="DeveloperPortalModeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="333ec1d7-18a6-420a-bf4d-102cc7d93c3f"
+                  name="Adds features to the developer portal"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="be413c03-109d-4fd3-a44e-75e4715721f9"
+                  name="Deploys new features using CCR / CCB process"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d952cda3-62ee-49ec-9867-b9b75d85a8f4"
+        name="Deploys new content without waiting for product delivery cycle of 6+ months"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f40aa527-c72c-40d1-a553-263b972aa801"
+        name="Deploys new features using CCR / CCB process"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="45fdb3ec-c6ee-4b90-b1e6-a62a8a2faaac"
+        name="Monitors and answers forum questions"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="98b60c0a-ac5a-4624-9644-f41efc1c7bb1"
+        name="Authentication"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="47434ad3-60d0-424c-bb83-b42fd5fbe0de"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="a186ec5f-400a-4c2e-8504-404288dcd3ea"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="75921b55-6b6b-49c0-94dc-11a1926cfcc4"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="ae143fe1-d408-4036-8841-6dda9c8e0f4f"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="c7f885cd-cab2-49b6-9fcd-ba3440182ed6"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="75921b55-6b6b-49c0-94dc-11a1926cfcc4"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2219d1bb-2f43-4fe3-99c8-d5017e8a3b35"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="08bea30e-3932-4098-9895-7754d08997d5"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="ee11ad90-b4b9-4673-b95c-1ab33e65bb41"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ae143fe1-d408-4036-8841-6dda9c8e0f4f"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c7f885cd-cab2-49b6-9fcd-ba3440182ed6"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e616947c-72ec-4710-bd75-d4436535ccb2"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="ee11ad90-b4b9-4673-b95c-1ab33e65bb41"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="a186ec5f-400a-4c2e-8504-404288dcd3ea"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="909c4b20-9741-48a7-b1a9-d2c8ef42fb19"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="281b6178-0305-43f6-b1ed-d2803d1279af"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="cbe33fcf-d99a-46f6-89ee-ef9a6e7da717"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="ffefcb66-194c-40e7-b36d-2c7cd0178706"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="6eba7492-5bc2-4b27-9b0e-81a4e49a0434"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e1858968-d94c-42c5-a580-c91f2be632f3"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="effb6674-015f-4f04-8636-09d11108f5dc"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="491bf821-cd0b-45ec-8195-f3c0ebc5fae1"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="1dd79a39-982b-45f8-911d-6bd40726ef7d"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="a2b920ee-6c09-4da4-838b-5e4801d0b69d"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="ffefcb66-194c-40e7-b36d-2c7cd0178706"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="49805194-b982-40c0-987b-1ff08f529057"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7d0e09ec-8063-4234-9426-e347004f9107"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="ee11ad90-b4b9-4673-b95c-1ab33e65bb41"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6eba7492-5bc2-4b27-9b0e-81a4e49a0434"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="27d9919b-7f5d-4ec7-ae41-967192d02989"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3e7d708f-46c2-4265-b536-d737f332b02f"
+                LastKnownName="inContact Central"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="2c160fab-ab9e-446b-837b-e3027e6b66cb"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="774dc43c-e450-4103-a88d-7add1035c44e"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="17d0cdce-e5b6-46ee-8f0a-5dc6dbf2f430"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="fb6c02d7-fc67-4da5-954f-ec859b05f989"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="774dc43c-e450-4103-a88d-7add1035c44e"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="be6f9814-abbc-4167-a2e3-ea0fc5259fc9"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3e7d708f-46c2-4265-b536-d737f332b02f"
+                LastKnownName="inContact Central"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="17d0cdce-e5b6-46ee-8f0a-5dc6dbf2f430"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="3e7d708f-46c2-4265-b536-d737f332b02f"
+                LastKnownName="inContact Central"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e1858968-d94c-42c5-a580-c91f2be632f3"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fb6c02d7-fc67-4da5-954f-ec859b05f989"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="3e7d708f-46c2-4265-b536-d737f332b02f"
+                LastKnownName="inContact Central"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="effb6674-015f-4f04-8636-09d11108f5dc"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="2c160fab-ab9e-446b-837b-e3027e6b66cb"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="f03068c9-2dbd-4e9a-87ed-5eb593d80b37"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3e7d708f-46c2-4265-b536-d737f332b02f"
+                LastKnownName="inContact Central"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="3410e0c6-492e-4f75-be1c-3b64169c5fb0"
+            name="BehaviorExecutionSpecification4">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="2e313993-77f7-462b-8639-b59b93927e20"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="80bb9a85-fbaa-4566-b980-076048585537"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="7f594293-dfbc-49ee-be91-3cdf2ad85993"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="b1c8d94c-0962-4013-a675-f6c5899795ac"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="305d6b8c-8359-4bb5-b484-f0fe32a239be"
+                LastKnownName="MessageOccurrenceSpecification20"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="ea823ca0-9f3c-4ab0-9752-518d7ce62548"
+                LastKnownName="MessageOccurrenceSpecification21"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="fa71ad88-2370-4a77-ae00-6482f792ad85"
+                LastKnownName="MessageOccurrenceSpecification24"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="9205a932-ed16-4fbe-979a-b80ce89ea00e"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="80bb9a85-fbaa-4566-b980-076048585537"
+            name="ExecutionOccurrenceSpecification7">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="c94f6337-8601-4e9f-a108-748981d7a6a6"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="7f594293-dfbc-49ee-be91-3cdf2ad85993"
+            name="MessageOccurrenceSpecification14">
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="491bf821-cd0b-45ec-8195-f3c0ebc5fae1"
+            name="MessageOccurrenceSpecification13">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="8ceebe11-d7cc-4f3a-ae89-5e6ab4622ef9"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="a4344b74-abf3-4c1c-bbac-e4fa17a47fa1"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="394987ca-7f19-4664-b99d-6610fe310191"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="8523502f-1a4f-4156-bb53-1cc5953eabf1"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="461ac67a-a425-4993-a6de-3563bdaa03ce"
+                LastKnownName="MessageOccurrenceSpecification19"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="394987ca-7f19-4664-b99d-6610fe310191"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="4e31c4ce-b2ad-4a9c-b2ca-1f93d3f9aa0b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8523502f-1a4f-4156-bb53-1cc5953eabf1"
+            name="MessageOccurrenceSpecification18">
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="b1c8d94c-0962-4013-a675-f6c5899795ac"
+            name="MessageOccurrenceSpecification17">
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="305d6b8c-8359-4bb5-b484-f0fe32a239be"
+            name="MessageOccurrenceSpecification20">
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="461ac67a-a425-4993-a6de-3563bdaa03ce"
+            name="MessageOccurrenceSpecification19">
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="a4344b74-abf3-4c1c-bbac-e4fa17a47fa1"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="80d88f69-b047-4777-b930-5226b1cc57f6"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="d53bf60b-c5a8-4f42-b67f-f3ba71aa9cf3"
+            name="BehaviorExecutionSpecification6">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="eaa962fc-ad6e-4572-8895-594f6a3621c5"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="a0627c5a-5025-491a-8ffa-a3735f214bbf"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="27b1aad7-4542-4469-a7f8-d9ceb1078024"
+                LastKnownName="MessageOccurrenceSpecification22"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="733cc3c8-d102-4b66-867b-b0936dfe1908"
+                LastKnownName="MessageOccurrenceSpecification23"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="a0627c5a-5025-491a-8ffa-a3735f214bbf"
+            name="ExecutionOccurrenceSpecification11">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="c172e24c-a8d5-4055-a6d2-8b16730440c2"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="27b1aad7-4542-4469-a7f8-d9ceb1078024"
+            name="MessageOccurrenceSpecification22">
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ea823ca0-9f3c-4ab0-9752-518d7ce62548"
+            name="MessageOccurrenceSpecification21">
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fa71ad88-2370-4a77-ae00-6482f792ad85"
+            name="MessageOccurrenceSpecification24">
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="733cc3c8-d102-4b66-867b-b0936dfe1908"
+            name="MessageOccurrenceSpecification23">
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="eaa962fc-ad6e-4572-8895-594f6a3621c5"
+            name="ExecutionOccurrenceSpecification12">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="36404c01-61bf-4891-9d58-53b7f3bdeee5"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+                LastKnownName="DeveloperForum Database"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="9205a932-ed16-4fbe-979a-b80ce89ea00e"
+            name="MessageOccurrenceSpecification15">
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1dd79a39-982b-45f8-911d-6bd40726ef7d"
+            name="MessageOccurrenceSpecification16">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="2e313993-77f7-462b-8639-b59b93927e20"
+            name="ExecutionOccurrenceSpecification8">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="e4e8265e-d640-4f20-b3cf-e7c07548640c"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3906253e-9360-4636-af43-98ad25582656"
+                LastKnownName="Developer Forum Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a2b920ee-6c09-4da4-838b-5e4801d0b69d"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a3dc5638-24c9-498c-813a-996790464095"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="ee11ad90-b4b9-4673-b95c-1ab33e65bb41"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="cbe33fcf-d99a-46f6-89ee-ef9a6e7da717"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="00b9bc32-11f4-4f68-9943-0823fa541714"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+                LastKnownName="Developer Portal Web App"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="ee11ad90-b4b9-4673-b95c-1ab33e65bb41"
+            name="Browser"
+            isActor="false"
+            lifelineDisplayName="Browser">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="08bea30e-3932-4098-9895-7754d08997d5"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e616947c-72ec-4710-bd75-d4436535ccb2"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="7d0e09ec-8063-4234-9426-e347004f9107"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="a3dc5638-24c9-498c-813a-996790464095"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="c58484bf-5856-4cd2-bd17-9d77b4a36af1"
+            name="Developer Portal Web App"
+            isActor="false"
+            lifelineDisplayName="Developer Portal Web App">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="75921b55-6b6b-49c0-94dc-11a1926cfcc4"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a186ec5f-400a-4c2e-8504-404288dcd3ea"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ffefcb66-194c-40e7-b36d-2c7cd0178706"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="cbe33fcf-d99a-46f6-89ee-ef9a6e7da717"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="3906253e-9360-4636-af43-98ad25582656"
+            name="Developer Forum Web App"
+            isActor="false"
+            lifelineDisplayName="Developer Forum Web App">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="80bb9a85-fbaa-4566-b980-076048585537"
+                LastKnownName="ExecutionOccurrenceSpecification7"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="2e313993-77f7-462b-8639-b59b93927e20"
+                LastKnownName="ExecutionOccurrenceSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="528f3c1f-1c57-425b-8f17-b8f819335ce1"
+            name="DeveloperForum Database"
+            isActor="false"
+            lifelineDisplayName="DeveloperForum Database">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="394987ca-7f19-4664-b99d-6610fe310191"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a4344b74-abf3-4c1c-bbac-e4fa17a47fa1"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="a0627c5a-5025-491a-8ffa-a3735f214bbf"
+                LastKnownName="ExecutionOccurrenceSpecification11"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="eaa962fc-ad6e-4572-8895-594f6a3621c5"
+                LastKnownName="ExecutionOccurrenceSpecification12"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="3e7d708f-46c2-4265-b536-d737f332b02f"
+            name="inContact Central"
+            isActor="false"
+            lifelineDisplayName="inContact Central">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="774dc43c-e450-4103-a88d-7add1035c44e"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="2c160fab-ab9e-446b-837b-e3027e6b66cb"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="45e45296-49af-4a22-8b6a-68e5f3128342"
+            name="Request secure content"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="08bea30e-3932-4098-9895-7754d08997d5"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ae143fe1-d408-4036-8841-6dda9c8e0f4f"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="417de09f-d955-464d-88a4-b252cecf32a3"
+            name="Return login form"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c7f885cd-cab2-49b6-9fcd-ba3440182ed6"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e616947c-72ec-4710-bd75-d4436535ccb2"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="3de8efab-292c-427d-ae10-f779f837c2cd"
+            name="Submit login form"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7d0e09ec-8063-4234-9426-e347004f9107"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6eba7492-5bc2-4b27-9b0e-81a4e49a0434"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="a7133afc-7f66-45f8-a24f-69ce28fd3e2b"
+            name="Send oAuth message to retrieve token"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e1858968-d94c-42c5-a580-c91f2be632f3"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="17d0cdce-e5b6-46ee-8f0a-5dc6dbf2f430"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="61e33607-6c24-4fd7-9a09-d58de9448e6d"
+            name="Return authorization token"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fb6c02d7-fc67-4da5-954f-ec859b05f989"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="effb6674-015f-4f04-8636-09d11108f5dc"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="862018d6-38b4-4c9e-bf00-89e8f0c2a089"
+            name="Send User to confirm/create  forum User"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="491bf821-cd0b-45ec-8195-f3c0ebc5fae1"
+                LastKnownName="MessageOccurrenceSpecification13"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="7f594293-dfbc-49ee-be91-3cdf2ad85993"
+                LastKnownName="MessageOccurrenceSpecification14"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="90acaf2c-727c-4a58-bcb2-fc41f28c52a2"
+            name="Get User"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="b1c8d94c-0962-4013-a675-f6c5899795ac"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="8523502f-1a4f-4156-bb53-1cc5953eabf1"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="f6a76c00-112f-4b16-bc47-5d2b7919fa4b"
+            name="User or null"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="461ac67a-a425-4993-a6de-3563bdaa03ce"
+                LastKnownName="MessageOccurrenceSpecification19"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="305d6b8c-8359-4bb5-b484-f0fe32a239be"
+                LastKnownName="MessageOccurrenceSpecification20"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="41e09876-9976-4c95-90e2-68f2ee07dcbc"
+            name="Ceate User if necessary"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ea823ca0-9f3c-4ab0-9752-518d7ce62548"
+                LastKnownName="MessageOccurrenceSpecification21"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="27b1aad7-4542-4469-a7f8-d9ceb1078024"
+                LastKnownName="MessageOccurrenceSpecification22"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="80a3df95-2262-41e9-928f-001fffcc3ab1"
+            name="Result"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="733cc3c8-d102-4b66-867b-b0936dfe1908"
+                LastKnownName="MessageOccurrenceSpecification23"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fa71ad88-2370-4a77-ae00-6482f792ad85"
+                LastKnownName="MessageOccurrenceSpecification24"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="d6490338-bdc8-4018-9b1b-3c77c15a849c"
+            name="Result"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="9205a932-ed16-4fbe-979a-b80ce89ea00e"
+                LastKnownName="MessageOccurrenceSpecification15"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1dd79a39-982b-45f8-911d-6bd40726ef7d"
+                LastKnownName="MessageOccurrenceSpecification16"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="b48d0408-8a2c-445a-b821-2cdbd341bcc2"
+            name="Return token and redirect to secure content"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a2b920ee-6c09-4da4-838b-5e4801d0b69d"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a3dc5638-24c9-498c-813a-996790464095"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2219d1bb-2f43-4fe3-99c8-d5017e8a3b35"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="909c4b20-9741-48a7-b1a9-d2c8ef42fb19"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="49805194-b982-40c0-987b-1ff08f529057"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="00b9bc32-11f4-4f68-9943-0823fa541714"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="be6f9814-abbc-4167-a2e3-ea0fc5259fc9"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="f03068c9-2dbd-4e9a-87ed-5eb593d80b37"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="c94f6337-8601-4e9f-a108-748981d7a6a6"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="e4e8265e-d640-4f20-b3cf-e7c07548640c"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="4e31c4ce-b2ad-4a9c-b2ca-1f93d3f9aa0b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="80d88f69-b047-4777-b930-5226b1cc57f6"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="c172e24c-a8d5-4055-a6d2-8b16730440c2"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="36404c01-61bf-4891-9d58-53b7f3bdeee5"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="9ea58954-700b-42a3-9e0e-e37db010ec92"
+        name="SearchingInPhpVersion"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <ownedCommentsInternal>
+          <comment
+            Id="72894107-32e1-4339-b9a3-feadd4174828">
+            <body>uses setTimeout() with 250 ms delay</body>
+            <annotatedElements>
+              <behaviorExecutionSpecificationMoniker
+                Id="1b67137d-06c5-4a07-b2f9-d9681689fc08"
+                LastKnownName="BehaviorExecutionSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </annotatedElements>
+          </comment>
+          <comment
+            Id="79a4ca35-f510-4b96-8f3c-42f746f8d4d7">
+            <body>Retrieves each API definition JSON file that is listed in the /index file under "apis": []. This has the potential to get out of sync with actual API definition files.</body>
+            <annotatedElements>
+              <combinedFragmentMoniker
+                Id="cf5a09f8-a990-4cec-8ca1-cb7a72e1fae8"
+                LastKnownName="CombinedFragment2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </annotatedElements>
+          </comment>
+          <comment
+            Id="3622a803-9938-4fa4-a5ce-07734f08353b">
+            <body>Retrieves each web page that is listed in the /index file under "pages": []. This has the potential to get out of sync with actual files that comprise the site.</body>
+            <annotatedElements>
+              <interactionOperandMoniker
+                Id="94893ea0-3972-417b-b5e1-294fc6f072e4"
+                LastKnownName="InteractionOperand1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </annotatedElements>
+          </comment>
+        </ownedCommentsInternal>
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="2957c6ec-6bb7-4cd0-815b-77db59b51cd7"
+            name="BehaviorExecutionSpecification5">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="0fd5ad8e-5212-46d5-8860-5129e90e96ab"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="94c4c472-06b5-4955-a5d4-99f2a310bf60"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="5699063d-3e9e-4aa3-a679-e086e7b288c0"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="c82e8de6-d5c9-4465-8fc8-6af56abfc22f"
+                LastKnownName="MessageOccurrenceSpecification19"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="94c4c472-06b5-4955-a5d4-99f2a310bf60"
+            name="ExecutionOccurrenceSpecification9">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="9ec51afe-20e9-4507-882b-42df032a9391"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="5699063d-3e9e-4aa3-a679-e086e7b288c0"
+            name="MessageOccurrenceSpecification18">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f839b665-1122-49a5-9f5b-d2f2edc28946"
+            name="MessageOccurrenceSpecification17">
+            <covered>
+              <lifelineMoniker
+                Id="8e69458d-e057-4188-9fd8-4e683553d6e7"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="164b9563-362a-48dc-9a50-f6bf2029a540"
+            name="MessageOccurrenceSpecification20">
+            <covered>
+              <lifelineMoniker
+                Id="8e69458d-e057-4188-9fd8-4e683553d6e7"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c82e8de6-d5c9-4465-8fc8-6af56abfc22f"
+            name="MessageOccurrenceSpecification19">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="0fd5ad8e-5212-46d5-8860-5129e90e96ab"
+            name="ExecutionOccurrenceSpecification10">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a3874ca8-9a8c-4c2a-b492-6645f1773d75"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="a8e15fbd-d12b-421b-8786-eb7e1ba0f8bf"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="68cb9c4c-8e2c-4c09-8f3a-11a4089ca146"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="943da930-3cb7-4fe3-b723-2c529417a094"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="4c8a117c-35b9-469c-83fc-a710c340bc2d"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="f0365d52-cf61-48f8-ae0a-15af8d754f9a"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="2c27ef8b-5f24-4f57-8790-6254c500a109"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="e00d3423-c6f9-485c-a9e4-dc755eea4892"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="943da930-3cb7-4fe3-b723-2c529417a094"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b3a9c014-a9db-49aa-9bdf-fdc2974df000"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0f3ac9e3-1fad-4e7c-b253-7bb8b8b8bce1"
+            name="MessageOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="8e69458d-e057-4188-9fd8-4e683553d6e7"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4c8a117c-35b9-469c-83fc-a710c340bc2d"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="02b4e321-9ae9-41ec-bd13-575ef8b360fa"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="5102f5d5-5a82-490f-abe9-9b09f767834a"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="19433d27-f534-43e3-a1d0-cda0acb7dfa1"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="63d8af71-6011-4f25-98c5-023a7ac9c35b"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="c5d59ff8-6e60-422b-9756-049fe381e495"
+                LastKnownName="MessageOccurrenceSpecification25"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="5dabc110-d566-41f0-baec-0f0e5ba476af"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="19433d27-f534-43e3-a1d0-cda0acb7dfa1"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="e009a438-7a2e-457f-914a-dfea36cbdef5"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f0365d52-cf61-48f8-ae0a-15af8d754f9a"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="63d8af71-6011-4f25-98c5-023a7ac9c35b"
+            name="MessageOccurrenceSpecification10">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="2659ea54-1dc4-4d12-bd45-8ef167b53a01"
+            name="BehaviorExecutionSpecification7">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="9aa6b0e2-88d8-4967-86aa-836dfd6edf9e"
+                LastKnownName="ExecutionOccurrenceSpecification14"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="da1d2cdf-bba6-4dc3-b7ca-e9fc1efb80a8"
+                LastKnownName="ExecutionOccurrenceSpecification13"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="12eb5754-d909-48cb-ba5e-565bdfc91ad0"
+                LastKnownName="MessageOccurrenceSpecification26"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="da1d2cdf-bba6-4dc3-b7ca-e9fc1efb80a8"
+            name="ExecutionOccurrenceSpecification13">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="332a21f4-4df9-41e1-9923-4b4731a101b8"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c5d59ff8-6e60-422b-9756-049fe381e495"
+            name="MessageOccurrenceSpecification25">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="12eb5754-d909-48cb-ba5e-565bdfc91ad0"
+            name="MessageOccurrenceSpecification26">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="5dabc110-d566-41f0-baec-0f0e5ba476af"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="2c27ef8b-5f24-4f57-8790-6254c500a109"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="5102f5d5-5a82-490f-abe9-9b09f767834a"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="65961491-9158-4388-ad20-8dd47a55bc77"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="9aa6b0e2-88d8-4967-86aa-836dfd6edf9e"
+            name="ExecutionOccurrenceSpecification14">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="f86ba5a6-f0bb-4432-ab5e-0661521fd6c1"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="335b6a3f-abe0-4010-b26d-b327f7f64344"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="8e69458d-e057-4188-9fd8-4e683553d6e7"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e00d3423-c6f9-485c-a9e4-dc755eea4892"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="68cb9c4c-8e2c-4c09-8f3a-11a4089ca146"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="aedf009a-c5a0-470a-b18f-58ab1f9cb300"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="9806ef93-fa45-4149-a6d5-7725670e9912"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="47c1f059-f12e-4a9d-b8aa-9d5dbc8e18b1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="0d3d2237-b28e-4e21-af2e-e14984fcb111"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="29b6cae9-10d8-4bbc-a866-1979381ecbba"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="22c8df8f-77d8-4456-b797-a464a03b04b1"
+                LastKnownName="MessageOccurrenceSpecification27"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="1ad5f4a1-1122-4b4b-9a5c-628c6a69b240"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="0d3d2237-b28e-4e21-af2e-e14984fcb111"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="74b7bcfb-63a7-4415-b9d8-a035cc513f7c"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a48a41f3-d51f-4156-9c2e-6ce5e8321d78"
+            name="MessageOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="8e69458d-e057-4188-9fd8-4e683553d6e7"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="29b6cae9-10d8-4bbc-a866-1979381ecbba"
+            name="MessageOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="1b67137d-06c5-4a07-b2f9-d9681689fc08"
+            name="BehaviorExecutionSpecification8">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="d4ca9b21-61b6-4261-b6ce-20e13375559c"
+                LastKnownName="ExecutionOccurrenceSpecification16"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="35217320-4339-4e74-9cf0-88a6f918f4f8"
+                LastKnownName="ExecutionOccurrenceSpecification15"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="c902e54c-6dfd-4afa-b31b-7ea58f477b4c"
+                LastKnownName="MessageOccurrenceSpecification28"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="d57e9951-8179-4373-8e0d-d1834470b98d"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="70d5dd11-2658-4c04-ab51-69d78bc6b90f"
+                LastKnownName="ExecutionOccurrenceSpecification17"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="921464f2-efca-45fe-a63b-12dfdf905e45"
+                LastKnownName="ExecutionOccurrenceSpecification18"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="35217320-4339-4e74-9cf0-88a6f918f4f8"
+            name="ExecutionOccurrenceSpecification15">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="48806076-0db1-4779-b1e8-f94bd1f00571"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c902e54c-6dfd-4afa-b31b-7ea58f477b4c"
+            name="MessageOccurrenceSpecification28">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="22c8df8f-77d8-4456-b797-a464a03b04b1"
+            name="MessageOccurrenceSpecification27">
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ebfb2b76-1f81-42bb-8cec-b3a74589e456"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="8e69458d-e057-4188-9fd8-4e683553d6e7"
+                LastKnownName="Browser"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1ad5f4a1-1122-4b4b-9a5c-628c6a69b240"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="47c1f059-f12e-4a9d-b8aa-9d5dbc8e18b1"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="67e6c9f0-e9b3-40ce-87da-5c76819a3fdf"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+                LastKnownName="*.html"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d57e9951-8179-4373-8e0d-d1834470b98d"
+            name="MessageOccurrenceSpecification29">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="d320f803-ee8e-40bd-ad07-b44492a36cff"
+            name="BehaviorExecutionSpecification9">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="921464f2-efca-45fe-a63b-12dfdf905e45"
+                LastKnownName="ExecutionOccurrenceSpecification18"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="70d5dd11-2658-4c04-ab51-69d78bc6b90f"
+                LastKnownName="ExecutionOccurrenceSpecification17"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="05398ef3-7e82-4bbc-b370-ed13f5b4bd11"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="113a7427-096f-40d1-871c-1fc04998e138"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="c85e8412-7c3d-43a5-b6ac-505452c84076"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="066fb4fe-a48f-4916-97cf-8534bf42fc00"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="de78a132-412d-4caa-939d-b83b4258a414"
+                LastKnownName="MessageOccurrenceSpecification37"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="b2e639ba-e090-4588-836c-eedd259dbc2e"
+                LastKnownName="ExecutionOccurrenceSpecification23"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="fc55ebf8-d6b1-4e13-8abd-dc42578577ff"
+                LastKnownName="ExecutionOccurrenceSpecification24"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="70d5dd11-2658-4c04-ab51-69d78bc6b90f"
+            name="ExecutionOccurrenceSpecification17">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="3be60ec2-1087-4782-baf9-a3d007e7fb48"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="05398ef3-7e82-4bbc-b370-ed13f5b4bd11"
+            name="MessageOccurrenceSpecification30">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="113a7427-096f-40d1-871c-1fc04998e138"
+            name="MessageOccurrenceSpecification31">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="d81bf0dd-c6b9-4440-8183-3a00202770b6"
+            name="BehaviorExecutionSpecification10">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="066fb4fe-a48f-4916-97cf-8534bf42fc00"
+                LastKnownName="ExecutionOccurrenceSpecification20"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="c85e8412-7c3d-43a5-b6ac-505452c84076"
+                LastKnownName="ExecutionOccurrenceSpecification19"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="a616d776-5a6c-4a98-b651-45ce31af3350"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="63a04f2b-c44a-494b-9bfb-d2e759813f04"
+                LastKnownName="OperandOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="d79fbf8b-907f-486a-85f2-4e9eb8b93296"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="c4b8c5b7-9248-42f8-af7b-086aa7d7b575"
+                LastKnownName="MessageOccurrenceSpecification36"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="8b2042b8-7cf4-4261-826a-ed87c3888379"
+                LastKnownName="OperandOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="c85e8412-7c3d-43a5-b6ac-505452c84076"
+            name="ExecutionOccurrenceSpecification19">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="8099ac5f-88ca-4e91-9c49-0eaadd736c22"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a616d776-5a6c-4a98-b651-45ce31af3350"
+            name="MessageOccurrenceSpecification32">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <combinedFragment
+            Id="1602ddd8-a82a-4b56-a024-ad664394b008"
+            name="CombinedFragment1"
+            interactionOperator="Alt"
+            customInteractionOperator="Loop for every page in /index">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <operands>
+              <interactionOperand
+                Id="94893ea0-3972-417b-b5e1-294fc6f072e4"
+                name="InteractionOperand1">
+                <coveredLifelines>
+                  <lifelineMoniker
+                    Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                    LastKnownName="PHP Server"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <lifelineMoniker
+                    Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                    LastKnownName="hobosearch (in search.js)"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                </coveredLifelines>
+                <guard>
+                  <interactionConstraint
+                    Id="bab250ee-21c4-48db-88d2-f0a43f82186e">
+                    <maxInt>
+                      <literalString
+                        Id="39551da4-3b79-4fdf-8bd9-465e1b0bda5c"
+                        name="LiteralString1" />
+                    </maxInt>
+                    <minInt>
+                      <literalString
+                        Id="c94e8f14-8558-4d8c-853f-3db73a84d004"
+                        name="LiteralString2" />
+                    </minInt>
+                  </interactionConstraint>
+                </guard>
+                <operandOccurrenceSpecifications>
+                  <operandOccurrenceSpecificationMoniker
+                    Id="0d067909-64ae-412c-a5df-c9ccec555c2c"
+                    LastKnownName="OperandOccurrenceSpecification1"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <operandOccurrenceSpecificationMoniker
+                    Id="ad3ecf97-fec8-45b0-b936-4488bfae666b"
+                    LastKnownName="OperandOccurrenceSpecification2"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <operandOccurrenceSpecificationMoniker
+                    Id="63a04f2b-c44a-494b-9bfb-d2e759813f04"
+                    LastKnownName="OperandOccurrenceSpecification3"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <operandOccurrenceSpecificationMoniker
+                    Id="8b2042b8-7cf4-4261-826a-ed87c3888379"
+                    LastKnownName="OperandOccurrenceSpecification4"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                </operandOccurrenceSpecifications>
+              </interactionOperand>
+            </operands>
+          </combinedFragment>
+          <operandOccurrenceSpecification
+            Id="63a04f2b-c44a-494b-9bfb-d2e759813f04"
+            name="OperandOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <operandOccurrenceSpecification
+            Id="0d067909-64ae-412c-a5df-c9ccec555c2c"
+            name="OperandOccurrenceSpecification1">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="d5eacc35-4f3e-42f3-b627-2a3742295440"
+            name="BehaviorExecutionSpecification11">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="9037de5d-044c-44b8-bab7-aa6f60373352"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="f89443f7-d369-4083-b596-529099f9d778"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="088d0598-c01c-428e-86c8-432262e8eb53"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="a6e31d93-c231-4e34-92b7-2c7d50d3630f"
+                LastKnownName="MessageOccurrenceSpecification35"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="f89443f7-d369-4083-b596-529099f9d778"
+            name="ExecutionOccurrenceSpecification21">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="b68a5684-8472-4fd2-a8d7-ef9a549b44a8"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="088d0598-c01c-428e-86c8-432262e8eb53"
+            name="MessageOccurrenceSpecification34">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="d79fbf8b-907f-486a-85f2-4e9eb8b93296"
+            name="MessageOccurrenceSpecification33">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="c4b8c5b7-9248-42f8-af7b-086aa7d7b575"
+            name="MessageOccurrenceSpecification36">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="a6e31d93-c231-4e34-92b7-2c7d50d3630f"
+            name="MessageOccurrenceSpecification35">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="9037de5d-044c-44b8-bab7-aa6f60373352"
+            name="ExecutionOccurrenceSpecification22">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="7e53d77b-2606-4949-9fbe-9883929baf5e"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <operandOccurrenceSpecification
+            Id="8b2042b8-7cf4-4261-826a-ed87c3888379"
+            name="OperandOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <operandOccurrenceSpecification
+            Id="ad3ecf97-fec8-45b0-b936-4488bfae666b"
+            name="OperandOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="066fb4fe-a48f-4916-97cf-8534bf42fc00"
+            name="ExecutionOccurrenceSpecification20">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="26f55d50-bbcd-4c06-93a9-7b1903f715e0"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="de78a132-412d-4caa-939d-b83b4258a414"
+            name="MessageOccurrenceSpecification37">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="45902f54-6c5c-43a0-8473-f89aa57b8272"
+            name="BehaviorExecutionSpecification12">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="fc55ebf8-d6b1-4e13-8abd-dc42578577ff"
+                LastKnownName="ExecutionOccurrenceSpecification24"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="b2e639ba-e090-4588-836c-eedd259dbc2e"
+                LastKnownName="ExecutionOccurrenceSpecification23"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="76502e58-1603-4835-83e1-4efdc85f88b0"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="4a4b0f67-d283-4709-904f-e26faf6e544c"
+                LastKnownName="OperandOccurrenceSpecification7"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="fd64300e-56df-485c-809c-7a5bb46c5b25"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="832d20a4-b4b8-4e29-9c86-124ddaa353f2"
+                LastKnownName="MessageOccurrenceSpecification36"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="bd764df5-7ec8-44ab-a1e4-9756ef6e7826"
+                LastKnownName="OperandOccurrenceSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="b2e639ba-e090-4588-836c-eedd259dbc2e"
+            name="ExecutionOccurrenceSpecification23">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="8cb71a40-197b-4345-a9ee-dc7cbb17b151"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="76502e58-1603-4835-83e1-4efdc85f88b0"
+            name="MessageOccurrenceSpecification38">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <combinedFragment
+            Id="cf5a09f8-a990-4cec-8ca1-cb7a72e1fae8"
+            name="CombinedFragment2"
+            interactionOperator="Alt"
+            customInteractionOperator="Loop for every api in /index">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <operands>
+              <interactionOperand
+                Id="97fa58d8-d917-443b-ad27-63045d7fe9f2"
+                name="InteractionOperand1">
+                <coveredLifelines>
+                  <lifelineMoniker
+                    Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                    LastKnownName="PHP Server"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <lifelineMoniker
+                    Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                    LastKnownName="hobosearch (in search.js)"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                </coveredLifelines>
+                <guard>
+                  <interactionConstraint
+                    Id="10d82175-d327-4284-8d33-7f5d63ab8583">
+                    <maxInt>
+                      <literalString
+                        Id="033a4de5-0c2e-4b36-94b5-04e27d60bae5"
+                        name="LiteralString1" />
+                    </maxInt>
+                    <minInt>
+                      <literalString
+                        Id="723d57f7-44ce-4422-a479-77836d8fce50"
+                        name="LiteralString2" />
+                    </minInt>
+                  </interactionConstraint>
+                </guard>
+                <operandOccurrenceSpecifications>
+                  <operandOccurrenceSpecificationMoniker
+                    Id="d87fdd99-0b0d-4f4a-9157-8cb0b1af8fd2"
+                    LastKnownName="OperandOccurrenceSpecification5"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <operandOccurrenceSpecificationMoniker
+                    Id="0e7b69c5-4d81-4520-91fa-4966aa6f1f0f"
+                    LastKnownName="OperandOccurrenceSpecification6"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <operandOccurrenceSpecificationMoniker
+                    Id="4a4b0f67-d283-4709-904f-e26faf6e544c"
+                    LastKnownName="OperandOccurrenceSpecification7"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                  <operandOccurrenceSpecificationMoniker
+                    Id="bd764df5-7ec8-44ab-a1e4-9756ef6e7826"
+                    LastKnownName="OperandOccurrenceSpecification8"
+                    LastKnownLocation="DeveloperPortalModeling.uml" />
+                </operandOccurrenceSpecifications>
+              </interactionOperand>
+            </operands>
+          </combinedFragment>
+          <operandOccurrenceSpecification
+            Id="d87fdd99-0b0d-4f4a-9157-8cb0b1af8fd2"
+            name="OperandOccurrenceSpecification5">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <operandOccurrenceSpecification
+            Id="4a4b0f67-d283-4709-904f-e26faf6e544c"
+            name="OperandOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="5d0a4f02-ea17-4722-8418-53ab5973a57b"
+            name="BehaviorExecutionSpecification11">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="f66bd650-e1d5-4243-8f38-bbad42df0ae2"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="ce943961-2999-4091-b1dd-72c8c9e0a694"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="01ae96a2-968e-4468-9471-b750a1f38b6c"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="b4774141-74da-4cfb-be3a-8c9c507ed3c3"
+                LastKnownName="MessageOccurrenceSpecification35"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="ce943961-2999-4091-b1dd-72c8c9e0a694"
+            name="ExecutionOccurrenceSpecification21">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="63eb207b-f95e-4521-a681-b22dd3dd7808"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fd64300e-56df-485c-809c-7a5bb46c5b25"
+            name="MessageOccurrenceSpecification33">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="01ae96a2-968e-4468-9471-b750a1f38b6c"
+            name="MessageOccurrenceSpecification34">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="b4774141-74da-4cfb-be3a-8c9c507ed3c3"
+            name="MessageOccurrenceSpecification35">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="832d20a4-b4b8-4e29-9c86-124ddaa353f2"
+            name="MessageOccurrenceSpecification36">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="f66bd650-e1d5-4243-8f38-bbad42df0ae2"
+            name="ExecutionOccurrenceSpecification22">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="bc3f9346-8f67-4fb1-bf56-ef58a03754bd"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <operandOccurrenceSpecification
+            Id="bd764df5-7ec8-44ab-a1e4-9756ef6e7826"
+            name="OperandOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <operandOccurrenceSpecification
+            Id="0e7b69c5-4d81-4520-91fa-4966aa6f1f0f"
+            name="OperandOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+                LastKnownName="PHP Server"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </operandOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="fc55ebf8-d6b1-4e13-8abd-dc42578577ff"
+            name="ExecutionOccurrenceSpecification24">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2de28ed8-2edb-4190-96d7-7b9134546221"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="921464f2-efca-45fe-a63b-12dfdf905e45"
+            name="ExecutionOccurrenceSpecification18">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="ee6bb092-d2c1-4465-a5b8-6f81bf74ee42"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="d4ca9b21-61b6-4261-b6ce-20e13375559c"
+            name="ExecutionOccurrenceSpecification16">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="5becbfd9-8f3f-4024-bafb-a1678ff4b7a2"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="DeveloperPortalModeling.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+                LastKnownName="hobosearch (in search.js)"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="8e69458d-e057-4188-9fd8-4e683553d6e7"
+            name="Browser"
+            isActor="false"
+            lifelineDisplayName="Browser">
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="f839b665-1122-49a5-9f5b-d2f2edc28946"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="164b9563-362a-48dc-9a50-f6bf2029a540"
+                LastKnownName="MessageOccurrenceSpecification20"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="0f3ac9e3-1fad-4e7c-b253-7bb8b8b8bce1"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="335b6a3f-abe0-4010-b26d-b327f7f64344"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="a48a41f3-d51f-4156-9c2e-6ce5e8321d78"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="ebfb2b76-1f81-42bb-8cec-b3a74589e456"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="df29c07c-aca9-416b-ac9d-d78671414d13"
+            name="*.html"
+            isActor="false"
+            lifelineDisplayName="*.html">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="943da930-3cb7-4fe3-b723-2c529417a094"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="68cb9c4c-8e2c-4c09-8f3a-11a4089ca146"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="0d3d2237-b28e-4e21-af2e-e14984fcb111"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="47c1f059-f12e-4a9d-b8aa-9d5dbc8e18b1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="3fa3b73e-2f69-4f5a-99d5-6fa35f37967a"
+            name="hobosearch (in search.js)"
+            isActor="false"
+            lifelineDisplayName="hobosearch (in search.js)">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="19433d27-f534-43e3-a1d0-cda0acb7dfa1"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="5102f5d5-5a82-490f-abe9-9b09f767834a"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="35217320-4339-4e74-9cf0-88a6f918f4f8"
+                LastKnownName="ExecutionOccurrenceSpecification15"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="d4ca9b21-61b6-4261-b6ce-20e13375559c"
+                LastKnownName="ExecutionOccurrenceSpecification16"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="e882da10-4d97-4703-8dd5-e546aef77c7a"
+            name="PHP Server"
+            isActor="false"
+            lifelineDisplayName="PHP Server">
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="94c4c472-06b5-4955-a5d4-99f2a310bf60"
+                LastKnownName="ExecutionOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="0fd5ad8e-5212-46d5-8860-5129e90e96ab"
+                LastKnownName="ExecutionOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="da1d2cdf-bba6-4dc3-b7ca-e9fc1efb80a8"
+                LastKnownName="ExecutionOccurrenceSpecification13"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="9aa6b0e2-88d8-4967-86aa-836dfd6edf9e"
+                LastKnownName="ExecutionOccurrenceSpecification14"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="0d067909-64ae-412c-a5df-c9ccec555c2c"
+                LastKnownName="OperandOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f89443f7-d369-4083-b596-529099f9d778"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="9037de5d-044c-44b8-bab7-aa6f60373352"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="ad3ecf97-fec8-45b0-b936-4488bfae666b"
+                LastKnownName="OperandOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="d87fdd99-0b0d-4f4a-9157-8cb0b1af8fd2"
+                LastKnownName="OperandOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="ce943961-2999-4091-b1dd-72c8c9e0a694"
+                LastKnownName="ExecutionOccurrenceSpecification21"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="f66bd650-e1d5-4243-8f38-bbad42df0ae2"
+                LastKnownName="ExecutionOccurrenceSpecification22"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+              <operandOccurrenceSpecificationMoniker
+                Id="0e7b69c5-4d81-4520-91fa-4966aa6f1f0f"
+                LastKnownName="OperandOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="389b22a4-9485-4ca7-bfc2-bf6075db98ca"
+            name="GET search.js"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f839b665-1122-49a5-9f5b-d2f2edc28946"
+                LastKnownName="MessageOccurrenceSpecification17"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="5699063d-3e9e-4aa3-a679-e086e7b288c0"
+                LastKnownName="MessageOccurrenceSpecification18"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="f7db32fd-1109-499e-bb38-a94fb271db79"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c82e8de6-d5c9-4465-8fc8-6af56abfc22f"
+                LastKnownName="MessageOccurrenceSpecification19"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="164b9563-362a-48dc-9a50-f6bf2029a540"
+                LastKnownName="MessageOccurrenceSpecification20"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="53e307bd-0b94-440f-8d07-ebe2a5063dea"
+            name="$(document).ready()"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="0f3ac9e3-1fad-4e7c-b253-7bb8b8b8bce1"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="4c8a117c-35b9-469c-83fc-a710c340bc2d"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="586bf6c1-f89e-4c19-a173-39f720bb13f7"
+            name="hobosearch.init()"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f0365d52-cf61-48f8-ae0a-15af8d754f9a"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="63d8af71-6011-4f25-98c5-023a7ac9c35b"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="806b34cc-3084-4e76-a76d-1f269f6831b1"
+            name="GET /index"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c5d59ff8-6e60-422b-9756-049fe381e495"
+                LastKnownName="MessageOccurrenceSpecification25"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="12eb5754-d909-48cb-ba5e-565bdfc91ad0"
+                LastKnownName="MessageOccurrenceSpecification26"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="cb36832f-5f1a-423b-a64a-fed215c8e1c6"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="5dabc110-d566-41f0-baec-0f0e5ba476af"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="2c27ef8b-5f24-4f57-8790-6254c500a109"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="27cc5ca0-38b5-4cb3-88c1-80e66df6e6da"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e00d3423-c6f9-485c-a9e4-dc755eea4892"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="335b6a3f-abe0-4010-b26d-b327f7f64344"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="4b7cb77b-c1eb-46c3-b96e-192885b7303c"
+            name="Search initiated"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a48a41f3-d51f-4156-9c2e-6ce5e8321d78"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="29b6cae9-10d8-4bbc-a866-1979381ecbba"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="5ed50142-8a90-4def-b538-c9de3c1c2634"
+            name="hobosearch.create_results()"
+            messageKind="Complete"
+            messageSort="AsynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="22c8df8f-77d8-4456-b797-a464a03b04b1"
+                LastKnownName="MessageOccurrenceSpecification27"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c902e54c-6dfd-4afa-b31b-7ea58f477b4c"
+                LastKnownName="MessageOccurrenceSpecification28"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="8022eff8-5baa-4896-ae7c-7f1d2e01ae81"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1ad5f4a1-1122-4b4b-9a5c-628c6a69b240"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ebfb2b76-1f81-42bb-8cec-b3a74589e456"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="57d8bb5a-960f-46de-90c6-b66ef68e947b"
+            name="hobosearch.exec_search"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d57e9951-8179-4373-8e0d-d1834470b98d"
+                LastKnownName="MessageOccurrenceSpecification29"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="05398ef3-7e82-4bbc-b370-ed13f5b4bd11"
+                LastKnownName="MessageOccurrenceSpecification30"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="4d9393da-954e-4773-a26c-80e7cce4a1ef"
+            name="hobosearch.search_in_pages"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="113a7427-096f-40d1-871c-1fc04998e138"
+                LastKnownName="MessageOccurrenceSpecification31"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a616d776-5a6c-4a98-b651-45ce31af3350"
+                LastKnownName="MessageOccurrenceSpecification32"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="e3ea8e3f-143c-41ae-b2dc-77496c0f7951"
+            name="GET (every page in /Index)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="d79fbf8b-907f-486a-85f2-4e9eb8b93296"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="088d0598-c01c-428e-86c8-432262e8eb53"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ffe1bef2-aae8-4001-b8b6-b4d595a5f7b1"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="a6e31d93-c231-4e34-92b7-2c7d50d3630f"
+                LastKnownName="MessageOccurrenceSpecification35"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="c4b8c5b7-9248-42f8-af7b-086aa7d7b575"
+                LastKnownName="MessageOccurrenceSpecification36"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="3f78a36d-dc80-4c65-8f73-7d8f557ad431"
+            name="hobosearch.search_in_apis"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="true">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="de78a132-412d-4caa-939d-b83b4258a414"
+                LastKnownName="MessageOccurrenceSpecification37"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="76502e58-1603-4835-83e1-4efdc85f88b0"
+                LastKnownName="MessageOccurrenceSpecification38"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="1d7894e1-be17-45c6-93d5-d27b9528a448"
+            name="GET (every api in /Index)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="fd64300e-56df-485c-809c-7a5bb46c5b25"
+                LastKnownName="MessageOccurrenceSpecification33"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="01ae96a2-968e-4468-9471-b750a1f38b6c"
+                LastKnownName="MessageOccurrenceSpecification34"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="1cbaff32-2448-4462-b20f-d94f31c1e63c"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="b4774141-74da-4cfb-be3a-8c9c507ed3c3"
+                LastKnownName="MessageOccurrenceSpecification35"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="832d20a4-b4b8-4e29-9c86-124ddaa353f2"
+                LastKnownName="MessageOccurrenceSpecification36"
+                LastKnownLocation="DeveloperPortalModeling.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="74b7bcfb-63a7-4415-b9d8-a035cc513f7c"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="67e6c9f0-e9b3-40ce-87da-5c76819a3fdf"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b3a9c014-a9db-49aa-9bdf-fdc2974df000"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="aedf009a-c5a0-470a-b18f-58ab1f9cb300"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="e009a438-7a2e-457f-914a-dfea36cbdef5"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="65961491-9158-4388-ad20-8dd47a55bc77"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="9ec51afe-20e9-4507-882b-42df032a9391"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a3874ca8-9a8c-4c2a-b492-6645f1773d75"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="332a21f4-4df9-41e1-9923-4b4731a101b8"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="f86ba5a6-f0bb-4432-ab5e-0661521fd6c1"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="48806076-0db1-4779-b1e8-f94bd1f00571"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="5becbfd9-8f3f-4024-bafb-a1678ff4b7a2"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="3be60ec2-1087-4782-baf9-a3d007e7fb48"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="ee6bb092-d2c1-4465-a5b8-6f81bf74ee42"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="8099ac5f-88ca-4e91-9c49-0eaadd736c22"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="26f55d50-bbcd-4c06-93a9-7b1903f715e0"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="b68a5684-8472-4fd2-a8d7-ef9a549b44a8"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="7e53d77b-2606-4949-9fbe-9883929baf5e"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="8cb71a40-197b-4345-a9ee-dc7cbb17b151"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2de28ed8-2edb-4190-96d7-7b9134546221"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="63eb207b-f95e-4521-a681-b22dd3dd7808"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="bc3f9346-8f67-4fb1-bf56-ef58a03754bd"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

@@ -1,0 +1,80 @@
+<pre class="prettyprint linenums">
+# Calls the API to retrieve the skill details for all the agents configured in
+# a business unit.
+#
+# * *Arguments* :
+#   - +token+ -> a token hash
+#   - +startDate+ -> an ISO 8601 compliant date in yyyy-mm-ddThh:mm:ss+/-hh:mm form
+#   - +endDate+ -> an ISO 8601 compliant date in yyyy-mm-ddThh:mm:ss+/-hh:mm form. 
+#    endDate cannot be more than 30 days after startDate
+#
+# * *Returns* :
+#   - the skill details for all the agents configured in a business unit.
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if startDate isn't an appropriate date
+#   - +ArgumentError+ -> if endDate isn't an appropriate date
+#
+def getAgentSkillData(token, startDate="2014-01-01", endDate="2014-01-10")
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "the function didn't receive a token it could understand"
+  end
+  
+  # Check that startDate is a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form.
+  unless startDate.is_a?(String) && 
+         startDate =~ /\d\d\d\d-\d\d-\d\d(T\d\d:\d\d:\d\d[\S]*)?/
+    raise ArgumentError, 
+      "startDate must be a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form"
+  end
+  
+  # Check that endDate is a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form.
+  unless endDate.is_a?(String) && 
+         endDate =~ /\d\d\d\d-\d\d-\d\d(T\d\d:\d\d:\d\d[\S]*)?/
+    raise ArgumentError, 
+      "endDate must be a string in yyyy-mm-ddThh:mm:ss+/-hh:mm form"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  apiURL =
+    "services/{version}/agents/skill-data?startDate=#{startDate}&endDate=#{endDate}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.request_get(baseURL + apiURL, headers)
+    
+  # The data the API returns is in JSON, so parse it if it's valid.
+  data = if response.body != ""
+      JSON.parse(response.body)
+    else
+      "The response was empty."
+  end
+
+  # Now you can do something with the data the API returned.
+end
+</pre>

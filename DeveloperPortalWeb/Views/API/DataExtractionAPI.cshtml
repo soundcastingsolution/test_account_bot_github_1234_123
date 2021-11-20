@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+    ViewBag.Title = "Data Extraction API";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+
+<p>
+    The Data Extraction API lets you extract data from CXone for external reporting purposes. For example, you can extract QM workflow data or CXone Recording interaction metadata. Data to extract can only be filtered according to the specified date range.
+</p>
+
+<p>
+    Call the endpoint /jobs/sync to trigger a query for extracting data. Data is prepared and gathered. A URL is returned and is accessible for 30 seconds (not including the time it takes to download the file).
+</p>
+
+<p>
+    You can write scripts to call the API periodically instead of retrieving the data manually each time. At any given time, only one user per tenant can call an API. You can only call the API once in a 30 second period.
+</p>
+
+<p>
+    For more information, see <a href="https://help.nice-incontact.com/content/recording/dataextractionapi.htm">Data Extraction API</a> in the online help.
+</p>
+
+ <button type="button" class="GeneralCollapsible">General Requirements</button>
+<div class="content">
+    <p>
+        To use this API, you must first generate an access token (to be used as an authorization bearer token when calling Data Extraction APIs).
+    </p>
+    <p>
+        Follow these steps to generate the access token:
+    </p>
+    <p>
+            1. Make sure you are logged in to CXone as a user with sufficient permissions to generate an access key:
+
+        <img src="~/Content/images/Generate Access Key.jpg" alt="Italian Trulli">
+    </p>
+    <p>
+        <b>My Access Key </b> is required for generating your own access key.
+    </p>
+    <p>
+        <b>Access Key</b> is required for generating access keys for other users.
+    </p>
+    <p>
+            2. Generate an access key and a secret key:
+                              
+        <ul>
+            a.	To generate an access key for yourself, follow the steps below:
+            In CXone, navigate to User -> My Profile -> Access Keys  and click Generate New Access Key.
+        </ul>
+
+              <img src="~/Content/images/Secret Key.jpg" alt="Italian Trulli"> 
+        
+        <ul>
+            b.	To generate an access key for another employee:
+            In CXone, navigate to Employees -> Edit Employee -> Access Keys and click Generate New Access Key.
+        </ul>
+               
+         <img src="~/Content/images/Employee edit.jpg" alt="Italian Trulli">          
+    </p>
+    <p>
+
+        3.	Copy the secret key to a secure place, as it will be visible only once.
+    </p>
+    <p>
+        4.	Generate an access token by calling the following API:
+    </p>
+    <p>
+        URL: <a href="https://na1.nice-incontact.com/authentication/v1/token/access-key">https://na1.nice-incontact.com/authentication/v1/token/access-key</a>
+    </p>
+    <p>
+        Type: POST
+        Request Body:
+        {
+        "accessKeyId": <access key>,
+        "accessKeySecret": <secret>
+        }
+
+    </p>
+    <p>
+            Extract the "access_token" from the response body. Use this string as a bearer token authorization header when calling the Data Extract API.
+
+    </p>
+    <p>
+        <b>Note (regardless of the token acquired):</b>
+        Verify entity permissions, because authorization checks are applied and may result in success or unauthorized.
+    </p>
+    </div>
+
+    <div class="swagger-section">
+        <div id="swagger-ui-container" class="swagger-ui-wrap">Loading...</div>
+    </div>
+
+    @Html.Partial("~/Views/Shared/_CodeSampleTabs.cshtml")
+
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                inContact.Swagger.init(
+                    "@Url.Content("~/content/apis/dataextraction-api-docs")",
+                    "@Url.Content("~/content/apis/code_examples")",
+                    "@Url.Action("GetAccessToken", "Account")",
+                    "@Url.Content("~/content/swagger/images/throbber.gif")",
+                     false,
+                     "UserHub");
+            });
+        </script>
+    <script>
+        var coll = document.getElementsByClassName("GeneralCollapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+            }
+    </script>
+    }

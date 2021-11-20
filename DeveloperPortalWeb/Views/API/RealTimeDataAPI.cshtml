@@ -1,0 +1,33 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+	ViewBag.Title = "Real-Time Data API";
+}
+
+<h1 class="primary-color">@ViewBag.Title </h1>
+<p>
+	The Real-time Data API is a collection of API calls that provide access to "real-time" data on the platform. This API can be used to create custom dashboards and control panels, and to provide information about Agents and Skills (leaderboards, etc.).
+</p>
+
+<h3 class="primary-color">General Requirements</h3>
+<p>
+    To use any of the NICE CXone APIs in your application, you must have an API authentication token from the token service. See the @Html.ActionLink("API authentication token", "APIAuthenticationToken", "Documentation") tutorial for information on what type of token is needed for your application and the @Html.ActionLink("getting started", "GettingStarted", "Documentation") tutorial to get to know how to get an API authentication token.
+</p>
+
+<div class="swagger-section">
+	<div id="swagger-ui-container" class="swagger-ui-wrap">Loading...</div>
+</div>
+
+@Html.Partial("~/Views/Shared/_CodeSampleTabs.cshtml")
+
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+            inContact.Swagger.init(
+                "@Url.Content("~/content/apis/realtimedata-api-docs")",
+                "@Url.Content("~/content/apis/code_examples")",
+                "@Url.Action("GetAccessToken", "Account")",
+                "@Url.Content("~/content/swagger/images/throbber.gif")");
+        });
+	</script>
+}

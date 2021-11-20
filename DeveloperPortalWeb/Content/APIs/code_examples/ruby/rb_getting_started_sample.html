@@ -1,0 +1,128 @@
+<pre class="prettyprint linenums">
+#!/usr/bin/ruby
+
+require "base64"
+require "json"
+require "net/https"
+require "rubygems" # Needed on Mac.
+
+# This method example shows how to get a token manually, but you may prefer to 
+# get a token using the oath2 gem. At the command line, type:
+# $ gem install oauth2
+#
+# * *Arguments* :
+# * *Returns* :
+#   - a token, formatted in JSON. Get the access token with getToken["access_token"]
+#
+def getToken
+  username = "user@server.com"
+  password = "your password"
+  appName = "TestApp"
+  busNo = "4593220"
+  scope = ""
+  vendorName = "inCloud"
+
+  # Create a base-64 encoded authorization token.
+  encodedAuthToken = Base64.encode64(appName + "@" + vendorName + ":" + busNo)
+
+  # Specify the token service URL.
+  endpoint = 
+    URI.parse("https://api.incontact.com/InContactAuthorizationServer/Token")
+
+  # Create the post data.
+  postData = "{\"grant_type\":\"password\",\"username\":\"" + username + 
+             "\",\"password\":\"" + password + 
+             "\",\"scope\":\"" + scope + "\"}"
+  
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "basic #{encodedAuthToken}",
+      "Content-Length" => "#{postData.bytesize}",
+      "Content-Type" => "application/json; charset=UTF-8" }
+    
+  # Initialize the request with endpoint (i.e. the URL).
+  http = Net::HTTP.new endpoint.host, endpoint.port
+  
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(endpoint.path, postData, headers)
+
+  # The response body is in JSON, so parse it into a Ruby data structure.
+  token = JSON.parse(response.body)
+end
+
+# Calls the API to retrieve a list of agents.
+#
+# * *Arguments* :
+#  - +token+ -> a token object, formatted in JSON. You can get this token with
+#               getToken
+#
+# * *Returns* :
+#   - a list of all agents currently configured in the business unit
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have the expected fields
+#
+def getAgents(token)
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "getAgents didn't receive a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/agents"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.request_get(uri.to_s, headers)
+
+  # The data the API returns is in JSON, so parse it if it's valid.
+  data = if response.body != ""
+      JSON.parse(response.body)
+    else
+      "The response was empty."
+  end
+
+  # Now you can do something with the data the API returned.
+end
+
+# Example: get a list of agents.
+agents = getAgents(getToken)
+
+# Output the agent objects in a human-readable format.
+puts JSON.pretty_generate(agents)
+
+</pre>

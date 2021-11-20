@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="249c50aa-e4a3-40d2-ac34-95881e9dad59" name="Guest" linkedPackageId="0670e907-578e-43ea-b1a7-0751832bccb5" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="a9f12baa-8f32-4382-93e8-03eb2a12dbbd" name="Person without inContact Central credentials" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1ab65ffc-e527-4afb-a22c-37d6b3fd68cf" />
+        <targetEnds>
+          <association Id="57b53ce8-2169-4561-ae51-791788615336" isDerived="false" sourceEndRoleName="Person without inContact Central credentials" targetEndRoleName="Browses developer portal to learn inContact API information" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="f5106d6d-ba28-41b3-91ac-0e4d049c9d92" LastKnownName="Browses developer portal to learn general, non-secure inContact API information" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0f84e4a3-6fe6-44fa-b379-bfcee3e68301" name="Person without inContact Central credentials" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4886d921-9fda-4ca1-831e-1149ffd9d7ab" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f6597960-e6fe-4abc-86ed-aefddda5ee16" name="Browses developer portal to learn inContact API information" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="d1bfb48c-0486-4dfa-bd7d-671e6cd690f8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="dd33270d-6e7d-41a6-90dd-22f889f6a690" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="f5106d6d-ba28-41b3-91ac-0e4d049c9d92" name="Browses developer portal to learn general, non-secure inContact API information" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="72be5044-a072-4b5d-97a9-3a2edd1c6405" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="0670e907-578e-43ea-b1a7-0751832bccb5" name="DeveloperPortalModeling">
+    <elementDefinition Id="8803fc24-99ad-4dd7-897f-73ae34383926" />
+    <profileInstances>
+      <packageHasProfileInstances Id="06c4ca7e-0b9b-4b87-9a71-50a4dec37b5b">
+        <profileInstance Id="c2b05ea0-6411-4d08-a7e2-ac780c2e1770" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="59cef79f-d20e-4802-b14a-2711e4839e0b">
+        <profileInstance Id="0534c365-ceb6-48ba-a96b-ca498c15a983" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>

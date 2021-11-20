@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="d486b2f1-e744-46b4-9267-327d3eed5df4" name="inContactEmployee" linkedPackageId="4707e286-fc8f-4013-9340-205183acfe97" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="6cb20b09-c0c5-4d64-b287-56ca7c53d010">
+      <profileInstance Id="8f5f62cf-7868-44a3-96b1-7f83ffa981c0" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="1d4cd80a-0ea8-4949-9c9f-3d57c70d5c12">
+      <profileInstance Id="2aba664e-ab0d-4eb6-bcf2-ab3ca0e675da" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="91eb62fe-753a-4635-ab77-f1ca06d69c30" name="inContact CIMS person" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ac9fa91a-d44f-429d-891f-e571fdf4f50d" />
+        <targetEnds>
+          <association Id="5dfd0c7e-3cd2-4eac-8b0f-0084b2d29bce" isDerived="false" sourceEndRoleName="inContact CIMS person" targetEndRoleName="Modifies static content on developer portal" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c75dd2e0-2ce7-4885-ba1b-427191982dce" LastKnownName="Modifies static content on developer portal" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="990089da-f1d0-4d64-9d5b-39adc22562aa" name="inContact CIMS person" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1d4947ad-af38-4dc6-87ad-043dfbe55ec1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1c2556a6-c132-453d-a852-24b225bfb0b3" name="Modifies static content on developer portal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="045182c9-a75f-4cf7-9420-e76c11ced5cf" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="bde5ccda-734e-49e3-b112-dce15ecb5479" />
+          </association>
+          <association Id="32f077aa-89ad-425c-b0b7-ed8839b4bfff" isDerived="false" sourceEndRoleName="inContact CIMS person" targetEndRoleName="Adds API calls to developer portal" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="fc5a1ebc-ebfd-4dce-80a5-5c1a1ef3caa4" LastKnownName="Adds API call details to developer portal" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="335c673b-cc1d-42a2-96b2-f71f51ce2700" name="inContact CIMS person" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d8788685-7c9b-4d24-b1f2-dcb89865b59b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1b81fdf0-6431-487d-ba9b-fb7d48d242a9" name="Adds API calls to developer portal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7d6e80f7-f8e6-487f-bb2f-fce49acfa673" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="6bdd8c80-2591-4483-8c9f-0495285a3882" />
+          </association>
+          <association Id="7eb2ea75-bca0-489d-9ffe-62220256826c" isDerived="false" sourceEndRoleName="inContact CIMS person" targetEndRoleName="Monitors and answers forum questions" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="aa58a2e9-b3e8-4465-8b90-b1fff93a996c" LastKnownName="Monitors and answers forum questions" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="23cf1cbd-ec4c-4db0-816f-c4f84243f781" name="inContact CIMS person" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3241092e-fd87-48fd-9c0c-609924d7b8cf" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f99abd82-3fad-4d1a-9794-92d5ab7da321" name="Monitors and answers forum questions" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="dec70f60-ef7e-458c-92ec-66fdd6bed7d5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="196a326e-f8a3-46e3-b57d-2fabb63aab9a" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="c75dd2e0-2ce7-4885-ba1b-427191982dce" name="Modifies static content on developer portal" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3e91552e-a299-4220-90fc-9c9a0782d11c" />
+        <targetEnds>
+          <association Id="9d1ffb22-15e9-4b62-8e03-5d3a86e0b6e8" isDerived="false" sourceEndRoleName="Modifies static content on developer portal" targetEndRoleName="Deploys new content automatically" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="8ca10290-7658-4143-b450-f44c4b606579" LastKnownName="Deploys new content without waiting for product delivery cycle of 6+ months" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b91f2af1-4b04-4a4f-bd56-dfb6798cf5b0" name="Modifies static content on developer portal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4a99ba81-f3ab-40de-ad0b-c75e35ba99b4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a30f776e-6498-4ef8-8887-d11fc9e8bd1c" name="Deploys new content automatically" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="61abafb0-26c0-4de3-9605-4c05491e8468" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="937096bd-91fa-4d46-b229-f14f8ef36c6f" />
+          </association>
+        </targetEnds>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="fc5a1ebc-ebfd-4dce-80a5-5c1a1ef3caa4" name="Adds API call details to developer portal" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c9e7fbe5-9984-423b-b84e-adf30ab42760" />
+        <targetEnds>
+          <association Id="e19c6c8d-b1d6-4f05-ad4d-a29e586a7604" isDerived="false" sourceEndRoleName="Adds API call details to developer portal" targetEndRoleName="Deploys new content automatically" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="8ca10290-7658-4143-b450-f44c4b606579" LastKnownName="Deploys new content without waiting for product delivery cycle of 6+ months" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5c513c08-ae58-4053-b7f8-ce3bb207a751" name="Adds API call details to developer portal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3a4c6f14-28af-4afe-943e-f7570652f2a4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f997d344-f977-4db6-a581-aca1d8e03ee4" name="Deploys new content automatically" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7a1a85b4-4721-45e0-97a4-99677451ed12" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="899a694c-3756-45e1-8bcb-afad0e1695e3" />
+          </association>
+        </targetEnds>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="9232e94d-49a0-43ab-b347-abfde44e5efb" name="Corporate IT developer" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="323915ed-f489-41f4-a033-4f06d0135efd" />
+        <targetEnds>
+          <association Id="d97ea487-10d1-4020-811e-80fe7ceb10a9" isDerived="false" sourceEndRoleName="Corporate IT developer" targetEndRoleName="Adds features to the developer portal" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="b5488544-823a-4448-ad54-7d02099a68df" LastKnownName="Adds features to the developer portal" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fd1d9cf7-5764-4e0b-8781-834abf1dce4b" name="Corporate IT developer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="80ab4a4e-c470-4067-bf6a-0d9b4d460b27" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="690a4428-f69f-4dbe-ad96-954a1b67042b" name="Adds features to the developer portal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3faf8432-21c1-4964-be49-c78395c61399" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="101210be-74e2-4eec-9d40-fd01e4176309" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="b5488544-823a-4448-ad54-7d02099a68df" name="Adds features to the developer portal" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8620cd89-19d1-4c35-bf51-a118bf6b2bfb" />
+        <targetEnds>
+          <association Id="5f8c27c8-f686-40cb-9a85-569772b4ecf4" isDerived="false" sourceEndRoleName="Adds features to the developer portal" targetEndRoleName="Deploys new features using CCR / CCB process" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="782b6440-fa7c-4270-bb3b-95b2360a7674" LastKnownName="Deploys new features using CCR / CCB process" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="74e29ddc-4d1f-4753-9909-e3b732be3fc5" name="Adds features to the developer portal" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="333ec1d7-18a6-420a-bf4d-102cc7d93c3f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c4e60f6b-1dbf-4f52-8d6e-28409c5c4cfa" name="Deploys new features using CCR / CCB process" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="be413c03-109d-4fd3-a44e-75e4715721f9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0236435b-8497-4d87-8264-a4acf4cc733e" />
+          </association>
+        </targetEnds>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="8ca10290-7658-4143-b450-f44c4b606579" name="Deploys new content without waiting for product delivery cycle of 6+ months" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d952cda3-62ee-49ec-9867-b9b75d85a8f4" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="782b6440-fa7c-4270-bb3b-95b2360a7674" name="Deploys new features using CCR / CCB process" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f40aa527-c72c-40d1-a553-263b972aa801" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="aa58a2e9-b3e8-4465-8b90-b1fff93a996c" name="Monitors and answers forum questions" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="45fdb3ec-c6ee-4b90-b1e6-a62a8a2faaac" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="4707e286-fc8f-4013-9340-205183acfe97" name="DeveloperPortalModeling">
+    <elementDefinition Id="8803fc24-99ad-4dd7-897f-73ae34383926" />
+  </package>
+</useCaseModelRoot>

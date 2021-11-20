@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9b1953ac-eafb-4c3a-8c0b-7de7d4c498a8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://labweb01:21080/SupportEmail.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SupportEmail.xsd" MetadataType="Schema" ID="fe06ddbd-1c9f-47d7-a588-98a40ea68f67" SourceId="1" SourceUrl="http://labweb01:21080/SupportEmail.svc?xsd=xsd1" />
+    <MetadataFile FileName="SupportEmail1.xsd" MetadataType="Schema" ID="bde7feff-38e5-4af6-a17c-3f96a2eb0f55" SourceId="1" SourceUrl="http://labweb01:21080/SupportEmail.svc?xsd=xsd4" />
+    <MetadataFile FileName="SupportEmail2.xsd" MetadataType="Schema" ID="560d39ab-3c90-4572-9d55-b0a5fc8c37f2" SourceId="1" SourceUrl="http://labweb01:21080/SupportEmail.svc?xsd=xsd3" />
+    <MetadataFile FileName="SupportEmail3.xsd" MetadataType="Schema" ID="7d8bda14-3407-4ea3-bb7b-1f6df1a921c3" SourceId="1" SourceUrl="http://labweb01:21080/SupportEmail.svc?xsd=xsd0" />
+    <MetadataFile FileName="SupportEmail.disco" MetadataType="Disco" ID="9fd128c6-5186-4e9d-8701-fd2314edc509" SourceId="1" SourceUrl="http://labweb01:21080/SupportEmail.svc?disco" />
+    <MetadataFile FileName="SupportEmail.wsdl" MetadataType="Wsdl" ID="23cc5113-c2f1-4ba7-8967-4fd879d9d78b" SourceId="1" SourceUrl="http://labweb01:21080/SupportEmail.svc?wsdl" />
+    <MetadataFile FileName="SupportEmail4.xsd" MetadataType="Schema" ID="259905aa-ae04-418a-945f-a3105d03ddef" SourceId="1" SourceUrl="http://labweb01:21080/SupportEmail.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

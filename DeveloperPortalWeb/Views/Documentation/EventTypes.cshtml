@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Event Types";
+}
+
+<p>
+    There are a number of events that can occur on the platform. The links below will
+    lead you to the JSON schema for each event type that you could receive.
+</p>
+
+<p class="margin-bottom-none text-left">
+    @Html.ActionLink("Agent Events", "AgentSessionEvents", "Documentation", new { accordionId = "AgentEvents" }, null)<br />
+    @Html.ActionLink("Personal Connection Events", "AgentSessionEvents", "Documentation", new { accordionId = "PersonalConnectionEvents" }, null)<br />
+    @Html.ActionLink("Call Contact Events", "AgentSessionEvents", "Documentation", new { accordionId = "CallContactEvents" }, null)<br />
+    @Html.ActionLink("Work Item Contact Events", "AgentSessionEvents", "Documentation", new { accordionId = "WorkItemContactEvents" }, null)<br />
+    @Html.ActionLink("Indicator Events", "AgentSessionEvents", "Documentation", new { accordionId = "IndicatorEvents" }, null)<br />
+    @Html.ActionLink("Page Open Events", "AgentSessionEvents", "Documentation", new { accordionId = "PageOpenEvents" }, null)<br />
+    @Html.ActionLink("Chat Contact Events", "AgentSessionEvents", "Documentation", new { accordionId = "ChatContactEvents" }, null)<br />
+    @Html.ActionLink("Supervisor Events", "AgentSessionEvents", "Documentation", new { accordionId = "SupervisorEvents" }, null)<br />
+    @Html.ActionLink("Other Events", "AgentSessionEvents", "Documentation", new { accordionId = "OtherEvents" }, null)<br />
+</p>

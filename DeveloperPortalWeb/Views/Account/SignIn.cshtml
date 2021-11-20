@@ -1,0 +1,209 @@
+﻿@model InContact.DeveloperPortal.Web.Models.SigninViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-7 col-md-7">
+        <div class="panel-group panel-margin-bottom-none-min-768px">
+            <div class="panel panel-default">
+                <div class="panel-heading not-hover">
+                    <h4 class="panel-title">
+                        Login
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body form-horizontal">
+                        @using (Html.BeginForm())
+                        {
+                            if (null != ViewBag.LoginFailedMessage)
+                            {
+                                <p class="error-message" id="loginFailedMessage">
+                                    @ViewBag.LoginFailedMessage
+                                </p>
+                            }
+                            @Html.AntiForgeryToken()
+                            <p>
+                                You can use your CXone usename and password. Central users can enter internal API Applications below. API Applications are not used for UserHub.
+                            </p>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UserName, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control max-width-300px" })
+                                    @Html.ValidationMessageFor(model => model.UserName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Password, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control max-width-300px" })
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                </div>
+                            </div>
+
+                            <p>
+                                If you want to use your custom API application, please enter the following:
+                            </p>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ApplicationName, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.ApplicationName, new { id = "applicationTextId", @class = "form-control max-width-300px" })
+                                    @Html.ValidationMessageFor(model => model.ApplicationName, "", new { id = "applicationValidationId" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VendorName, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.VendorName, new { id = "vendorTextId", @class = "form-control max-width-300px" })
+                                    @Html.ValidationMessageFor(model => model.VendorName, "", new { id = "vendorValidationId" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BusinessUnitNumber, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.BusinessUnitNumber, new { id = "buisnessTextId", @class = "form-control max-width-300px" })
+                                    @Html.ValidationMessageFor(model => model.BusinessUnitNumber, "", new { id = "buisnessValidationId" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="display-flex">
+                                <div>
+                                    @Html.CheckBoxFor(model => model.Consent, new { @class = "cursor-pointer" })
+                                </div>
+                                <div class="margin-left-16px">
+                                    @Html.LabelFor(model => model.Consent, new { @class = "cursor-pointer" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.Consent)
+                                </div>
+                            </div>
+                            <div class="display-flex">
+                                <div>
+                                    @Html.CheckBoxFor(model => model.RememberBusinessUnitInfo, new { @class = "cursor-pointer" })
+                                </div>
+                                <div class="margin-left-16px">
+                                    @Html.LabelFor(model => model.RememberBusinessUnitInfo, new { @class = "cursor-pointer" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                                    <a id="btnlogin" class="button blue background-primary-color color-white" href="javascript:void(0);" onclick="$(this).closest('form').submit();">Login</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 col-md-5">
+        <div class="panel-group panel-margin-bottom-none-max-767px">
+            <div class="panel panel-default rest-api-home border-none">
+                <div class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <h4 class="primary-color margin-top-none">
+                            <strong>
+                                How to Register an Application
+                            </strong>
+                        </h4>
+                        <p>
+                            To register a new API Application:
+                        </p>
+                        <ul>
+                            <li> Login to NICE inContact Central</li>
+                            <li> Go to "ACD &#x21e8; ACD Configuration &#x21e8; API Applications"</li>
+                            <li> Create "Internal" API Application</li>
+                            <li> Select all API Scopes and Save</li>
+                        </ul>
+                        <p class="margin-bottom-none">
+                            NOTE: You can now use an External API Application in the Developer Portal
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input').keyup(function (e) {
+                if (e.keyCode === 13) {
+                    $(this).closest('form').submit()
+                }
+            });
+
+            //set the focus to the first text box
+            try {
+
+                $("#txtApplicationName").focus();
+
+                $("#applicationTextId").keydown(function () {
+                    $("#applicationValidationId").empty();
+                    $("#applicationValidationId").removeClass("field-validation-error");
+                    $("#applicationTextId").removeClass("input-validation-error");
+
+                });
+
+                $("#vendorTextId").keydown(function () {
+                    $("#vendorValidationId").empty();
+                    $("#vendorValidationId").removeClass("field-validation-error");
+                    $("#vendorTextId").removeClass("input-validation-error");
+
+                });
+
+                $("#buisnessTextId").keydown(function () {
+                    $("#buisnessValidationId").empty();
+                    $("#buisnessValidationId").removeClass("field-validation-error");
+                    $("#buisnessTextId").removeClass("input-validation-error");
+
+                });
+            }
+            catch (ex) {
+                //Oh well, cursor won't default to the first field.
+            }
+
+            $('#applicationTextId').rules("add", {
+                required: function () {
+                    return $('#vendorTextId').val().length !== 0 || $('#buisnessTextId').val().length !== 0;
+                },
+                messages: {
+                    required: "Application Name is required"
+                }
+            });
+
+            $('#vendorTextId').rules("add", {
+                required: function () {
+                    return $('#applicationTextId').val().length !== 0 || $('#buisnessTextId').val().length !== 0;
+                },
+                messages: {
+                    required: "Vendor Name is required"
+                }
+            });
+
+            $('#buisnessTextId').rules("add", {
+                required: function () {
+                    return $('#applicationTextId').val().length !== 0 || $('#vendorTextId').val().length !== 0;
+                },
+                messages: {
+                    required: "Business Unit is required"
+                }
+            });
+
+            $('#btnlogin').click(function () {
+                if ($('#applicationTextId').val().length === 0 && $('#vendorTextId').val().length === 0 && $('#buisnessTextId').val().length === 0) { 
+                    $("#buisnessValidationId").empty(); $("#applicationValidationId").empty(); $("#vendorValidationId").empty();
+                }
+            });
+        });
+
+
+    </script>
+}

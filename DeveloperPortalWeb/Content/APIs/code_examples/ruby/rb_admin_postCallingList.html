@@ -1,0 +1,105 @@
+<pre class="prettyprint linenums">
+# Calls the API to set an agent status.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +listName+ -> a string
+#  - +skillId+ -> an integer    
+#  - +filename+ -> a string    
+#  - +forceOverwrite+ -> a boolean    
+#  - +listFile+ -> a string
+#  - +parameters+ -> a hash
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if sessionID isn't a nonempty string
+#
+def postCallingList(token, listName, skillId, filename, forceOverwrite, listFile, parameters={
+    :externalIdColumn => "", 
+    :phoneColumn => "", 
+    :scoreColumn => "", 
+    :customer1Column => "", 
+    :customer2Column => "", 
+    :callerIdColumn => "", 
+    :priorityColumn => "", 
+    :isCellPhoneColumn => "", 
+    :firstNameColumn => "",    
+    :lastNameColumn => "",    
+    :addressColumn => "",    
+    :cityColumn => "",    
+    :stateColumn => "",    
+    :zipColumn => "",    
+    :confirmReqColumn => "",    
+    :timeZoneColumn => ""
+})
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that sessionID is a nonempty string.
+  unless sessionID.is_a?(String) && sessionID != ""
+    raise ArgumentError, "sessionID must be a nonempty string"
+  end
+    
+  # Check that parameters is a hash with appropriate keys.
+  # Keys not checked have default values.
+  unless parameters.is_a?(Hash) &&
+         parameters[:externalIdColumn].is_a?(Integer) &&
+         parameters[:phoneColumn].is_a?(String) &&
+         parameters[:scoreColumn].is_a?(String) &&
+         parameters[:customer1Column].is_a?(String) &&
+         parameters[:customer2Column].is_a?(String) &&
+         parameters[:callerIdColumn].is_a?(String) &&
+         parameters[:priorityColumn].is_a?(String) &&    
+         parameters[:isCellPhoneColumn].is_a?(String) &&
+         parameters[:firstNameColumn].is_a?(String) &&    
+         parameters[:lastNameColumn].is_a?(String) &&    
+         parameters[:addressColumn].is_a?(String) &&    
+         parameters[:cityColumn].is_a?(String) &&    
+         parameters[:stateColumn].is_a?(String) &&    
+         parameters[:zipColumn].is_a?(String) &&    
+         parameters[:confirmReqColumn].is_a?(String) &&    
+         parameters[:timeZoneColumn].is_a?(String)
+    raise ArgumentError, "parameters wasn't a hash with the right kind of keys"
+  end
+
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Encode the session ID.
+  sessionID.gsub! "=", "%3D"
+
+  # Create the URL that accesses the API.
+  apiURL = "/services/v4.0/lists/call-lists"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(uri.path, parameters, headers)
+end
+</pre>

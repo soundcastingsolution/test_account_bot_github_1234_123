@@ -1,0 +1,79 @@
+<pre class="prettyprint linenums">
+/*************************************************************************************
+*
+* @description This method allows you to create a Scheduled Callback request for either
+* an Outbound Skill identified by skillId or an Agent identified by targetAgentId
+*
+* @param phoneNumber (string): phone number to be dialed by agent
+* @param skillId (integer): ID of the outbound skill to be used for callback
+* @param scheduleDate (string): ISO-8601 GMT time requested for Scheduled Callback    
+* @param firstName (string): first name of the person requesting a callback
+* @param lastName (string): last name of the person requesting a callback
+* @param targetAgentId (integer): the agent to which to queue the callback
+* @param notes (string): any notes for the scheduled callback
+* 
+* @returns callbackId (integer): ID of a Scheduled Callback
+*
+*/
+public Integer postScheduledCallback(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        //numeric and date fields are converted to strings when passed as page parameters
+        String phoneNumber=ApexPages.currentPage().getParameters().get('phoneNumber');    
+        String skillId=ApexPages.currentPage().getParameters().get('skillId');    
+        String scheduleDate=ApexPages.currentPage().getParameters().get('scheduleDate');    
+        String firstName=ApexPages.currentPage().getParameters().get('firstName');    
+        String lastName=ApexPages.currentPage().getParameters().get('lastName');    
+        String targetAgentId=ApexPages.currentPage().getParameters().get('targetAgentId');    
+        String notes=ApexPages.currentPage().getParameters().get('notes');
+
+        String apiURL = 'services/{version}/scheduled-callbacks';
+        String postData = '{"phoneNumber":"' + phoneNumber + '", "skillId":"' + skillId + 
+                '", "scheduleDate":"' + scheduleDate + '", "firstName":"' + firstName + 
+                '", "lastName":"' + lastName + '", "targetAgentId":"' + targetAgentId + 
+                '", "notes":"' + notes + '"}';
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setBody(postData);
+            request.setMethod('POST');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+                return obj.callbackId;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+                return null;
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;
+        }
+    }
+    return null;
+}
+</pre>

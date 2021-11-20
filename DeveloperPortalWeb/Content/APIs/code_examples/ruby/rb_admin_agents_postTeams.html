@@ -1,0 +1,96 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +teams->a hash
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def postTeam(token,
+"teams":{ 
+      "teamName"=> "",
+      "isActive"=> true,
+      "maxConcurrentChats"=> 0,
+      "wfoEnabled"=> true,
+      "wfm2Enabled"=> true,
+      "qm2Enabled"=> true,
+      "inViewEnabled"=> true,
+      "inViewGamificationEnabled"=> true,
+      "inViewChatEnabled"=> true,
+      "inViewLMSEnabled"=> true,
+      "notes"=> "",
+      "maxEmailAutoParkingLimit"=> 0,
+      "analyticsEnabled"=> true,
+      "requestContact"=> true,
+      "contactAutoFocus"=> true,
+      "chatThreshold"=> 0,
+      "emailThreshold"=> 0,
+      "workItemThreshold"=> 0,
+      "voiceThreshold"=> 0,
+      "teamUuid"=> "",
+      "teamLeadUuid"=> ""})
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/teams"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::Post.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+      "teams[teamName]"=> "string value",
+      "teams[isActive]"=> true,
+      "teams[maxConcurrentChats]"=> 0,
+      "teams[wfoEnabled]"=> true,
+      "teams[wfm2Enabled]"=> true,
+      "teams[qm2Enabled]"=> true,
+      "teams[inViewEnabled]"=> true,
+      "teams[inViewGamificationEnabled]"=> true,
+      "teams[inViewChatEnabled]"=> true,
+      "teams[inViewLMSEnabled]"=> true,
+      "teams[notes]"=> "string value",
+      "teams[maxEmailAutoParkingLimit]"=> 0,
+      "teams[analyticsEnabled]"=> true,
+      "teams[requestContact]"=> true,
+      "teams[contactAutoFocus]"=> true,
+      "teams[chatThreshold]"=> 0,
+      "teams[emailThreshold]"=> 0,
+      "teams[workItemThreshold]"=> 0,
+      "teams[voiceThreshold]"=> 0,
+      "teams[teamUuid]"=> "string value",
+      "teams[teamLeadUuid]"=> "string value"})
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

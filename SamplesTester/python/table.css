@@ -1,0 +1,42 @@
+.rTable {
+  	display: block;
+  	width: 100%;
+}
+.rTableHeading, .rTableBody, .rTableFoot, .rTableRow{
+  	clear: both;
+}
+.rTableHead, .rTableFoot{
+  	background-color: #DDD;
+  	font-weight: bold;
+}
+.rTableCell, .rTableHead {
+  	border: 1px solid #999999;
+  	float: left;
+  	height: 17px;
+  	overflow: hidden;
+  	padding: 3px 1.8%;
+  	width: 36%;
+	word-break: break-word;
+}
+
+.small{
+  	width: 6%;
+}
+
+.med{
+  	width: 25%;
+}
+
+.rTableCell {
+	height: 65px;
+}
+
+
+.rTable:after {
+  	visibility: hidden;
+  	display: block;
+  	font-size: 0;
+  	content: " ";
+  	clear: both;
+  	height: 0;
+}

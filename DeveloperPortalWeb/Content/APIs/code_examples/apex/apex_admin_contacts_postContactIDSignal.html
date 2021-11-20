@@ -1,0 +1,79 @@
+<pre class="prettyprint linenums">
+/*********************************************************************************************
+*
+* @description This method can be used to send up to 9 custom data variables into a script
+* environment
+* @param contactId (integer): Contact ID of the customer script you want to signal
+* @param p1 (string): custom data    
+* @param p2 (string): custom data    
+* @param p3 (string): custom data    
+* @param p4 (string): custom data    
+* @param p5 (string): custom data    
+* @param p6 (string): custom data    
+* @param p7 (string): custom data    
+* @param p8 (string): custom data    
+* @param p9 (string): custom data
+* @return a single contact state
+*
+*/
+protected void getContactStateById()
+{
+    if(this.AccessToken!=null)
+    {
+        String contactStateId=ApexPages.currentPage().getParameters().get('contactStateId');
+        String p1=ApexPages.currentPage().getParameters().get('p1');                  
+        String p2=ApexPages.currentPage().getParameters().get('p2');                  
+        String p3=ApexPages.currentPage().getParameters().get('p3');                  
+        String p4=ApexPages.currentPage().getParameters().get('p4');                  
+        String p5=ApexPages.currentPage().getParameters().get('p5');                  
+        String p6=ApexPages.currentPage().getParameters().get('p6');                  
+        String p7=ApexPages.currentPage().getParameters().get('p7');                  
+        String p8=ApexPages.currentPage().getParameters().get('p8');                  
+        String p9=ApexPages.currentPage().getParameters().get('p9');                  
+        String apiURL = 'services/{version}/interactions/' + contactId + '/signal';
+        String postData = '{"p1":' + p1 + ', "p2":"' + p2 + '", ' +
+                '"p3":"' + p3 + '", "p4":"' + p4 + '", ' + '"p5":"' + p5 + '", ' + 
+                '"p6":"' + p6 + '", "p7":"' + p7 + '", "p8":"' + p8 + '", ' + 
+                '"p9":"' + p9 + '"}';
+
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setBody(postData);
+            request.setMethod('POST');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is an arbitrary helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            //It also deserializes any errors returned by the inContact API
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+        }
+    }
+}
+</pre>

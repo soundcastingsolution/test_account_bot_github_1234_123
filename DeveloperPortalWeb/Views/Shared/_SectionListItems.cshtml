@@ -1,0 +1,22 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.SectionItemViewModel>
+
+@foreach (var item in Model)
+{
+	<div class="section-item">
+		<div class="section-item__left">
+			<a class="section-item__icon" href="@item.Link"><img src="@item.Icon" alt="@item.Title" /></a>
+			<a class="section-item__title" href="@item.Link">@item.Title</a>
+		</div>
+
+		<div class="section-item__right">
+			<p class="section-item__description">@item.Description</p>
+			@if (item.Reference != null)
+			{
+				<div class="section-item__reference">
+					<p>@item.Reference.Title</p>
+					<p>@item.Reference.Date</p>
+				</div>
+			}
+		</div>
+	</div>
+}

@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Customize Callback Widget";
+}
+
+<div class="break-word">
+    <p>
+        To use the callback service in your own user interface you first need to
+        create the layout and the activity that will handle the events and the fields
+        needed to be filled to send the required information. A sample layout is shown below:
+    </p>
+    <img class="img-responsive center-block img-size-sm small-margin-bottom" src="@Url.Content("~/Content/images/masdk20.png")">
+    <p>After having created the activity and the layout, you will need to do the following:</p>
+    <ol>
+        <li>
+            <p>
+                First in the onCreate method we must add the HttpConnectionConfiguration to the
+                HttpConnectionManager the same way we did in the previous examples. This step can be
+                skipped if you have already set your configuration in one of the previous examples.
+            </p>
+<pre class="prettyprint linenums">
+&#64;Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.custom_callback_screen);
+    HttpConnectionConfiguration httpConnectionConfiguration = new HttpConnectionConfiguration();
+    httpConnectionConfiguration.setUser("YOUR USER");
+    httpConnectionConfiguration.setPassword("YOUR PASSWORD");
+    httpConnectionConfiguration.setClientId("YOUR ApplicationID");
+    httpConnectionConfiguration.setClientSecretKey("YOUR AppName@VendorName");
+    httpConnectionConfiguration.setServerUrl("http://login.incontact.com");
+    HttpConnectionManager.getInstance().setConfiguration(httpConnectionConfiguration);
+    phoneField = (EditText) findViewById(R.id.callback_screen_phone);
+    dateField = (EditText) findViewById(R.id.callback_screen_phone);
+    timeField = (EditText) findViewById(R.id.callback_screen_phone);
+    callbackManager = CallbackManager.getInstance(this);
+    callbackManager.setCallBackListener(callbackListener);
+}
+</pre>
+        </li>
+        <li>
+            <p>
+                Now add the CallbackListener to hear all events fired from the CallbackManager.
+            </p>
+<pre class="prettyprint linenums">
+private CallbackListener callbackListener = new CallbackListener() {
+    &#64;Override
+    public void receiveNoInternetConnection() {
+    }
+    &#64;Override
+    public void receiveFailed(int code) {
+    }
+    &#64;Override
+    public void receiveError(Exception exception) {
+    }
+    &#64;Override
+    public void connectionTimeOut() {
+    }
+    &#64;Override
+    public void callbackSent(String contactId) {
+    }
+    &#64;Override
+    public void authenticated(Authorization authorization) {
+    }
+};
+</pre>
+            <p>
+                <b>NOTE:</b> This listener is very similar with the ChatSessionListener, the
+                description of the methods and its usage is the same, except of the callbackSent
+                method which is called when the callback has been successfully submitted to the
+                server returning a contactId.
+            </p>
+        </li>
+        <li>
+            <p>
+                Now we must create the onClick handlers of the "Call Now" and "Request
+                Callback" buttons and call the manager.
+            </p>
+<pre class="prettyprint linenums">
+public void onCallNowClick(View view) {
+    String phone = phoneField.getText().toString();
+    callbackManager.callNow(phone);
+}
+public void onRequestCallbackClick(View view) {
+    String phone = phoneField.getText().toString();
+    String date = dateField.getText().toString();
+    String time = timeField.getText().toString();
+    callbackManager.sendCallback(phone, date, time, "");
+}
+</pre>
+        </li>
+        <li>
+            <p>
+                With this, you can launch the application and try the service:
+            </p>
+            <p>
+                The patron can enter their phone number and optionally the date and time of
+                the Callback request, and click on the "Request Callback" or "Call Now" buttons.
+            </p>
+            <img class="img-responsive center-block img-size-sm small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk21.png")">
+            <p>
+                The agent should see the Callback request and can accept it.
+            </p>
+            <img class="img-responsive center-block img-size-sm small-margin-bottom padding-right" src="@Url.Content("~/Content/images/masdk22.png")">
+        </li>
+    </ol>
+    <h3 class="primary-color">Changing the Callback Manager Configuration.</h3>
+    <p>
+        The CallbackManager methods callNow and sendCallback have their own configuration options.
+        Those can be accessed by calling the following methods:
+    </p>
+    <ul class="margin-bottom-none">
+        <li>
+            <b>getPromiseConfiguration():</b> It retrieves the configuration to request scheduled callbacks.
+            The most important configuration options are the skill and time zone:
+        </li>
+        <li><b>setSkill:</b> This method can be used to set the skill that is going to be used in the callback request.</li>
+        <li>
+            <b>setTimeZone:</b> This method allows you to change the time zone that the server is going to use the
+            send a callback. We recommend that this be set to the current device time zone, which is the
+            already done in the inContactMobileSdk PromiseActivity class. The default value is "Mountain Standard Time".
+        </li>
+        <li>
+            <b>getImmediateCallbackConfiguration:</b> Use this method to set any needed configuration for
+            immediate callback requests. You can set the skill information as in the case of the PromiseConfiguration.
+        </li>
+    </ul>
+</div>

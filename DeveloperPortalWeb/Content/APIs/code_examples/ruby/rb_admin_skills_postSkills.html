@@ -1,0 +1,104 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +skills->a hash
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def PostSkills(token,
+"skills":{ 
+      "mediaTypeId"=> 0,
+      "skillName"=> "",
+      "campaignId"=> 0,
+      "useScreenPops"=> true,
+      "screenPopTriggerEvent"=> 0,
+      "useCustomScreenPops"=> true,
+      "screenPopType"=> "",
+      "screenPopDetails"=> "",
+      "initialPriority"=> 0,
+      "acceleration"=> 0,
+      "maxPriority"=> 0,
+      "serviceLevelThreshold"=> 0,
+      "serviceLevelGoal"=> 0,
+      "enableShortAbandon"=> true,
+      "shortAbandonThreshold"=> 0,
+      "countShortAbandons"=> true,
+      "countOtherAbandons"=> true,
+      "chatWarningThreshold"=> 0,
+      "agentTypingIndicator"=> true,
+      "smsTransportCodeId"=> 0,
+      "messageTemplateId"=> 0}
+
+   "dispositions": 
+        {
+          "dispositionId"=> 0,
+          "priority"=> 0
+        })
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/skills"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::Post.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+      "skills[mediaTypeId]"=> 0,
+      "skills[skillName]"=> "string value",
+      "skills[campaignId]"=> 0,
+      "skills[useScreenPops]"=> true,
+      "skills[screenPopTriggerEvent]"=> 0,
+      "skills[useCustomScreenPops]"=> true,
+      "skills[screenPopType]"=> "string value",
+      "skills[screenPopDetails]"=> "string value",
+      "skills[initialPriority]"=> 0,
+      "skills[acceleration]"=> 0,
+      "skills[maxPriority]"=> 0,
+      "skills[serviceLevelThreshold]"=> 0,
+      "skills[serviceLevelGoal]"=> 0,
+      "skills[enableShortAbandon]"=> true,
+      "skills[shortAbandonThreshold]"=> 0,
+      "skills[countShortAbandons]"=> true,
+      "skills[countOtherAbandons]"=> true,
+      "skills[chatWarningThreshold]"=> 0,
+      "skills[agentTypingIndicator]"=> true,
+      "skills[smsTransportCodeId]"=> 0,
+      "skills[messageTemplateId]"=> 0
+      "dispositions[dispositionId]"=> 0,
+      "dispositions[priority]"=> 0 })
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

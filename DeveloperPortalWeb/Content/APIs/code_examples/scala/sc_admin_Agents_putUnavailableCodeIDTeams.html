@@ -1,0 +1,20 @@
+﻿<pre class="prettyprint linenums">
+def PutUnavailableCodeByIDTeams(unavailableCodeId:Int,data:String,securityUser:String){
+	//Check if accessToken is empty or null
+	if(accessToken!= null && !accessToken.isEmpty())
+	{
+		//Add all necessary headers and Make the http request
+		var response = Http(baseURI+ "/services/{version}/unavailable-codes/"+unavailableCodeId+"/teams")
+				.postData(data)
+				.method("put")
+				.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json")).option(HttpOptions.connTimeout(10000)).option(HttpOptions.readTimeout(50000))
+				.asString
+			//TODO-> the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+			construct("Admin","Skills","PUT /campaigns/{campaignId}",cluster + " - v15.0" ,response.code, response.statusLine)
+		}
+		else{
+		//No token - get one or handle error
+		}
+	}
+}
+</pre>

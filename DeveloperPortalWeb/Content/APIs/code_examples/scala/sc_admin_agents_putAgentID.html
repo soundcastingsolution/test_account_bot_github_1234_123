@@ -1,0 +1,36 @@
+﻿ <pre class="prettyprint linenums">
+// importing the scalaj-http library and spray.json 
+package scalaj.http
+import spray.json._
+
+
+object PutAgentbyAgentID {
+
+//JSON data is contructed using spray.json
+
+	def PutAgentbyAgentID(AgentID:Int, AgentJsonData:JsValue) {
+
+       //Give the specified url ,accessToken
+       
+         val accessToken = "";
+	    val baseURI = "";
+		 
+       //Check if accessToken is empty or null
+		 if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http(baseURI+ "services/{version}/agents/" + {AgentID})
+					.postData(AgentJsonData.prettyPrint) //JSON data is converted to String using prettyprint
+			
+			.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json"))
+			.asString
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+		
+			println(response);
+		}
+		else{
+			   //No token - get one or handle error
+		 }
+	}
+}
+</pre>

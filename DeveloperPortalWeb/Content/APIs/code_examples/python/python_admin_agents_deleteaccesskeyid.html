@@ -1,0 +1,12 @@
+﻿<pre class="prettyprint linenums">
+def deleteAccessKeysByID(accessKeyId):
+    #Check if accessToken is empty or null
+    if accessToken!="":
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+        response=requests.delete(baseURI + '/services/{version}/access-keys/'+ accessKeyId,headers=header_param)
+        #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

@@ -1,0 +1,76 @@
+﻿<pre class="prettyprint linenums">
+protected void postAddressBook(string addressBookId, string entityType, int[] entityId)
+{
+    // Test to see if you have obtained a token
+    if (!string.IsNullOrEmpty(accessToken))
+    {
+        //NOTE - Only available version 4.0 or later
+        string apiURL = "/services/{version}/address-books/" + addressBookId + "/assignment";
+        // baseURL was returned with your successful token request
+        string endpoint = baseURL + apiURL; 
+ 
+        // Create the request object
+        var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+        request.Method = "POST";
+        request.ContentType = "application/x-www-form-urlencoded";
+ 
+        // Add any and all necessary headers
+        request.Headers.Add("Authorization", "bearer " + accessToken);
+        // Accept is a reserved header, so you must modify it rather than add
+        request.Accept = "application/json, text/javascript, */*; q=0.01"; 
+ 
+        //The post data for address book assignment is not JSON, it is actually a large HTML String.
+        //This example assumes an int array of entityIds was passed in, and will also work for just
+        //one entityId. For example, if you select entityType as "Agent", entityId would be an int
+        //array of agentIds.
+        string postData = "entityType=" + entityType;
+        for (int i = 0; i < entityId.Length; i++)
+        {
+            postData += "&addressBookAssignments[" + i.ToString  + "][entityId]=" + entityId[i];
+        }
+        var encoding = new System.Text.UTF8Encoding ;
+        var bytes = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(postData);
+        request.ContentLength = bytes.Length;
+        using (var writeStream = request.GetRequestStream )
+        {
+            writeStream.Write(bytes, 0, bytes.Length);
+        }
+ 
+        // Make the request
+        try
+        {
+            using (var response = (System.Net.HttpWebResponse)request.GetResponse )
+            {
+                string responseBody = "";
+                int statusCode = (int)response.StatusCode;
+                string statusDescription = response.StatusDescription;
+                using (var responseStream = response.GetResponseStream )
+                {
+                    if (responseStream != null)
+                    {
+                        using (var reader = new System.IO.StreamReader(responseStream))
+                        {
+                            responseBody = reader.ReadToEnd ;
+                            //responseBody now contains the JSON string of the response.
+                            //save and parse it as you see fit.
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Net.WebException webException)
+        {
+            // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+            // You can catch that exception and retain the StatusCode for error handling.
+        }
+        catch (Exception ex)
+        {
+            // Catch any non Web Exception error
+        }
+    }
+    else
+    {
+        // No token - get one or handle error
+    }
+}
+</pre>

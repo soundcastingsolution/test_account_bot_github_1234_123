@@ -1,0 +1,824 @@
+﻿{
+  "wfm_agents": {
+    "get": {
+      "tags": [ "ReportingScope" ],
+      "summary": "<b><i><span style='color:red'>New in v9.0</span></i></b> Return WFM Agent Data ",
+      "operationId": "WFMAgents",
+      "responseClass": "",
+      "description": "This method will return Agent information needed for integration with a WFM system for a specific date range bounded by the \"startDate\" and \"endDate\" parameters.  <br/><br/><b>NOTE:</b> The \"startDate\" and \"endDate\" cannot span more than 1 hour.  The minutes must be on the quarter hour: 00, 15, 30 or 45.<div class='tabs_wrapper' data-path='reporting_reports_getWFM_Agents.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "startDate",
+          "description": "ISO 8601 beginning of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "endDate",
+          "description": "ISO 8601 End of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "List of elements to return in response",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "AgentsData",
+            "name": "agentsData",
+            "description": "List of System Address Books",
+            "properties": {
+              "agents": {
+                "type": "array",
+                "items": {
+                  "title": "agents",
+                  "description": "",
+                  "properties": {
+                    "agentId": {
+                      "type": "integer",
+                      "description": "ID of the Agent",
+                      "required": true
+                    },
+                    "teamName": {
+                      "type": "string",
+                      "description": "Name of the Team",
+                      "required": true
+                    },
+                    "teamId": {
+                      "type": "integer",
+                      "description": "ID of the Team",
+                      "required": true
+                    },
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of the Business Unit",
+                      "required": true
+                    },
+                    "businessUnitName": {
+                      "type": "string",
+                      "description": "Name of the Business Unit",
+                      "required": true
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "First name of the Agent",
+                      "required": true
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "Last name of the Agent",
+                      "required": true
+                    },
+                    "employmentType": {
+                      "type": "integer",
+                      "description": "Type of Agent employment",
+                      "required": true
+                    },
+                    "employmentTypeName": {
+                      "type": "integer",
+                      "description": "Name of the type of Agent employment",
+                      "required": true
+                    },
+                    "createDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of record creation",
+                      "required": true
+                    },
+                    "modDateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of record modification",
+                      "required": true
+                    },
+                    "productId": {
+                      "type": "integer",
+                      "description": "ID of the product",
+                      "required": true
+                    },
+                    "ntLoginName": {
+                      "type": "string",
+                      "description": "",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid date range. Range must be less than or equal to 1 hour</p><p>Invalid date range, startDate and endDate must be on the quarter hours</p><p>Invalid Fields List</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "WFM data access is not authorized"
+        },
+        "409": {
+          "description": "Business Unit not configured for WFO"
+        }
+      }
+    }
+  },
+  "wfm_agents_scorecards": {
+    "get": {
+      "tags": [ "ReportingScope" ],
+      "summary": "<b><i><span style='color:red'>New in v9.0</span></i></b> Return WFM Scorecard Statistics",
+      "operationId": "WFMAgentsScorecards",
+      "description": "This method will return the daily scorecard statistics generated by the WFM Data Collector for a specific date range bounded by the \"startDate\" and \"endDate\" parameters.  <br/><br/><b>NOTE:</b> The \"startDate\" and \"endDate\" cannot span more than 14 days in a single request.<div class='tabs_wrapper' data-path='reporting_reports_getWFM_Agents_Scorecards.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "startDate",
+          "description": "ISO 8601 beginning of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "endDate",
+          "description": "ISO 8601 End of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "List of elements to return in response",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "AgentScoreCard",
+            "name": "agentScoreCard",
+            "description": "",
+            "properties": {
+              "agentScorecards": {
+                "type": "array",
+                "items": {
+                  "title": "agentScorecards",
+                  "description": "",
+                  "properties": {
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of the Business Unit",
+                      "required": true
+                    },
+                    "businessUnitName": {
+                      "type": "string",
+                      "description": "Name of the Business Unit",
+                      "required": true
+                    },
+                    "agentId": {
+                      "type": "integer",
+                      "description": "ID of the Agent",
+                      "required": true
+                    },
+                    "loginTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of the Agent login",
+                      "required": true
+                    },
+                    "totalTime": {
+                      "type": "double",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "talkTime": {
+                      "type": "double",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "acwTime": {
+                      "type": "double",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "holdTime": {
+                      "type": "double",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "totalCalls": {
+                      "type": "integer",
+                      "description": "Total Contacts handled",
+                      "required": true
+                    },
+                    "abandonedCalls": {
+                      "type": "integer",
+                      "description": "Total number of abandonded Contacts",
+                      "required": true
+                    },
+                    "auxTime": {
+                      "type": "double",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "auxInTime": {
+                      "type": "integer",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "auxOutTime": {
+                      "type": "integer",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "idleTIme": {
+                      "type": "double",
+                      "description": "Total time spent in seconds",
+                      "required": true
+                    },
+                    "actualCalls": {
+                      "type": "integer",
+                      "description": "",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid startDate</p><p>Invalid endDate</p><p>endDate is before startDate</p><p>Invalid Fields List</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "WFM data access is not authorized"
+        },
+        "409": {
+          "description": "Business Unit not configured for WFO"
+        }
+      }
+    }
+  },
+  "wfm_agents_schedule-adherence": {
+    "get": {
+      "tags": [ "ReportingScope" ],
+      "summary": "<b><i><span style='color:red'>New in v9.0</span></i></b> Returns WFM Schedule Adherence",
+      "operationId": "WFMScheduleAdherence",
+      "description": "This method will return the Agents schedule adherence by listing the specific states and durations for the Agents for a specific date range bounded by the \"startDate\" and \"endDate\" parameters.  <br/><br/><b>NOTE:</b> The \"startDate\" and \"endDate\" cannot span more than 5 minutes in a single request.<div class='tabs_wrapper' data-path='reporting_reports_getWFM_Agents_ScheduleAdhere.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "startDate",
+          "description": "ISO 8601 beginning of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "endDate",
+          "description": "ISO 8601 End of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "List of elements to return in response",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "AgentStateHistory",
+            "name": "agentStateHistory",
+            "description": "",
+            "properties": {
+              "agentStateHistory": {
+                "type": "array",
+                "items": {
+                  "title": "agentStateHistory",
+                  "description": "",
+                  "properties": {
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of the Business Unit",
+                      "required": true
+                    },
+                    "businessUnitName": {
+                      "type": "string",
+                      "description": "Name of the Business Unit",
+                      "required": true
+                    },
+                    "agentId": {
+                      "type": "integer",
+                      "description": "ID of the Agent",
+                      "required": true
+                    },
+                    "stateIndex": {
+                      "type": "integer",
+                      "description": "Ordered index of the Agent states",
+                      "required": true
+                    },
+                    "startDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of the Agent state start time",
+                      "required": true
+                    },
+                    "agentStateId": {
+                      "type": "integer",
+                      "description": "ID of the Agent state",
+                      "required": true
+                    },
+                    "agentSessionId": {
+                      "type": "integer",
+                      "description": "ID of the Agent session",
+                      "required": true
+                    },
+                    "skillId": {
+                      "type": "integer",
+                      "description": "ID of the Skill the Agent was in",
+                      "required": true
+                    },
+                    "outStateId": {
+                      "type": "integer",
+                      "description": "ID of the unavailable outstate for the Agent",
+                      "required": true
+                    },
+                    "outStateDescription": {
+                      "type": "string",
+                      "description": "Name of the unavailable outstate for the Agent",
+                      "required": true
+                    },
+                    "duration": {
+                      "type": "integer",
+                      "description": "Total duration, in seconds of the Agent state",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid startDate</p><p>Invalid endDate</p><p>Invalid date range. Range must be less than or equal to 5 minutes</p><p>Invalid Fields List</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "Security privileges prevent access to data"
+        },
+        "409": {
+          "description": "Business Unit not configured for WFO"
+        }
+      }
+    }
+  },
+  "wfm_skills_agent-performance": {
+    "get": {
+      "tags": [ "ReportingScope" ],
+      "summary": "<b><i><span style='color:red'>New in v9.0</span></i></b> Returns WFM Agent Performance",
+      "operationId": "WFMAgentPerformance",
+      "description": "This method will return specific metrics for the Agent performance over a specific date range bounded by the \"startDate\" and \"endDate\" parameters.  <br/><br/><b>NOTE:</b> The \"startDate\" and \"endDate\" cannot span more than 31 days.<div class='tabs_wrapper' data-path='reporting_reports_getWFM_Contacts_Evaluations.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "startDate",
+          "description": "ISO 8601 beginning of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "endDate",
+          "description": "ISO 8601 End of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "List of elements to return in response",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "skillsPerformance",
+            "name": "skillsPerformance",
+            "description": "",
+            "properties": {
+              "skillsPerformance": {
+                "type": "array",
+                "items": {
+                  "title": "skillsPerformance",
+                  "description": "",
+                  "properties": {
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of the Business Unit",
+                      "required": true
+                    },
+                    "businessUnitName": {
+                      "type": "string",
+                      "description": "Name of the Business Unit",
+                      "required": true
+                    },
+                    "skillId": {
+                      "type": "integer",
+                      "description": "ID of the Skill",
+                      "required": true
+                    },
+                    "skillName": {
+                      "type": "string",
+                      "description": "Name of the Skill",
+                      "required": true
+                    },
+                    "agentId": {
+                      "type": "integer",
+                      "description": "ID of the Agent",
+                      "required": true
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "First name of the Agent",
+                      "required": true
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "Last name of the Agent",
+                      "required": true
+                    },
+                    "halfHour": {
+                      "type": "integer",
+                      "description": "Identifies the half hour that the metrics cover",
+                      "required": true
+                    },
+                    "totalHandled": {
+                      "type": "integer",
+                      "description": "Total number of contacts handled",
+                      "required": true
+                    },
+                    "totalHandledTime": {
+                      "type": "integer",
+                      "description": "Total number seconds for handled contacts",
+                      "required": true
+                    },
+                    "totalACWTime": {
+                      "type": "integer",
+                      "description": "total number of seconds spent on after call work",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid startDate</p><p>Invalid endDate</p><p>endDate is before startDate or range has exceeded maximum amount of 31 days</p><p>Invalid fields list</p>"
+        }
+      }
+    }
+  },
+  "wfm_skills_contacts": {
+    "get": {
+      "tags": [ "ReportingScope" ],
+      "summary": "<b><i><span style='color:red'>New in v9.0</span></i></b> Return WFM Contacts",
+      "operationId": "WFMContacts",
+      "description": "This method will return the Contact statistics generated by the WFM Data Collector for a specific date range bounded by the \"startDate\" and \"endDate\" parameters. <br/><br/><b>NOTE:</b> The \"startDate\" and \"endDate\" cannot span more than 1 hour.<div class='tabs_wrapper' data-path='reporting_reports_getWFM_Skills_Contacts.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "startDate",
+          "description": "ISO 8601 beginning of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "endDate",
+          "description": "ISO 8601 End of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "List of elements to return in response",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "mediaTypeId",
+          "description": "Filters based on the media type",
+          "type": "integer",
+          "in": "query",
+          "enum": [ "1", "3", "4", "5", "6", "7", "8" ]
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "contactStats",
+            "name": "contactStats",
+            "description": "",
+            "properties": {
+              "contactStats": {
+                "type": "array",
+                "items": {
+                  "title": "contactStats",
+                  "description": "",
+                  "properties": {
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of the Business Unit",
+                      "required": true
+                    },
+                    "businessUnitName": {
+                      "type": "string",
+                      "description": "Name of the Business Unit",
+                      "required": true
+                    },
+                    "intervalStartDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of the start of the interval",
+                      "required": true
+                    },
+                    "skillId": {
+                      "type": "integer",
+                      "description": "ID of the Skill",
+                      "required": true
+                    },
+                    "skillName": {
+                      "type": "string",
+                      "description": "ID of the Skill",
+                      "required": true
+                    },
+                    "isOutbound": {
+                      "type": "boolean",
+                      "description": "Indicates if the Skill is an outbound skill",
+                      "required": true
+                    },
+                    "serviceLevel": {
+                      "type": "integer",
+                      "description": "Service level of the Skill",
+                      "required": true
+                    },
+                    "mediaTypeId": {
+                      "type": "integer",
+                      "description": "The media type ID for the Skill's media type (phone, chat, etc.)",
+                      "required": true
+                    },
+                    "mediaTypeName": {
+                      "type": "string",
+                      "description": "The textual description or name of the media type for the Skill",
+                      "required": true
+                    },
+                    "totalContacts": {
+                      "type": "integer",
+                      "description": "Total number of Contacts offered",
+                      "required": true
+                    },
+                    "totalHandled": {
+                      "type": "integer",
+                      "description": "Total number of Contacts handled",
+                      "required": true
+                    },
+                    "averageHandleTime": {
+                      "type": "integer",
+                      "description": "Average time spent handling contacts in minutes",
+                      "required": true
+                    },
+                    "abandonCount": {
+                      "type": "integer",
+                      "description": "Total number of abandoned Contacts",
+                      "required": true
+                    },
+                    "averageSpeedOfAnswer": {
+                      "type": "integer",
+                      "description": "Average time to answer a Contact in minutes",
+                      "required": true
+                    },
+                    "totalContactTime": {
+                      "type": "integer",
+                      "description": "Total time spent on contact handling in minutes",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid startDate</p><p>Invalid endDate</p><p>endDate is before startDate or range has exceeded maximum amount of 1 hours</p><p>Invalid Fields List</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "WFM data access is not authorized"
+        },
+        "409": {
+          "description": "Business Unit not configured for WFO"
+        }
+      }
+    }
+  },
+  "wfm_skills_dialer-contacts": {
+    "get": {
+      "tags": [ "ReportingScope" ],
+      "summary": "<b><i><span style='color:red'>New in v9.0</span></i></b> Return WFM Dialer Contacts",
+      "operationId": "WFMDialerContacts",
+      "description": "This method will return the outbound phone call statistics generated by the WFM Data Collector for a specific date range bounded by the \"startDate\" and \"endDate\" parameters.  <br/><br/><b>NOTE:</b> The \"startDate\" and \"endDate\" cannot span more than 1 hour.  The minutes must be on the quarter hour: 00, 15, 30 or 45.<div class='tabs_wrapper' data-path='reporting_reports_getWFM_Skills_DialerContacts.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "startDate",
+          "description": "ISO 8601 beginning of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "endDate",
+          "description": "ISO 8601 End of report period",
+          "required": true,
+          "allowMultiple": false,
+          "type": "string",
+          "format": "date-time",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "List of elements to return in response",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "mediaTypeId",
+          "description": "Filters based on the media type",
+          "type": "integer",
+          "in": "query",
+          "enum": [ "1", "3", "4", "5", "6", "7", "8" ]
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "outboundStats",
+            "name": "outboundStats",
+            "description": "",
+            "properties": {
+              "outboundStats": {
+                "type": "array",
+                "items": {
+                  "title": "outboundStats",
+                  "description": "",
+                  "properties": {
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of the Business Unit",
+                      "required": true
+                    },
+                    "businessUnitName": {
+                      "type": "string",
+                      "description": "Name of the Business Unit",
+                      "required": true
+                    },
+                    "intervalStartDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of the start of the interval",
+                      "required": true
+                    },
+                    "skillId": {
+                      "type": "integer",
+                      "description": "ID of the Skill",
+                      "required": true
+                    },
+                    "skillName": {
+                      "type": "string",
+                      "description": "ID of the Skill",
+                      "required": true
+                    },
+                    "mediaTypeId": {
+                      "type": "integer",
+                      "description": "The media type ID for the Skill's media type (phone, chat, etc.)",
+                      "required": true
+                    },
+                    "mediaTypeName": {
+                      "type": "string",
+                      "description": "The textual description or name of the media type for the Skill",
+                      "required": true
+                    },
+                    "dials": {
+                      "type": "integer",
+                      "description": "Number of phone calls dialed for Agent",
+                      "required": true
+                    },
+                    "connects": {
+                      "type": "integer",
+                      "description": "Number of phone calls connected for Agent",
+                      "required": true
+                    },
+                    "connectsAHT": {
+                      "type": "double",
+                      "description": "Average handle time for connected calls",
+                      "required": true
+                    },
+                    "rightPartyConnects": {
+                      "type": "integer",
+                      "description": "Number of correct phone calls connected for Agent",
+                      "required": true
+                    },
+                    "rightPartyConnectsAHT": {
+                      "type": "double",
+                      "description": "Average handle time for right party connected calls",
+                      "required": true
+                    },
+                    "abandons": {
+                      "type": "integer",
+                      "description": "Total number of abandoned Contacts",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "<p>Invalid startDate</p><p>Invalid endDate</p><p>endDate is before startDate or range has exceeded maximum amount of 1 hours</p><p>Invalid date range, startDate and endDate must be on the quarter hours</p><p>Invalid Fields List</p>"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "WFM data access is not authorized"
+        },
+        "409": {
+          "description": "Business Unit not configured for WFO"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+﻿<pre class="prettyprint linenums">
+def getActiveFlag(activeFlag)
+if($accessToken!='')
+uri = URI.parse(($baseURI) +'services/v16.0/workflow-data/list/'+activeFlag)
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer " + ($accessToken),
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json",
+      "Accept-Encoding" => "deflate"}
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+  # Make the request.
+  http.use_ssl = true
+  res = http.get(uri.path , headers)
+construct('Admin','Workflow','GET /workflow-data/list','so32-v16.0',res.code,res.message)
+  # puts res.code
+   #puts res.message
+else
+construct('Admin','Workflow','GET ​/workflow-data/list','so32-v16.0',res.code,res.message)
+end
+end
+</pre>

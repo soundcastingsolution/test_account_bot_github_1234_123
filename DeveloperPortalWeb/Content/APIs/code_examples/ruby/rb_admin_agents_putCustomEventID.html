@@ -1,0 +1,83 @@
+<pre class="prettyprint linenums">
+# Calls the API to create a custom agent event.
+#
+# * *Arguments* :
+#   - +token+ -> a token hash
+#   - +agentID+ -> a nonnegative integer
+#   - +eventName+ -> a string
+#   - +persistInMemory+ -> a boolean
+#   - +data+ -> a string
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if agentID isn't a nonnegative integer
+#   - +ArgumentError+ -> if eventName isn't a string
+#   - +ArgumentError+ -> if persistInMemory isn't a boolean
+#   - +ArgumentError+ -> if data isn't a string
+#
+def createCustomEvent(token, 
+                      agentID=132955, 
+                      eventName="", 
+                      persistInMemory=false,
+                      data="")
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "the function didn't receive a token it could understand"
+  end
+  
+  # Check that agentID is a nonnegative integer.
+  unless agentID.is_a?(Integer) && agentID >= 0
+    raise ArgumentError, "agentID must be a nonnegative integer"
+  end
+  
+  # Check that eventName is a string.
+  unless eventName.is_a? String
+    raise ArgumentError, "eventName must be a string"
+  end
+  
+  # Check that persistInMemory is a boolean.
+  unless !!persistInMemory == persistInMemory
+    raise ArgumentError, "persistInMemory must be a boolean"
+  end
+  
+  # Check that data is a string.
+  raise ArgumentError, "data must be a string" unless data.is_a? String
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/agents/#{agentID}/"\
+           "custom-event?eventName=#{eventName}"\
+           "&persistInMemory=#{persistInMemory}&data=#{data}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the PUT request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+   http = Net::HTTP.new uri.host, uri.port
+
+  # Make the request an HTTPS request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.send_request('PUT', baseURL + apiURL)
+end
+</pre>

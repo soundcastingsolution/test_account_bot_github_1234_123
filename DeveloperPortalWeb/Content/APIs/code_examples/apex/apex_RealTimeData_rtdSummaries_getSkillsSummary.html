@@ -1,0 +1,60 @@
+<pre class="prettyprint linenums">
+/*****************************************************************************************
+*
+* @description This method returns both real time and reporting summary data for every
+* Skill in the business unit.
+* @param startDate (string): beginning of report interval
+* @param endDate (string): end of report interval
+* @return statistics for all Skills
+*
+*/ 
+public List<JSON2Apex.skillsummaries> getSkillSummaries(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {               
+        //GET PAGE PARAMETERS
+        this.StartDate=ApexPages.currentPage().getParameters().get('startDate');
+        this.EndDate=ApexPages.currentPage().getParameters().get('endDate');
+        
+        String apiURL = 'services/{version}/skills/summary?startDate=' + this.StartDate +
+                '&endDate='+this.EndDate;
+        try{
+
+            //arbitrary method to convert dates to the correct format
+            convertDates();
+        
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+        
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.SkillData = resp.getBody();
+        
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.SkillData);
+            if(resp.getStatusCode()==200){               
+                //do something with the returned data
+                return obj.skillSummaries
+            } else {
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+                return null;
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;       
+        }
+    }    
+}
+</pre>

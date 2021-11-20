@@ -1,0 +1,122 @@
+﻿<pre class="prettyprint linenums">
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +team->a hash
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def PutTeamByid(token,teamid
+"team":{ 
+    "isActive"=> true,
+    "maxConcurrentChats"=> 0,
+    "wfoEnabled"=> true,
+    "wfm2Enabled"=> true,
+    "qm2Enabled"=> true,
+    "inViewEnabled"=> true,
+    "inViewGamificationEnabled"=> true,
+    "inViewChatEnabled"=> true,
+    "inViewLMSEnabled"=> true,
+    "maxEmailAutoParkingLimit"=> 0,
+    "analyticsEnabled"=> true,
+    "requestContact"=> true,
+    "contactAutoFocus"=> true,
+    "chatThreshold"=> 0,
+    "emailThreshold"=> 0,
+    "workItemThreshold"=> 0,
+    "voiceThreshold"=> 0,
+    "teamLeadId"=> "",
+    "niceAudioRecordingEnabled"=> true,
+    "niceDesktopAnalyticsEnabled"=> true,
+    "niceQmEnabled"=> true,
+    "niceScreenRecordingEnabled"=> true,
+    "niceSpeechAnalyticsEnabled"=> true,
+    "niceWfmEnabled"=> true,
+    "niceQualityOptimizationEnabled"=> true,
+    "niceSurvey_CustomerEnabled"=> true,
+    "nicePerformanceManagementEnabled"=> true,
+    "niceAnalyticsEnabled"=> true,
+    "niceLessonManagementEnabled"=> true,
+    "niceCoachingEnabled"=> true,
+    "niceStrategicPlannerEnabled"=> true,
+    "niceShiftBiddingEnabled"=> true,
+    "niceWfoAdvancedEnabled"=> true,
+    "niceWfoEssentialsEnabled"=> true})
+
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "/services/{version}/teams/#{teamid}"
+  uri = URI.parse(baseURL + apiURL)
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+  # Set up an HTTP object.
+      http = Net::HTTP.new uri.host, uri.port
+  request = Net::HTTP::put.new(uri.path)
+  request['Accept'] = "application/json, text/javascript, */*; q=0.01"
+  request['Authorization'] = "bearer #{accessToken}" 
+  request['Content-Length'] = 0
+  request['Content-Type'] = "application/x-www-form-urlencoded"
+  request['Data-Type'] = "JSON"
+  request.set_form_data({
+    "team[isActive]"=> true,
+    "team[maxConcurrentChats]"=> 0,
+    "team[wfoEnabled]"=> true,
+    "team[wfm2Enabled]"=> true,
+    "team[qm2Enabled]"=> true,
+    "team[inViewEnabled]"=> true,
+    "team[inViewGamificationEnabled]"=> true,
+    "team[inViewChatEnabled]"=> true,
+    "team[inViewLMSEnabled]"=> true,
+    "team[maxEmailAutoParkingLimit]"=> 0,
+    "team[analyticsEnabled]"=> true,
+    "team[requestContact]"=> true,
+    "team[contactAutoFocus]"=> true,
+    "team[chatThreshold]"=> 0,
+    "team[emailThreshold]"=> 0,
+    "team[workItemThreshold]"=> 0,
+    "team[voiceThreshold]"=> 0,
+    "team[teamLeadId]"=> "string value",
+    "team[niceAudioRecordingEnabled]"=> true,
+    "team[niceDesktopAnalyticsEnabled]"=> true,
+    "team[niceQmEnabled]"=> true,
+    "team[niceScreenRecordingEnabled]"=> true,
+    "team[niceSpeechAnalyticsEnabled]"=> true,
+    "team[niceWfmEnabled]"=> true,
+    "team[niceQualityOptimizationEnabled]"=> true,
+    "team[niceSurvey_CustomerEnabled]"=> true,
+    "team[nicePerformanceManagementEnabled]"=> true,
+    "team[niceAnalyticsEnabled]"=> true,
+    "team[niceLessonManagementEnabled]"=> true,
+    "team[niceCoachingEnabled]"=> true,
+    "team[niceStrategicPlannerEnabled]"=> true,
+    "team[niceShiftBiddingEnabled]"=> true,
+    "team[niceWfoAdvancedEnabled]"=> true,
+    "team[niceWfoEssentialsEnabled]"=> true})
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  # Make the request and store the response.
+      response = http.request(request)
+end
+</pre>

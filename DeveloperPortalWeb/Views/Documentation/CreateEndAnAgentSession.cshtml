@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Create End An Agent Session";
+}
+
+<p>
+    Most of the Agent API resources can only be accessed through an "Agent Session".
+    An agent session is started by POST-ing a new session request to the "agent-sessions"
+    collection resource. The context for the agent-sessions collection is specified in the
+    API token that you receive from the platform when your application authenticates and requests a
+    token. "Agent-sessions" applies to the user whose credentials were used to request the API token.
+    When you start an agent session by POST-ing to the agent-sessions collection resource, the session
+    is started for the agent whose credentials were used to retrieve the API token that is used
+    when calling the "start session" method.
+</p>
+
+<p>
+    To start an agent session, you need to get an API Password (or Implicit) token from the token service.
+    See the Getting Started tutorial for more details.
+</p>
+
+<p>
+    Once you have received a responce object with access token and other needed information,
+    we can consider some code.
+</p>
+
+<pre class="prettyprint linenums">
+var auth_response;
+var baseUrl = auth_response.resource_server_base_uri;
+var sessionId;
+var getEvents = false;
+
+function startSession() {
+    console.log("Starting session...");
+    $.ajax({
+        url: baseUrl + "services/v12.0/agent-sessions",
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+            "stationPhoneNumber": "4005150001"
+        }),
+        headers: {
+            "Authorization": auth_response.token_type + " " +
+            auth_response.access_token
+        },
+        success: function (data) {
+            sessionId = data.sessionId;
+            console.log("Session started");
+            console.log("session id: " + sessionId);
+            getEvents = true;//Get events. Timeout is set to 10 seconds
+            getNextEvents(10);
+        },
+        error: function (xhr, status) {
+            alert("start session failed: " + xhr.status);
+        }
+    });
+}
+
+function endSession() {
+    $.ajax({
+        type: "DELETE",
+        url: baseUrl + 'services/v13.0/agent-sessions/' + sessionId,
+        contentType: 'application/json',
+        dataType: "json",
+        headers: {
+            "Authorization": auth_response.token_type + " " + auth_response.access_token
+        },
+        error:
+        function (xhr, status) {
+            eventLog("failed to end session: " + xhr.status + " - " + xhr.statusText);
+        }
+    });
+}
+</pre>
+
+<p>
+    Here we have two functions: startSession() and endSession() which
+    will start and end our agent session respectively.
+</p>
+
+<p>endSession() just sends DELETE XHR request to end current session.</p>
+
+<p>The startSession() function sends the</p>
+
+<pre class="prettyprint linenums">
+{
+    "stationPhoneNumber": "4005150001"
+}
+</pre>
+<p class="margin-bottom-none">
+    as a parameter. If our request will complete successfully and we have
+    sessionId we can start requesting events immediately with getNextEvents().
+</p>

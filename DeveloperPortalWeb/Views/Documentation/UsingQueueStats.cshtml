@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Using Queue Stats";
+}
+
+<div class="break-word">
+    <p>
+        The inContactMobileSdk contains a class called QueueStatsManager which gives access to
+        some key statistics about your correct queue.
+    </p>
+    <p>
+        To use the QueueStatsManager, as in the other examples, it is important that you update
+        the configuration in the HttpConnectionManager to connect to the server.
+    </p>
+    <p>
+        <b>NOTE:</b> If you have already configured this in the application before, you don’t
+        have to repeat this step.
+    </p>
+<pre class="prettyprint linenums">
+HttpConnectionConfiguration httpConnectionConfiguration = new HttpConnectionConfiguration();
+httpConnectionConfiguration.setUser("YOUR USER");
+httpConnectionConfiguration.setPassword("YOUR PASSWORD");
+httpConnectionConfiguration.setClientId("YOUR ApplicationID");
+httpConnectionConfiguration.setClientSecretKey("YOUR AppName@VendorName");
+httpConnectionConfiguration.setServerUrl("THE SERVER URL");
+HttpConnectionManager.getInstance().setConfiguration(httpConnectionConfiguration);
+</pre>
+    <p>
+        You can save the instance of the QueueStatsManager in a local variable.
+    </p>
+<pre class="prettyprint linenums">
+QueueStatsManager manager = new QueueStatsManager(this);    
+</pre>
+    <p>
+        The QueueStatsManager gets all the information from the server, which is why you will need to create the callback object from the QueueDelegate interface.
+    </p>
+    <h3 class="primary-color text-align-left">How to get the number of connected agents?</h3>
+    <p>
+        To get the number of connected agents, you can use the getAgentStateList in the QueueManager class with the start date as parameter. You will receive the response in the methods of the QueueDelegate. The requestSucceeded method sends the response of the server with the constructed object.
+    </p>
+<pre class="prettyprint linenums">
+QueueDelegate&lt;list&lt;agentstate>> dalegate = new QueueDelegate&lt;list &lt;agentstate>>() {
+    &#64;Override
+    public void requestSucceeded(List&lt; agentstate > agentStateList) 
+    {
+        //This will count how many agents are not in the LOGGED_OUT state
+        int availableAgents = 0;
+        for (AgentState agentState : agentStateList)
+        {
+            if (AgentState.AVAILABLE.equals(agentState.getAgentStateName()))
+            {
+                availableAgents++;
+            }
+        }
+    }
+    &#64;Override
+    public void requestFailed(int method, int type, int code, String response) 
+    {
+    }
+    &#64;Override
+    public void requestError(Exception arg0) 
+    {
+    }
+};
+String startDate ="2013-01-01";
+manager.getAgentStateList(dalegate, startDate);
+</pre>
+    <p>
+        As you can see in the requestSucceded method, we are getting the parameter List "agentstate"" which has the same type of the created delegate. This will be similar in all of the cases; the given response will be the same type of the constructed generic delegate.
+    </p>
+    <p>
+        Having the response in the requestSucceeded method, we must count how many agents aren’t in the LOGGED_OUT state. This is how we establish how many agents are connected.
+    </p>
+    <h3 class="primary-color text-align-left">How to get the number of available agents?</h3>
+    <p>
+        As in the previous example, you can use the AgentState class to get this information as shown below:
+    </p>
+<pre class="prettyprint linenums">
+QueueDelegate&lt;list &lt;agentstate>> dalegate = new QueueDelegate&lt;list &lt;agentstate>>() {
+    &#64;Override
+    public void requestSucceeded(List&lt;agentstate>agentStateList)
+    {
+        //This will count how many agents are not in the LOGGED_OUT state
+        int availableAgents = 0;
+        for(AgentState agentState : agentStateList) 
+        {
+            if(AgentState.AVAILABLE.equals(agentState.getAgentStateName())) 
+            {
+                availableAgents ++;
+            }
+        }
+    }
+    &#64;Override
+    public void requestFailed(int method, int type, int code, String response) 
+    {
+    }
+    &#64;Override
+    public void requestError(Exception arg0) 
+    {
+    }
+};
+String startDate ="2013-01-01";
+manager.getAgentStateList(dalegate, startDate);
+</pre>
+    <p>
+        Then, instead of counting the agents that are not LOGGED_OUT, you can count the agents that are in the AVAILABLE state to get the desired information.
+    </p>
+    <h3 class="primary-color text-align-left">How to get the number of available agents in a specific skill?</h3>
+    <p>
+        You can do something similar to what we have shown in the previous example, and add in an additional check on the skillID when doing the count. Another way of doing this is to use the SkillSummary class. This class has many other statistics that that the AgentState class doesn’t have.
+        In order to get the desired information you will need to create the delegate, but this time the generic type will be a SkillSummary class. The method that we are going to use is the getSkillSummary method.
+    </p>
+<pre class="prettyprint linenums">
+QueueDelegate&lt;skillsummary> dalegate = new QueueDelegate&lt;skillsummary> () {
+    &#64;Override
+    public void requestSucceded(SkillSummary summary) {
+        int availableAgents = summary.getAgentsLoggedIn() - summary.getAgentsUnavailable();
+    }
+    &#64;Override
+    public void requestFailed(int method, int type, int code, String response) {
+    }
+    &#64;Override
+    public void requestError(Exception arg0) {
+    }
+};
+String skillId = "DESIRED_SKILL";
+String startDate = "START_DATE";//yyyy-MM-dd
+String endDate = "END_DATE";//yyyy-MM-dd
+manager.getSkillSummary(dalegate, skillId, startDate, endDate);
+</pre>
+    <p class="margin-bottom-none">
+        Subtracting the unavailable from the logged in agents we can have the available agents without using a "for" cycle.
+        Just as in the above examples, you can add similar functions per your requirements and create a QueueDelegate that matches the parameter that the function needs.
+    </p>
+</div>

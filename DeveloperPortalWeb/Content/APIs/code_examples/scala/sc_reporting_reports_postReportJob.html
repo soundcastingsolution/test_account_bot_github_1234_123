@@ -1,0 +1,37 @@
+﻿<pre class="prettyprint linenums">
+// importing the scalaj-http library
+package scalaj.http
+
+object startReportJob {
+
+	def startReportJob() {
+
+		//Give the specified url ,accessToken
+
+			val accessToken = "";
+			val BASEURL = "";
+
+		//Check if accessToken is empty or null
+		if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http(BASEURL+"services/{version}/report-jobs/" + {reportId})
+					.postData("""{"fileType": "string - CSV, TAB, XML, Excel",
+						"includeHeaders": "boolean - true or false",
+						"appendDate": "boolean - true or false",
+						"deleteAfter":"integer",
+						"overwrite":"boolean - true or false",
+						"startDate":"string - ISO 8601 formatted date/time",
+						"endDate": "string - ISO 8601 formatted date/time"}""")
+
+					.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json")).asString
+
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+			println(response);
+		}
+		else{
+		//No token - get one or handle error
+		}
+	}
+}
+</pre>

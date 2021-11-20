@@ -1,0 +1,27 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.AccordionItemViewModel>
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Agent Session Events";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<div class="session-events-container">
+	@Html.Partial("_AccordionListItems", Model)
+</div>
+
+
+@section Styles {
+	@Styles.Render("~/bundles/prettify.css")
+}
+
+@section Scripts {
+	@Scripts.Render("/Scripts/kendo/kendo.all.min.js")
+	@Scripts.Render("~/bundles/prettify.js")
+	<script>
+		$(window).load(function () {
+			expandAccordionItem('accordionId');
+			prettyPrint();
+		});
+	</script>
+}

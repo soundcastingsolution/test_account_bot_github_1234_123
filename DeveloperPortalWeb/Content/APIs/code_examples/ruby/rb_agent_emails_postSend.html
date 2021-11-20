@@ -1,0 +1,99 @@
+<pre class="prettyprint linenums">
+# Calls the API to set an agent status.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +sessionID+ -> a string
+#  - +contactId+ -> an integer    
+#  - +parameters+ -> a hash
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if sessionID isn't a nonempty string
+#
+def send(token, sessionID, contactId, parameters={
+    :skillId => "123456", 
+    :toAddress => "recipient@company.com", 
+    :fromAddress => "sender@company.com", 
+    :ccAddress => "", 
+    :bccAddress => "", 
+    :subject => "Hello", 
+    :bodyHtml => "Just saying hi", 
+    :attachments => "", 
+    :attachmentNames => ""
+})
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that sessionID is a nonempty string.
+  unless sessionID.is_a?(String) && sessionID != ""
+    raise ArgumentError, "sessionID must be a nonempty string"
+  end
+    
+  # Check that parameters is a hash with appropriate keys.
+  # Keys not checked have default values.
+  unless parameters.is_a?(Hash) &&
+         parameters[:skillId].is_a?(Integer) &&
+         parameters[:toAddress].is_a?(String) &&
+         parameters[:fromAddress].is_a?(String) &&
+         parameters[:ccAddress].is_a?(String) &&
+         parameters[:bccAddress].is_a?(String) &&
+         parameters[:subject].is_a?(String) &&
+         parameters[:bodyHtml].is_a?(String) &&    
+         parameters[:attachments].is_a?(String) &&
+         parameters[:attachmentNames].is_a?(String)
+    raise ArgumentError, "parameters wasn't a hash with the right kind of keys"
+  end
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Encode the session ID.
+  sessionID.gsub! "=", "%3D"
+
+  # Create the URL that accesses the API.    
+  # Only available in v4.0 or later
+  apiURL = "/services/{version}/agent-sessions/#{sessionID}/interactions/#{contactId}/email-send"
+  uri = URI.parse(baseURL + apiURL)    
+    
+  # Create the POST data.
+  postData = "{\"skillId\": \"#{skillId}\",
+               \"toAddress\": \"#{toAddress}\",
+               \"fromAddress\": \"#{fromAddress}\",
+               \"ccAddress\": \"#{ccAddress}\",
+               \"bccAddress\": \"#{bccAddress}\",
+               \"subject\": \"#{subject}\",
+               \"bodyHtml\": \"#{bodyHtml}\",
+               \"attachments\": \"#{attachments}\",
+               \"attachmentNames\": \"#{attachmentNames}\"}"
+
+  # Create the POST request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => "0",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the POST request an HTTPS POST request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(baseURL + apiURL, postData, headers)
+end
+</pre>

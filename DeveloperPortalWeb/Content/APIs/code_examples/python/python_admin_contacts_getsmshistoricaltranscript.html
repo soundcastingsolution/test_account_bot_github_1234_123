@@ -1,0 +1,13 @@
+﻿<pre class="prettyprint linenums">
+def getSmsHistoricalTranscripts(contactId,businessUnitId):
+    #Check if accessToken is empty or null
+    if accessToken!="":
+        getSmsHistoricalTranscriptsPayload = {
+        'businessUnitId': businessUnitId}
+        header_param = {'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/x-www-form-urlencoded'}
+        response=requests.get(baseURI + 'services/{version}/contacts/'+ contactId+'/sms-historical-transcript',headers=header_param,params=getSmsHistoricalTranscriptsPayload)
+        #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

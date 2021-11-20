@@ -1,0 +1,34 @@
+﻿<pre class="prettyprint linenums">
+function PostCallListbyListID(listId,skillId,fileName,forceOverwrite,defaultTimeZone,expirationDate,listFile,startSkill){
+
+var PostCallListbyListIDpayload ={
+  "skillId": skillId,
+  "fileName": fileName,
+  "forceOverwrite": forceOverwrite,
+  "defaultTimeZone": defaultTimeZone,
+  "expirationDate": expirationDate,
+  "listFile": listFile,
+  "startSkill": startSkill
+}
+    $.ajax({
+        //The baseURI variable is created by the result.resource_server_base_uri,
+        //which is returned when getting a token and should be used to create the URL base
+        'url': baseURI + '/services/{version}/lists/call-lists/' + listId + '/upload',
+        'type': 'POST',
+        'headers': {
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/json; charset=UTF-8'
+        },
+        'data': JSON.stringify(PostCallListbyListIDpayload),
+        'success': function (result, status, statusCode) {
+            //Process success actions
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions
+            return false;
+        }
+    });
+}
+</pre>

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Create Access Key";
+}
+
+<p>
+    With the bearer token, you can create an access key using this endpoint:
+</p>
+    <p>https://na1.nice-incontact.com/access-key-management/v1/access-keys.</p>
+    <p>
+    Your POST request should contain:</p>
+<p>
+    <ul>
+        <li><b>Header:</b> Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9…. (the bearer token is the "token" shown in the response to the refresh request).</li>
+        <li><b>Content-Type:</b> application/json</li>
+        <li>
+            <b>Body:</b> {“userId”: “string” 
+                         “tenantId”: “string”}
+        </li>
+    </ul>
+</p>
+<p>
+    <b>Note:</b><i>You can find the GUID for userID and tenantID by pasting the token into jwt.io.</i>
+</p>
+<p>
+    This request will generate the following:
+</p>
+<pre class="prettyprint linenums">
+ 201 Response:
+ Body: 
+ {
+ "accessKey" :
+ { 
+  "accessKeyId" : "xxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "accessKeySecret" : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "userId" : "1xxxxxxxxxxxxxxxxxxxx”,
+  "tenantId" : "xxxxxxxxxxxxxxxxxxxx",
+  "isActive" : true
+ }
+ }
+</pre>

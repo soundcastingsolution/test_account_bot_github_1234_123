@@ -1,0 +1,36 @@
+﻿<pre class="prettyprint linenums">
+def PutSkillCadenceSettings(skillId):
+#Check if accessToken is empty or null
+if accessToken!="":
+ 
+#Give necessary parameters for http request
+    payload={
+    "attemptMode": "string",
+    "recordRequestMode": "string",
+    "destinationRetryRestMinutes": 0,
+	"maximumAttempts": [{
+    "fieldName": "string"
+	"attempts": 0 }],
+    "cadences": [{
+    "fieldName": "string"
+	"attempts": 0,
+    "timeConstraints": {
+	"weekdayTimeConstraints": [{
+    "startTime": "string",
+    "endTime": "string" }],
+	"weekendTimeConstraints": [{
+    "startTime": "string",
+    "endTime": "string" }]}}]}
+#add all necessary headers
+    header_param={
+    'Authorization': 'bearer ' + accessToken,
+    'content-Type': 'application/json; charset=UTF-8'}
+ 
+# Make http put request
+    response = requests.put(baseURI +'/services/v18.0/skills/' + skillId + '/parameters/cadence-settings'  , headers = header_param,data=payload) 
+ 
+#print response appropriately
+ 
+else:
+    construct('error')
+</pre>

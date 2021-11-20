@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Use The Token";
+}
+
+<p>
+    Once you get the token response, you can use the token in any API call. Note that you will use the "resource_server_base_uri" value to make all API calls once you have a token. The difference is that this new URI will contain the cluster name where {cluster} represents the specific cluster your Business Unit is authorized to use. For example:
+</p>
+
+<p class="indentation">
+    <b class="break-word">"https://api-{cluster}.incontact.com/inContactAPI/"</b>
+</p>
+
+<p>
+    All of the NICE CXone API calls are RESTful and require the new base URI and an authorization header with a valid token:
+</p>
+
+<p class="indentation">
+    <b>Authorization: bearer {token}</b>
+</p>
+
+<p>
+    For example, if you want to use the Admin API to retrieve a list of agents in your business unit, you would send an HTTPS request to the Agent List resource URI and include the API token as a "bearer Authorization" header:
+</p>
+
+<div class="panel-group margin-bottom-none">
+    <div class="panel panel-default">
+        <div class="panel-heading not-hover code-header-gray">
+            <h4 class="panel-title">
+                "Agents" API REQUEST
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in">
+            <div class="panel-body">
+                <pre class="margin-bottom-none no-padding">
+<b>Request URL:</b> https://api-{cluster}.incontact.com/inContactAPI/services/v13.0/agents 
+<b>Request Method:</b> GET
+<b>Request Headers:</b> GET /InContactAPI/services/v13.0/agents HTTP/1.1
+<b>Host:</b> api-{cluster}.incontact.com
+<b>Connection:</b>  keep-alive
+<b>Content-Length:</b> 65
+<b>Origin:</b> http://myapp.example.com 
+<span class="background-yellow"><b>Authorization:</b> bearer VAp4BUKosVW3DQa6mGVbF9gJVOCoi7fv7+Kp8piexdF24JjuwWeyi/ </span>
+<span class="background-yellow">7jpU2YZVMwHIpfefuDsLFF144iMsJJeghS0uDMb+XO1wToISr8UswnFmlWDPiI2JuC5OlBLoRLNiG1nWfxkv</span>
+<span class="background-yellow">f2xg4vZ3TC5w5856I1u8oQsVx9j43xVEZJsuKR2TC3ydGNfkp+/xWu8ad67kRDcnqmV+/vi6fYVWwJWaeXO6</span>
+<span class="background-yellow">jFxJd8TYCVaYka1rf5uO065VKSuG++cq2I7y2zws/XEu8vwC95ZREXOr4UcgNqs+IIfl4IdNEqCBM= </span>
+<b>User-Agent:</b> Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) 
+        Chrome/23.0.1271.95 Safari/537.11 
+<b>Content-Type:</b> application/json; charset=UTF-8 
+<b>Accept:</b> application/json, text/javascript, */*; q=0.01 
+<b>Referer:</b> http://myapp.example.com/mainPage 
+<b>Accept-Encoding:</b> gzip,deflate,sdch 
+<b>Accept-Language:</b> en-US,en;q=0.8 
+<b>Accept-Charset:</b> ISO-8859-1,utf-8;q=0.7,*;q=0.3 
+</pre>
+            </div>
+        </div>
+    </div>
+</div>

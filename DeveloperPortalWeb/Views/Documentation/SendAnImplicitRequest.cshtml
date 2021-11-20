@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Send An Implicit Request";
+}
+
+<p>
+    If your application is a web-server-based application, or a browser-based application that needs access to resources on behalf of a specific user, and you have decided to use the <b><i>Implicit Grant</i></b> type, there are a few steps that are unique to this token grant process that we will describe below
+</p>
+
+<p>
+    To learn more about token types, read the @Html.ActionLink("API authentication token", "APIAuthenticationToken", "Documentation") tutorial.
+</p>
+
+<p>
+    Because the <b><i>Implicit Grant</i></b> involves directing the user to an NICE CXone authorization page, the authorization key from <a data-toggle="collapse" onclick="scrollToId('CreateAnAuthorizationKey')">step two</a>, is not required. Instead you will just pass in the Client ID that is made up of the Application Name and Vendor Name using the &#64 symbol as described below.
+</p>
+
+<pre class="prettyprint linenums">
+var application = "SuperWidgets";
+var vendor = "WidgetsInc.com";
+var client_id = window.btoa(application + "&#64" + vendor);
+</pre>
+
+<p>
+    For <b><i>Implicit Grant</i></b> tokens the request must be sent to the NICE CXone Authenticate Service URL:
+</p>
+
+<p class="indentation">
+    <b class="break-word">https://api.incontact.com/InContactAuthorizationServer/Authenticate</b>
+</p>
+
+<p>
+    You must also define and pass into the NICE CXone Authenticate service several parameters that control how the service will interact with the user and what type of token will be returned from the request.
+</p>
+
+<p>
+    One required parameter that is unique to <b><i>Implicit Grant</i></b> tokens is a <b>"redirect_uri"</b> that contains the URI for the application that will consume the token received from this request.  This must match exactly one of the Authorized Callback URLs that you added to the API Application registered in <a data-toggle="collapse" onclick="scrollToId('RegisterYourApplication')">step one</a> of this tutorial.
+</p>
+
+<p>
+    Some of these parameters must be URI encoded and others are sent as regular strings as described below.
+</p>
+
+<pre class="prettyprint linenums">
+var implicitUri = "https://api.incontact.com/InContactAuthorizationServer/Authenticate";
+var client_id = "SuperWidget&#64WidgetsInc.com";
+var token_scope = "AdminApi AgentApi";
+var redirect_uri = "https://customapplication.superwidgets.com/authenticated";
+var state_object = "myState";
+
+function RedirectToAuthPage() {
+    var url = implicitUri;
+    url = url + "?state=" + state_object;
+    url = url + "&response_type=token";
+    url = url + "&client_id=" + encodeURIComponent(client_id);
+    url = url + "&redirect_uri=" + encodeURIComponent(redirect_uri);
+    url = url + "&scope=" + encodeURIComponent(token_scope);
+    window.location.href = url;
+}
+</pre>
+
+<p>
+    <b>NOTE:</b> The <b>"scope"</b> parameter must be populated for <b><i>Implicit Grant</i></b> tokens.  If you pass in the NULL string ("") you will receive a token that does not have access to any API scopes.
+</p>
+
+<p>
+    Currently in the NICE CXone API Framework, the following API’s can be specified:
+</p>
+
+<ul class="text-left">
+    <li><b>AdminAPI</b> - Administrative APIs such as assigning a Skill to an Agent</li>
+    <li><b>AgentAPI</b> - Agent Session APIs such as accepting a Contact</li>
+    <li><b>AuthenticationAPI</b> - Authentication APIs such as resetting passwords</li>
+    <li><b>RealTimeDataAPI</b> - Real Time Data APIs such as getting current state of Agents</li>
+    <li><b>ReportingAPI</b> - Historical or calculated data</li>
+    <li><b>PatronAPI</b> - APIs that do not require NICE CXone credentials such as Click-to-call</li>
+    <li><b>CustomAPI</b> - Any APIs you create from the Studio scripting tool</li>
+</ul>
+
+<p>
+    Once you make the request, the user will be redirected to the NICE CXone Implicit Login page and be prompted for their NICE CXone username and password as shown below.
+</p>
+
+<p>
+    <img class="img-responsive center-block img-size-sm" src="@Url.Content("~/Content/images/implicit-Login.png")">
+</p>
+
+<p>
+    If the user successfully logs into the NICE CXone platform, they will be redirected to the Implicit Grant page where they will be shown a description of the API Scopes that your application is requesting and be required to either <b><i>Grant</i></b>  or <b><i>Deny</i></b> that access as shown below.
+</p>
+
+<p>
+    <img class="img-responsive center-block img-size-lg" src="@Url.Content("~/Content/images/implicit-Grant.png")">
+</p>
+
+<p>
+    Below is an example of HTTP an request for the Implicit Grant:
+</p>
+
+<div class="panel-group margin-bottom-none">
+    <div class="panel panel-default">
+        <div class="panel-heading not-hover code-header-gray">
+            <h4 class="panel-title">
+                "Implicit" grant REQUEST
+            </h4>
+        </div>
+        <div class="panel-collapse collapse in">
+            <div class="panel-body">
+                <pre class="margin-bottom-none no-padding">
+<b>Request URL:</b> https://api.incontact.com/InContactAuthorizationServer/Authenticate HTTP/1.1
+<b>Request Method:</b> POST
+<b>Request Headers:</b>
+        POST /InContactAuthorizationServer/Authenticate HTTP/1.1
+<b>Host:</b> api.incontact.com
+<b>Connection:</b>  keep-alive
+<b>Content-Length:</b> 156
+<b>Origin:</b> https://api.incontact.com
+<b>User-Agent:</b> Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) 
+            Chrome/23.0.1271.95 Safari/537.11 
+<b>Content-Type:</b> application/x-www-form-urlencoded
+<b>Accept:</b> application/json, text/javascript, */*; q=0.01 
+<span class="background-yellow"><b>Referer:</b> https://api.incontact.com/InContactAuthorizationServer/Authenticate?client_id=SuperWidgets@WidgetsInc.com
+     &redirect_uri=https://customapplication.superwidgets.com&response_type=token&scope=AdminApi%20AgentApi&state=myState</span>
+<b>Accept-Encoding:</b> gzip,deflate
+<b>Accept-Language:</b> en-US,en;q=0.8 
+<span class="background-yellow">client_id=SuperWidgets@WidgetsInc.com&redirect_uri=https://customapplication.superwidgets.com
+    &response_type=token&scope=AdminApi%20AgentApi&state=myState</span>
+</pre>
+            </div>
+        </div>
+    </div>
+</div>

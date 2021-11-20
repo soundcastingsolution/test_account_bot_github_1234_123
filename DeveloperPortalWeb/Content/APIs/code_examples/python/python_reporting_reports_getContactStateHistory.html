@@ -1,0 +1,26 @@
+﻿<pre class="prettyprint linenums">
+ # importing the requests library 
+import requests 
+
+def getContactStateHistory():
+
+# api-endpoint 
+#Give the specified url ,accessToken
+	BASEURL = "{BASEURL}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+if accessToken!="":
+
+#add all necessary headers
+	header_param = {'Authorization': 'bearer ' + '{accessToken}','content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make get http request
+	response = requests.get(BASEURL + 'services/{version}/contacts/' + {contactId} + '/statehistory' , headers = header_param) 
+
+#print response appropriately
+	print (response)
+
+else:
+	#no token get one or handle error
+</pre>

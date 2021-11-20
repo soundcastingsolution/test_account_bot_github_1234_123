@@ -1,0 +1,63 @@
+﻿<pre class="prettyprint linenums">
+# Calls the API to retrieve activity information for all skills
+#
+# * *Arguments* :
+#   - +token+ -> a token hash    
+#   - +skillId+ -> ID of the skill
+#   - +fields+ -> List of elements to return in response
+#   - +updatedSince+ -> Returns all Skills with activity updates since ISO 8601 time
+#
+# * *Returns* :
+#   - skill activity
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#
+def getSkillActivityById(token, skillId, fields, updatedSince)
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "the function didn't receive a token it could understand"
+  end
+    
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  # New input params only available in v5.0 or higher
+  apiURL = "services/{version}/skills/#{skillId}/activity?"\
+           "fields=#{fields}&updatedSince=#{updatedSince}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.request_get(baseURL + apiURL, headers)
+    
+  # The data the API returns is in JSON, so parse it if it's valid.
+  data = if !(response.body == "" || response.body == nil)
+      JSON.parse(response.body)
+    else
+      "The response was empty. Is there data for that range?"
+  end
+  # Now you can do something with the data the API returned.
+end
+</pre>

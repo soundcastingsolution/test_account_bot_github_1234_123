@@ -1,0 +1,61 @@
+﻿{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CXoneAPI",
+    "description": "Access Keys ",
+    "version": "1.0.0-oas3"
+  },
+  "tags": [
+    {
+      "name": "AccessKeys",
+      "description": " : Access Key Management"
+    },
+    {
+      "name": "Authentication",
+      "description": " : Request a Token"
+    },
+    {
+      "name": "Authorization-Management",
+      "description": " : Authorization Management"
+    },
+    {
+      "name": "User-Management",
+      "description": ": User Management"
+    }
+  ],
+  "paths": {
+    "/authentication/v1/token/access-key": {
+      "$ref": "CXone/Authentication#/authentication_v1_token_access-key"
+    },
+    "/access-key-management/v1/access-keys/validate": {
+      "$ref": "CXone/AccessKeys#/access-key-management_v1_access-keys_validate"
+    },
+    "/access-key-management/v1/access-keys": {
+      "$ref": "CXone/AccessKeys#/access-key-management_v1_access-keys"
+    },
+    "/access-key-management/v1/access-keys/{accessKeyId}": {
+      "$ref": "CXone/AccessKeys#/access-key-management_v1_access-keys_accessKeyId"
+    },
+    "/user-management/v1/teams": {
+      "$ref": "CXone/UserManagement#/%2Fteams"
+    },
+    "/user-management/v1/teams/{teamId}": {
+      "$ref": "CXone/UserManagement#/%2Fteams%2F%7BteamId%7D"
+    },
+    "/user-management/v1/teams/search": {
+      "$ref": "CXone/UserManagement#/%2Fteams%2Fsearch"
+    },
+    "/user-management/v1/users": {
+      "$ref": "CXone/UserManagement#/%2Fusers"
+    },
+    "/user-management/v1/users/{userId}": {
+      "$ref": "CXone/UserManagement#/%2Fusers%2F%7BuserId%7D"
+    },
+    "/user-management/v1/users/teams/{teamId}": {
+      "$ref": "CXone/UserManagement#/%2Fusers%2Fteams%2F%7BteamId%7D"
+    },
+    "/authorization/v1/roles/search": {
+      "$ref": "CXone/AuthorizationManagement#/%2Froles%2Fsearch"
+    }
+  }
+}

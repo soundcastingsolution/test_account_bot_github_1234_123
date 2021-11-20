@@ -1,0 +1,25 @@
+﻿    <pre class="prettyprint linenums">
+    public void transformnumbers(int agentpatternId) throws IOException {
+    final String API_PATH = "/agent-patterns/" + agentpatternId + "/transform-phonenumbers";
+    final String API_URL = "services/v19.0" + API_PATH;
+    if (ACCESS_TOKEN_PROPERTY != null) {
+    HttpsURLConnection urlConnection = (HttpsURLConnection) (new URL(
+    (RESOURCE_SERVER_BASE_URI_PROPERTY) + API_URL).openConnection());
+    urlConnection.setRequestProperty(AUTHORIZATION_HEADER, AUTHORIZATION_BEARER_PREFIX + ACCESS_TOKEN_PROPERTY);
+    urlConnection.setRequestProperty(ACCEPT_HEADER, APPLICATION_JSON_VALUE);
+    urlConnection.setRequestProperty(CONTENT_TYPE_HEADER, APPLICATION_JSON_VALUE);
+    urlConnection.setDoInput(true);
+    urlConnection.setDoOutput(true);
+    urlConnection.setRequestMethod("POST");
+    urlConnection.connect();
+    OutputStream os = urlConnection.getOutputStream();
+    os.write(param.getBytes("UTF-8"));
+    int responseCode = urlConnection.getResponseCode();
+    String responseLine = urlConnection.getResponseMessage();
+    construct("Admin", "Agents", "POST /agent-patterns/{agentpatternId}/transform-phonenumbers", CLUSTER + "- v19", responseCode,
+    responseLine);
+    } else {
+    // No token - get one or handle error
+    }
+    }
+    </pre>

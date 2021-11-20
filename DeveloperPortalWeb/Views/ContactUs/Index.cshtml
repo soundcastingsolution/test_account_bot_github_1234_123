@@ -1,0 +1,187 @@
+﻿@using System.Configuration
+@model InContact.DeveloperPortal.Web.Models.ContactUsModel
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-12">
+                <hr style="border:1px solid #f48b31" />
+            </div>
+            <div class="col-sm-2 col-md-2" style="text-align: center;">
+                <div style="padding-bottom: 10px;">
+                    <span style="color:#f48b31;font-weight:600;font-size: 18px;">Contact Us</span>
+                </div>
+                <div>
+                    <img src="~/Content/images/headset.png" />
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-10">
+                <span>Dear customer, for any issues or questions please contact your Technical Account Manager or <a href="@System.Configuration.ConfigurationManager.AppSettings["CustomerSupport"]">Customer Support</a> or post your query in the Developer forums. Visit <a href="~/ForumHome">“Forums”</a>.</span>
+                <br />
+                <br />
+                <span>For DEVone Partners, </span>
+                <ul>
+                    <li style="padding-left:1em">To understand more about DEVone program please visit <a href="@System.Configuration.ConfigurationManager.AppSettings["DEVoneEcosystem"]">“DEVone Ecosystem” </a> </li>
+                    <li style="padding-left:1em">To become a DEVone partner please email <a>devone@niceincontact.com</a> or click <a href="@System.Configuration.ConfigurationManager.AppSettings["BecomeDEVonePartner"]">“Become a DEVone Partner”</a></li>
+                    <li style="padding-left:1em">If you have questions related to integration of your solution with CXone email at <a>devonesupport@niceincontact.com</a>  (only    for existing DEVone partners) and/or post your query in the Developer forums. Visit <a href="~/ForumHome">“Forums”</a>.</li>
+                    <li style="padding-left:1em">For general queries please complete the form below.</li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-12">
+                <hr style="border:1px solid #f48b31" />
+            </div>
+            <div class="col-sm-12 col-md-12" style="text-align:center;margin-bottom:20px">
+                @{
+                    if (ViewBag.sucess != null)
+                    {
+                        @:<span style="color:#85cd8e">@ViewBag.sucess</span>
+                    }
+                }
+            </div>
+            <div class="panel-body form-horizontal">
+                @using (Html.BeginForm("SendMessage", "ContactUs", new { id = "form" }))
+                {
+                    <div class="form-group col-sm-12">
+                        @Html.Label("Are you an existing Partner?", new { @class = "col-md-4 control-label" })
+                        <div class="col-md-2">
+                            @Html.DropDownList("IsExistingCustomer", new[] { new SelectListItem { Text = "Yes", Value = "true" }, new SelectListItem { Text = "No", Value = "false" } }, new { @class = "form-control-ddl" })
+                        </div>
+                        <span id="NICEinContactContactUs" hidden>Please click here <a href="@System.Configuration.ConfigurationManager.AppSettings["NICEinContactContactUs"]">"NICEinContact – Contact Us"</a></span>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(model => model.Company, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Company, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Company)
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group col-md-7 row">
+                            @Html.LabelFor(model => model.FirstName, new { @class = "col-md-7 control-label", @style = "padding-right: 20px;" })
+                            <div class="col-md-5 col-sm-12" style="padding: 0px;padding-left: 10px;">
+                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+                        </div>
+                        <div class="form-group col-md-5 col-sm-12 row" style="float:right;margin-right: 0px;">
+                            @Html.LabelFor(model => model.LastName, new { @class = "col-md-4 control-label", @style = "float:left" })
+                            <div class="col-md-8 col-sm-12">
+                                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(model => model.Email, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(model => model.PhoneNumber, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber)
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(model => model.Message, new { @class = "col-md-4 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.Message, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Message)
+                        </div>
+
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <div class="form-group row col-md-8">
+                            @Html.LabelFor(model => model.Captcha, new { @class = "col-md-6 control-label", @style = "padding-right: 30px;" })
+                            <div class="col-md-6 col-sm-12">
+                                <div class="col-md-7 col-sm-12">
+                                    @Html.TextBoxFor(model => model.Captcha, new { @class = "form-control ", autocomplete = "off" })
+                                    @Html.ValidationMessageFor(model => model.Captcha)
+                                </div>
+                                <div class="col-md-5 col-sm-12" style="float:right">
+                                    <p><img src="@Url.Action("ShowCaptchaImage")" id="imgCaptcha" height="70px" width="180px" /></p>
+
+                                    <button type="button" id="reloadCaptcha" class="btn btn-link" style="outline:none;margin-left:60px"> Reload </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4 col-sm-12" style="float:right;padding-right: 30px;">
+                                <input type="hidden" value="false" id="isSubmit" />
+                                <input id="submit" type="submit" class="background-primary-color buttonContactUs button-v6 color-white" style="float:right;padding:2px 20px" value="Send Message">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function (e) {
+        $('#submit').click(function () {
+            $("#isSubmit").val("true");
+        });
+        $('#reloadCaptcha').click(function () {
+            $('#imgCaptcha').attr('src', '@Url.Action("ShowCaptchaImage")');
+            $('#captchaValidationSuccess').hide();
+        });
+
+        $("#IsExistingCustomer").change(function () {
+
+            if ($(this).val() == "false") {
+
+                $("#NICEinContactContactUs").show();
+                $(".form-control").prop("disabled", true);
+                $(this).closest('form').find("input[type=text], textarea").val("");
+                $(".form-control").removeClass("input-validation-error");
+                $("#submit").prop("disabled", true);
+                $("#submit").addClass("disable");
+                $(".field-validation-error").hide();
+            } else {
+                $("#NICEinContactContactUs").hide();
+                $(".form-control").prop("disabled", false);
+                $("#submit").prop("disabled", false);
+                $("#submit").removeClass("disable");
+                if ($("#isSubmit").val() == "true") {
+                    $(".field-validation-error").show();
+                    $(".form-control").addClass("input-validation-error");
+                }
+            }
+        });
+    });
+
+</script>
+<style>
+    .disable {
+        background-color: #c3c3c3;
+    }
+
+    .form-control-ddl {
+        display: block;
+        width: 100%;
+        height: 36px;
+        padding: 6px 12px;
+        font-size: 16px;
+        line-height: 1.42857143;
+        color: #555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+</style>

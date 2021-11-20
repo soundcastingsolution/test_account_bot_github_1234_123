@@ -1,0 +1,237 @@
+﻿@{
+    ViewBag.Title = "Call Contact Events";
+}
+
+<p>
+    Call Contact Events are events that are related to phone calls that are either routed to the agent (inbound, or dialer-generated outbound), or placed by the agent (manual outbound).
+</p>
+<p>
+    There is only one "call contact event" structure. The event structure contains a "Status" field that identifies the status of the contact. For instance, you will receive an "Incoming" status when a call is first being routed to the agent (while the agent leg is being called). You will receive an "Active" status when a call is finally connected to the agent leg. You will receive a "Disconnected" status when the call is ended by either the agent or the caller. There are other call statuses you can receive. The structure of the event is the same for each of them.
+</p>
+
+<h3 class="primary-color">CallContactEvent</h3>
+<pre class="prettyprint linenums">
+{
+    "Type": "CallContactEvent",
+    "ContactID": "1569815",
+    "Status": "Dialing",
+    "OriginalState": "False",
+    "CallType": "Regular",
+    "DNIS": "4000010001",
+    "ANI": "8013203200",
+    "Skill": "1507",
+    "IsInbound": "False",
+    "StartTimeUTC": "2013-09-11T05:03:24.000Z",
+    "LastStateChangeTimeUTC": "2013-09-11T05:03:24.000Z",
+    "ScreenPopUrl": "",
+    "DisconnectCode": "NA",
+    "IsLogging": "False",
+    "Timeout": "",
+    "AllowDispositions": "True",
+    "Label": "",
+    "IsLinked": "False",
+    "TimeZones": "",
+    "FinalState": "False",
+    "OtherInformation": "",
+    "BlendingToSkillName": ""
+}
+</pre>
+
+<div class="table-container small-margin-bottom">
+    <table id="table-CCE-1" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th onclick="sortTable('table-CCE-1', 0, event)">Field name</th>
+                <th onclick="sortTable('table-CCE-1', 1, event)">Field type</th>
+                <th onclick="sortTable('table-CCE-1', 2, event)">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Type</td>
+                <td>string</td>
+                <td>"CallContactEvent"</td>
+            </tr>
+            <tr>
+                <td>ContactID</td>
+                <td>string (integer)</td>
+                <td>The unique contact ID for this contact. This will be unique on the platform. Note that this value will change each time the call is transferred – the receiving agent will have a different contact ID. It is possible to store the "master contact ID" (the contact ID of the original call, allowing you reference CRM or database data about the call. The master Contact ID can be stored in a script variable, which will be delivered as a "screen pop variable".</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>string</td>
+                <td>This is the current status of the contact. The possible values for Status can be found below.</td>
+            </tr>
+            <tr>
+                <td>OriginalState</td>
+                <td>string (boolean)</td>
+                <td><b>Not used</b> – you can ignore this field.</td>
+            </tr>
+            <tr>
+                <td>CallType</td>
+                <td>string</td>
+                <td>A string that indicates the call type. The possible values for CallType can be found below.</td>
+            </tr>
+            <tr>
+                <td>DNIS</td>
+                <td>string</td>
+                <td>The phone number the caller dialed.</td>
+            </tr>
+            <tr>
+                <td>ANI</td>
+                <td>string</td>
+                <td>The phone number the caller dialed from.</td>
+            </tr>
+            <tr>
+                <td>Skill</td>
+                <td>string</td>
+                <td>The name of the skill the call was routed to (or placed on, for outbound calls)</td>
+            </tr>
+            <tr>
+                <td>IsInbound</td>
+                <td>string (boolean)</td>
+                <td>A string that represents a Boolean value (True or False) indicating whether the call is an inbound call or not. (If it's not inbound, it's outbound).</td>
+            </tr>
+            <tr>
+                <td>StartTimeUTC</td>
+                <td>string (date)</td>
+                <td>A string that is an ISO8601-formatted date/time that shows when the contact started. This will always be in UTC time.</td>
+            </tr>
+            <tr>
+                <td>LastStateChangeTimeUTC</td>
+                <td>string (date)</td>
+                <td>A string that is an ISO8601-formatted date/time that shows when the current status of the call was set. This will always be in UTC time (related to the server time).</td>
+            </tr>
+            <tr>
+                <td>ScreenPopUrl</td>
+                <td>string</td>
+                <td>A string that represents a URL that should be opened in a browser and displayed to the agent. This can be used to convey screen pop data to the agent. In some cases, you can use this field to simply transfer data to the agent application without actually displaying a web page.</td>
+            </tr>
+            <tr>
+                <td>DisconnectCode</td>
+                <td>string</td>
+                <td>A string that represents a disconnect reason if an outbound call failed, or other error that may occur on a call. Various disconnect codes have various causes, and these will be documented in future versions of this documentation. The possible values for DisconnectCode can be found below.</td>
+            </tr>
+            <tr>
+                <td>IsLogging</td>
+                <td>string (boolean)</td>
+                <td>A string that represents a Boolean value (True or False) that indicates whether the call is being recorded (a.k.a. "logged"). This value will only show "true" if the agent has requested that the call be recorded. If call recording/logging is initiated through an IVR script or by an administrator (through the Central admin web site or through the Admin API), this value will NOT indicate that the call is being recorded.</td>
+            </tr>
+            <tr>
+                <td>Timeout</td>
+                <td>string (integer)</td>
+                <td><b>Not Used</b> – you can ignore this field.</td>
+            </tr>
+            <tr>
+                <td>AllowDispositions</td>
+                <td>string (boolean)</td>
+                <td>A string that represents a Boolean value (true or false) that indicates whether or not this contact can be dispositioned.</td>
+            </tr>
+            <tr>
+                <td>Label</td>
+                <td>string</td>
+                <td><b>Not used</b> – you can ignore this field.</td>
+            </tr>
+            <tr>
+                <td>IsLinked</td>
+                <td>string (boolean)</td>
+                <td>A string representing a Boolean value (true or false) that indicates whether or not this call is the "linked" call for a Personal Connection outbound dialer campaign. If the ratio of outbound call attempts is greater than 1:1 (meaning more than one outbound call is being placed concurrently for each agent), the agent session will receive CallContactEvent notices for each of the outbound calls that are assigned to the agent. The agent's voice path will only be linked to one of the calls, however. This field indicates which of the calls the agent is listening to. This allows you to do a screen pop or display data to the agent about the call that is deemed "most likely to be connected next".</td>
+            </tr>
+            <tr>
+                <td>TimeZones</td>
+                <td>string</td>
+                <td><b>Not used</b> – you can ignore this field.</td>
+            </tr>
+            <tr>
+                <td>FinalState</td>
+                <td>string (boolean)</td>
+                <td>String representing a Boolean (true or false) that indicates whether the call is completed. When the voice path for a call is torn down, the agent session will receive a "Disconnected" status in a CallContactEvent. But if the agent is moved into an Unavailable/ACW state, the contact will still be "active" in the system, and the FinalState property of the CallContactEvent will be "false". Time will be counted towards the overall handle time for the contact during this phase. When the ACW state finally ends, the contact will be completely closed out, and the agent will receive a Disconnected status event with the FinalState property set to "true".</td>
+            </tr>
+            <tr>
+                <td>OtherInformation</td>
+                <td>string</td>
+                <td>A string that contains HTML data that should be displayed to the agent when they receive CallContactEvent notices for Personal Connection outbound dialer calls. If the call was requeued to the dialer as a "callback", the original handling agent is able to enter "callback notes" for the call. These should be displayed to the next agent to handle the call record. In addition, dialer list entries can have values that are considered "custom values" that should be displayed to the agent. The callback notes and custom field display values are delivered in the OtherInformation field as HTML data.</td>
+            </tr>
+            <tr>
+                <td>BlendingToSkillName</td>
+                <td>string</td>
+                <td>If blending is enabled on the platform, the agent session may be automatically logged into and out of a Personal Connection outbound skill campaign. It is possible to move the agent out of a Personal Connection campaign, and to deliver a call for a skill that the agent is not directly assigned to handle. In this scenario, the skill name is provided in the contact event so that it can be displayed to the agent (or used for other reasons).</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <p>
+            "Status" values:
+        </p>
+        <ul>
+            <li>Incoming</li>
+            <li>Ringing</li>
+            <li>Dialing</li>
+            <li>Active</li>
+            <li>Holding</li>
+            <li>Joined</li>
+            <li>Disconnected</li>
+            <li>CallBackDisconnected</li>
+            <li>Preview</li>
+            <li>Masking</li>
+            <li>NaturalCallRinging</li>
+            <li>NaturalCallAMD</li>
+            <li>NaturalCallDialing</li>
+        </ul>
+
+        <p>
+            "CallType" values:
+        </p>
+        <ul>
+            <li>Regular</li>
+            <li>AgentLeg</li>
+            <li>ReskillProxy</li>
+            <li>Consult</li>
+            <li>PersonalQueue</li>
+            <li>Dialer</li>
+            <li>TakeOver</li>
+            <li>NaturalCalling</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        <p>
+            "DisconnectCode" values:
+        </p>
+        <ul class="margin-bottom-none">
+            <li>NA</li>
+            <li>AgentLegAlreadyActive</li>
+            <li>Succeeded</li>
+            <li>Failed</li>
+            <li>CallAbandoned</li>
+            <li>Active</li>
+            <li>NoAnswer</li>
+            <li>Busy</li>
+            <li>BadNumber</li>
+            <li>Error</li>
+            <li>InvalidCallLeg</li>
+            <li>InvalidCallCount</li>
+            <li>InvalidStationID</li>
+            <li>InvalidWorkItem</li>
+            <li>JoinFailed</li>
+            <li>LinkFailed</li>
+            <li>InitiateConferenceFailed</li>
+            <li>InvalidState</li>
+            <li>Rejected</li>
+            <li>MissingRoomID</li>
+            <li>TransferComplete</li>
+            <li>Dropped</li>
+            <li>NoPorts</li>
+            <li>AgentLinkTimeout</li>
+            <li>AgentCancelled</li>
+            <li>LoginFailed</li>
+            <li>CampaignClosed</li>
+            <li>DialerActive</li>
+            <li>DialerSuppressed</li>
+            <li>AnsweringMachine</li>
+            <li>Fax</li>
+        </ul>
+    </div>
+</div>

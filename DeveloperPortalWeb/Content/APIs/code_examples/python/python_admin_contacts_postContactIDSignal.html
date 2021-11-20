@@ -1,0 +1,36 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def signalContact():
+
+# api-endpoint 
+#Give the specified url ,accessToken 
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+	if accessToken!="":
+
+#Give necessary parameters for http request
+		payload={'p1': 'string',
+		'p2': 'string',
+		'p3': 'string',
+		'p4': 'string',
+		'p5': 'string',
+		'p6': 'string',
+		'p7': 'string',
+		'p8': 'string',
+		'p9': 'string'}
+
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken,'content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make http post request
+		response = requests.post(Baseuri + 'services/{version}/interactions/' + {contactId} + '/signal', headers = header_param, data=payload) 
+
+#print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Chat Contact Events";
+}
+
+<h3 class="primary-color margin-top-none">ChatContactEvent</h3>
+<pre class="prettyprint linenums margin-bottom-none">
+{
+    "Type": "ChatContactEvent",
+    "ContactID": "1569822",
+    "RoomId": "2",
+    "Status": "Incoming",
+    "Skill": "1509",
+    "StartTime": "2013-09-11T05:30:39.000Z",
+    "LastStateChangeTime": "2013-09-11T05:30:39.000Z",
+    "ScreenPopUrl": "",
+    "RefusalTimeout": "45",
+    "IsActive": "True",
+    "Messages": [
+    {
+        "Text": "asdf",
+        "TimeStamp": "2013-09-11T05:30:40.750Z",
+        "PartyType": "Client"
+    }
+    ],
+    "FinalState": "False"
+}
+</pre>
+
+<h3 class="primary-color">ChatTextEvent</h3>
+<pre class="prettyprint linenums margin-bottom-none">
+{
+    "Type": "ChatText",
+    "RoomId": "2",
+    "Label": "CustomAgentLabel",
+    "Message": "Test",
+    "PartyType": "Agent",
+    "TimeStamp": "2013-09-11T05:32:10.000Z"
+{
+}
+    "Type": "ChatText",
+    "RoomId": "2",
+    "Label": "CustomCallerLabel",
+    "Message": "Test Test Test",
+    "PartyType": "Client",
+    "TimeStamp": "2013-09-11T05:32:36.000Z"
+{
+}
+    "Type": "ChatText",
+    "RoomId": "2",
+    "Label": "SystemSaysHello",
+    "Message": "$Localized:ChatSessionEnded",
+    "PartyType": "System",
+    "TimeStamp": "2013-09-11T05:33:09.000Z"
+}
+</pre>

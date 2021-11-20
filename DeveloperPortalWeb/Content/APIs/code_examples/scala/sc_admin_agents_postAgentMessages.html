@@ -1,0 +1,40 @@
+﻿<pre class="prettyprint linenums">
+ // importing the scalaj-http library
+package scalaj.http
+
+object PostAgentMessages {
+
+	def PostAgentMessages(message:String,startDate:Int,subject:String,targetId:Int,targetType:Int,validUntil:Int,expireMinutes:Int) {
+
+       //Give the specified url ,accessToken
+       
+         val accessToken = "";
+	    val baseURI = "";
+		 
+       //Check if accessToken is empty or null
+		 if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http(baseURI+ "/services/{version}/agents/messages")
+					.postData("""{"agentMessages": [
+				{
+					"message"->  message ,
+					"startDate"->  startDate ,
+					"subject"-> subject ,
+					"targetId"->  targetId ,
+					"targetType"->  targetType ,
+					"validUntil"->  validUntil  ,
+					"expireMinutes"-> expireMinutes }],"json"->"data"}""")
+
+			.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json"))
+			.asString
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+		
+			println(response);
+		}
+		else{
+			   //No token - get one or handle error
+		}
+	}
+}
+</pre>

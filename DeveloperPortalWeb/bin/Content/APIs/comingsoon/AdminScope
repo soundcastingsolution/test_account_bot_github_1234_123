@@ -1,0 +1,421 @@
+﻿{
+  "permissions": {
+    "get": {
+      "tags": [ "AdminScope" ],
+      "summary": "<b><i><span style='color:red'>Updated in v9.0</span></i></b> Returns a list of permissions",
+      "operationId": "getPermissions",
+      "description": "This method returns a list of all available permissions.<br/><br/><b><i><span style='color:red'>v9.0 NOTE: </span></i></b>Added \"profileId\" as a parameter and in the response payload<div class='tabs_wrapper' data-path='admin_general_getPermissions.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "profileId",
+          "description": "<b><i><span style='color:red'>(New in v9.0)</span></i></b>  ID for a security profile to filter permissions on",
+          "type": "integer",
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "title": "permissions",
+            "name": "permissions",
+            "description": "",
+            "properties": {
+              "profileId": {
+                "type": "integer",
+                "description": "<b><i><span style='color:red'>(New in v9.0)</span></i></b> ID of the Security Profile",
+                "required": true
+              },
+              "permissions": {
+                "type": "array",
+                "items": {
+                  "title": "permissions",
+                  "description": "",
+                  "properties": {
+                    "agentId": {
+                      "type": "integer",
+                      "description": "ID of the Agent",
+                      "required": true
+                    },
+                    "teamName": {
+                      "type": "string",
+                      "description": "Name of the Team",
+                      "required": true
+                    },
+                    "teamId": {
+                      "type": "integer",
+                      "description": "ID of the Team",
+                      "required": true
+                    },
+                    "businessUnitId": {
+                      "type": "integer",
+                      "description": "ID of the Business Unit",
+                      "required": true
+                    },
+                    "businessUnitName": {
+                      "type": "string",
+                      "description": "Name of the Business Unit",
+                      "required": true
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "First name of the Agent",
+                      "required": true
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "Last name of the Agent",
+                      "required": true
+                    },
+                    "employmentType": {
+                      "type": "integer",
+                      "description": "Type of Agent employment",
+                      "required": true
+                    },
+                    "employmentTypeName": {
+                      "type": "integer",
+                      "description": "Name of the type of Agent employment",
+                      "required": true
+                    },
+                    "createDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of record creation",
+                      "required": true
+                    },
+                    "modDateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp of record modification",
+                      "required": true
+                    },
+                    "productId": {
+                      "type": "integer",
+                      "description": "ID of the product",
+                      "required": true
+                    },
+                    "ntLoginName": {
+                      "type": "string",
+                      "description": "",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "404": {
+          "description": "Invalid Agent Id"
+        }
+      }
+    }
+  },
+  "dispositions": {
+    "get": {
+      "tags": [ "AdminScope" ],
+      "summary": "<b><i><span style='color:red'>New in v9.0</span></i></b> Returns Dispositions",
+      "operationId": "ReturnsDispositions",
+      "description": "This method will return the list of Dispositions configured for your Business Unit.<div class='tabs_wrapper' data-path='admin_general_getDispositions.html'></div>",
+      "produces": [
+        "application/json"
+      ],
+      "parameters": [
+        {
+          "name": "skip",
+          "description": "Number of records to skip in the results",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "top",
+          "description": "Number of records to return in the results",
+          "type": "integer",
+          "in": "query"
+        },
+        {
+          "name": "orderBy",
+          "description": "Values used to order results before paginating them.  Can also specify \"asc\" or \"desc\" to specify direction for example \"field1 desc\".  Default is asc",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "fields",
+          "description": "Comma separated list of elements to return in response",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "searchString",
+          "description": "Used to filter results to objects with the value in key fields",
+          "type": "string",
+          "in": "query"
+        },
+        {
+          "name": "includePreviewDispositions",
+          "description": "Indicates if Agent information should be returned",
+          "type": "boolean",
+          "default": false,
+          "in": "query"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Success",
+          "schema": {
+            "$ref": "#/definitions/getLocationsResponse"
+          }
+        },
+        "204": {
+          "description": "No Locations configured"
+        },
+        "401": {
+          "description": "Invalid or expired token"
+        },
+        "403": {
+          "description": "Security permissions prevent access to data"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "parameters": {
+      "addressBookId": {
+        "name": "addressBookId",
+        "description": "Address Book Id",
+        "required": true,
+        "type": "integer",
+        "in": "path"
+      },
+      "includeEntries": {
+        "name": "includeEntries",
+        "description": "Include Address Book Entries",
+        "type": "boolean",
+        "in": "query",
+        "enum": [ "true", "false" ],
+        "default": "false"
+      },
+      "updatedSince": {
+        "name": "updatedSince",
+        "description": "ISO 8601 timestamp which filters results for those updated since this time",
+        "type": "string",
+        "format": "date-time",
+        "in": "query"
+      }
+    },
+    "getAgentAddressBooksResponse": {
+      "title": "response",
+      "description": "Collection of Agent Address Books",
+      "properties": {
+        "lastPollTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of last database poll. Value should be passed in \"updatedSince\" parameter on next call"
+        },
+        "addressBooks": {
+          "type": "array",
+          "description": "Collection of Address Books assigned to the Agent",
+          "items": {
+            "title": "AddressBook",
+            "description": "Address Book",
+            "properties": {
+              "addressBookName": {
+                "type": "string",
+                "description": "Address Book Name"
+              },
+              "addressBookId": {
+                "type": "integer",
+                "description": "Address Book Id"
+              },
+              "addressBookType": {
+                "type": "string",
+                "description": "Address Book Type (Standard or Dynamic)"
+              },
+              "appId": {
+                "type": "string",
+                "description": "Application API Id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "getCampaignAddressBooksResponse": {
+      "title": "response",
+      "description": "Collection of Campaign Address Books",
+      "properties": {
+        "lastPollTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of last database poll. Value should be passed in \"updatedSince\" parameter on next call"
+        },
+        "addressBooks": {
+          "type": "array",
+          "description": "Collection of Address Books assigned to the Campaign",
+          "items": {
+            "title": "AddressBook",
+            "description": "Address Book",
+            "properties": {
+              "addressBookName": {
+                "type": "string",
+                "description": "Address Book Name"
+              },
+              "addressBookId": {
+                "type": "integer",
+                "description": "Address Book Id"
+              },
+              "addressBookType": {
+                "type": "string",
+                "description": "Address Book Type (Standard or Dynamic)"
+              },
+              "appId": {
+                "type": "string",
+                "description": "Application API Id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "getTeamAddressBooksResponse": {
+      "title": "response",
+      "description": "Collection of Team Address Books",
+      "properties": {
+        "lastPollTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of last database poll. Value should be passed in \"updatedSince\" parameter on next call"
+        },
+        "addressBooks": {
+          "type": "array",
+          "description": "Collection of Address Books assigned to the Team",
+          "items": {
+            "title": "AddressBook",
+            "description": "Address Book",
+            "properties": {
+              "addressBookName": {
+                "type": "string",
+                "description": "Address Book Name"
+              },
+              "addressBookId": {
+                "type": "integer",
+                "description": "Address Book Id"
+              },
+              "addressBookType": {
+                "type": "string",
+                "description": "Address Book Type (Standard or Dynamic)"
+              },
+              "appId": {
+                "type": "string",
+                "description": "Application API Id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "getSkillAddressBooksResponse": {
+      "title": "response",
+      "description": "Collection of Skills Address Books",
+      "properties": {
+        "lastPollTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of last database poll. Value should be passed in \"updatedSince\" parameter on next call"
+        },
+        "addressBooks": {
+          "type": "array",
+          "description": "Collection of Address Books assigned to the Skill",
+          "items": {
+            "title": "AddressBook",
+            "description": "Address Book",
+            "properties": {
+              "addressBookName": {
+                "type": "string",
+                "description": "Address Book Name"
+              },
+              "addressBookId": {
+                "type": "integer",
+                "description": "Address Book Id"
+              },
+              "addressBookType": {
+                "type": "string",
+                "description": "Address Book Type (Standard or Dynamic)"
+              },
+              "appId": {
+                "type": "string",
+                "description": "Application API Id"
+              }
+            }
+          }
+        }
+      }
+    },
+    "getPermissionsResponse": {
+      "title": " ",
+      "type": "object",
+      "required": [ "permissions" ],
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "description": "Collection of Permissions",
+          "items": {
+            "title": "permission",
+            "description": "Permission",
+            "required": [ "BusinessUnitId", "Key", "Value" ],
+            "properties": {
+              "BusinessUnitId": {
+                "type": "integer",
+                "description": "Business Unit Id"
+              },
+              "Key": {
+                "type": "string",
+                "description": "Permission Name"
+              },
+              "Value": {
+                "type": "string",
+                "description": "Permission Action"
+              }
+            }
+          }
+        }
+      }
+    },
+    "getDispositionsResponse": {
+      "title": " ",
+      "description": "Collection of Dispositions",
+      "type": "object",
+      "required": [ "dispositions" ],
+      "properties": {
+        "dispositions": {
+          "type": "array",
+          "items": {
+            "title": "Country",
+            "description": "Country",
+            "required": [ "countryId", "countryCode", "countryName" ],
+            "properties": {
+              "countryId": {
+                "type": "integer",
+                "description": "Country Id"
+              },
+              "countryCode": {
+                "type": "string",
+                "description": "Country Code (2 characters)"
+              },
+              "countryName": {
+                "type": "string",
+                "description": "Country Name"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

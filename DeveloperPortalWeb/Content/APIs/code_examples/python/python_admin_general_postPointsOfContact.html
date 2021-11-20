@@ -1,0 +1,23 @@
+﻿<pre class="prettyprint linenums">
+def PostPointofContact():
+    #Check if accessToken is empty or null
+    if accessToken!="":
+    #payload
+        PostPointofContactPayload = {
+        "pointOfContact": "string",
+        "pointOfContactName": "string",
+        "skillId": 0,
+        "isActive": "true",
+        "mediaTypeId": 0,
+        "scriptName": "string",
+        "ivrReportingEnabled": "true"}
+    #add all necessary headers
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+    # Make http post request
+        response = requests.post(baseURI+'/services/{version}/points-of-contact', headers = header_param,data=PostPointofContactPayload) 
+    #print response appropriately
+    else:
+        #no token get one or handle error
+</pre>

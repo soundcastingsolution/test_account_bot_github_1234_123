@@ -1,0 +1,40 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+	ViewBag.Title = "Agent API";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<p>
+	The Agent API is a set of method calls used to create, manage, and end "agent sessions". With an agent session, you are able to set the agent’s state and manage interactions (phone calls, chats, emails, voice mails, and work items).
+</p>
+
+
+<h3 class="primary-color">General Requirements</h3>
+<p>
+	To start an agent session, you need to get an API token from the token service. All API methods require some form of authentication token in each method call. Most agent applications require an Implicit or Password authentication token. See the @Html.ActionLink("API authentication token", "APIAuthenticationToken", "Documentation") tutorial for information on what type of token is needed for your application and how to get an API Authentication Token.
+</p>
+<p>
+	Once you have an API Authentication Token, you use this token to create an agent session for the agent whose credentials you used to get the token. This is done by requesting the method, <b class="break-word">https://api-{cluster}.incontact.com/inContactAPI/services/v13.0/agent-sessions</b> and supplying either a "station ID" or a phone number which will be delivered to the agent.
+</p>
+<p>
+	Once you start an agent session, you receive a "session ID". This will be used in most Agent API method calls. The agent session is referenced using its ID as a resource, like this: <b class="break-word">https://api-{cluster}.incontact.com/services/v13.0/agent-sessions/{session-id}</b>.
+</p>
+
+<div class="swagger-section">
+	<div id="swagger-ui-container" class="swagger-ui-wrap">Loading...</div>
+</div>
+
+@Html.Partial("~/Views/Shared/_CodeSampleTabs.cshtml")
+
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+            inContact.Swagger.init(
+                "@Url.Content("~/content/apis/agent-api-docs")",
+                "@Url.Content("~/content/apis/code_examples")",
+                "@Url.Action("GetAccessToken", "Account")",
+                "@Url.Content("~/content/swagger/images/throbber.gif")");
+        });
+	</script>
+}

@@ -1,0 +1,93 @@
+<pre class="prettyprint linenums">
+&lt?php
+  //The following code sample assumes that the access token is stored in the session
+  session_start();
+  //check if you have obtained a token
+  if($_SESSION["access_token"]!="")
+  {
+    //session_id is a required field
+    //force_logoff, end_contacts, ignore_personal_queue are optional fields
+    //Check if values are passed
+    //If values not passed handle them appropriately. For instance,
+    //Optional fields may be set to default values or removed from apiURL, etc
+    $param=rawurlencode($_POST['session_id']);
+    $param1=rawurlencode($_POST['force_logoff']);
+    $param2=rawurlencode($_POST['end_contacts']);
+    $param3=rawurlencode($_POST['ignore_personal_queue']);
+    $api_URL="services/{version}/agent-sessions/".$param."?forceLogoff=".$param1.
+            "&endContacts=".$param2."&ignorePersonalQueue=".$param3;
+    //creating the endpoint for the request
+    //appending api uri with the base uri obtained from the successful token request
+    $endpoint=$_SESSION["resource_server_base_uri"].$api_URL;
+
+    //creating a HTTP DELETE request to the api
+    $handle = curl_init($endpoint);
+    curl_setopt($handle, CURLOPT_HEADER, true); 
+    curl_setopt($handle, CURLOPT_CUSTOMREQUEST, "DELETE");
+
+    //set to TRUE to return the output of curl_exec as a string 
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true); 
+
+    //by default, cURL is setup to not trust any CAs 
+    //hence does not support any server's certificate
+    //Here we configure cURL to accept any server(peer) certificate
+    //does not verify if the CA is trusted
+    //For more security 
+    //set the CURLOPT_CAINFO parameter to point towards a CA certificate that cURL should trust
+    //curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, true);
+    //curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 2);
+    //curl_setopt($handle, CURLOPT_CAINFO, getcwd() . "certificate.crt");
+    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+
+    //Setting necessary header options
+    $headers=array();
+    $headers[] = 'Content-type: application/x-www-form-urlencoded; charset=UTF-8';
+    $headers[] = 'Authorization: bearer '.$_SESSION["access_token"];
+    $headers[] = 'Accept: application/json, text/javascript, */*; q=0.01';
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+
+    // Make the request         
+    $response = curl_exec($handle);  
+
+    //handling valid response
+    if($response!=FALSE)
+    {
+      $http_code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+      echo "\nStatus Code of the Response:".$http_code;
+	
+      //Parsing the response
+      //each property in header is a line by itself.
+      //the header and the web page content sent together are separated by \r\n\r\n
+      $parts = explode("\r\n\r\nHTTP/", $response);
+      //For HTTP status code 100 interim responses exists before the final response
+      //getting the final response header using array_pop
+      $parts = (count($parts) > 1 ? 'HTTP/' : '').array_pop($parts);
+      list($response_headers, $response_body) = explode("\r\n\r\n", $parts, 2);  
+      echo "&ltbr&gt";      
+      echo "\nResponse Header:\n".$response_headers;
+      echo "&ltbr&gt";
+      echo "&ltbr&gt";
+      if (!empty($response_body))
+      {
+        //The Response from the api is in JSON
+        //parsing the json response
+        echo "\nResponse Body:\n";  
+        //json_decode converts a json string to a PHP variable
+        $parsed_json=json_decode($response_body);  
+
+        //use the response data
+        print_r($parsed_json);
+      }
+    }
+
+    // Close the curl session  
+    curl_close($handle);
+
+    //Report all PHP errors (notices, errors, warnings, etc.)  
+    error_reporting(E_ALL);
+  }
+  else
+    // No token - get one or handle error
+    echo "No access Token";
+?>
+</pre>

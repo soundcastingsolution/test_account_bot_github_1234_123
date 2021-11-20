@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Complete Request Example Code";
+}
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<p>
+	The NICE inContact API Framework is a collection of RESTful APIs that provide access to NICE inContact data and services. The RESTful API requests are all made over HTTPS. Each request requires a valid API token, which is retrieved via an OAuth2 authentication process. API tokens expire, and can be renewed. Because the RESTful API works over HTTPS, it can be used from any platform, programming language, or environment that supports HTTPS (pretty much every language and environment there is). In the current version of the NICE inContact API Framework, only the Implicit, Password, and Client OAuth2 grant types are supported.
+</p>
+
+<div class="page-header">
+    <h3>Where do I start?</h3>
+</div>
+<p>
+	To help you get started we have provided some samples of how you would successfully request a token from the NICE inContact platform and use that token to make a basic GET API call. For more detailed information on how to use tokens please view the @Html.ActionLink("getting started", "GettingStarted", "Documentation") tutorial.
+</p>
+<p>
+    Click on the tab for your preferred language below to see the code sample:
+</p>
+
+<div id='tabstrip'>
+    <ul>
+        <li>JS</li>
+        <li>C#</li>
+        <li>Ruby</li>
+        <li>PHP</li>
+        <li>Java</li>
+        <li>Scala</li>
+    </ul>
+</div>
+
+@section Styles
+{
+    @Styles.Render("~/bundles/prettify.css")
+}
+
+@section Scripts
+{
+    @Scripts.Render("/Scripts/kendo/kendo.all.min.js")
+    @Scripts.Render("~/bundles/prettify.js")
+    <script>
+        $(document).ready(function () {
+            var tabs = $("#tabstrip").kendoTabStrip({
+                animation: {
+                    open: { effects: "fadeIn" },
+                    collapsible: true
+                },
+                contentUrls: [
+                    '../Content/APIs/code_examples/js/js_getting_started_sample.html',
+                    '../Content/APIs/code_examples/c/cs_getting_started_sample.html',
+                    '../Content/APIs/code_examples/ruby/rb_getting_started_sample.html',
+                    '../Content/APIs/code_examples/php/php_getting_started_sample.html',
+                    '../Content/APIs/code_examples/java/java_getting_started_sample.html',
+                    '../Content/APIs/code_examples/scala/sc_getting_started_sample.html'
+                ],
+                contentLoad: prettyPrint //prettyPrint() comes from prettify.js
+            });
+            $(tabs).data("kendoTabStrip").select(0);
+        });
+    </script>
+}

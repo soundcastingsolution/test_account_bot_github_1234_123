@@ -1,0 +1,44 @@
+﻿@model  IEnumerable<InContact.DeveloperPortal.Web.ViewModels.AccordionItemViewModel>
+@{
+    ViewBag.Title = "UserHub: Getting Started";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<p>
+    This process is required to create the first access key for an administrative user on a tenant and to gain access to
+    CXone APIs. Once the first access key is created, it can be used to request an access token via API.This access
+    key method will be the required API access method in the future. NICE CXone intends to deprecate previous API
+    access APIs.
+</p>
+<p>
+    You must use area specific domains and developers should know the domains that apply to them before beginning
+    this process. Contact your Technical Account Manager or Technical Account management team with domain questions. Current domains are:
+</p>
+<p>
+    <ul>
+        <li>na1</li>
+        <li>au1</li>
+        <li>eu1</li>
+    </ul>
+</p>
+<p>
+    Examples in this guide use the na1 area domain.
+</p>
+<p>
+    <b>NOTE:</b><i>Developers should not tether integrations to the following process.</i>
+</p>
+
+@Html.Partial("_AccordionListItems", Model)
+@section Styles {
+    @Styles.Render("~/bundles/prettify.css")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/prettify.js")
+<script>
+    $(window).load(function () {
+        expandAccordionItem('accordionId');
+        prettyPrint();
+    });
+    </script>
+}

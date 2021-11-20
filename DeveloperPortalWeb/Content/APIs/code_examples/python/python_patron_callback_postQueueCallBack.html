@@ -1,0 +1,41 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def queueCallback():
+
+# api-endpoint 
+#Give the specified url ,accessToken
+	BASEURL = "{BASEURL}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+if accessToken!="":
+
+#Give necessary parameters for http request
+	payload={'phoneNumber': 'string',
+	'callerID': 'string',
+	'callDelaySec': 'integer',
+	'skill': 'integer',
+	'taretAgent': 'integer',
+	'priorityManagement': 'string - DefaultFromSkill or Custom',
+	'intialPriority': 'integer',
+	'acceleration': 'integer',
+	'maxPriority': 'integer',
+	'sequence': 'string',
+	'zipTone': 'string - NoZipTone or BeforeSequence or AfterSequence',
+	'screenPopSrc': 'string - DefaultFromSkill or UseOnPageOpen or Custom',
+	'screenPopUrl': 'string',
+	'timeout': 'integer'}
+
+#add all necessary headers
+	header_param = {'Authorization': 'bearer ' + '{accessToken}','content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make http post request
+	response = requests.post(BASEURL + 'services/{version}/queuecallback' , headers = header_param, data=payload) 
+
+#print response appropriately
+	print (response)
+else:
+	#no token get one or handle error
+</pre>

@@ -1,0 +1,77 @@
+<pre class="prettyprint linenums">
+# Creates or updates an address book.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +addressBookEntries+ -> the address book data you want to update, in the 
+#    form of a URL query string
+#    Example:
+#      "addressBookEntries[0][firstName]=Michael"\
+#      "&addressBookEntries[0][middleName]=Christian"\
+#      "&addressBookEntries[0][lastName]=Smith&"\
+#      "addressBookEntries[0][company]=inContact"\
+#      "&addressBookEntries[0][phone]=8012222222"\
+#      "&addressBookEntries[0][mobile]=8013333333"\
+#      "&addressBookEntries[0][email]=me@incontact.com"
+#  - +addressBookID+ -> the integer number of an address book
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token doesn't have expected fields
+#   - +ArgumentError+ -> if the address book entries aren't a URL query string
+#   - +ArgumentError+ -> if the address book ID isn't an integer
+#
+def createAddressBook(token, addressBookEntries, addressBookID=383)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that addressBookEntries is a URL query string.
+  unless addressBookEntries.is_a?(String) &&
+         addressBookEntries =~ /[\S^=^&]+=[\S^=^&]+[&[\S^=^&]+=[\S^=^&]+]?/
+    raise ArgumentError, "addressBookEntries must be a URL query string"
+  end
+  
+  # Check that addressBookID is a nonnegative integer.
+  unless addressBookID.is_a?(Integer) && addressBookID >= 0
+    raise ArgumentError, "addressBookID must be a nonnegative integer"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+                        
+  # Find the byte length of the entires, which we'll need for a request header.
+  entriesLength = addressBookEntries.bytesize
+
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/address-books/#{addressBookID}/entries"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request.
+  http.post(uri.path, addressBookEntries, headers)
+end
+</pre>

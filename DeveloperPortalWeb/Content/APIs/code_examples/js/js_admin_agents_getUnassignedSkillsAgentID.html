@@ -1,0 +1,34 @@
+﻿<pre class="prettyprint linenums">
+function getAgentUnassignedSkills() {
+	var getAgentUnassignedSkillsByIdPayload = {
+		'fields': 'string',
+		'mediaTypeId': 'integer',
+		'outboundStrategy': 'string',
+		'isSkillActive': 'boolean',
+		'searchString': 'string',
+		'skip': 'integer',
+		'top': 'integer',
+		'orderBy': 'string'
+	}
+	$.ajax({
+		//The baseURI variable is created by the result.resource_server_base_uri,
+		//which is returned when getting a token and should be used to create the URL base
+		'url': baseURI + 'services/{version}/agents/' + agentId + '/skills/unassigned',
+		'type': 'GET',
+		'headers': {
+			//Use access_token previously retrieved from inContact token service
+			'Authorization': 'bearer ' + accessToken,
+			'content-Type': 'application/x-www-form-urlencoded'
+		},
+		'data': getAgentUnassignedSkillsByIdPayload,
+		'success': function (result, status, statusCode) {
+			//Process success actions
+			return result;
+		},
+		'error': function (XMLHttpRequest, textStatus, errorThrown) {
+			//Process error actions
+			return false;
+		}
+	});
+}
+</pre>

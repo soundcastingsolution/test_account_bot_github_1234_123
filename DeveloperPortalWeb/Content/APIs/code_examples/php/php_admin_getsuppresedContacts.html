@@ -1,0 +1,72 @@
+﻿<pre class="prettyprint linenums">
+&lt?php
+  //The following code sample assumes that the access token is stored in the session
+  session_start();
+  //Check if you have obtained a token
+  if($_SESSION["access_token"]!="")
+  {
+    $api_URL="/services/{version}/suppressed-contact";
+    //Creating the endpoint for the request
+    //Appending api uri with the base uri obtained from the successful token request
+    $endpoint=$_SESSION["resource_server_base_uri"].$api_URL;
+    //Creating a HTTP GET request to the api
+    $handle = curl_init($endpoint);
+    curl_setopt($handle, CURLOPT_HEADER, true);
+    //Set to TRUE to return the output of curl_exec as a string 
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true); 
+    //By default, cURL is setup to not trust any CAs
+    //Hence does not support any server's certificate
+    //Here we configure cURL to accept any server(peer) certificate
+    //Does not verify if the CA is trusted
+    //For more security
+    //Set the CURLOPT_CAINFO parameter to a CA certificate that cURL should trust
+    //curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, true);
+    //curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 2);
+    //curl_setopt($handle, CURLOPT_CAINFO, getcwd()."/cert/certificate.crt");
+    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+    //Setting necessary header options
+    $headers=array();
+    $headers[] = 'Content-type: application/x-www-form-urlencoded; charset=utf-8';
+    $headers[] = 'Authorization: bearer '.$_SESSION["access_token"];
+    $headers[] = 'Accept: application/json, text/javascript, */*; q=0.01';
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    // Make the request         
+    $response = curl_exec($handle);  
+    //Handling valid response
+    if($response!=FALSE)
+    {
+      $http_code = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+      echo "Status Code of the Response:".$http_code;
+	
+      //Parsing the response
+      //Each property in header is a line by itself.
+      //The header and the web page content sent together are separated by \r\n\r\n
+      $parts = explode("\r\n\r\nHTTP/", $response);
+      //For HTTP status code 100 interim responses exists before the final response
+      //Getting the final response header using array_pop
+      $parts = (count($parts) > 1 ? 'HTTP/' : '').array_pop($parts);
+      list($response_headers, $response_body) = explode("\r\n\r\n", $parts, 2); 
+      echo "&ltbr&gt";      
+      echo "Response Header:".$response_headers;
+      echo "&ltbr&gt";
+      if (!empty($response_body))
+      {
+        //The Response from the api is in JSON
+        //Parsing the json response
+        echo "Response Body:";  
+        //json_decode converts a json string to a PHP variable
+        $parsed_json=json_decode($response_body);  
+        //Use the response data
+        print_r($parsed_json);
+      }
+    }
+    // Close the curl session  
+    curl_close($handle);
+    //Report all PHP errors (notices, errors, warnings, etc.)  
+    error_reporting(E_ALL);
+  }
+  else
+    // No token - get one or handle error
+    echo "No access Token";
+?>
+</pre>

@@ -1,0 +1,134 @@
+﻿<pre class="prettyprint linenums">
+function putAgents() {
+    var putAgentsData = {
+        "agents": [
+          {
+              "agentId": "string",
+              "firstName": "string",
+              "middleName": "string",
+              "lastName": "string",
+              "teamId": "string",
+              "teamUuid": "string",
+              "reportToId": 0,
+              "internalId": "string",
+              "profileId": 0,
+              "roleId": "string",
+              "emailAddress": "string",
+              "userName": "string",
+              "userId": "string",
+              "timeZone": "string",
+              "country": "string",
+              "state": "string",
+              "city": "string",
+              "chatRefusalTimeout": 0,
+              "phoneRefusalTimeout": 0,
+              "workItemRefusalTimeout": 0,
+              "defaultDialingPattern": 0,
+              "useTeamMaxConcurrentChats": true,
+              "maxConcurrentChats": 0,
+              "isActive": true,
+              "locationId": 0,
+              "notes": "string",
+              "hireDate": "string",
+              "terminationDate": "string",
+              "hourlyCost": 0,
+              "rehireStatus": true,
+              "employmentType": "1",
+              "referral": "string",
+              "atHome": true,
+              "hiringSource": 0,
+              "ntLoginName": "string",
+              "customerCard": true,
+              "custom1": "string",
+              "custom2": "string",
+              "custom3": "string",
+              "custom4": "string",
+              "custom5": "string",
+              "scheduleNotification": "5",
+              "federatedId": "string",
+              "useTeamEmailAutoParkingLimit": true,
+              "maxEmailAutoParkingLimit": 0,
+              "sipUser": "string",
+              "systemUser": "string",
+              "systemDomain": "string",
+              "crmUserName": "string",
+              "useAgentTimeZone": true,
+              "timeDisplayFormat": 0,
+              "sendEmailNotifications": true,
+              "apiKey": "string",
+              "telephone1": "string",
+              "telephone2": "string",
+              "userType": "string",
+              "isWhatIfAgent": true,
+              "requestContact": true,
+              "chatThreshold": 0,
+              "useTeamChatThreshold": true,
+              "emailThreshold": 0,
+              "useTeamEmailThreshold": true,
+              "workItemThreshold": 0,
+              "useTeamWorkItemThreshold": true,
+              "smsThreshold": 0,
+              "useTeamSmsThreshold": true,
+              "voiceThreshold": 0,
+              "useTeamVoiceThreshold": true,
+              "contactAutoFocus": true,
+              "useTeamContactAutoFocus": true,
+              "useTeamRequestContact": true,
+              "recordingNumbers": [
+                {
+                    "number": "string"
+                }
+              ],
+              "subject": "string",
+              "issuer": "string",
+              "isOpenIdProfileComplete": true,
+              "deliveryMode": "string",
+              "totalContactCount": "string",
+              "useTeamDeliveryModeSettings": true,
+              "emailRefusalTimeOut": 0,
+              "voicemailRefusalTimeOut": 0,
+              "smsRefusalTimeout": 0,
+              "isBillable": true,
+              "useTeamDefaults": true,
+              "agentvoiceThreshold": 0,
+              "agentchatThreshold": 0,
+              "agentemailThreshold": 0,
+              "agentworkItemThreshold": 0,
+              "agentSmsThreshold": 0,
+              "agentDeliveryMode": "string",
+              "agentTotalContactCount": 0,
+              "agentRequestContact": true,
+              "agentContactAutoFocus": true,
+              "integratedSoftphoneWebRtcUrls": [
+                {
+                    "urlName": "string",
+                    "weight": "string"
+                }
+              ],
+              "agentMaxVersion": 0,
+              "loginAuthenticatorId": "string"
+          }
+        ]
+    }
+    $.ajax({
+        //The baseURI variable is created by the result.resource_server_base_uri,
+        //which is returned when getting a token and should be used to create the URL base
+        'url': baseURI + '/services/{version}/agents',
+        'type': 'PUT',
+        'headers': {
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/x-www-form-urlencoded'
+        },
+        'data': putAgentsData,
+        'success': function (result, status, statusCode) {
+            //Process success actions            
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions            
+            return false;
+        }
+    });
+}
+</pre>

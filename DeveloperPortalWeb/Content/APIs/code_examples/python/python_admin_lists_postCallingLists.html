@@ -1,0 +1,62 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+
+def createCallingListMapping():
+
+# api-endpoint 
+#Give the specified url ,accessToken 
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+	if accessToken!="":
+
+#Give necessary parameters for http request
+		payload={'listName': 'string - required',
+		'listExpirationDate': 'ISO 8601 formatted date/time',
+		'externalIdColumn': 'string - required',
+		'scoreColumn': 'string',
+		'customer1Column': 'string',
+		'customer2Column': 'string',
+		'callerIdColumn': 'string',
+		'priorityColumn': 'string',
+		'complianceReqColumn': 'string',
+		'firstNameColumn': 'string',
+		'lastNameColumn': 'string',
+		'addressColumn': 'string',
+		'cityColumn': 'string',
+		'stateColumn': 'string',
+		'zipColumn': 'string',
+		'timeZoneColumn': 'string',
+		'confirmReqColumn': 'string',
+		'overrideFinalizationColumn': 'string',
+		'agentIdColumn': 'string',
+		'callRequestTimeColumn': 'string',
+		'callRequestStaleColumn': 'string',
+		'notesColumn': 'string',
+		'expirationDateColumn': 'string',
+		'destinationMappings': [
+		{
+		'fieldName': 'string - required',
+		'fieldValue': 'string - required'
+		}
+		]
+		'customFieldMappings': [
+		{
+		'fieldName': 'string',
+		'fieldValue': 'string'
+		}
+		]}
+
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken,'content-Type': 'application/x-www-form-urlencoded','Accept': 'application/json, text/javascript, */*'}
+
+# Make http post request
+		response = requests.post(Baseuri + 'services/{version}/lists/call-lists', headers = header_param, data=payload) 
+
+#print response appropriately
+		print (response)
+	else:
+		#no token get one or handle error
+</pre>

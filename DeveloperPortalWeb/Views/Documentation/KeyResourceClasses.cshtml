@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Key Resource Classes";
+}
+
+<div class="break-word">
+    <h3 class="primary-color margin-top-none">AgentState Class</h3>
+    <p>
+        An instance of this class has information about the current state, when the state
+        changed and of a single agent. Here is the information that can be extracted from
+        this class.
+    </p>
+    <p>
+        For a full list of the class attributes see @Html.ActionLink("GET /agents/states", "RealTimeDataAPI", "API")
+        API documentation.
+    </p>
+    <h3 class="primary-color">SkillSummary Class</h3>
+    <p>
+        An instance of this class has the most relevant information about a specific skill;
+        of you are trying to get some information regarding a specific skill and its configuration
+        parameters this must be the first class you have to see.
+    </p>
+    <p class="margin-bottom-none">
+        For a full list of the class attributes see @Html.ActionLink("GET /skills/summary", "RealTimeDataAPI", "API")
+        API documentation.
+    </p>
+</div>

@@ -1,0 +1,54 @@
+ <pre class="prettyprint linenums">
+/*************************************************************************************
+*
+* @description Can be useful for ending \"stuck\" contacts (where both parties have
+* ended their respective legs, but the contact still shows as \"active\" on the platform)
+* @param contactId (integer): ID of contact to be disconnected
+*
+*/
+public void postContactIdEnd(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        String contactId=ApexPages.currentPage().getParameters().get('contactId');
+        String apiURL = 'services/{version}/contacts/' + contactId + '/end';
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setBody(''); //requires a body for POST callouts
+            request.setMethod('POST');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+        }
+    }
+}
+</pre>

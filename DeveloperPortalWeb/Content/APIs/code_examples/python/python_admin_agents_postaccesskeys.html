@@ -1,0 +1,17 @@
+﻿<pre class="prettyprint linenums">
+    def PostAccessKeys(agentId):
+    #Check if accessToken is empty or null
+    if accessToken!="":
+    #payload
+        PostAccessKeysPayload = {
+        'agentId': 'Integer'}
+    #add all necessary headers
+        header_param={
+        'Authorization': 'bearer ' + accessToken,
+        'content-Type': 'application/json; charset=UTF-8'}
+    # Make http post request
+        response = requests.post(baseURI+'/services/{version}/access-keys', headers = header_param,data=PostAccessKeysPayload) 
+    #print response appropriately
+     else:
+        #no token get one or handle error
+</pre>

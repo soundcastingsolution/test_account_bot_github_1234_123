@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Requesting Events";
+}
+
+<p>
+    The NICE CXone platform supports the "comet" design pattern (also known as "Ajax Push", "Reverse Ajax",
+    "Two-way-web", "HTTP Streaming", and "HTTP Server Push".) This design pattern allows the agent client
+    application to request events from the NICE CXone platform, and the HTTP request will not return until
+    an event occurs on the platform. This can prevent the agent application from being very "chatty", and
+    will greatly reduce the number of event polling requests needed. Because the event request is a "blocking"
+    request (i.e. the API request doesn’t return until there is an event to retrieve), you should make these
+    requests in a background thread.
+</p>
+<p>
+    When you request events from the platform, you must specify a "timeout" value (in seconds) after which
+    the request will return, even if there are no events. Note that if an event occurs before the timeout period,
+    the request will return the event immediately. Your application should dispatch a handler to handle the event,
+    and immediately request new events again.
+</p>
+<p>
+    The timeout value must be between 0 and 60 seconds. A value of "0" causes the request to return immediately,
+    whether there are events or not. Any value over 60, or any non-integer value, will result in an error response
+    from the API.
+</p>
+<p>Each request for events from the NICE CXone platform will return two things:</p>
+<ol>
+    <li>A new session ID, which should be used in the subsequent event poll request</li>
+    <li>A collection of events that have occurred since the previous event poll request, if any</li>
+</ol>
+
+<pre class="prettyprint linenums">
+function getNextEvents(timeout) {
+    if (getEvents) {
+        console.log("Getting events...");
+        $.ajax({
+            url: baseUrl + "services/v13.0/agent-sessions/" + sessionId +
+            "/get-next-event?timeout=" + timeout,
+            type: "GET",
+            contentType: "application/json",
+            dataType: "json",
+            headers: {
+                "Authorization": auth_response.token_type + " " +
+                auth_response.access_token
+            },
+            success: function (data) {
+                //Process events here
+                processEvents(data);
+                console.log("Events received");
+            },
+            error: function (xhr, status) {
+                alert("get events failed: " + xhr.status + " - " + xhr.statusText);
+                getEvents = false;
+            },
+            complete: function (xhr, status) {
+                if (xhr.status == 304) {
+                    //Do something if not modified
+                }
+            }
+        });
+    }
+}
+
+function processEvents(event) {
+    // an undefined event typically means that a 304 was returned with
+    // an empty body in the get-next-event request.  This is a "timeout",
+    // which means there were no events... so nothing to log, we just
+    // need to re-request events.
+    if (typeof (event) != 'undefined') {
+        sessionId = event.sessionId;
+        var events = event.events;
+        console.log("processing " + events.length + " events...");
+        $.each(events, function (index, value) {
+            console.log("event received: " + value.Type);
+            if (value.Type == 'AgentSessionEnd') {
+                getEvents = false;
+            }
+        });
+    }
+    getNextEvents();
+}
+</pre>
+
+<p>
+    Our getNextEvents() function requests events and calls processEvents() which process all coming events and
+    calls cyclically getNextEvents() again.
+    For example you can try to place a test call and see what events you will get
+</p>
+<pre class="prettyprint linenums margin-bottom-none">
+function callNumber() {
+    console.log("Placing call...");
+    $.ajax({
+        url: baseUrl + "services/v13.0/agent-sessions/" + sessionId + "/dial-phone",
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+            "phoneNumber": "4005150002",
+            "skillName": "sk_obphone1"
+        }),
+        headers: {
+            "Authorization": auth_response.token_type + " " + auth_response.access_token
+        },
+        success: function (data) {
+            console.log("Call request successful");
+        },
+        error: function (xhr, status) {
+            alert("dial phone request failed: " + xhr.status);
+        }
+    });
+}
+</pre>

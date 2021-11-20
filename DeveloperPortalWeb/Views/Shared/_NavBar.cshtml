@@ -1,0 +1,58 @@
+﻿@using System.Configuration
+<nav id="nav-v6" class="nav-v6 navbar navbar-default navbar-static-top" role="navigation">
+    <div class="collapse navbar-collapse" id="navbar-v6">
+        <ul class="nav navbar-nav" style="list-style-type: none">
+            @*The style inline is to fix the edge browser issue*@
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="/API">API<i class="fa fa-angle-down custom-fa" aria-hidden="true"></i></a>
+                <ul class="dropdown-menu" style="list-style-type: none">
+                    <li><a href="/API">API Home</a></li>
+                    <li><a href="/API/AdminAPI">Admin APIs</a></li>
+                    <li><a href="/API/AgentAPI">Agent APIs</a></li>
+                    <li><a href="/API/AuthenticationAPI">Authentication APIs</a></li>
+                    <li><a href="/API/PatronAPI">Patron APIs</a></li>
+                    <li><a href="/API/RealTimeDataAPI">Real-Time Data APIs</a></li>
+                    <li><a href="/API/ReportingAPI">Reporting APIs</a></li>
+                    <li><a href="/API/UserHubAPI">UserHub APIs</a></li>
+                    <li><a href="/API/DataExtractionAPI">Data Extraction APIs</a></li>
+                    <li><a href="/API/MediaPlaybackAPI">Media Playback APIs</a></li>
+                    <li><a href="/API/DigitalEngagementAPI">Digital Engagement APIs</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="/Documentation">Documentation<i class="fa fa-angle-down custom-fa" aria-hidden="true"></i></a>
+                <ul class="dropdown-menu" style="list-style-type: none">
+                    <li><a href="/Documentation">Documentation Home</a></li>
+                    <li><a href="/Documentation/AgentSessionEvents">Agent Session Events</a></li>
+                    <li><a href="/Documentation/APIAuthenticationToken">API Authentication Token</a></li>
+                    <li><a href="/Documentation/GettingStarted">Central: Getting Started</a></li>
+                    <li><a href="/Documentation/MobileSDK">Mobile SDK</a></li>
+                    <li><a href="/Documentation/UsingEvents">Using Events</a></li>
+                    <li><a href="http://www.niceincontact.com/devone-ecosystem/devone-partner-enablement">DEVone - Getting Started</a></li>
+                    <li><a href="/eLearning">eLearning</a></li>
+                    <li><a href="/Documentation/UserHubGettingStarted">UserHub: Getting Started</a></li>
+                </ul>
+            </li>
+            <li><a href="/Downloads">Downloads</a></li>
+            <li><a href="/FAQ">FAQ</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="/ForumHome">Forum<i class="fa fa-angle-down custom-fa" aria-hidden="true"></i></a>
+                <ul class="dropdown-menu" style="list-style-type: none">
+                    <li><a href="/ForumHome">Forum Home</a></li>
+                    <li><a href="@ConfigurationManager.AppSettings["APIForumUrl"]">API Forum</a></li>
+                    <li><a href="@ConfigurationManager.AppSettings["StudioForumUrl"]">Studio Forum</a></li>
+                </ul>
+            </li>
+            <li><a href="/NewsAndEvents">News &amp; Events</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="http://www.niceincontact.com/devone-ecosystem/devone-partner-enablement">DEVone Ecosystem<i class="fa fa-angle-down custom-fa" aria-hidden="true"></i></a>
+                <ul class="dropdown-menu" style="list-style-type: none">
+                    <li><a href="http://www.niceincontact.com/devone-ecosystem/devone-partner-enablement">Developer Ecosystem</a></li>
+                    <li><a href="https://cxexchange.niceincontact.com/home">CXexchange Marketplace</a></li>
+                    <li><a href="https://www.niceincontact.com/become-incloud-partner">Become a DEVone Partner</a></li>
+                    <li><a href="/eLearning">eLearning</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

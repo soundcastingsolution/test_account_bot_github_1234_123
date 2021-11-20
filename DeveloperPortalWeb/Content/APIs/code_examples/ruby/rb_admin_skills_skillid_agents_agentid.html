@@ -1,0 +1,65 @@
+﻿<pre class="prettyprint linenums">
+# Deletes a dynamic address book entry.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +skillID+ -> the number of an address book to be deleted    
+#  - +AgentID+ -> the externalId of an address book entry to be deleted
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if the address book ID isn't a nonnegative integer
+#   - +ArgumentError+ -> if the address book entry ID isn't a nonnegative integer
+#
+def delDABIdEntry(token, addressBookID=383, externalID=9797)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that addressBookID is a nonnegative integer.
+  unless skillID.is_a?(Integer) && skillID >= 0
+    raise ArgumentError, "addressBookID must be a nonnegative integer"
+  end
+
+  # Check that externalID is a nonnegative integer.
+  unless AgentID.is_a?(Integer) && AgentID >= 0
+    raise ArgumentError, "externalID must be a nonnegative integer"
+  end
+
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+
+  # Create the URL that accesses the API.
+  apiURL = 
+    "service/{version}/skills/#{skillID.to_s}/agents/#{AgentID.to_s}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the GET request an HTTPS GET request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request.
+  http.delete(uri.path, headers)
+end
+</pre>

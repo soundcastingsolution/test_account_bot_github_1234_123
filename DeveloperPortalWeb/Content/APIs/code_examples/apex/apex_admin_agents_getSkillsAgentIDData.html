@@ -1,0 +1,62 @@
+<pre class="prettyprint linenums">
+/*************************************************************************************
+*
+* @description This method will return summary information about the contacts handled
+* for each skill assigned to an agent identified by agent id over the period of time
+* specified by startDate and endDate
+* @param agentId (required) - integer; an agent id
+* @param startDate (required) - an ISO-8601 date/time
+* @param endDate (required) - an ISO-8601 date/time
+*
+* @return Returns a summary of an agent's contacts by skill
+*
+*/
+public List<JSON2Apex.AgentSkillData> getAgentSkillDataByAgentId(){
+    //Check to see if you have obtained a token
+    if(this.AccessToken!=null)
+    {
+        String apiURL = 'services/{version}/agents/' + agentId + '/skill-data?' + 
+                    'startDate=' + startDate + '&endDate=' + endDate;
+        try{
+            //Create the Request object
+            HttpRequest request = new HttpRequest();
+            request.setMethod('GET');
+            request.setEndpoint(BaseUri + apiURL);
+            request.setHeader('Content-Type','application/json');
+   
+            //Add any and all necessary Headers                   
+            request.setHeader('Authorization',this.TokenType + ' ' + this.AccessToken);
+            request.setHeader('Accept','*/*');
+           
+            //Make the request
+            HttpResponse resp = new Http().send(request);
+            this.Response= resp.getBody();
+            this.statusCode=resp.getStatusCode();3
+            this.statusDescription=resp.getStatus();
+            
+            //JSON2Apex is a helper class that deserializes the JSON response from
+            //the inContact API into a list of corresponding types
+            JSON2Apex obj = JSON2Apex.parse(this.Response);
+            if(resp.getStatusCode()==200){
+                //do something with the returned data
+                this.RawJSON=this.Response;
+                return obj.agentSkillData;
+            } else {
+                system.debug('should be adding error messages');
+                ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    resp.getStatusCode() + ' - ' + resp.getStatus());
+                ApexPages.addMessage(msg);
+                ApexPages.Message msg2 = new ApexPages.Message(ApexPages.Severity.ERROR,
+                    obj.error + ' - ' + obj.error_description);
+                ApexPages.addMessage(msg2);
+                return null;
+            }
+        } catch (Exception ex) {
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR,'Apex Exception - ' + ex.getMessage());
+            ApexPages.addMessage(msg);
+            return null;
+        }
+    }
+    return null;
+}
+</pre>

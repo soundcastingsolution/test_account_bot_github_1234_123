@@ -1,0 +1,159 @@
+﻿
+.swagger-section .swagger-ui-wrap p {
+	line-height: 1.4em;
+	padding: 0 0 0;
+	color: #333333;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.put div.content {
+	background-color: #ffffff;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.head div.content {
+	background-color: #ffffff;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.delete div.content {
+	background-color: #ffffff;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.post div.content {
+	background-color: #ffffff;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.patch div.content {
+	background-color: #ffffff;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.content {
+	background-color: #ffffff;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.options div.content {
+	background-color: #ffffff;
+}
+
+.swagger-section .swagger-ui-wrap .body-textarea {
+	width: 200px;
+	min-width: 200px;
+}
+
+tbody.operation-status td:nth-child(3) {
+	display: none;
+}
+
+tbody.operation-status td:nth-child(1) {
+	width: 115px;
+}
+
+tbody.operation-params td:nth-child(4) {
+	display: none;
+}
+
+tbody.operation-params td:nth-child(2) input[type=text] {
+	width: 200px !important;
+}
+
+li.operation table:nth-child(odd) thead th:nth-child(4) {
+	display: none;
+}
+
+li.operation table:nth-child(odd) thead th:nth-child(2) {
+	width: 220px !important;
+}
+
+/*fixes stop match old swagger command kendo styling swagger 2.0*/
+
+.swagger-section .swagger-ui-wrap .markdown ol, .swagger-section .swagger-ui-wrap .markdown ul {
+	font-family: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+.k-tabstrip-items .k-item {
+	margin-bottom: -1px;
+}
+
+.info,
+.footer {
+	display: none;
+}
+
+.swagger-section .swagger-ui-wrap ol, .swagger-section .swagger-ui-wrap .markdown pre {
+	margin: 0px 0 10px;
+	padding: 5px 0 0 18px;
+}
+
+	.swagger-section .swagger-ui-wrap ol li {
+		padding: 5px 0px;
+		font-size: 0.9em;
+		color: #333333;
+	}
+
+.swagger-section .swagger-ui-wrap .markdown ol li.k-item, .swagger-section .swagger-ui-wrap .markdown ul li.k-item,
+.k-link,
+.swagger-section pre code {
+	padding: 0;
+}
+
+span.markdown p, td.markdown p {
+	margin: 0;
+}
+
+li.operation table:nth-child(even) thead th:nth-child(3) {
+	display: none;
+}
+
+li.operation table:nth-child(even) thead th:nth-child(4) {
+	display: none;
+}
+
+tbody.operation-status td:nth-child(4) {
+	display: none;
+}
+
+/*V2: Rebranding changes DEVone*/
+.swagger-section .swagger-ui-wrap {
+	max-width: 100%;
+}
+
+.sandbox {
+	overflow: auto;
+}
+
+.operation-params td {
+	min-width: 10em;
+}
+
+.swagger-section .swagger-ui-wrap h2 {
+	margin: 0;
+}
+
+.k-tabstrip-items .k-item {
+	margin-bottom: 0;
+}
+
+.endpoints {
+	padding-left: 0;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources {
+	padding-left: 0;
+}
+
+.swagger-section .swagger-ui-wrap .markdown ol, .swagger-section .swagger-ui-wrap .markdown ul {
+	list-style: none;
+	list-style-type: none;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation {
+	margin-bottom: 10px;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources:last-child li.resource:last-child ul.endpoints:last-child li.endpoint:last-child ul.operations:last-child li.operation:last-child {
+	margin-bottom: 0;
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation div.content {
+	margin-bottom: 0;
+}

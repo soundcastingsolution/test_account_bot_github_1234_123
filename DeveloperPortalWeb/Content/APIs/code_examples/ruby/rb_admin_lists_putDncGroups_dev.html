@@ -1,0 +1,95 @@
+<pre class="prettyprint">
+# Adds or updates a record in a DNC list.
+#
+# * *Arguments* :
+#   - +token+ -> a token hash
+#   - +groupId+ -> a nonnegative integer; ID of DNC group
+#   - +dncGroupName+ -> a string; name of DNC group
+#   - +dncGroupDescription+ -> string; description of DNC group
+#   - +isActive+ -> a string; sets the DNC group to active or inactive
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if groupId isn't a nonnegative integer
+#   - +ArgumentError+ -> if dncGroupName isn't a string
+#   - +ArgumentError+ -> if dncGroupDescription isn't an appropriate date
+#   - +ArgumentError+ -> if isActive isn't a string
+#
+def putDncGroup(token,
+                 groupId = 1234567,
+                 dncGroupName = "dncGroup1",
+                 dncGroupDescription="my description", 
+                 isActive="true")
+  # Check that the token is a valid token.
+  unless !(token["access_token"] == nil && 
+           token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "the function didn't receive a token it could understand"
+  end
+  
+  # Check that groupID is a nonnegative integer.
+  unless groupID.is_a?(Integer) && groupID >= 0
+    raise ArgumentError, "groupId must be a nonnegative integer"
+  end
+      
+  # Check that dncGroupName is a string
+  unless dncGroupName.is_a?(String)
+    raise ArgumentError, 
+      "dncGroupName must be a string"
+  end
+    
+  # Check that dncGroupDescription is a string
+  unless dncGroupDescription.is_a?(String)
+    raise ArgumentError, 
+      "dncGroupDescription must be a string"
+  end
+
+  # Check that isActive is a string
+  unless isActive.is_a?(String)
+    raise ArgumentError, 
+      "isActive must be a string"
+  end
+  
+  # Check that skillID is a nonnegative integer.
+  unless skillID.is_a?(Integer) && skillID >= 0 
+    raise ArgumentError, "skillID must an integer" 
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/lists/dnc-groups/#{groupID}?" +
+           "dncGroupName=#{dncGroupName}&" +
+           "isActive=#{isActive}&" +
+           "dncGroupDescription=#{dncGroupDescription}"
+  uri = URI.parse(baseURL + apiURL)
+  puts uri
+
+  # Create the GET request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Type" => "application/x-www-form-urlencoded",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the request an HTTPS request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  # Note: the request might work even if the response is an HTTP 411 error.
+  response = http.send_request('PUT', baseURL + apiURL)
+end
+</pre>

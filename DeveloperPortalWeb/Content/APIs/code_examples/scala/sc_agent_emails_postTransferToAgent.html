@@ -1,0 +1,21 @@
+<pre class="prettyprint linenums">
+// importing the scalaj-http library 
+package scalaj.http
+object transferEmailToAgent {
+	def emailToAgent(sessionID:String,contactID:String,targetAgentId:String,toAddress:String,fromAddress:String,ccAddress:String,bccAddress:String,subject:String,bodyHtml:String,attachments:String,attachmentNames:String,isDraft:Bool,draftEmailGuidStr:String,primaryDispositionId:String,secondaryDispositionId:String,tags:String,notes:String,originalAttachmentNames:String) {
+		//Check if accessToken is empty or null
+		if(accessToken != null && !accessToken.isEmpty()){
+			//Add all necessary headers and Make the http request 
+		    val response = Http( baseURI +"services/{version}/agent-sessions/"+ sessionID +"/interactions/"+ contactID +"/transfer-email-to-agent")
+							.postData("""{"targetAgentId":targetAgentId,"toAddress":toAddress,"fromAddress":fromAddress,"ccAddress":ccAddress,"bccAddress":bccAddress,"subject":subject,"bodyHtml":bodyHtml,"attachments":attachments,"attachmentNames":attachmentNames,"isDraft":isDraft,"draftEmailGuidStr":draftEmailGuidStr,"primaryDispositionId":primaryDispositionId,"secondaryDispositionId":secondaryDispositionId,"tags":tags,"notes":notes,"originalAttachmentNames":originalAttachmentNames}""")
+							.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json"))
+							.asString	
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON 
+			//package to handle the response appropriately
+			println(response);
+		}else{
+			   //No token - get one or handle error
+		}				
+	}
+}
+</pre>

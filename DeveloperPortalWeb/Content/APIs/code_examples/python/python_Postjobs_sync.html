@@ -1,0 +1,16 @@
+﻿<pre class="prettyprint linenums">
+def postjobSync():
+#Check if accessToken is empty or null
+    if accessToken!="":
+    #payload
+	    PostjobSyncPayload = {
+	    "entityName": "qm-workflows",
+	    "version":"1",
+	    "startDate":"2019-07-10",
+	    "endDate":"2019-07-15"}
+	    header_param = {'Authorization': 'bearer ' + accessToken,'content-Type': 'application/x-www-form-urlencoded'}
+	    response=requests.post(CXone_baseURI + '/data-extraction/{version}/jobs/sync', headers = header_param, data=PostjobSyncPayload)
+    #print response appropriately
+    else:
+	#no token get one or handle error
+</pre>

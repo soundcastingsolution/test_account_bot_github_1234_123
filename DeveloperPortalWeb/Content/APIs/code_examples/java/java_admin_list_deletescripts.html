@@ -1,0 +1,25 @@
+﻿    <pre class="prettyprint linenums">
+    public void deletescripts() throws IOException {
+    final String API_PATH = "/scripts";
+    final String API_URL = "services/{version}" + API_PATH;
+    if (ACCESS_TOKEN_PROPERTY!= null) 
+    {
+    HttpsURLConnection urlConnection = (HttpsURLConnection) (new URL((RESOURCE_SERVER_BASE_URI_PROPERTY) + API_URL).openConnection());
+    urlConnection.setRequestProperty(AUTHORIZATION_HEADER, AUTHORIZATION_BEARER_PREFIX + ACCESS_TOKEN_PROPERTY);
+    urlConnection.setRequestProperty(ACCEPT_HEADER, APPLICATION_JSON_VALUE);
+    urlConnection.setRequestProperty(CONTENT_TYPE_HEADER, APPLICATION_JSON_VALUE);
+    urlConnection.setDoInput(true);
+    urlConnection.setDoOutput(true);
+    urlConnection.setRequestMethod("DELETE");
+    urlConnection.connect();
+    int responseCode = urlConnection.getResponseCode();
+    String responseLine = urlConnection.getResponseMessage();
+    //Print Response
+    construct("Admin", "Skills", "Delete /scripts", CLUSTER + "- v19", responseCode,responseLine);
+    }
+    else 
+    {
+    // No token - get one or handle error
+    }
+    }
+    </pre>

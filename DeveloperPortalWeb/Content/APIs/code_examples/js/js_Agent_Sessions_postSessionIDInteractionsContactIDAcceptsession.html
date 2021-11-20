@@ -1,0 +1,23 @@
+﻿<pre class="prettyprint linenums">
+function acceptContact(contactId) {
+    $.ajax({
+        //The baseURI variable is created by the result.base_server_base_uri
+        //which is returned when getting a token and should be used to create the URL base
+        'url': baseURI + 'services/{version}/agent-sessions/' + sessionId + '/interactions/' + contactId + '/Accept',
+        'type': 'POST',
+        'headers': {
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/json'
+        },
+        'success': function (result) {
+            //Process success actions
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions
+            return false;
+        }
+    })
+}
+</pre>

@@ -1,0 +1,36 @@
+﻿<pre class="prettyprint linenums">
+// importing the scalaj-http library
+package scalaj.http
+
+object getAgentContactHistory {
+
+	def getAgentContactHistory() {
+		//Give the specified url ,accessToken
+
+			val accessToken = "";
+			val BASEURL = "";
+
+		//Check if accessToken is empty or null
+		if(accessToken!= null && !accessToken.isEmpty())
+		{
+			//Add all necessary headers and Make the http request
+			val response = Http( BASEURL +"services/{version}/agents/" + {agentID} + "/interaction-history")
+					.params("startDate"->"ISO 8601 formatted date/time",
+						"endDate"->"ISO 8601 formatted date/time",
+						"updatedSince"->"ISO 8601 formatted date/time",
+						"mediaTypeId"->"integer",
+						"fields"->"string",
+						"skip"->"integer",
+						"top"->"integer",
+						"orderby"->"string")
+					.headers(("Authorization", "Bearer " + accessToken),("content-type", "application/json")).asString
+
+			//TODO: the response comes back as a JSON document. Replace the following code with your preferred JSON //package to handle the response appropriately
+			println(response);
+		}
+		else{
+		//No token - get one or handle error
+		}
+	}
+}
+</pre>

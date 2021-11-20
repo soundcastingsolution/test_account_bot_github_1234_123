@@ -1,0 +1,38 @@
+function getAgentContactStates(agentId, updateSince){<br>
+&emsp;var url = 'https://api-b2.incontact.com/incontactapi/services/v2.0/contacts/states';<br>
+&emsp;var params = [];<br>
+&emsp;//Check optional func arguments<br>
+&emsp;if(isNaN(+agentId) && (agentId !== undefined)){<br>
+&emsp;&emsp;updateSince = agentId;<br>
+&emsp;&emsp;agentId = undefined;<br>
+&emsp;&emsp;params.push('updatesince=' + agentId);<br>
+&emsp;}<br>
+&emsp;else{<br>
+&emsp;&emsp;if(updateSince !== undefined)<br>
+&emsp;&emsp;&emsp;params.push('updateSince=' + updateSince);<br>
+&emsp;&emsp;if(agentId !== undefined)<br>
+&emsp;&emsp;&emsp;params.push('agentId=' + agentId);<br>
+&emsp;}<br>
+&emsp;params = params.join('&');<br>
+&emsp;if(params.length > 0)<br>
+&emsp;&emsp;url = url + '?' + params;<br>
+&emsp;$.ajax({<br>
+&emsp;&emsp;'url' : url,<br>
+&emsp;&emsp;'type' : 'GET',<br>
+&emsp;&emsp;'contentType' : 'application/json',<br>
+&emsp;&emsp;'dataType' : 'json',<br>
+&emsp;&emsp;'headers' : {<br>
+&emsp;&emsp;&emsp;//Use access_token previously retrieved from inContact token service<br>
+&emsp;&emsp;&emsp;'Authorization' : 'bearer ' + access_token<br>
+&emsp;&emsp;},<br>
+&emsp;&emsp;'success' : function (result) {<br>
+&emsp;&emsp;&emsp;//Do something if success<br>
+&emsp;&emsp;&emsp;return result;<br>
+&emsp;&emsp;},<br>
+&emsp;&emsp;'error' : function (XMLHttpRequest, textStatus, errorThrown) {<br>
+&emsp;&emsp;&emsp;//Process error actions<br>
+&emsp;&emsp;&emsp;console.log(XMLHttpRequest.status + ' ' + XMLHttpRequest.statusText);<br>
+&emsp;&emsp;&emsp;return false;<br>
+&emsp;&emsp;}<br>
+&emsp;});<br>
+}

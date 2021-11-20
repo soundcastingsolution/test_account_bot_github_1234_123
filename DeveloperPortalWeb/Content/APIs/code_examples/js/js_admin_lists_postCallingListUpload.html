@@ -1,0 +1,33 @@
+﻿<pre class="prettyprint linenums">
+// NOTE: The following sample will allow a file to be uploaded to a calling list. In order for this to work, the local file containing the list
+// will first needs to be read and made available for the JS code to access.  One method that can be used to do this, is the File APIs that are 
+// available with HTML5
+function uploadFileToCallingList() {
+    var uploadCallingListPayload = {
+        'listFile': 'base64binary - required',
+        'skillId': 'integer',
+        'fileName': 'string',
+        'forceOverwrite': 'boolean',
+        'defaultTimeZone': 'string',
+    }
+    $.ajax({
+        //The baseURI variable is created by the result.resource_server_base_uri, which is returned when getting a token and should be used to create the URL base
+        'url': baseURI + 'services/{version}/lists/call-lists/' + listId + '/upload',
+        'type': 'POST',
+        'headers': {
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/json'
+        },
+        'data': JSON.stringify(uploadCallingListPayload),
+        'success': function (result, status, statusCode) {
+            //Process success actions
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions
+            return false;
+        }
+    });
+}
+</pre>

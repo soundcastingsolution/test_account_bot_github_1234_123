@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>TheMVCForum</id>
+    <version>1.5.0</version>
+    <title>The Official MVCForum</title>
+    <authors>Aptitude</authors>
+    <owners>Aptitude</owners>
+    <licenseUrl>http://www.mvcforum.com/license/</licenseUrl>
+    <projectUrl>https://github.com/leen3o/mvcforum</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MVCForum is a fully featured enterprise level ASP.NET MVC 5 discussion board/forum with multiple responsive themes. The software has features similar to that seen on StackOverFlow plus LOTS more. Along with MVC it’s built using Unity &amp; Entity Framework 6.1 and is super easy to extend and add your own features.</description>
+    <summary>MVCForum is a fully featured enterprise level ASP.NET MVC 5 discussion board with features like StackOverFlow</summary>
+    <tags>forum mvcforum</tags>
+  </metadata>
+</package>

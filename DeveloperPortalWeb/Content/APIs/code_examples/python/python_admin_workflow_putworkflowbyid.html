@@ -1,0 +1,28 @@
+﻿<pre class="prettyprint linenums">
+def putWorkflowDataById(workflowDataId ):
+    #Check if accessToken is empty or null
+	if accessToken!="":
+    #payload
+		PutWorkflowDataByIDPayload = {
+		"profile": {
+		"ProfileName": "string",
+		"Description": "string",
+		"ProfileID": 0
+		},
+		"data": {
+		"date": {
+		"Value": [
+		"string"
+		],
+		"Visible": "string",
+		"Type": "string",
+		"Ref": "string"}}}
+    #add all necessary headers
+		header_param={
+		'Authorization': 'bearer ' + accessToken,
+		'content-Type': 'application/json; charset=UTF-8'}
+    # Make http post request
+		response = requests.put(baseURI+'/services/v16.0/workflow-data/'+workflowDataId ,headers=header_param,data=PutWorkflowDataByIDPayload) 
+    #print response appropriately
+    else:
+</pre>

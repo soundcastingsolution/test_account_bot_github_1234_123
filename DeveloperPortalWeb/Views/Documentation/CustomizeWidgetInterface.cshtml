@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = "Customize Widget Interface";
+}
+
+<p>
+    If you would like to use the NICE CXone services in your application,
+    but would prefer to use your own user interface, this section will
+    guide you on how to do that.
+</p>
+<p class="break-word">
+    <b>NOTE:</b> If you don’t want to use the NICE CXone UI, you will not
+    need to import the inContactMobileSdkUI project as described in the
+    sections previous. You will only one library that is located in the
+    "libs" directory called "incontactmobilesdk.jar". This library contains
+    all the classes used by the NICE CXone widget and can be integrated
+    with your user interface.
+</p>
+<h3 class="primary-color text-align-left break-word">Customizing the Chat Widget Interface</h3>
+<p class="break-word">
+    After you have the incontactmobilesdk.jar file in the libs directory of your project you just need an appropriate interface to show the messages of the chat.
+</p>
+<p>
+    For purposes of this example, we will just create one activity that has a TextView to show the messages, an EditText box to write the messages, and a "Send" button.
+</p>
+
+<img class="img-responsive center-block img-size-sm small-margin-bottom" src="@Url.Content("~/Content/images/masdk17.png")">
+<p>
+    Since the chat is a group of procedures that must be running all the time, it has been created as an Android service, which must be started and stopped when it is necessary.
+</p>
+<p>
+    To establish a connection with the chat service we must follow the normal steps to start a service from an activity.
+</p>
+<ol>
+    <li>
+        <p class="break-word">
+            Create an instance of the ServiceConnection class which will help us listen to the connection and disconnection events of the service.
+        </p>
+<pre class="prettyprint linenums">
+private ServiceConnection connection = new ServiceConnection(){
+    &#64;Override
+    public void onServiceDisconnected(ComponentName name){
+    }
+    &#64;Override
+    public void onServiceConnected(ComponentName name, IBinder service){
+    }
+}
+</pre>
+    </li>
+    <li>
+        <p class="break-word">
+            We need to add a ConnectivityManager to the HttpConnectionManager to
+            test if there is internet connection before trying to connect to the server.
+            Also, we need to add the HttpConnectionConfiguration to the HttpConnectionManager
+            if we haven’t done it yet in another Activity.
+        </p>
+<pre class="prettyprint linenums">
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.custom_chat_screen);
+    ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+    JHttpUtil.initialize(connectivityManager);
+    HttpConnectionConfiguration httpConnectionConfiguration = new HttpConnectionConfiguration();
+    httpConnectionConfiguration.setUser("YOUR USER");
+    httpConnectionConfiguration.setPassword("YOUR PASSWORD");
+    httpConnectionConfiguration.setClientId("YOUR Application ID");
+    httpConnectionConfiguration.setClientSecretKey("YOUR AppName@VendorName");
+    httpConnectionConfiguration.setServerUrl("https://login.incontact.com");
+    HttpConnectionManager.getInstance().
+    setConfiguration(httpConnectionConfiguration);
+    chatEditor = (EditText)findViewById(R.id.custom_chat_editor);
+    chatPanel = (TextView)findViewById(R.id.custom_chat_panel);
+    startChatService();
+}
+</pre>
+    </li>
+    <li>
+        <p>
+            Then add a private method that will do all the needed steps to call the chat service.
+        </p>
+<pre class="prettyprint linenums">
+private void startChatService() {
+    Intent intent = new Intent(this, ChatService.class);
+    startService(intent);
+    bindService(intent, connection, BIND_AUTO_CREATE);
+}
+</pre>
+        <p>
+            This will start the chat service which will be running in background. As you can see,
+            we are starting the chat twice using two different strategies to start the service. The
+            first strategy will just start the service and run it in background, and the second will
+            guarantee that the service will be alive until no Activity is bounded to the service. This
+            is because it is important to keep the service alive even though the chat Activity is in
+            background or destroyed.
+        </p>
+    </li>
+    <li>
+        <p>We must create a listener that will hear all events in the chat service.</p>
+<pre class="prettyprint linenums">
+private ChatSessionListener listener = new ChatSessionListener() {
+    &#64;Override
+    public void agentAssigned(ChatSession chatSession) {
+    }
+    &#64;Override
+    public void authenticatedWithCredentials(Authorization authorization) {
+    }
+    &#64;Override
+    public void authenticatedWithoutCredentials(Authorization authorization) {
+    }
+    &#64;Override
+    public void chatEnded() {
+    }
+    &#64;Override
+    public void chatStarted(ChatSession chatSession) {
+    }
+    &#64;Override
+    public void connectionTimedOut() {
+    }
+    &#64;Override
+    public void internetConnectionNotFound() {
+    }
+    &#64;Override
+    public void messageReceived(String sender, String message) {
+    }
+    &#64;Override
+    public void messageSent() {
+    }
+    &#64;Override
+    public void receiveError(Exception exception, int code) {
+    }
+};
+</pre>
+        <p>
+            All of the listener methods available are listed below:<br>
+        </p>
+        <ul class="small-margin-bottom break-word list-type-disk">
+            <li>
+                <b>agentAssigned:</b> This method gets called when the platform raises
+                an event indicating an agent has been assigned to the chat session.
+            </li>
+            <li>
+                <b>authenticatedWithCredentials:</b> This event gets fired when you
+                authenticate with username and password in the HttpConnectionManager
+                (used in the OAuth 2.0 Password flow).
+            </li>
+            <li>
+                <b>authenticatedWithoutCredentials:</b> This event gets fired when you
+                authenticate without username and password in the HttpConnectionManager
+                (used in the OAuth 2.0 Client flow).
+            </li>
+            <li>
+                <b>chatEnded:</b> This method gets called when the platform raises an event
+                indicating that the chat session has ended.
+            </li>
+            <li>
+                <b>chatStarted:</b> This method gets called when the platform raises an event
+                indicating that the chat session has started.
+            </li>
+            <li>
+                <b>connectionTimedOut:</b> This method gets called when the response takes more
+                than 60 seconds.
+            </li>
+            <li>
+                <b>internetConnectionNotFound:</b> This method gets called when no internet
+                connection is found.
+            </li>
+            <li>
+                <b>messageReceived:</b> This method gets called every time the chat service receives
+                a message. Information on the sender and the message is passed into this method.
+            </li>
+            <li>
+                <b>messageSent:</b> This method gets called every time a message is sent to the server.
+            </li>
+            <li>
+                <b>receiveError:</b> If an error occurred in the chat service or in the server, this
+                method is called with the corresponding exception or the error code from the server.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p class="break-word">
+            In the onServiceConnected and onServiceDisconnected methods you will need to add this code to get the server instance, and also to set and remove the created listener.
+        </p>
+<pre class="prettyprint linenums">
+&#64;Override
+public void onServiceDisconnected(ComponentName name) {
+    chatService.removeChatListener(listener);
+}
+&#64;Override
+public void onServiceConnected(ComponentName name, IBinder service) {
+    chatService = ((ChatServiceBinder)service).getServerInstance();
+    chatService.addChatListener(listener);
+    chatService.startChat();
+}
+</pre>
+    </li>
+    <li>
+        <p>
+            Add the click event handler to the button to send messages when the "Send" button is pressed.
+        </p>
+<pre class="prettyprint linenums">
+public void onSendClick(View view) {
+    String message = chatEditor.getText().toString();
+    chatService.sendMessage("Patron", message);
+    showMessage("Patron", message);
+    chatEditor.setText("");
+}
+private void showMessage(String sender, String message) {
+    String conversation = chatEditor.getText().toString();
+    conversation+=sender + ": " + message;
+    chatPanel.setText(conversation);
+}
+</pre>
+    </li>
+    <li>
+        <p class="break-word">
+            Finally, in the messageReceived method of the created ChatSessionListener we
+            call the just created showMessage method to show the received message.
+        </p>
+<pre class="prettyprint linenums">
+&#64;Override
+public void messageReceived(String sender, String message) {
+    showMessage(sender, message);
+}
+</pre>
+    </li>
+</ol>
+<p>
+    With this, you will be able to launch the application and test it with an agent.
+    In the agent screen, the agent can accept the incoming chat request and send a
+    message to the android application.
+</p>
+<img class="img-responsive center-block img-size-sm small-margin-bottom" src="@Url.Content("~/Content/images/masdk18.png")">
+<p>
+    The patron can send the messages back to the agent by typing in text and tapping
+    on the "Send" button. To end the chat, the patron can just click on the close
+    button or you can implement a button that calls the closeChat method in the chat service.
+</p>
+<img class="img-responsive center-block img-size-sm" src="@Url.Content("~/Content/images/masdk19.png")">

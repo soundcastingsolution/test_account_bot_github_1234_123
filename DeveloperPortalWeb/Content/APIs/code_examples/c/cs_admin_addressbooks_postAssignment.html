@@ -1,0 +1,61 @@
+﻿<pre class="prettyprint linenums">
+protected void postAddressBookAssignment(int addressBookId, string entityType, string[] addressBookAssignments)
+{
+  // Test to see if you have obtained a token
+  // See the sample on obtaining a token [link to token code] here
+  if (!string.IsNullOrEmpty(accessToken))
+  {
+      string apiURL = "/services/{version}/address-books/" + addressBookId + "/assignment";
+      // baseURL was returned with your successful token request
+      string endpoint = baseURL + apiURL; 
+      string authorizationHeader = "Authorization:bearer " + accessToken;
+
+      // Create the request object
+      var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+      request.Method = "POST";
+      request.ContentType = "application/x-www-form-urlencoded";
+
+      // Add any and all necessary headers
+      request.Headers.Add("Authorization", "bearer " + accessToken);
+
+      // Accept is a reserved header, so you must modify it rather than add
+      request.Accept = "application/json, text/javascript, */*; q=0.01"; 
+
+      // The post data for an address book entry is not JSON it is actually a large HTML String.
+      // This example is hard coded for one full entry.
+      string postData = "entityType=" + entityType + 
+          "&addressBookAssignments[0]["entityId "]=" + addressBookAssignments[0];
+
+      var encoding = new System.Text.UTF8Encoding ;
+      var bytes = System.Text.Encoding.GetEncoding("iso-8859-1").GetBytes(postData);
+      request.ContentLength = bytes.Length;
+      using (var writeStream = request.GetRequestStream )
+      {
+          writeStream.Write(bytes, 0, bytes.Length);
+      }
+
+      // Make the request
+      try
+      {
+         // Get the Response from the Web Request
+         using (var response = (System.Net.HttpWebResponse)request.GetResponse )
+         {
+            // Success do something with the response here.
+         }
+      }
+      catch (System.Net.WebException webException)
+      {
+            // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+            // You can catch that exception and retain the StatusCode for error handling.
+      }
+      catch (Exception ex)
+      {
+            // Catch any non Web Exception error
+      }
+  }
+  else
+  {
+      // No token - get one or handle error
+  }
+}
+</pre>

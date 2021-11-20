@@ -1,0 +1,236 @@
+﻿{
+  "jobs_jobId" : {
+      "get" : {
+        "tags" : [ "ExtractingData" ],
+        "summary" : "Gets a specific job status.",
+        "description" : "View the status for a specific job per its job Id. If a job was successful, a url to access the extracted data is returned and is accessible for 30 seconds (not including the time it takes to download the file). If the job failed, an error message is returned. The link  can be used to access the extracted data. Possible job statuses are Running, Succeeded, Failed, Expired, and Cancelled.<div class='tabs_wrapper' data-path='getjobs_jobid.html'></div>",
+        "operationId" : "getJobStatus",
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "description" : "Unique identifier for the request that was made to extract customer data.",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success. Retrieved job status.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/jobResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid credentials."
+          },
+          "403" : {
+            "description" : "Forbidden. User does not have permission to view job status."
+          },
+          "404" : {
+            "description" : "Not found. Job not found."
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+  "jobs": {
+    "get": {
+      "tags": [ "ExtractingData" ],
+      "summary": "Gets status for all jobs.",
+      "description": "View a list of all job statuses per tenant. Possible statuses are Running, Succeeded, Failed, Cancelled, and Expired.<div class='tabs_wrapper' data-path='getjobs.html'></div>",
+      "operationId": "getAllJobs",
+      "responses": {
+        "200": {
+          "description": "Success. Retrieved status for all jobs.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/jobsResponse"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized. Invalid credentials."
+        },
+        "403": {
+          "description": "Forbidden. User does not have permission to view job status."
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    },
+    "post": {
+      "tags": [ "ExtractingData" ],
+      "summary": "Prepares requested data for extraction.",
+      "description": "After a request to extract data is made, the data is gathered and prepared for extraction. The data is available in S3 as a csv file for 24 hours. When done, a job ID is returned.<div class='tabs_wrapper' data-path='Postjobs.html'></div>",
+      "operationId": "extractData",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/exportRequest"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "202": {
+          "description": "Success. Successfully exported asynchronous job.",
+          "content": {
+             "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Invalid request. Incorrect date filters, etc."
+        },
+        "401": {
+          "description": "Unauthorized. Invalid credentials."
+        },
+        "403": {
+          "description": "Forbidden. User does not have permission to view job status."
+        },
+        "404": {
+          "description": "Not Found. Missing entity or invalid version."
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "exportRequest": {
+        "type": "object",
+        "properties": {
+          "entityName": {
+            "type": "string",
+            "description": "Name of entity to extract."
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of entity to extract."
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Date from which to start extracting data. For example, extract data starting from May 22, 2019.",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Date from which to stop extracting data. For example, extract data until May 29, 2019.",
+            "format": "date"
+          }
+        },
+        "description": "Parameters that need to be provided in order to extract data."
+      },
+      "exportResponse": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A url to access the extracted data is returned when a request for extracting data is successful.",
+            "example": "https://s3.example.amazonaws.com/results-bucket/data-extraction/{details}"
+          }
+        },
+        "description": "Successful response includes a url to access the extracted data."
+      },
+      "jobState": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the job.",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the job.",
+            "enum": [ "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "EXPIRED" ]
+          }
+        },
+        "description": "Status and ID of the job."
+      },
+      "jobsResponse": {
+        "type": "object",
+        "properties": {
+          "jobs": {
+            "type": "array",
+            "description": "List of statuses for all jobs.",
+            "items": {
+              "$ref": "#/components/schemas/jobState"
+            }
+          }
+        },
+        "description": "Displays statuses for all jobs."
+      },
+      "jobResponse": {
+        "type": "object",
+        "properties": {
+          "jobStatus": {
+            "$ref": "#/components/schemas/jobStatus"
+          }
+        },
+        "description": "Displays the job status."
+      },
+      "jobResult": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A url to access the extracted data is returned when a job for extracting data is successful.",
+            "example": "https://s3.example.amazonaws.com/results-bucket/data-extraction/{details}"
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "Error message displayed when a request for extracting data fails."
+          }
+        },
+        "description": "Job result. If successful, contains the url, if failed, an error message is displayed."
+      },
+      "jobStatus": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the job.",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "description": "Job status that can be returned.",
+            "example": "SUCCEEDED",
+            "enum": [ "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED", "EXPIRED" ]
+          },
+          "result": {
+            "$ref": "#/components/schemas/jobResult"
+          }
+        },
+        "description": "Job Status, includes job ID and job status."
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

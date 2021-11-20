@@ -1,0 +1,33 @@
+﻿@{
+	Layout = "~/Views/Shared/_LayoutAPI.cshtml";
+	ViewBag.Title = "Authentication API";
+}
+
+<h1 class="primary-color">@ViewBag.Title</h1>
+<p>
+	The Authentication API is a collection of API calls that deal specifically with the system resources required to login to the NICE CXone platform. For example the Authentication scope is the only scope returned with a token request if the password for the User making the request has expired. This allows you to use that token to reset the password of that User and request another token with more scopes.
+</p>
+
+<h3 class="primary-color">General Requirements</h3>
+<p>
+    To use any of the NICE CXone APIs in your application, you must have an API authentication token from the token service. See the @Html.ActionLink("API authentication token", "APIAuthenticationToken", "Documentation") tutorial for information on what type of token is needed for your application and @Html.ActionLink("getting started", "GettingStarted", "Documentation") tutorial to get to know how to get an API authentication token.
+</p>
+
+<div class="swagger-section">
+	<div id="swagger-ui-container" class="swagger-ui-wrap">Loading...</div>
+</div>
+
+@Html.Partial("~/Views/Shared/_CodeSampleTabs.cshtml")
+
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+            inContact.Swagger.init(
+                "@Url.Content("~/content/apis/authentication-api-docs")",
+                "@Url.Content("~/content/apis/code_examples")",
+                "@Url.Action("GetAccessToken", "Account")",
+                "@Url.Content("~/content/swagger/images/throbber.gif")");
+        });
+	</script>
+}

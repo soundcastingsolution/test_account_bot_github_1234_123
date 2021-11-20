@@ -1,0 +1,28 @@
+﻿<pre class="prettyprint linenums">
+# importing the requests library 
+import requests 
+import json
+
+def PostCreateSkill(SkillJSONData):
+
+# api-endpoint 
+#Give the specified url ,accessToken
+	Baseuri = "{Baseuri}"
+	accessToken = "{accessToken}"
+
+#Check if accessToken is empty or null
+	if accessToken!="":
+
+#add all necessary headers
+		header_param = {'Authorization': 'bearer ' + accessToken}
+
+# Make http post request
+		response = requests.post(Baseuri +'/services/{version}/skills' , headers = header_param, json=SkillJSONData) 
+
+#print response appropriately
+		print (response)
+
+	else:
+		#no token get one or handle error
+
+</pre>

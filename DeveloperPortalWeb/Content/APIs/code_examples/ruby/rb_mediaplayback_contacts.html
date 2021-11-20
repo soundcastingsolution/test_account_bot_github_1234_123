@@ -1,0 +1,22 @@
+    <pre class="prettyprint linenums">
+    def getMediaPlayBackContacts(acdId,mediaType,excludeWaveform)
+    if($accessToken!='')
+    uri = URI.parse(($CXone_baseURI) +'media-playback/v1/contacts/'+'?acdId='+acdId+'&mediaType='+mediaType+'&excludeWaveform='+excludeWaveform)
+    # Create the GET request headers.
+    headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+    "Authorization" => "bearer " + ($accessToken),
+    "Content-Type" => "application/x-www-form-urlencoded",
+    "Data-Type" => "json",
+    "Accept-Encoding" => "deflate"}
+    # Set up an HTTP object.
+    http = Net::HTTP.new uri.host, uri.port
+    # Make the request.
+    http.use_ssl = true
+    res = http.get(uri.path , headers)
+    # puts res.code
+    #puts res.message
+    else
+    end
+    end
+    </pre>

@@ -1,0 +1,21 @@
+﻿<pre class="prettyprint linenums">
+def postSetDisposition(contactId):
+#Check if accessToken is empty or null
+if accessToken!="":
+#payload
+	postSetDispositionPayload = {
+	"dispositionInfo": {
+	"Skill": "1007",
+	"DispositionCode": "1",
+	"CallbackNumber": "",
+	"CallbackTime": "",
+	"notes": "",
+	"CommitmentAmount": ""}}
+	header_param = {'Authorization': 'bearer ' + accessToken,
+	'content-Type': 'application/x-www-form-urlencoded'}
+	response=requests.post(CXone_baseURI + '/contacts/'+contactId+'/set-disposition', headers = header_param, data=postSetDispositionPayload)
+#print response appropriately
+else:
+#no token get one or handle error
+	construct('error')
+</pre>

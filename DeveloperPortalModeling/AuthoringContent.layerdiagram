@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="eea2ab84-cb4d-482b-9abe-2ab220f44ed8" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="6cecfd32-faba-45b1-a188-ab6bd2078684" name="Comment1">
+      <body>The developer portal source code is stored in source control (TFS).
+
+Members of the "developer.incontact.com content authors" Active Directory group can make changes to static content.</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="a313cadc-2e17-4398-b48f-449f3423997c" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="9e119321-2685-4c52-b331-8ec6de3ae9fb" name="Comment2">
+      <body>Members of the "developer.incontact.com content authors" Active Directory group use Microsoft Visual Studio to make static content changes to the portal.</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="09dc6147-2d7c-4619-9989-2ecb404728fe" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="034467ad-7de1-4b2f-9b52-71d5e3dbed9f" name="Comment3">
+      <body>Upon check-in (commit) of static content changes, Team Foundation Server starts an automatic build to package up the new content.</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="cc9fb2e1-c15e-45b6-a683-87796b38e165" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="42758e71-3f8c-4df1-9378-3fa3a3a5e552" name="Comment4">
+      <body>Once a new build is complete, the build is automatically deployed to lab, qa, and staging environments for validation and approval. Once the staging environment is found to be satisfactory the release is approved to go to production.</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="55c17360-b4a9-441a-aabe-6c177d1f12b6" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="70ca0613-50e9-4af5-90db-7739f0690ae7" name="Comment5">
+      <body>The new static content is delivered to the QA and staging environments</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="d55d5c45-2158-40b3-be60-d703e87750bc" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="21b78213-5a22-4bf3-a57f-215e6cf8e2f4" name="Comment51">
+      <body>The new static content is delivered to the outside world</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="a5dd1c62-ad37-4ad7-8c69-d01b1c184f73" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="d98215c9-c834-4a58-bded-bf1029bdb1ed" name="Comment6">
+      <body>A member of the CIMS Tech team validates the content in the staging environment</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="866d9ef8-1629-429b-aee8-651285789eee" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="2261f0f3-1294-4743-b825-e719cf2bb3d2" name="Comment8">
+      <body>A member of the CIMS Tech team approves the release to continue to production.</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="866d9ef8-1629-429b-aee8-651285789eee" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="d55d5c45-2158-40b3-be60-d703e87750bc" name="QA and Staging Web servers">
+      <childLayers>
+        <layer Id="18fa748a-0e94-44bb-bf67-0a7f9a71dd93" name="Static content">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="a760ed63-5d9a-4037-bd23-fb87b0e3801d" direction="Forward">
+              <layerMoniker Id="78f0cfe0-1658-4256-bb00-c8bde2a2d61c" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="55c17360-b4a9-441a-aabe-6c177d1f12b6" name="Release Management">
+      <childLayers>
+        <layer Id="c328cb59-a370-4b7d-beda-c25cd374dfd9" name="Developer Portal Static Content Continous Delivery">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="1f774a64-0e66-4e7c-b336-5db88724f994" direction="Forward">
+              <layerMoniker Id="18fa748a-0e94-44bb-bf67-0a7f9a71dd93" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="09dc6147-2d7c-4619-9989-2ecb404728fe" name="Visual Studio">
+      <childLayers>
+        <layer Id="5be473f0-0304-4a4c-a8cc-9ddcafba2cef" name="DeveloperPortalWeb.csproj">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="bd91eb2f-e896-47f4-a774-75768e240bc6" direction="Forward">
+              <layerMoniker Id="8a7564dd-d13a-42ba-a7a5-cc8ebf71eedd" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="a313cadc-2e17-4398-b48f-449f3423997c" name="Team Foundation Server">
+      <childLayers>
+        <layer Id="94ba1fab-fc81-4eb4-ab1a-cf17754db889" name="$/Operations/DeveloperPortal/Main">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="e9ce583b-9eba-4599-88b1-8b4303112bb2" direction="Forward">
+              <layerMoniker Id="5be473f0-0304-4a4c-a8cc-9ddcafba2cef" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="cc9fb2e1-c15e-45b6-a683-87796b38e165" name="TFS Build">
+      <childLayers>
+        <layer Id="8a7564dd-d13a-42ba-a7a5-cc8ebf71eedd" name="DeveloperPortal-Main">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="fe21a53d-c29f-4540-8ecf-c063eb47b245" direction="Forward">
+              <layerMoniker Id="c328cb59-a370-4b7d-beda-c25cd374dfd9" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="866d9ef8-1629-429b-aee8-651285789eee" name="Release Management validation">
+      <childLayers>
+        <layer Id="78f0cfe0-1658-4256-bb00-c8bde2a2d61c" name="Validate Staging environment">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="6f0acdf7-681c-4e8d-b741-06b4b3475d25" direction="Forward">
+              <layerMoniker Id="f55398b6-a168-452c-862b-6ea4256fd726" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="f55398b6-a168-452c-862b-6ea4256fd726" name="Approve release">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="b3b589f2-9aad-46d1-bc9c-271c7eab1186" direction="Forward">
+              <layerMoniker Id="dff18856-9030-4ec5-9577-a0cfd70226fd" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="a5dd1c62-ad37-4ad7-8c69-d01b1c184f73" name="Production web server">
+      <childLayers>
+        <layer Id="dff18856-9030-4ec5-9577-a0cfd70226fd" name="Static content" />
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

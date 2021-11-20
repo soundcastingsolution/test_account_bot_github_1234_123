@@ -1,0 +1,30 @@
+﻿{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DataExtractionAPI",
+    "description": "The Data Extraction API let you extract data from CXone for external reporting purposes. For example, you can extract QM Workflows data. You must generate a key in order to use this API.",
+    "contact": {
+      "email": "R&DApiTeam@niceincontact.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "V1"
+  },  
+  "tags": [
+    {
+      "name": "ExtractingData",
+      "description": " : The Data Extraction API let you extract data from CXone."
+    }
+  ],
+"schemes": [ "https" ],
+  "paths": {
+    "/data-extraction/v1/jobs": {
+      "$ref": "DataExtraction/DataExtraction#/jobs"
+    },
+    "/data-extraction/v1/jobs/{jobId}": {
+      "$ref": "DataExtraction/DataExtraction#/jobs_jobId"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+﻿<pre class="prettyprint linenums">
+
+    
+     function updateTeamsById(teamId, updateTeamData){ 
+    $.ajax({
+        //The baseURI variable is created by the result.resource_server_base_uri,
+        //which is returned when getting a token and should be used to create the URL base
+ 
+        'url': CxoneBaseURI + '/user-management​/v1​/users​/teams​/'+ teamId,
+        'type': 'PATCH',
+        'headers': { 
+            //Use access_token previously retrieved from inContact token service
+            'Authorization': 'bearer ' + accessToken,
+            'content-Type': 'application/json; charset=UTF-8',
+			'Accept':'application/json, text/javascript, */*; q=0.01'
+        },
+        'data': JSON.stringify(updateTeamData),
+        'success': function (result, status, statusCode) {
+            //Process success actions
+            return result;
+        },
+        'error': function (XMLHttpRequest, textStatus, errorThrown) {
+            //Process error actions
+            return false;
+			
+        }
+    });
+}
+</pre>

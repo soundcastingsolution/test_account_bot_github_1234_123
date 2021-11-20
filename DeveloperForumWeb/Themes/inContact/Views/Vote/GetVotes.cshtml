@@ -1,0 +1,41 @@
+﻿@model MVCForum.Website.ViewModels.ShowVotesViewModel
+@using ForumWeb.Common
+
+@{
+    if (StudioForumHelper.IsStudioForumInQueryString(Request.Url.Query))
+    {
+        <span class="expandvotesholder">
+            <span class="upvotesstudio ">
+                @if (Model.UpVotes > 0)
+                {
+                    <text>+</text>@Model.UpVotes.KiloFormat()
+                }
+                else
+                {
+                    @Model.UpVotes.KiloFormat()
+                }
+            </span>
+            <span class="downvotesstudio ">
+                @if (Model.DownVotes > 0)
+                {
+                    <text>-</text>@Model.DownVotes.KiloFormat()
+                }
+                else
+                {
+                    @Model.DownVotes.KiloFormat()
+                }
+            </span>
+        </span>
+    }
+    else if (Model.DownVotes > 0 || Model.UpVotes > 0)
+    {
+        <div class="expandvotesholder">
+            <div class="upvotes">
+                +@(Model.UpVotes.KiloFormat())
+            </div>
+            <div class="downvotes">
+                -@(Model.DownVotes.KiloFormat())
+            </div>
+        </div>
+    }
+}

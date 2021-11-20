@@ -1,0 +1,467 @@
+﻿@{
+    ViewBag.Title = "Agent Events";
+}
+
+<p class="margin-bottom-none">
+    Agent events are events that pertain to the agent session itself.
+</p>
+
+<h3 class="primary-color">AgentSessionStart</h3>
+
+<p>
+    The AgentSessionStart event is received when an agent session is first started or joined. You can also receive an AgentSessionStart event if you request events using an old session ID. The AgentSessionStart event contains information about the agent session, and may be accompanied by several other events that describe the agent session and contact states (if you join an existing session, or use an old session ID).
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "Type": "AgentSessionStart",
+    "BusNo": "4500",
+    "AgentId": "12214",
+    "SessionId": "58070815",
+    "StationPhoneNumber": "8013203420",
+    "StationCallerId": "8013203200",
+    "DialerCampaign": "",
+    "DialerCampaignStartTime": "2013-09-10T19:16:33.000Z",
+    "SupervisorPermissionLevel": "4",
+    "CanMask": "True",
+    "AgentSchedulePermission": "True",
+    "ScoreRecordingsPermission": "True",
+    "HideAgentStatePermission": "",
+    "CanMultiPartyConference": "True"
+}
+</pre>
+
+<div class="table-container small-margin-bottom">
+    <table id="table-AE-1" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th onclick="sortTable('table-AE-1', 0, event)">Field name</th>
+                <th onclick="sortTable('table-AE-1', 1, event)">Field type</th>
+                <th onclick="sortTable('table-AE-1', 2, event)">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Type</td>
+                <td>string</td>
+                <td>"AgentSessionStart"</td>
+            </tr>
+            <tr>
+                <td>BusNo</td>
+                <td>string (integer)</td>
+                <td>A string representing the business unit number</td>
+            </tr>
+            <tr>
+                <td>AgentId</td>
+                <td>string (integer)</td>
+                <td>A string representing the agent ID number</td>
+            </tr>
+            <tr>
+                <td>SessionId</td>
+                <td>string</td>
+                <td>A string identifying the agent session on the platform. Note that this is NOT the same as the "session ID" used by the API.</td>
+            </tr>
+            <tr>
+                <td>StationPhoneNumber</td>
+                <td>string</td>
+                <td>A string representing the station phone number for the agent (without formatting)</td>
+            </tr>
+            <tr>
+                <td>StationCallerId</td>
+                <td>string</td>
+                <td>A string representing the "caller ID" presented to called parties when the agent calls them.</td>
+            </tr>
+            <tr>
+                <td>DialerCampaign</td>
+                <td>string</td>
+                <td>A string representing the "dialer campaign" (or automated outbound skill) the agent is logged into (if applicable – will be empty if they are not logged into an outbound skill/campaign.)</td>
+            </tr>
+            <tr>
+                <td>DialerCampaignStartTime</td>
+                <td>string (date)</td>
+                <td>The ISO8601-formatted date/time (in UTC time) that the dialer campaign started (if the agent is logged into a campaign/skill – this vale has no meaning if the agent is not logged into a campaign.)</td>
+            </tr>
+            <tr>
+                <td>SupervisorPermissionLevel</td>
+                <td>string (integer)</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>CanMask</td>
+                <td>string (boolean)</td>
+                <td>A string representing a Boolean value ("True" or "False") indicating if the agent should be able to mask calls.</td>
+            </tr>
+            <tr>
+                <td>AgentSchedulePermission</td>
+                <td>string (boolean)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>ScoreRecordingsPermission</td>
+                <td>string (boolean)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>HideAgentStatePermission</td>
+                <td>string (boolean)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>CanMultiPartyConference</td>
+                <td>string (boolean)</td>
+                <td>A string representing a Boolean value ("True" or "False") indicating if the agent and agent's business unit have permissions to perform "multi party conferencing".</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="primary-color">AgentSessionEnd</h3>
+
+<p>
+    The AgentSessionEnd event is received when the agent session ends. Note that shortly after the session ends, the event queue for the session is cleared out (including this event). If your application is polling using the "comet" design patter, you should receive this event as soon as it occurs. If you are polling or using some other model, you may miss this event. Note that attempting to use an agent session ID for a session that has ended will result in a "409 Session Ended" HTTP status.
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "Type": "AgentSessionEnd",
+    "Success": "True",
+    "Message": ""
+}
+</pre>
+
+<div class="table-container small-margin-bottom">
+    <table id="table-AE-2" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th onclick="sortTable('table-AE-2', 0, event)">Field name</th>
+                <th onclick="sortTable('table-AE-2', 1, event)">Field type</th>
+                <th onclick="sortTable('table-AE-2', 2, event)">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Type</td>
+                <td>string</td>
+                <td>"AgentSessionEnd"</td>
+            </tr>
+            <tr>
+                <td>Success</td>
+                <td>string (boolean)</td>
+                <td>String representing a Boolean value. Indicates that the agent session has ended cleanly.</td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td>string</td>
+                <td>Any platform message related to the session end (almost always blank).</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="primary-color break-word">RemoteAgentSessionEnd</h3>
+
+<p>
+    This event is delivered if the agent session was ended by an administrator. Administrators can request that an agent session end through the Central administration web site, or through an application that uses the "remote session end" API call.
+</p>
+<p>
+    This event will be followed by a normal "AgentSessionEnd" event.
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "Type": "RemoteAgentSessionEnd",
+    "Message": "RemoteLogoff"
+}
+</pre>
+
+<div class="table-container small-margin-bottom">
+    <table id="table-AE-3" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th onclick="sortTable('table-AE-3', 0, event)">Field name</th>
+                <th onclick="sortTable('table-AE-3', 1, event)">Field type</th>
+                <th onclick="sortTable('table-AE-3', 2, event)">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Type</td>
+                <td>string</td>
+                <td>"RemoteAgentSessionEnd"</td>
+            </tr>
+            <tr>
+                <td>Message</td>
+                <td>string</td>
+                <td>Any platform message related to the remote session end.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="primary-color">AgentState</h3>
+
+<p>
+    The AgentState event will be delivered when the agent's state is changed. This can happen because the agent session requests the change, or because a call or contact is being delivered to the agent, or it can happen automatically when a contact ends (the agent will be moved to their "next" state.)
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "Type": "AgentState",
+    "CurrentState": "Unavailable",
+    "CurrentOutReason": "",
+    "NextStates": [
+        {
+            "State": "Unavailable",
+            "OutReason": ""
+        }
+    ],
+    "StartTimeUTC": "2013-09-10T20:05:37.000Z",
+    "IsAcw": "False",
+    "AcwTimeout": "0"
+}
+</pre>
+
+<div class="table-container small-margin-bottom">
+    <table id="table-AE-4" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th onclick="sortTable('table-AE-4', 0, event)">Field name</th>
+                <th onclick="sortTable('table-AE-4', 1, event)">Field type</th>
+                <th onclick="sortTable('table-AE-4', 2, event)">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Type</td>
+                <td>string</td>
+                <td>"AgentState"</td>
+            </tr>
+            <tr>
+                <td>CurrentState</td>
+                <td>string</td>
+                <td>
+                    A text description of the agent's state. Can be one of the following:
+                    <ul>
+                        <li>LoggedOut</li>
+                        <li>LoggedIn</li>
+                        <li>Available</li>
+                        <li>Unavailable</li>
+                        <li>InboundContact</li>
+                        <li>OutboundContact</li>
+                        <li>InboundConsult</li>
+                        <li>OutboundConsult</li>
+                        <li>Dialer</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>CurrentOutReason</td>
+                <td>string</td>
+                <td>If the agent's state is "Unavailable", there may be an associated "outstate reason" (a.k.a. "unavailable code"). Unavailable codes are configured in Central and are often used for things like "lunch", "break", etc. If the agent's Unavailable state is associated with an outstate reason, the description will be in this field.</td>
+            </tr>
+            <tr>
+                <td>NextStates</td>
+                <td>array of objects</td>
+                <td>This is a collection of state objects that represent the agent's next state(s). If the agent is Available, there is no "next state", and this array can be ignored. If the agent is in an ACW Unavailable state, this will contain the next state (when ACW ends). If the agent is on a call, this may contain one or two states. If the skill the call is associated with is an ACW skill, it will contain the ACW state (next) and the state that will follow ACW (next-next). The agent will automatically be placed in the ACW state. Any state change requests that occur when the agent is on a call will affect the agent's next state (or next-next state, if the next state is an ACW state).</td>
+            </tr>
+            <tr>
+                <td>NextStates[x].State</td>
+                <td>string</td>
+                <td>The "next" state description.</td>
+            </tr>
+            <tr>
+                <td>NextStates[x].OutReason</td>
+                <td>string</td>
+                <td>If the "next" state is an Unavailable state with an outstate reason (a.k.a. unavailable code), this will contain the outstate reason.</td>
+            </tr>
+            <tr>
+                <td>StartTimeUTC</td>
+                <td>string (date)</td>
+                <td>This field is a string that contains an ISO8601 date that indicates when the agent's state began.</td>
+            </tr>
+            <tr>
+                <td>IsACW</td>
+                <td>string (boolean)</td>
+                <td>A String representation of a Boolean value (True or False) that indicates whether the state is an ACW state or not.</td>
+            </tr>
+            <tr>
+                <td>AcwTimeout</td>
+                <td>string (integer)</td>
+                <td>A string that represents the number of seconds that the ACW state is configured to timeout. Note that some ACW skills are configured without a timeout (where a disposition response is required before the call can completely end.)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="primary-color">AgentLeg</h3>
+
+<p>
+    AgentLeg events are events related to the agent station associated with a session. There are three "Status" events for the agent leg: Dialing, Active, and Disconnected.
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "Type": "AgentLeg",
+    "AgentLegId": "2200339882",
+    "Status": "Dialing",
+    "FinalState": "False"
+},
+{
+    "Type": "AgentLeg",
+    "AgentLegId": "2200339884",
+    "Status": "Active",
+    "FinalState": "False"
+},
+{
+    "Type": "AgentLeg",
+    "AgentLegId": "2200339882",
+    "Status": "Disconnected",
+    "FinalState": "True"
+}
+</pre>
+
+<div class="table-container small-margin-bottom">
+    <table id="table-AE-5" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th onclick="sortTable('table-AE-5', 0, event)">Field name</th>
+                <th onclick="sortTable('table-AE-5', 1, event)">Field type</th>
+                <th onclick="sortTable('table-AE-5', 2, event)">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Type</td>
+                <td>string</td>
+                <td>"AgentLeg"</td>
+            </tr>
+            <tr>
+                <td>AgentLegId</td>
+                <td>string</td>
+                <td>The "contact ID" for the agent leg script. This can be helpful in situations where a single app is managing multiple agent sessions. This ID will be valid from the time the agent leg is "dialing", until it is disconnected.</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>string</td>
+                <td>The status of the agent leg. Will be "Dialing", "Active", or "Disconnected".</td>
+            </tr>
+            <tr>
+                <td>FinalState</td>
+                <td>string (boolean)</td>
+                <td>Indicates whether the state is the final state for the agent leg "contact". This will only be "true" for the "Disconnected" status event.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="primary-color">AgentLegError</h3>
+
+<p>
+    This event is generated when an error occurs on the agent leg.
+</p>
+
+<pre class="prettyprint linenums">
+{
+    "Type": "AgentError",
+    "Command": "ReadyAgentLeg",
+    "ResultCode": "BadNumber",
+    "ContactID": "-1",
+    "Target": "AgentLeg",
+    "ErrorLevel": "Medium"
+}
+</pre>
+
+<div class="table-container small-margin-bottom">
+    <table id="table-AE-6" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th onclick="sortTable('table-AE-6', 0, event)">Field name</th>
+                <th onclick="sortTable('table-AE-6', 1, event)">Field type</th>
+                <th onclick="sortTable('table-AE-6', 2, event)">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Type</td>
+                <td>string</td>
+                <td>"AgentError"</td>
+            </tr>
+            <tr>
+                <td>Command</td>
+                <td>string</td>
+                <td><b>Not Used</b> – You can ignore this field.</td>
+            </tr>
+            <tr>
+                <td>ResultCode</td>
+                <td>string</td>
+                <td>This is the result code that indicates why there was an error on the agent leg. Possible values for this field are listed below.</td>
+            </tr>
+            <tr>
+                <td>ContactID</td>
+                <td>string (boolean)</td>
+                <td>The "contact ID" for the agent leg script. This can be helpful in situations where a single app is managing multiple agent sessions. This ID will be valid from the time the agent leg is "dialing", until it is disconnected.</td>
+            </tr>
+            <tr>
+                <td>Target</td>
+                <td>string</td>
+                <td>This will always be "AgentLeg", indicating an error for the agent leg.</td>
+            </tr>
+            <tr>
+                <td>ErrorLevel</td>
+                <td>string</td>
+                <td>A string indicating the severity of the error.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p class="indentation">
+    <u><b>NOTE:</b></u> The "AgentError" event can also be received with outbound phone calls, if an error
+    occurs on the outbound call leg.
+</p>
+
+<p>
+    "ResultCode" values:
+</p>
+
+<div class="row">
+    <div class="col-sm-6">
+        <ul class="margin-bottom-none">
+            <li>NA</li>
+            <li>AgentLegAlreadyActive</li>
+            <li>Succeeded</li>
+            <li>Failed</li>
+            <li>CallAbandoned</li>
+            <li>Active</li>
+            <li>NoAnswer</li>
+            <li>Busy</li>
+            <li>BadNumber</li>
+            <li>Error</li>
+            <li>InvalidCallLeg</li>
+            <li>InvalidCallCount</li>
+            <li>InvalidStationID</li>
+            <li>InvalidWorkItem</li>
+            <li>JoinFailed</li>
+            <li>LinkFailed</li>
+        </ul>
+    </div>
+    <div class="col-sm-6">
+        <ul class="margin-bottom-none">
+            <li>InitiateConferenceFailed</li>
+            <li>InvalidState</li>
+            <li>Rejected</li>
+            <li>MissingRoomID</li>
+            <li>TransferComplete</li>
+            <li>Dropped</li>
+            <li>NoPorts</li>
+            <li>AgentLinkTimeout</li>
+            <li>AgentCancelled</li>
+            <li>LoginFailed</li>
+            <li>CampaignClosed</li>
+            <li>DialerActive</li>
+            <li>DialerSuppressed</li>
+            <li>AnsweringMachine</li>
+            <li>Fax</li>
+        </ul>
+    </div>
+</div>

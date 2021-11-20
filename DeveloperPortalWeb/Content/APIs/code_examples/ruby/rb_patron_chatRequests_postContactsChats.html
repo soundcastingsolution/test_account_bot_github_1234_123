@@ -1,0 +1,95 @@
+<pre class="prettyprint linenums">
+# Calls the API to start a new chat session.
+#
+# * *Arguments* :
+#  - +token+ -> a token hash
+#  - +pointOfContact+ -> a string
+#  - +fromAddress+ -> a string
+#  - +chatRoomID+ -> a nonnegative integer
+#  - +parameters+ -> an array of strings 
+#  - +mediaType+ -> a nonnegative integer
+#
+# * *Returns* :
+#   - an HTTP response
+#
+# * *Raises* :
+#   - +ArgumentError+ -> if the token object doesn't have expected fields
+#   - +ArgumentError+ -> if pointOfContact isn't a string
+#   - +ArgumentError+ -> if fromAddress isn't a string
+#   - +ArgumentError+ -> if chatRoomID isn't a nonnegative integer
+#   - +ArgumentError+ -> if parameters isn't an array
+#   - +ArgumentError+ -> if mediaType isn't a nonnegative integer
+#
+def startChatSession(token, 
+                     pointOfContact, 
+                     fromAddress, 
+                     chatRoomID, 
+                     parameters)
+  # Check that the token is a valid token.
+  if (token["access_token"] == nil || 
+      token["resource_server_base_uri"] == nil)
+    raise ArgumentError, "The function didn't get a token it could understand"
+  end
+  
+  # Check that pointOfContact is a string.
+  unless pointOfContact.is_a? String
+    raise ArgumentError, "pointOfContact must be a string"
+  end
+  
+  # Check that fromAddress is fromAddress a string.
+  unless fromAddress.is_a? String
+    raise ArgumentError, "fromAddress must be a string"
+  end
+  
+  # Check that chatRoomID is a nonnegative integer.
+  unless chatRoomID.is_a?(Integer) && chatRoomID >= 0
+    raise ArgumentError, "chatRoomID must be a nonnegative integer"
+  end
+  
+  # Check that params is an array.
+  unless parameters.kind_of? Array
+    raise ArgumentError, "parameters must be an array"
+  end
+
+  # Check that mediaType is a nonnegative integer.
+  unless mediaType.is_a?(Integer) && mediaType >= 0
+    raise ArgumentError, "mediaType must be a nonnegative integer"
+  end
+  
+  # Pull the access token and base URL from the response body.
+  accessToken = token["access_token"]
+  baseURL = token["resource_server_base_uri"]
+  
+  # Turn the parameters into a JSON array.
+  require "json"
+  parameters = JSON.generate(parameters)
+
+  # Create the URL that accesses the API.
+  apiURL = "services/{version}/contacts/chats?pointOfContact=#{pointOfContact}"\
+           "&fromAddress=#{fromAddress}&chatRoomID=#{chatRoomID.to_s}&mediaType=#{mediaType.to_s}"
+  uri = URI.parse(baseURL + apiURL)
+
+  # Create the request headers.
+  headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+      "Authorization" => "bearer #{accessToken}",
+      "Content-Length" => parameters.bytesize.to_s,
+      "Content-Type" => "application/json",
+      "Data-Type" => "json" }
+
+  # Set up an HTTP object.
+  http = Net::HTTP.new uri.host, uri.port
+
+  # Make the request an HTTPS request.
+  http.use_ssl = true
+
+  # Delete this line and be sure you have a valid certificate.
+  # The default Ruby library, net/https, doesn't check the validity of a 
+  # certificate during a handshake. Using VERIFY_NONE is a simple, and insecure,
+  # hack to get around this limitation.
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  # Make the request and store the response.
+  response = http.post(baseURL + apiURL, parameters, headers)
+end
+</pre>

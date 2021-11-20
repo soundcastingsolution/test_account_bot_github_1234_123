@@ -1,0 +1,22 @@
+﻿<pre class="prettyprint linenums">
+    def getTeamsAgentbyTeamId(searchString,fields,skip,top,orderBy,updatedSince)
+    if($accessToken!='')
+    uri= URI.parse(($baseURI).to_s+'/services/v15.0/teams/'+($teamID).to_s+'/agents'+'?searchString='+searchString.to_s+'&fields='+fields.to_s+'&skip'+ skip.to_s+'&top='+ top.to_s+'&orderBy='+orderBy.to_s+'&updatedSince='+updatedSince.to_s)
+    headers = 
+    { "Accept" => "application/json, text/javascript, */*; q=0.01",
+    "Authorization" => "bearer " + ($accessToken),
+    "Content-Type" => "application/json; charset=UTF-8",
+    "Data-Type" => "json",
+    "Accept-Encoding" => "gzip,deflate"}
+ 
+    # Set up an HTTP object.
+    http = Net::HTTP.new uri.host, uri.port
+    # puts headers
+    # Make the request.
+    res = http.get(uri.path ,headers)
+    construct('Admin','Skills','GET /TeamsByIdAgents','HC8-v13.0',res.code,res.message)
+    else
+    construct('Admin','Skills','GET /TeamsByIdAgents','HC8-v13.0',res.code,res.message)
+    end
+    end	  
+</pre>

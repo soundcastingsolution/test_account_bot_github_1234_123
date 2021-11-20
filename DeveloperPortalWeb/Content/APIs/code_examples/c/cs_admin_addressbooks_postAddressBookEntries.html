@@ -1,0 +1,81 @@
+<pre class="prettyprint linenums">
+protected void postAddressBookID(int addressBookID, string [] entries)
+{
+    //Test to see if you have obtained a token
+    if (!string.IsNullOrEmpty(accessToken))
+    {
+        string apiURL = "/services/{version}/address-books/" + addressBookID + "/entries";
+        //baseURL was returned with your successful token request
+        string endpoint = baseURL + apiURL;
+        string authorizationHeader = "Authorization:bearer " + accessToken;
+
+        //Create the request object
+        var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(endpoint);
+        request.Method = "POST";
+        request.ContentType = "application/x-www-form-urlencoded";
+            
+        //Add any and all necessary headers
+        request.Headers.Add("Authorization", "bearer " + accessToken);
+        //Accept is a reserved header, so you must modify it rather than add
+        request.Accept = "application/json, text/javascript, */*; q=0.01";
+
+        // The post data for an address book entry is not JSON it is actually a large HTML String. 
+        // This needs to be taken into consideration when looping through multiple address book entries.
+        // Continue to add to the string with "&addressBookEntries[i]" to keep adding
+        // This example is hard coded for one full entry.
+        string postData = "addressBookEntries[0][firstName]=" + entries[0] +
+            "&addressBookEntries[0][middleName]=" + entries[1] +
+            "&addressBookEntries[0][lastName]=" + entries[2] +
+            "&addressBookEntries[0][company]=" + entries[3] +
+            "&addressBookEntries[0][phone]=" + entries[4] +
+            "&addressBookEntries[0][mobile]=" + entries[5] +
+            "&addressBookEntries[0][email]=" + entries[6];
+
+        // Make the request
+        try
+        {
+            //Read in Post Data
+            var encoding = new System.Text.UTF8Encoding ;
+            var bytes = System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(postData);
+            request.ContentLength = bytes.Length;
+            using (var writeStream = request.GetRequestStream )
+            {
+                writeStream.Write(bytes, 0, bytes.Length);
+            }
+            // Get the Response from the Web Request
+            using (var response = (System.Net.HttpWebResponse)request.GetResponse )
+            {
+                string responseBody = "";
+                int statusCode = (int)response.StatusCode;
+                string statusDescription = response.StatusDescription;
+                using (var responseStream = response.GetResponseStream )
+                {
+                    if (responseStream != null)
+                    {
+                        using (var reader = new System.IO.StreamReader(responseStream))
+                        {
+                            responseBody = reader.ReadToEnd ;
+                            //responseBody now contains the JSON string of the response.
+                            //save and parse it as you see fit.
+                        }
+                    }
+                }
+            }
+        }
+        catch (System.Net.WebException webException)
+        {
+            // .NET will throw a System.Net.WebException on StatusCodes other than 200.  
+            // You can catch that exception and retain the StatusCode for error handling.
+        }
+        catch (Exception ex)
+        {
+            // Catch any non Web Exception error
+        }
+    }
+    else
+    {
+        // No token - get one or handle error
+    }
+}
+</pre>
+    
